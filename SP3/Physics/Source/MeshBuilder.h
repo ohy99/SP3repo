@@ -22,7 +22,7 @@ public:
 	static Mesh* GenerateOBJ(const std::string &meshName, const std::string &file_path);
 	static Mesh* GenerateText(const std::string &meshName, unsigned row, unsigned col);
 
-	static Mesh* GenerateMovingTextureQuad(const std::string &meshName, Color color, float length = 1.f, float numOfUVs = 1.f);
+	//static Mesh* GenerateMovingTextureQuad(const std::string &meshName, Color color, float length = 1.f, float numOfUVs = 1.f);
 
 	static Mesh* GenerateLine(const std::string &meshName, Color color, float length);
 };
