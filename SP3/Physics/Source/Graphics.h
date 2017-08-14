@@ -6,10 +6,11 @@
 #include "Light.h"
 
 #include "shader.hpp"
+#include "SingletonTemplate.h"
 
-class Graphics
+class Graphics : public Singleton<Graphics>
 {
-	static Graphics* instance;
+	friend Singleton;
 	Graphics() {
 
 		glGenVertexArrays(1, &m_vertexArrayID);
@@ -17,11 +18,6 @@ class Graphics
 	}
 
 public:
-	static Graphics* getInstance() {
-		if (!instance)
-			instance = new Graphics;
-		return instance;
-	}
 	~Graphics()
 	{
 		glDeleteProgram(m_programID);

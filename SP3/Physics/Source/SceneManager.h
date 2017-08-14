@@ -3,21 +3,18 @@
 
 #include <map>
 #include "Scene.h"
+#include "SingletonTemplate.h"
 
-class SceneManager
+class SceneManager : public Singleton <SceneManager>
 {
+	friend Singleton;
 	bool shouldExit = false;
 	std::map < std::string, Scene*> scenes;
 	Scene* curr;
 	SceneManager() {
 	}
-	static SceneManager* instance;
 public:
-	static SceneManager* getInstance() {
-		if (!instance)
-			instance = new SceneManager();
-		return instance;
-	}
+
 	~SceneManager() {
 		for each(auto p in scenes) {
 			if (p.second)

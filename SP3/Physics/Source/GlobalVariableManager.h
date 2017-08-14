@@ -1,35 +1,18 @@
 #ifndef _GLOBALMANAGER_H
 #define _GLOBALMANAGER_H
 
-class Player;
-class Enemy;
-#include <vector>
-#include "Collision.h"
+#include "SingletonTemplate.h"
 
-class GlobalVariables
+class GlobalVariables : public Singleton<GlobalVariables>
 {
-	static GlobalVariables* instance;
-	GlobalVariables() {
+	friend Singleton;
 
-		//player = nullptr;
-	}
 public:
-	static GlobalVariables* get(){
-		if (instance == nullptr)
-			instance = new GlobalVariables();
-		return instance;
-	}
-	~GlobalVariables() {
-
-	}
-
-	//ALL GLOBAL VARIABLES HERE
-	float* worldWidth;
-	float* worldHeight;
-
-	//Player* player;
 
 
+protected:
+	GlobalVariables() {}
+	~GlobalVariables() {}
 };
 
 

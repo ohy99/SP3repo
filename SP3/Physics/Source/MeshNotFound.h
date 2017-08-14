@@ -1,15 +1,15 @@
-#ifndef ENF_H
-#define ENF_H
+#ifndef MNF_H
+#define MNF_H
 
 #include <iostream>
 #include <exception>
 #include <string>
 
-class EntityNotFound : public std::exception
+class MeshNotFound : public std::exception
 {
 	std::string errStr;
 public:
-	EntityNotFound(std::string a)
+	MeshNotFound(std::string a)
 	{
 		errStr = a;
 	}

@@ -1,9 +1,13 @@
+#pragma once
+
 #ifndef _FONTTYPE_H
 #define _FONTTYPE_H
 
-#include "UIObj.h"
 
-class FontType : public UIObj
+#include "MeshList.h"
+class Mesh;
+
+class FontType
 {
 public:
 	virtual ~FontType() {
@@ -12,9 +16,16 @@ public:
 		textWidth = nullptr;
 	}
 	float* textWidth;
-protected:
+	Mesh* text_mesh;
+
+	Mesh* getMesh()
+	{
+		return text_mesh;
+	}
+
 	FontType() {
 		textWidth = nullptr;
+		text_mesh = MeshList::GetInstance()->getMesh("CALIBRI");
 	}
 
 };

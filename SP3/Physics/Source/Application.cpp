@@ -11,25 +11,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#include "SceneKinematics.h"
-//#include "SceneAsteroid.h"
-#include "AScene.h"
-#include "Menu.h"
-#include "Instructions.h"
-#include "EndGame.h"
-
 #include "SceneManager.h"
 #include "DetectMemoryLeak.h"
 
 #include "GlobalVariableManager.h"
-#include "EntityBase.h"
+#include "MeshList.h"
 #include "Graphics.h"
 
-#include "SceneCollision.h"
-
-//#include "RenderHelper.h"
-//
-
+#include "GameScene.h";
 
 struct AtExit
 {
@@ -148,25 +137,16 @@ void Application::Init()
 
 void Application::Run()
 {
-	////Main Loop
-	SceneManager* SM = SceneManager::getInstance();
-	SM->addScene("GAME", new AScene());
-	SM->addScene("MENU", new Menu());
-	SM->addScene("INSTRUCTIONS", new Instructions());
-	SM->addScene("ENDGAME", new EndGame());
-	////Scene *scene = new AScene();
-	////scene->Init();
-	SM->setCurrScene("MENU");
+	//Main Loop
+	SceneManager* SM = SceneManager::GetInstance();
+	SM->addScene("GAME", new GameScene());
+	SM->setCurrScene("GAME");
 
-	//Scene* scene = new AScene();
-
-	//scene->Init();
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
-		//scene->Update(m_timer.getElapsedTime());
-		//scene->Render();
+
 		SM->update(m_timer.getElapsedTime());
 		//Swap buffers
 		glfwSwapBuffers(m_window);
@@ -180,10 +160,8 @@ void Application::Run()
 	} //Check if the ESC key had been pressed or if the window had been closed
 
 	
-	delete SceneManager::getInstance();
+	SceneManager::Destroy();
 
-	//scene->Exit();
-	//delete scene;
 }
 
 void Application::Exit()

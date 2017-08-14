@@ -1,6 +1,6 @@
 
-#ifndef ASCENE_H
-#define ASCENE_H
+#ifndef GameScene_H
+#define GameScene_H
 
 #include "GameObject.h"
 #include <vector>
@@ -9,11 +9,11 @@
 
 class Mesh;
 
-class AScene : public Scene
+class GameScene : public Scene
 {
 public:
-	AScene();
-	~AScene();
+	GameScene();
+	~GameScene();
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -24,8 +24,10 @@ protected:
 	Camera camera;
 	double fps;
 
+	Mesh* axis;
 	//Mesh* background;
-
+	float worldHeight;
+	float worldWidth;
 };
 
 #endif
