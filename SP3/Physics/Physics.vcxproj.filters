@@ -242,7 +242,4 @@
       <Filter>Header Files\Assignments\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Physics.rc" />
-  </ItemGroup>
 </Project>
