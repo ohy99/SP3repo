@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\WoDeGameObj">
+      <UniqueIdentifier>{596f9f01-961b-428b-b57a-5663cd584cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Assignment">
+      <UniqueIdentifier>{e7c9af13-2efe-4db3-bebd-81bd751e4b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Assignments">
+      <UniqueIdentifier>{610d63c3-3f92-4d7c-9e65-4a4d491f7408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Assignments\Scenes">
+      <UniqueIdentifier>{73eca939-180e-4399-ad86-add48d8b7d13}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadOBJ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTGA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AScene.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTextData.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneCollision.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderHelper.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CollisionManager.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjManager.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerControls.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PhysicsManager.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameLogic.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bricks.cpp">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EndGame.cpp">
+      <Filter>Header Files\Assignments\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Instructions.cpp">
+      <Filter>Header Files\Assignments\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Menu.cpp">
+      <Filter>Header Files\Assignments\Scenes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadOBJ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTGA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObj.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AScene.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GlobalVariableManager.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UIObj.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityNotFound.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityBase.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTextData.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DetectMemoryLeak.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneCollision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CalibriStyle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FontType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollidableObj.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SingletonTemplate.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionManager.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderHelper.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Bricks.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Ball.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjManager.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerControls.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PhysicsManager.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wall.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Pillar.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameLogic.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Turret.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextManager.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HPArea.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HpBar.h">
+      <Filter>Header Files\WoDeGameObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EndGame.h">
+      <Filter>Header Files\Assignments\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Instructions.h">
+      <Filter>Header Files\Assignments\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Menu.h">
+      <Filter>Header Files\Assignments\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneManager.h">
+      <Filter>Header Files\Assignments\Scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Physics.rc" />
+  </ItemGroup>
+</Project>
