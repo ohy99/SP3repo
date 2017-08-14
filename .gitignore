@@ -32,3 +32,13 @@
 *.suo
 *.sdf
 *.opendb
+
+*.tlog
+*.log
+SP3/Debug/*
+SP3/Physics/Debug/*
+SP3/Physics/Debug/vc140.idb
+SP3/Physics/Debug/vc140.pdb
+SP3/Debug/Physics.pdb
+*.idb
+*.pdb
