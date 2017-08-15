@@ -62,6 +62,9 @@
     <ClCompile Include="Source\GameScene.cpp">
       <Filter>Header Files\Assignments</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CharacterInfo.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -147,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="Source\MeshNotFound.h">
       <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharacterInfo.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
