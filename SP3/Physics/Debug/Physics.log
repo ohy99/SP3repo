@@ -1,4 +1,0 @@
-﻿  Application.cpp
-c:\users\530\documents\sp3repo\sp3\physics\source\application.cpp(21): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  Physics.vcxproj -> C:\Users\530\Documents\SP3repo\SP3\Debug\Physics.exe
-  Physics.vcxproj -> C:\Users\530\Documents\SP3repo\SP3\Debug\Physics.pdb (Full PDB)
