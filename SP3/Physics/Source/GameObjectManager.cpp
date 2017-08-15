@@ -6,6 +6,9 @@
 #include <string>
 #include <sstream>
 #include "MeshList.h"
+#include "GenericDecoration.h"
+#include "EnvironmentManager.h"
+#include "RenderManager.h"
 
 GameObjectManager::GameObjectManager()
 {
@@ -29,6 +32,9 @@ GameObject * GameObjectManager::request_new(GameObjectType id)
 	case GameObjectType::PLAYERTOWER:
 		temp = new GameObject();
 		temp->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+		break;
+	case GameObjectType::BACKGROUND:
+		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
 		break;
 	}
 	game_object_list.push_back(temp);
@@ -113,12 +119,17 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 	while (bufstr != "\r" && bufstr != "")
 	{
 		GameObject* temp = nullptr;
+		temp = this->request_new(id);
 		switch (id)
 		{
 		case GameObjectType::PLAYERTOWER:
-			temp = this->request_new(PLAYERTOWER);
 			if (temp)
 				temp->pos = get_pos(bufstr);
+			RenderManager::GetInstance()->attach_renderable(temp);
+			break;
+		case GameObjectType::BACKGROUND:
+			EnvironmentManager::GetInstance()->attach_background
+			(dynamic_cast<GenericDecoration*>(temp));
 			break;
 		}
 

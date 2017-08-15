@@ -158,12 +158,14 @@
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AudioPlayer.cpp" />
     <ClCompile Include="Source\CharacterInfo.cpp" />
+    <ClCompile Include="Source\EnvironmentManager.cpp" />
     <ClCompile Include="Source\GameLogic.cpp" />
     <ClCompile Include="Source\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\CollisionManager.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
+    <ClCompile Include="Source\GenericDecoration.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTextData.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
@@ -172,6 +174,7 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
+    <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
@@ -179,6 +182,10 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\AudioPlayer.h" />
     <ClInclude Include="Source\CharacterInfo.h" />
+    <ClInclude Include="Source\Collidable.h" />
+    <ClInclude Include="Source\EnemyMinion.h" />
+    <ClInclude Include="Source\EnemyTower.h" />
+    <ClInclude Include="Source\EnvironmentManager.h" />
     <ClInclude Include="Source\FontType.h" />
     <ClInclude Include="Source\GameLogic.h" />
     <ClInclude Include="Source\GameObjectManager.h" />
@@ -187,6 +194,7 @@
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\CollisionManager.h" />
     <ClInclude Include="Source\DetectMemoryLeak.h" />
+    <ClInclude Include="Source\GenericDecoration.h" />
     <ClInclude Include="Source\MeshList.h" />
     <ClInclude Include="Source\MeshNotFound.h" />
     <ClInclude Include="Source\GameObject.h" />
@@ -201,6 +209,7 @@
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\PhysicsManager.h" />
     <ClInclude Include="Source\RenderHelper.h" />
+    <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />

@@ -21,6 +21,8 @@
 #include "GameObjectManager.h"
 #include "AudioPlayer.h"
 #include "GameLogic.h"
+#include "EnvironmentManager.h"
+#include "RenderManager.h"
 
 GameScene::GameScene()
 {
@@ -31,6 +33,10 @@ GameScene::~GameScene()
 	PhysicsManager::Destroy();
 	CollisionManager::Destroy();
 	GameObjectManager::Destroy();
+	GameLogic::Destroy();
+	MeshList::Destroy();
+	EnvironmentManager::Destroy();
+	RenderManager::Destroy();
 }
 
 void GameScene::Init()
@@ -113,8 +119,7 @@ void GameScene::Render()
 	MS& ms = Graphics::GetInstance()->modelStack;
 	RenderHelper::RenderMesh(axis, false);
 
-	GameObjectManager::GetInstance()->render_all_objects();
-
+	RenderManager::GetInstance()->render_all_active_objects();
 }
 
 void GameScene::Exit()
