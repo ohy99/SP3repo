@@ -158,6 +158,7 @@
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AudioPlayer.cpp" />
     <ClCompile Include="Source\CharacterInfo.cpp" />
+    <ClCompile Include="Source\GameLogic.cpp" />
     <ClCompile Include="Source\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Source\AudioPlayer.h" />
     <ClInclude Include="Source\CharacterInfo.h" />
     <ClInclude Include="Source\FontType.h" />
+    <ClInclude Include="Source\GameLogic.h" />
     <ClInclude Include="Source\GameObjectManager.h" />
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\Camera.h" />

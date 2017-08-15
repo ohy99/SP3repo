@@ -48,6 +48,10 @@ class MeshList : public Singleton <MeshList>
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateLine("BLUELINE", Color(0, 0, 1), 1);
 		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("PLAYERTOWER", Color(0, 0, 0), 10);
+		temp->textureID = LoadTGA("Image//tower(player).tga");
+		assignMesh(temp);
 	}
 
 	void assignMesh(Mesh* a) {

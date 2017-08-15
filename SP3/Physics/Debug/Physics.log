@@ -1,5 +1,0 @@
-﻿  GameScene.cpp
-c:\users\530\documents\sp3repo\sp3\physics\source\gameobjectmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\sp3repo\sp3\physics\source\gameobject.h(7): note: see declaration of 'GameObject'
-  Physics.vcxproj -> C:\Users\530\Documents\SP3repo\SP3\Debug\Physics.exe
-  Physics.vcxproj -> C:\Users\530\Documents\SP3repo\SP3\Debug\Physics.pdb (Full PDB)

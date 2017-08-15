@@ -71,6 +71,9 @@
     <ClCompile Include="Source\AudioPlayer.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameLogic.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -168,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="Source\sound.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameLogic.h">
+      <Filter>Header Files\HY</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
