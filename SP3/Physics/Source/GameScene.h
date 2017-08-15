@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "AudioPlayer.h"
+#include "CharacterInfo.h"
 class Mesh;
 
 class GameScene : public Scene
@@ -25,6 +26,7 @@ protected:
 	double fps;
 	AudioPlayer audioPlayer;
 	Mesh* axis;
+	Character CharacterInfo;
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;

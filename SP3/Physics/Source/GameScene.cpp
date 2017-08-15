@@ -24,6 +24,7 @@
 #include "EnvironmentManager.h"
 #include "RenderManager.h"
 
+#include "CharacterInfo.h"
 GameScene::GameScene()
 {
 }
@@ -41,6 +42,8 @@ GameScene::~GameScene()
 
 void GameScene::Init()
 {
+	
+	
 	glClearColor(0.0f, 0.0f, 0.f, 0.0f);
 	// Enable depth test
 	//glEnable(GL_DEPTH_TEST);
@@ -131,5 +134,7 @@ void GameScene::Exit()
 		axis = nullptr;
 	}
 
+	//Do this later when the variables are loaded.
+	//CharacterInfo.Save();
 
 }

@@ -62,9 +62,9 @@ public:
 
 
 	//Bool//
-	bool Load(const string saveFileName = ".//Image//DM2231.sav"); // .sav files
+	bool Load(const string saveFileName = ".//Image//Stats.sav"); // .sav files
 																   // Save this class
-	bool Save(const string saveFileName = ".//Image//DM2231.sav"); // .sav files
+	bool Save(const string saveFileName = ".//Image//Stats.sav"); // .sav files
 
 
 	//---------------------Token Convers-----------------//
