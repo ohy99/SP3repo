@@ -106,7 +106,7 @@ void GameScene::Render()
 
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(-worldWidth * 0.5f, worldWidth * 0.5f, -worldHeight * 0.5f, worldHeight * 0.5f, -10, 10);
+	projection.SetToOrtho(0, worldWidth, 0, worldHeight, -10, 10);
 	Graphics::GetInstance()->projectionStack.LoadMatrix(projection);
 
 	// Camera matrix

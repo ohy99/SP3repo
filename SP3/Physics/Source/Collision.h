@@ -11,11 +11,6 @@ struct Collision
 		AABB,
 		SPHERE,
 		POINT,
-
-		//2d
-		BALL,
-		WALL,
-		PILLAR
 	};
 
 	CollisionType collisionType;

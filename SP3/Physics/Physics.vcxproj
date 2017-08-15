@@ -170,7 +170,6 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
-    <ClCompile Include="Source\SceneBase.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
@@ -199,7 +198,6 @@
     <ClInclude Include="Source\PhysicsManager.h" />
     <ClInclude Include="Source\RenderHelper.h" />
     <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\SceneBase.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\SingletonTemplate.h" />
