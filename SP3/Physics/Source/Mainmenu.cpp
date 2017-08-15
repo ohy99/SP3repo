@@ -1,4 +1,4 @@
-#include "GameScene.h"
+#include "Mainmenu.h"
 #include "GL\glew.h"
 #include "Application.h"
 #include <sstream>
@@ -21,17 +21,17 @@
 
 
 
-GameScene::GameScene()
+Mainmenu::Mainmenu()
 {
 }
 
-GameScene::~GameScene()
+Mainmenu::~Mainmenu()
 {
 	PhysicsManager::Destroy();
 	CollisionManager::Destroy();
 }
 
-void GameScene::Init()
+void Mainmenu::Init()
 {
 	glClearColor(0.0f, 0.0f, 0.f, 0.0f);
 	// Enable depth test
@@ -58,29 +58,45 @@ void GameScene::Init()
 
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
 	//background = EntityBase::getInstance()->getEntity("BACKGROUND");
+	play = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 30);
+	play->textureID = LoadTGA("Image\\play.tga");
+	quit = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 30);
+	quit->textureID = LoadTGA("Image\\quit.tga");
 
-
+	option = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 30);
+	option->textureID = LoadTGA("Image\\options.tga");
 }
 
 
-void GameScene::Update(double dt)
+void Mainmenu::Update(double dt)
 {
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
-
+	double x, y;
+	Application::GetCursorPos(&x, &y);
 
 	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions
 	CollisionManager::GetInstance()->update(dt);
 
-
+	int w = Application::GetWindowWidth();
+	int h = Application::GetWindowHeight();
+	std::cout << float(x / w * worldWidth) << std::endl;
 	fps = 1.0 / dt;
 	//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
+	//if (x>Application::GetWindowWidth/2 )
+	if(float(x / w * worldWidth)&& float((h - y) / h * worldHeight))
+	{
+		if (Application::IsKeyPressed('1'))
+		{
+			SceneManager::GetInstance()->setNextScene("QUIT");
+		}
+	}
 }
 
 
 
-void GameScene::Render()
+void Mainmenu::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -95,23 +111,42 @@ void GameScene::Render()
 		camera.position.x, camera.position.y, camera.position.z,
 		camera.target.x, camera.target.y, camera.target.z,
 		camera.up.x, camera.up.y, camera.up.z
-	);
+		);
 	// Model matrix : an identity matrix (model will be at the origin)
 	Graphics::GetInstance()->modelStack.LoadIdentity();
 
 	MS& ms = Graphics::GetInstance()->modelStack;
 	RenderHelper::RenderMesh(axis, false);
+	
+	ms.PushMatrix();
+	ms.Scale(Vector3(3, 1, 1));
 
+	ms.PushMatrix();
+	ms.Translate(0, 10, 0);
+	RenderHelper::RenderMesh(play, false);
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	ms.Translate(0, -30, 0);
+	RenderHelper::RenderMesh(quit, false);
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	ms.Translate(0, -10, 0);
+	RenderHelper::RenderMesh(option, false);
+	ms.PopMatrix();
+
+	ms.PopMatrix();
 }
 
-void GameScene::Exit()
+void Mainmenu::Exit()
 {
 
-	//if (axis)
-	//{
-	//	delete axis;
-	//	axis = nullptr;
-	//}
+	if (axis)
+	{
+		delete axis;
+		axis = nullptr;
+	}
 
 
 }

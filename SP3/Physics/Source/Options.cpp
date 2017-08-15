@@ -1,4 +1,4 @@
-#include "GameScene.h"
+#include "Options.h"
 #include "GL\glew.h"
 #include "Application.h"
 #include <sstream>
@@ -21,17 +21,17 @@
 
 
 
-GameScene::GameScene()
+Options::Options()
 {
 }
 
-GameScene::~GameScene()
+Options::~Options()
 {
 	PhysicsManager::Destroy();
 	CollisionManager::Destroy();
 }
 
-void GameScene::Init()
+void Options::Init()
 {
 	glClearColor(0.0f, 0.0f, 0.f, 0.0f);
 	// Enable depth test
@@ -63,7 +63,7 @@ void GameScene::Init()
 }
 
 
-void GameScene::Update(double dt)
+void Options::Update(double dt)
 {
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
@@ -80,7 +80,7 @@ void GameScene::Update(double dt)
 
 
 
-void GameScene::Render()
+void Options::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -95,7 +95,7 @@ void GameScene::Render()
 		camera.position.x, camera.position.y, camera.position.z,
 		camera.target.x, camera.target.y, camera.target.z,
 		camera.up.x, camera.up.y, camera.up.z
-	);
+		);
 	// Model matrix : an identity matrix (model will be at the origin)
 	Graphics::GetInstance()->modelStack.LoadIdentity();
 
@@ -104,7 +104,7 @@ void GameScene::Render()
 
 }
 
-void GameScene::Exit()
+void Options::Exit()
 {
 
 	//if (axis)

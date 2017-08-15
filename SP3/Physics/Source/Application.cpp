@@ -19,6 +19,11 @@
 #include "Graphics.h"
 
 #include "GameScene.h";
+#include "Mainmenu.h";
+#include "Levelselect.h";
+#include "Quit.h";
+#include "Options.h";
+
 
 struct AtExit
 {
@@ -140,7 +145,11 @@ void Application::Run()
 	//Main Loop
 	SceneManager* SM = SceneManager::GetInstance();
 	SM->addScene("GAME", new GameScene());
-	SM->setCurrScene("GAME");
+	SM->addScene("MAIN", new Mainmenu());
+	SM->addScene("QUIT", new Quit());
+	SM->addScene("OPTIONS", new Options());
+	SM->addScene("LEVELSELECT", new Levelselect());
+	SM->setCurrScene("MAIN");
 
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame

@@ -62,6 +62,18 @@
     <ClCompile Include="Source\GameScene.cpp">
       <Filter>Header Files\Assignments</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Mainmenu.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Quit.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Options.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Levelselect.cpp">
+      <Filter>Header Files\Assignments</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -146,6 +158,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\MeshNotFound.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mainmenu.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Quit.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Options.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Levelselect.h">
       <Filter>Header Files\Assignments</Filter>
     </ClInclude>
   </ItemGroup>

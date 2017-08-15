@@ -1,6 +1,9 @@
-﻿  Vector3.cpp
-  timer.cpp
-  Mtx44.cpp
-  MatrixStack.cpp
-  Generating Code...
-  Common.vcxproj -> C:\Users\530\Documents\SP3repo\SP3\Debug\Common.lib
+﻿Build started 15/8/2017 9:49:24 PM.
+     1>Project "D:\SP3repo\SP3\Common\Common.vcxproj" on node 2 (Build target(s)).
+     1>Lib:
+         Common.vcxproj -> D:\SP3repo\SP3\Debug\Common.lib
+     1>Done Building Project "D:\SP3repo\SP3\Common\Common.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.03

@@ -160,13 +160,17 @@
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\CollisionManager.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
+    <ClCompile Include="Source\Levelselect.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTextData.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Mainmenu.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
+    <ClCompile Include="Source\Quit.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
@@ -179,6 +183,8 @@
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\CollisionManager.h" />
     <ClInclude Include="Source\DetectMemoryLeak.h" />
+    <ClInclude Include="Source\Levelselect.h" />
+    <ClInclude Include="Source\Mainmenu.h" />
     <ClInclude Include="Source\MeshList.h" />
     <ClInclude Include="Source\MeshNotFound.h" />
     <ClInclude Include="Source\GameObject.h" />
@@ -191,7 +197,9 @@
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
+    <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\PhysicsManager.h" />
+    <ClInclude Include="Source\Quit.h" />
     <ClInclude Include="Source\RenderHelper.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
