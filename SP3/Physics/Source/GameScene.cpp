@@ -18,7 +18,7 @@
 
 #include "PhysicsManager.h"
 #include "TextManager.h"
-
+#include "GameObjectManager.h"
 #include "AudioPlayer.h"
 
 GameScene::GameScene()
@@ -29,18 +29,11 @@ GameScene::~GameScene()
 {
 	PhysicsManager::Destroy();
 	CollisionManager::Destroy();
+	GameObjectManager::Destroy();
 }
 
 void GameScene::Init()
 {
-
-	//Example of Audio playing //
-	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
-	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
-
-	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
-
-
 	glClearColor(0.0f, 0.0f, 0.f, 0.0f);
 	// Enable depth test
 	//glEnable(GL_DEPTH_TEST);
@@ -67,24 +60,21 @@ void GameScene::Init()
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
 	//background = EntityBase::getInstance()->getEntity("BACKGROUND");
 
+	GameObjectManager::GetInstance()->load_objects("Image\\lvl0objects.txt");
+
+	
+		//Example of Audio playing //
+	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
+	
+	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
+	
 
 }
 
 
 void GameScene::Update(double dt)
 {
-	float sound = 0.0f;
-
-	//Sample of increasing volume //
-	/*if (Application::IsKeyPressed(VK_LBUTTON) && (mX >= 463) && (mX <= 514) && (mY <= 329) && (mY >= 267) && option && timer.getElapsedTime() > buttontime)
-	{
-		buttontime = timer.getElapsedTime() + 0.25;
-		audioPlayer.increaseVolume(20);
-	}*/
-
-	// Rmb to pause it when u switch scenes.
-	//audioPlayer.pause();
-
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 

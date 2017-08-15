@@ -94,7 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)\glew\lib;$(SolutionDir)\glfw\lib-vc2015;C:\Users\530\Documents\GitHub\SP3repo\SP3\irrKlang\lib\Win32-visualStudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)\glew\lib;$(SolutionDir)\glfw\lib-vc2015;$(SolutionDir)\irrKlang\lib\Win32-visualStudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Common.lib;winmm.lib;opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
@@ -156,11 +156,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
-<<<<<<< HEAD
-=======
     <ClCompile Include="Source\AudioPlayer.cpp" />
->>>>>>> 5cc6ec23f7f491ef86f5d736ab1d63b986578ccb
     <ClCompile Include="Source\CharacterInfo.cpp" />
+    <ClCompile Include="Source\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\CollisionManager.cpp" />
@@ -178,12 +176,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
-<<<<<<< HEAD
-=======
     <ClInclude Include="Source\AudioPlayer.h" />
->>>>>>> 5cc6ec23f7f491ef86f5d736ab1d63b986578ccb
     <ClInclude Include="Source\CharacterInfo.h" />
     <ClInclude Include="Source\FontType.h" />
+    <ClInclude Include="Source\GameObjectManager.h" />
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Collision.h" />

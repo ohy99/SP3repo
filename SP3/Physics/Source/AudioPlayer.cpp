@@ -44,7 +44,9 @@ DESTRUCTOR
 *****************************/
 AudioPlayer::~AudioPlayer()
 {
+	if (soundEngine)
 	soundEngine->drop();
+	if (currentSound)
 	currentSound->drop();
 }
 

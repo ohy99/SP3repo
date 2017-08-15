@@ -9,11 +9,11 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Header Files\Assignments">
-      <UniqueIdentifier>{610d63c3-3f92-4d7c-9e65-4a4d491f7408}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Assignments\Scenes">
+    <Filter Include="Header Files\Scenes">
       <UniqueIdentifier>{73eca939-180e-4399-ad86-add48d8b7d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\HY">
+      <UniqueIdentifier>{59b76753-e219-402c-8bc6-85034f5c40d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,30 +47,29 @@
     <ClCompile Include="Source\Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LoadTextData.cpp">
-      <Filter>Header Files\Assignments</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\RenderHelper.cpp">
-      <Filter>Header Files\Assignments</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CollisionManager.cpp">
-      <Filter>Header Files\Assignments</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PhysicsManager.cpp">
-      <Filter>Header Files\Assignments</Filter>
+    <ClCompile Include="Source\CharacterInfo.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameScene.cpp">
-      <Filter>Header Files\Assignments</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CharacterInfo.cpp">
-<<<<<<< HEAD
       <Filter>Header Files</Filter>
-=======
-      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTextData.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderHelper.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CollisionManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PhysicsManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjectManager.cpp">
+      <Filter>Header Files\HY</Filter>
     </ClCompile>
     <ClCompile Include="Source\AudioPlayer.cpp">
-      <Filter>Source Files</Filter>
->>>>>>> 5cc6ec23f7f491ef86f5d736ab1d63b986578ccb
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,62 +112,62 @@
     <ClInclude Include="Source\Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GlobalVariableManager.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Collision.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LoadTextData.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DetectMemoryLeak.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SingletonTemplate.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CollisionManager.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RenderHelper.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PhysicsManager.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TextManager.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
     <ClInclude Include="Source\SceneManager.h">
-      <Filter>Header Files\Assignments\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameScene.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MeshList.h">
-      <Filter>Header Files\Assignments</Filter>
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\FontType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MeshNotFound.h">
-      <Filter>Header Files\Assignments</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CharacterInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
-    <ClInclude Include="Source\sound.h">
-      <Filter>Header Files\Assignments</Filter>
+    <ClInclude Include="Source\Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DetectMemoryLeak.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTextData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshNotFound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SingletonTemplate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GlobalVariableManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PhysicsManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjectManager.h">
+      <Filter>Header Files\HY</Filter>
     </ClInclude>
     <ClInclude Include="Source\AudioPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
->>>>>>> 5cc6ec23f7f491ef86f5d736ab1d63b986578ccb
+    <ClInclude Include="Source\sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
