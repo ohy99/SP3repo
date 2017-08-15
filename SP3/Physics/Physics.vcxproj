@@ -88,13 +88,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Common\Source;$(SolutionDir)\glfw\include;$(SolutionDir)\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Common\Source;$(SolutionDir)\glfw\include;$(SolutionDir)\glew\include;$(SolutionDir)\irrKlang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)\glew\lib;$(SolutionDir)\glfw\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)\glew\lib;$(SolutionDir)\glfw\lib-vc2015;$(SolutionDir)\irrKlang\lib\Win32-visualStudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Common.lib;winmm.lib;opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
@@ -156,11 +156,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\AudioPlayer.cpp" />
+    <ClCompile Include="Source\CharacterInfo.cpp" />
+    <ClCompile Include="Source\EnvironmentManager.cpp" />
+    <ClCompile Include="Source\GameLogic.cpp" />
+    <ClCompile Include="Source\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\CollisionManager.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\Levelselect.cpp" />
+    <ClCompile Include="Source\GenericDecoration.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTextData.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
@@ -172,12 +178,21 @@
     <ClCompile Include="Source\PhysicsManager.cpp" />
     <ClCompile Include="Source\Quit.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
+    <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\AudioPlayer.h" />
+    <ClInclude Include="Source\CharacterInfo.h" />
+    <ClInclude Include="Source\Collidable.h" />
+    <ClInclude Include="Source\EnemyMinion.h" />
+    <ClInclude Include="Source\EnemyTower.h" />
+    <ClInclude Include="Source\EnvironmentManager.h" />
     <ClInclude Include="Source\FontType.h" />
+    <ClInclude Include="Source\GameLogic.h" />
+    <ClInclude Include="Source\GameObjectManager.h" />
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Collision.h" />
@@ -185,6 +200,7 @@
     <ClInclude Include="Source\DetectMemoryLeak.h" />
     <ClInclude Include="Source\Levelselect.h" />
     <ClInclude Include="Source\Mainmenu.h" />
+    <ClInclude Include="Source\GenericDecoration.h" />
     <ClInclude Include="Source\MeshList.h" />
     <ClInclude Include="Source\MeshNotFound.h" />
     <ClInclude Include="Source\GameObject.h" />
@@ -201,10 +217,12 @@
     <ClInclude Include="Source\PhysicsManager.h" />
     <ClInclude Include="Source\Quit.h" />
     <ClInclude Include="Source\RenderHelper.h" />
+    <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\SingletonTemplate.h" />
+    <ClInclude Include="Source\sound.h" />
     <ClInclude Include="Source\TextManager.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />

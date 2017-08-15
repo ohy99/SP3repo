@@ -18,9 +18,13 @@
 
 #include "PhysicsManager.h"
 #include "TextManager.h"
+#include "GameObjectManager.h"
+#include "AudioPlayer.h"
+#include "GameLogic.h"
+#include "EnvironmentManager.h"
+#include "RenderManager.h"
 
-
-
+#include "CharacterInfo.h"
 GameScene::GameScene()
 {
 }
@@ -29,10 +33,17 @@ GameScene::~GameScene()
 {
 	PhysicsManager::Destroy();
 	CollisionManager::Destroy();
+	GameObjectManager::Destroy();
+	GameLogic::Destroy();
+	MeshList::Destroy();
+	EnvironmentManager::Destroy();
+	RenderManager::Destroy();
 }
 
 void GameScene::Init()
 {
+	
+	
 	glClearColor(0.0f, 0.0f, 0.f, 0.0f);
 	// Enable depth test
 	//glEnable(GL_DEPTH_TEST);
@@ -51,23 +62,30 @@ void GameScene::Init()
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
-	worldHeight = 100;
-	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
+
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
 	Math::InitRNG();
 
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
 	//background = EntityBase::getInstance()->getEntity("BACKGROUND");
 
+	GameObjectManager::GetInstance()->load_objects("Image\\lvl0objects.txt");
+
+	
+		//Example of Audio playing //
+	/*audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
+	
+	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);*/
+	
 
 }
 
 
 void GameScene::Update(double dt)
 {
-	worldHeight = 100;
-	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
-
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
 	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions
@@ -86,7 +104,9 @@ void GameScene::Render()
 
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(-worldWidth * 0.5f, worldWidth * 0.5f, -worldHeight * 0.5f, worldHeight * 0.5f, -10, 10);
+
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+	projection.SetToOrtho(0, worldWidth, 0, worldHeight, -10, 10);
 	Graphics::GetInstance()->projectionStack.LoadMatrix(projection);
 
 	// Camera matrix
@@ -102,6 +122,7 @@ void GameScene::Render()
 	MS& ms = Graphics::GetInstance()->modelStack;
 	RenderHelper::RenderMesh(axis, false);
 
+	RenderManager::GetInstance()->render_all_active_objects();
 }
 
 void GameScene::Exit()
@@ -113,5 +134,7 @@ void GameScene::Exit()
 	//	axis = nullptr;
 	//}
 
+	//Do this later when the variables are loaded.
+	//CharacterInfo.Save();
 
 }

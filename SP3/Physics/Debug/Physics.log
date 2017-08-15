@@ -1,15 +1,79 @@
-﻿Build started 15/8/2017 11:11:45 PM.
+﻿Build started 15/8/2017 11:31:24 PM.
      1>Project "D:\SP3repo\SP3\Physics\Physics.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ID:\SP3repo\SP3\\Common\Source /ID:\SP3repo\SP3\\glfw\include /ID:\SP3repo\SP3\\glew\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Mainmenu.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ID:\SP3repo\SP3\\Common\Source /ID:\SP3repo\SP3\\glfw\include /ID:\SP3repo\SP3\\glew\include /ID:\SP3repo\SP3\\irrKlang\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Application.cpp Source\AudioPlayer.cpp Source\CharacterInfo.cpp Source\EnvironmentManager.cpp Source\GameLogic.cpp Source\GameObjectManager.cpp Source\GameScene.cpp Source\Camera.cpp Source\CollisionManager.cpp Source\GameObject.cpp Source\Levelselect.cpp Source\GenericDecoration.cpp Source\LoadOBJ.cpp Source\LoadTextData.cpp Source\LoadTGA.cpp Source\main.cpp Source\Mainmenu.cpp Source\Mesh.cpp Source\MeshBuilder.cpp Source\Options.cpp Source\PhysicsManager.cpp Source\Quit.cpp Source\RenderHelper.cpp Source\RenderManager.cpp Source\shader.cpp Source\Utility.cpp
+         Utility.cpp
+         shader.cpp
+         RenderManager.cpp
+     1>d:\sp3repo\sp3\physics\source\gameobject.h(8): warning C4099: 'GameObject': type name first seen using 'class' now seen using 'struct'
+         d:\sp3repo\sp3\physics\source\gameobject.h(7): note: see declaration of 'GameObject'
+         RenderHelper.cpp
+         Quit.cpp
+         PhysicsManager.cpp
+         Options.cpp
+         MeshBuilder.cpp
+         Mesh.cpp
          Mainmenu.cpp
+         main.cpp
+         LoadTGA.cpp
+         LoadTextData.cpp
+         LoadOBJ.cpp
+         GenericDecoration.cpp
+         Levelselect.cpp
+         GameObject.cpp
+         CollisionManager.cpp
+         Camera.cpp
+         GameScene.cpp
+     1>d:\sp3repo\sp3\physics\source\gameobjectmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
+         d:\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
+     1>d:\sp3repo\sp3\physics\source\rendermanager.h(7): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
+         d:\sp3repo\sp3\physics\source\gameobjectmanager.h(6): note: see declaration of 'GameObject'
+         Generating Code...
+         Compiling...
+         GameObjectManager.cpp
+     1>d:\sp3repo\sp3\physics\source\gameobject.h(8): warning C4099: 'GameObject': type name first seen using 'class' now seen using 'struct'
+         d:\sp3repo\sp3\physics\source\gameobject.h(7): note: see declaration of 'GameObject'
+     1>d:\sp3repo\sp3\physics\source\rendermanager.h(7): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
+         d:\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
+         GameLogic.cpp
+         EnvironmentManager.cpp
+         CharacterInfo.cpp
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(135): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(139): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(143): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(147): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(151): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(155): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(159): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(216): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(218): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\characterinfo.cpp(220): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+         AudioPlayer.cpp
+     1>d:\sp3repo\sp3\physics\source\audioplayer.cpp(213): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\audioplayer.cpp(222): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\audioplayer.cpp(231): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\audioplayer.cpp(240): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
+     1>d:\sp3repo\sp3\physics\source\audioplayer.cpp(249): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
+         Application.cpp
+     1>d:\sp3repo\sp3\physics\source\application.cpp(21): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\sp3repo\sp3\physics\source\application.cpp(22): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\sp3repo\sp3\physics\source\application.cpp(23): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\sp3repo\sp3\physics\source\application.cpp(24): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\sp3repo\sp3\physics\source\application.cpp(25): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\SP3repo\SP3\Debug\Physics.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\SP3repo\SP3\Debug /LIBPATH:D:\SP3repo\SP3\\glew\lib /LIBPATH:"D:\SP3repo\SP3\\glfw\lib-vc2015" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\SP3repo\SP3\Debug\Physics.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\SP3repo\SP3\Debug\Physics.lib" /MACHINE:X86 Debug\Application.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\SP3repo\SP3\Debug\Physics.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\SP3repo\SP3\Debug /LIBPATH:D:\SP3repo\SP3\\glew\lib /LIBPATH:"D:\SP3repo\SP3\\glfw\lib-vc2015" /LIBPATH:"D:\SP3repo\SP3\\irrKlang\lib\Win32-visualStudio" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\SP3repo\SP3\Debug\Physics.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\SP3repo\SP3\Debug\Physics.lib" /MACHINE:X86 Debug\Application.obj
+         Debug\AudioPlayer.obj
+         Debug\CharacterInfo.obj
+         Debug\EnvironmentManager.obj
+         Debug\GameLogic.obj
+         Debug\GameObjectManager.obj
          Debug\GameScene.obj
          Debug\Camera.obj
          Debug\CollisionManager.obj
          Debug\GameObject.obj
          Debug\Levelselect.obj
+         Debug\GenericDecoration.obj
          Debug\LoadOBJ.obj
          Debug\LoadTextData.obj
          Debug\LoadTGA.obj
@@ -21,11 +85,13 @@
          Debug\PhysicsManager.obj
          Debug\Quit.obj
          Debug\RenderHelper.obj
+         Debug\RenderManager.obj
          Debug\shader.obj
          Debug\Utility.obj
+     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
          Physics.vcxproj -> D:\SP3repo\SP3\Debug\Physics.exe
      1>Done Building Project "D:\SP3repo\SP3\Physics\Physics.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.19
+Time Elapsed 00:00:13.71

@@ -35,7 +35,7 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateRing("Ring", Color(1, 1, 1), 10, 1.0f, 0.5f);
 		assignMesh(temp);
 	
-		temp = MeshBuilder::GenerateQuad("BACKGROUND", Color(0, 0, 0), 1);
+		temp = MeshBuilder::GenerateQuad("BACKGROUND", Color(1, 1, 1), 1);
 		assignMesh(temp);
 
 		temp = MeshBuilder::GenerateText("CALIBRI", 16, 16);
@@ -47,6 +47,10 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateLine("GREENLINE", Color(0, 1, 0), 1);
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateLine("BLUELINE", Color(0, 0, 1), 1);
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("PLAYERTOWER", Color(0, 0, 0), 10);
+		temp->textureID = LoadTGA("Image//tower(player).tga");
 		assignMesh(temp);
 	}
 
