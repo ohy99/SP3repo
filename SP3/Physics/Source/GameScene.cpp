@@ -21,6 +21,7 @@
 #include "GameObjectManager.h"
 #include "AudioPlayer.h"
 
+#include "CharacterInfo.h"
 GameScene::GameScene()
 {
 }
@@ -34,6 +35,8 @@ GameScene::~GameScene()
 
 void GameScene::Init()
 {
+	
+	
 	glClearColor(0.0f, 0.0f, 0.f, 0.0f);
 	// Enable depth test
 	//glEnable(GL_DEPTH_TEST);
@@ -75,10 +78,11 @@ void GameScene::Init()
 
 void GameScene::Update(double dt)
 {
+	
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 
-
+	
 	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions
 	CollisionManager::GetInstance()->update(dt);
@@ -123,5 +127,7 @@ void GameScene::Exit()
 		axis = nullptr;
 	}
 
+	//Do this later when the variables are loaded.
+	//CharacterInfo.Save();
 
 }
