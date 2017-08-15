@@ -6,7 +6,7 @@
 #include <vector>
 #include "Scene.h"
 #include "Camera.h"
-
+#include "AudioPlayer.h"
 class Mesh;
 
 class GameScene : public Scene
@@ -23,7 +23,7 @@ public:
 protected:
 	Camera camera;
 	double fps;
-
+	AudioPlayer audioPlayer;
 	Mesh* axis;
 	//Mesh* background;
 	float worldHeight;

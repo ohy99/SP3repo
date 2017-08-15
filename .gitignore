@@ -40,5 +40,14 @@ SP3\Physics\Debug\*
 SP3\Physics\Debug\vc140.idb
 SP3\Physics\Debug\vc140.pdb
 SP3\Debug\Physics.pdb
+SP3\.vs\*
 *.idb
 *.pdb
+SP3/.vs/DM2212_Physics/v14/.suo
+*.exe
+*.ilk
+*.pdb
+*.log
+*.tlog
+*.idb
+SP3/.vs/DM2212_Physics/v14/.suo

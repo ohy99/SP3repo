@@ -63,7 +63,14 @@
       <Filter>Header Files\Assignments</Filter>
     </ClCompile>
     <ClCompile Include="Source\CharacterInfo.cpp">
+<<<<<<< HEAD
       <Filter>Header Files</Filter>
+=======
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AudioPlayer.cpp">
+      <Filter>Source Files</Filter>
+>>>>>>> 5cc6ec23f7f491ef86f5d736ab1d63b986578ccb
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,5 +161,14 @@
     <ClInclude Include="Source\CharacterInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Source\sound.h">
+      <Filter>Header Files\Assignments</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AudioPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> 5cc6ec23f7f491ef86f5d736ab1d63b986578ccb
   </ItemGroup>
 </Project>
