@@ -20,6 +20,7 @@
 #include "TextManager.h"
 #include "GameObjectManager.h"
 #include "AudioPlayer.h"
+#include "GameLogic.h"
 
 #include "CharacterInfo.h"
 GameScene::GameScene()
@@ -55,8 +56,8 @@ void GameScene::Init()
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
-	worldHeight = 100;
-	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
+
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
 	Math::InitRNG();
 
@@ -67,10 +68,10 @@ void GameScene::Init()
 
 	
 		//Example of Audio playing //
-	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
+	/*audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
 	
-	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
+	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);*/
 	
 
 }
@@ -78,11 +79,8 @@ void GameScene::Init()
 
 void GameScene::Update(double dt)
 {
-	
-	worldHeight = 100;
-	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
-	
 	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions
 	CollisionManager::GetInstance()->update(dt);
@@ -100,6 +98,8 @@ void GameScene::Render()
 
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
+
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	projection.SetToOrtho(0, worldWidth, 0, worldHeight, -10, 10);
 	Graphics::GetInstance()->projectionStack.LoadMatrix(projection);
 
@@ -115,6 +115,8 @@ void GameScene::Render()
 
 	MS& ms = Graphics::GetInstance()->modelStack;
 	RenderHelper::RenderMesh(axis, false);
+
+	GameObjectManager::GetInstance()->render_all_objects();
 
 }
 
