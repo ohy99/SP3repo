@@ -165,8 +165,8 @@
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\CollisionManager.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
-    <ClCompile Include="Source\Levelselect.cpp" />
     <ClCompile Include="Source\GenericDecoration.cpp" />
+    <ClCompile Include="Source\Levelselect.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTextData.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
@@ -198,9 +198,9 @@
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\CollisionManager.h" />
     <ClInclude Include="Source\DetectMemoryLeak.h" />
+    <ClInclude Include="Source\GenericDecoration.h" />
     <ClInclude Include="Source\Levelselect.h" />
     <ClInclude Include="Source\Mainmenu.h" />
-    <ClInclude Include="Source\GenericDecoration.h" />
     <ClInclude Include="Source\MeshList.h" />
     <ClInclude Include="Source\MeshNotFound.h" />
     <ClInclude Include="Source\GameObject.h" />

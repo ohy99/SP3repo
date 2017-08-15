@@ -87,16 +87,16 @@
       <Filter>Header Files\HY</Filter>
     </ClCompile>
     <ClCompile Include="Source\Mainmenu.cpp">
-      <Filter>Header Files\Assignments</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Quit.cpp">
-      <Filter>Header Files\Assignments</Filter>
+      <Filter>Header Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Options.cpp">
-      <Filter>Header Files\Assignments</Filter>
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Quit.cpp">
+      <Filter>Header Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Levelselect.cpp">
-      <Filter>Header Files\Assignments</Filter>
+      <Filter>Header Files\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,17 +217,17 @@
     <ClInclude Include="Source\Collidable.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mainmenu.h">
-      <Filter>Header Files\Assignments</Filter>
+    <ClInclude Include="Source\Levelselect.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Quit.h">
-      <Filter>Header Files\Assignments</Filter>
+    <ClInclude Include="Source\Mainmenu.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Options.h">
-      <Filter>Header Files\Assignments</Filter>
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Levelselect.h">
-      <Filter>Header Files\Assignments</Filter>
+    <ClInclude Include="Source\Quit.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
