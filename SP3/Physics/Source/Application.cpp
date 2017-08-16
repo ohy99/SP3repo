@@ -151,7 +151,7 @@ void Application::Run()
 	SM->addScene("WIN", new Win());
 	SM->addScene("OPTIONS", new Options());
 	SM->addScene("LEVELSELECT", new Levelselect());
-	SM->setCurrScene("GAME");
+	SM->setCurrScene("MAIN");
 
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame

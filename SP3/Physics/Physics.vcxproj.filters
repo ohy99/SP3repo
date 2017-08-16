@@ -246,10 +246,10 @@
     </ClInclude>
     <ClInclude Include="Source\Win.h">
       <Filter>Header Files\Scenes</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="Source\Shop.h">
       <Filter>Header Files</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="Source\ObjectPoolManager.h">
       <Filter>Header Files\HY</Filter>
     </ClInclude>

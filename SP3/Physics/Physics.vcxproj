@@ -180,7 +180,6 @@
     <ClCompile Include="Source\PhysicsManager.cpp" />
     <ClCompile Include="Source\Lose.cpp" />
     <ClCompile Include="Source\Projectile.cpp" />
-    <ClCompile Include="Source\Quit.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
@@ -225,7 +224,6 @@
     <ClInclude Include="Source\PhysicsManager.h" />
     <ClInclude Include="Source\Lose.h" />
     <ClInclude Include="Source\Projectile.h" />
-    <ClInclude Include="Source\Quit.h" />
     <ClInclude Include="Source\RenderHelper.h" />
     <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
