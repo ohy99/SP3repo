@@ -20,7 +20,8 @@ public:
 	enum GameObjectType {
 		//Define the types of game objects here.
 		PLAYERTOWER = 0,
-		BACKGROUND
+		BACKGROUND,
+		TILES
 	};
 	GameObject* request_new(GameObjectType);
 

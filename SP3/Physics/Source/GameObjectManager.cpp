@@ -33,6 +33,12 @@ GameObject * GameObjectManager::request_new(GameObjectType id)
 		temp = new GameObject();
 		temp->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
 		break;
+
+	case GameObjectType::TILES:
+		temp = new GameObject();
+		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		break;
+
 	case GameObjectType::BACKGROUND:
 		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
 		break;
@@ -130,6 +136,12 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 		case GameObjectType::BACKGROUND:
 			EnvironmentManager::GetInstance()->attach_background
 			(dynamic_cast<GenericDecoration*>(temp));
+			break;
+
+		case GameObjectType::TILES:
+			if (temp)
+				temp->pos = get_pos(bufstr);
+			RenderManager::GetInstance()->attach_renderable(temp);
 			break;
 		}
 

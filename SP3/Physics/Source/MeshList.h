@@ -21,6 +21,8 @@ class MeshList : public Singleton <MeshList>
 	MeshList(){
 
 		Mesh* temp;
+
+		//Base Meshes
 		temp = MeshBuilder::GenerateAxes("Axis", 1000, 1000, 1000);
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateSphere("Sphere", Color(1, 1, 1), 10, 10, 1);
@@ -36,6 +38,7 @@ class MeshList : public Singleton <MeshList>
 		assignMesh(temp);
 	
 		temp = MeshBuilder::GenerateQuad("BACKGROUND", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//level1background.tga");
 		assignMesh(temp);
 
 		temp = MeshBuilder::GenerateText("CALIBRI", 16, 16);
@@ -49,8 +52,19 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateLine("BLUELINE", Color(0, 0, 1), 1);
 		assignMesh(temp);
 
+
+		//Level 1 
+		
 		temp = MeshBuilder::GenerateQuad("PLAYERTOWER", Color(0, 0, 0), 10);
 		temp->textureID = LoadTGA("Image//tower(player).tga");
+		assignMesh(temp);
+
+		/*temp = MeshBuilder::GenerateQuad("BACKGROUND1", Color(0, 0, 0), 10);
+		temp->textureID = LoadTGA("Image//level1background.tga");
+		assignMesh(temp);*/
+
+		temp = MeshBuilder::GenerateQuad("Tile1", Color(0, 0, 0), 10);
+		temp->textureID = LoadTGA("Image//level1tile.tga");
 		assignMesh(temp);
 	}
 
