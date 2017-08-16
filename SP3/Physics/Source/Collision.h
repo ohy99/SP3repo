@@ -25,7 +25,8 @@ struct Collision
 	}
 
 	~Collision() {
-
+		mid = nullptr;
+		point.Set(0, 0, 0);
 	}
 
 	void setCollisionType(CollisionType collisionType) {

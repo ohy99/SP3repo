@@ -58,13 +58,23 @@ void Mainmenu::Init()
 
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
 	//background = EntityBase::getInstance()->getEntity("BACKGROUND");
-	play = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 30);
-	play->textureID = LoadTGA("Image\\play.tga");
-	quit = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 30);
-	quit->textureID = LoadTGA("Image\\quit.tga");
+	//play = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 30);
+	//play->textureID = LoadTGA("Image\\play.tga");
+	//quit = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 30);
+	//quit->textureID = LoadTGA("Image\\quit.tga");
 
-	option = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 30);
-	option->textureID = LoadTGA("Image\\options.tga");
+	//option = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 30);
+	//option->textureID = LoadTGA("Image\\options.tga");
+
+	playbutt.pos.Set(0, 12.5, 0);
+	playbutt.resize_button(20, 10);
+	playbutt.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");
+	optionbutt.pos.Set(0, 0, 0);
+	optionbutt.resize_button(35, 10);
+	optionbutt.mesh = MeshList::GetInstance()->getMesh("OPTIONSBUTTON");
+	quitbutt.pos.Set(0, -12.5, 0);
+	quitbutt.resize_button(20, 10);
+	quitbutt.mesh = MeshList::GetInstance()->getMesh("QUITBUTTON");
 }
 
 
@@ -81,16 +91,27 @@ void Mainmenu::Update(double dt)
 
 	int w = Application::GetWindowWidth();
 	int h = Application::GetWindowHeight();
-	std::cout << float(x / w * worldWidth) << std::endl;
+	//std::cout << float(x / w * worldWidth) << std::endl;
 	fps = 1.0 / dt;
 	//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
 	//if (x>Application::GetWindowWidth/2 )
-	if(float(x / w * worldWidth)&& float((h - y) / h * worldHeight))
+	//if(float(x / w * worldWidth)&& float((h - y) / h * worldHeight))
+	//{
+	//	if (Application::IsKeyPressed('1'))
+	//	{
+	//		SceneManager::GetInstance()->setNextScene("QUIT");
+	//	}
+	//}
+
+	Vector3 cursor_point_in_world_space(x / w * worldWidth - worldWidth * 0.5f, (Application::GetWindowHeight() - y) / h * worldHeight - worldHeight * 0.5f);
+	Collision cursor_collider;
+	cursor_collider.collisionType = Collision::POINT;
+	cursor_collider.mid = &cursor_point_in_world_space;
+
+	if (playbutt.collision.isCollide(cursor_collider))
 	{
-		if (Application::IsKeyPressed('1'))
-		{
-			SceneManager::GetInstance()->setNextScene("QUIT");
-		}
+		std::cout << cursor_point_in_world_space << std::endl;
+		//SceneManager::GetInstance()->setNextScene("QUIT");
 	}
 }
 
@@ -118,25 +139,33 @@ void Mainmenu::Render()
 	MS& ms = Graphics::GetInstance()->modelStack;
 	RenderHelper::RenderMesh(axis, false);
 	
-	ms.PushMatrix();
-	ms.Scale(Vector3(3, 1, 1));
+	//ms.PushMatrix();
+	//ms.Scale(Vector3(3, 1, 1));
 
-	ms.PushMatrix();
-	ms.Translate(0, 10, 0);
-	RenderHelper::RenderMesh(play, false);
-	ms.PopMatrix();
+	//ms.PushMatrix();
+	//ms.Translate(0, 10, 0);
+	////RenderHelper::RenderMesh(play, false);
+	//ms.PopMatrix();
 
-	ms.PushMatrix();
-	ms.Translate(0, -30, 0);
-	RenderHelper::RenderMesh(quit, false);
-	ms.PopMatrix();
+	////ms.PushMatrix();
+	////ms.Translate(0, -30, 0);
+	////RenderHelper::RenderMesh(quit, false);
+	////ms.PopMatrix();
 
-	ms.PushMatrix();
-	ms.Translate(0, -10, 0);
-	RenderHelper::RenderMesh(option, false);
-	ms.PopMatrix();
+	////ms.PushMatrix();
+	////ms.Translate(0, -10, 0);
+	////RenderHelper::RenderMesh(option, false);
+	////ms.PopMatrix();
 
-	ms.PopMatrix();
+
+	//ms.PopMatrix();
+
+
+	playbutt.render_button();
+	optionbutt.render_button();
+	quitbutt.render_button();
+
+
 }
 
 void Mainmenu::Exit()

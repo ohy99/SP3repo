@@ -5,7 +5,7 @@
 #include <vector>
 #include "Scene.h"
 #include "Camera.h"
-
+#include "Button.h"
 class Mesh;
 
 class Mainmenu : public Scene
@@ -27,6 +27,9 @@ protected:
 	Mesh* play;
 	Mesh* quit;
 	Mesh* option;
+	Button playbutt;
+	Button optionbutt;
+	Button quitbutt;
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;
