@@ -129,8 +129,10 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 		switch (id)
 		{
 		case GameObjectType::PLAYERTOWER:
-			if (temp)
-				temp->pos = get_pos(bufstr);
+			if (temp == nullptr)
+				break;
+			temp->pos = get_vector3(fileStream, bufstr);
+			temp->scale = get_vector3(fileStream, bufstr);
 			RenderManager::GetInstance()->attach_renderable(temp);
 			break;
 		case GameObjectType::BACKGROUND:
@@ -139,8 +141,10 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 			break;
 
 		case GameObjectType::TILES:
-			if (temp)
-				temp->pos = get_pos(bufstr);
+			if (temp == nullptr)
+				break;
+				temp->pos = get_vector3(fileStream, bufstr);
+				temp->scale = get_vector3(fileStream, bufstr);
 			RenderManager::GetInstance()->attach_renderable(temp);
 			break;
 		}
@@ -152,20 +156,36 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 	
 }
 
-Vector3 GameObjectManager::get_pos(std::string& bufstr)
+Vector3 GameObjectManager::get_vector3(std::ifstream& fileStream, std::string& bufstr)
 {
 	std::string temp;
 	std::stringstream ss;
 	ss.str(bufstr);
 	getline(ss, temp, '=');
-
 	Vector3 ret;
+	
+	if (temp == "pos")
+		ret.Set(0, 0, 0);
+	else if (temp == "scale")
+		ret.Set(1, 1, 1);
+	else {
+		std::cerr << "MISSING TRANSFORM COMPONENT!" << std::endl;
+		throw std::exception("MISSING TRANSFORM COMPONENT!");
+	}
+	
+
 	getline(ss, temp, ',');
+	if (temp == "\r")
+		return ret;
 	ret.x = std::stof(temp);
 	getline(ss, temp, ',');
 	ret.y = std::stof(temp);
 	getline(ss, temp);
 	ret.z = std::stof(temp);
+
+	char buf[256];
+	fileStream.getline(buf, 256);
+	bufstr = buf;
 
 	return ret;
 }

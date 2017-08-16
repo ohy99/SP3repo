@@ -33,7 +33,7 @@ protected:
 
 private:
 	void load_object(std::ifstream& fileStream, std::string& bufstr, GameObjectType id);
-	Vector3 get_pos(std::string& bufstr);
+	Vector3 get_vector3(std::ifstream& fileStream, std::string& bufstr);
 };
 
 #endif // !GAMEOBJECTMANAGER_H

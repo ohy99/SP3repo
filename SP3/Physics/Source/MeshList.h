@@ -55,11 +55,11 @@ class MeshList : public Singleton <MeshList>
 
 		//Level 1 
 		
-		temp = MeshBuilder::GenerateQuad("PLAYERTOWER", Color(0, 0, 0), 10);
+		temp = MeshBuilder::GenerateQuad("PLAYERTOWER", Color(0, 0, 0), 1);
 		temp->textureID = LoadTGA("Image//tower(player).tga");
 		assignMesh(temp);
 
-		/*temp = MeshBuilder::GenerateQuad("BACKGROUND1", Color(0, 0, 0), 10);
+		/*temp = MeshBuild cbcer::GenerateQuad("BACKGROUND1", Color(0, 0, 0), 10);
 		temp->textureID = LoadTGA("Image//level1background.tga");
 		assignMesh(temp);*/
 
