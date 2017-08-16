@@ -18,7 +18,11 @@
 
 #include "PhysicsManager.h"
 #include "TextManager.h"
+#include "GameObjectManager.h"
 
+#include "GameLogic.h"
+#include "EnvironmentManager.h"
+#include "RenderManager.h"
 
 
 Options::Options()
@@ -29,6 +33,11 @@ Options::~Options()
 {
 	PhysicsManager::Destroy();
 	CollisionManager::Destroy();
+	GameObjectManager::Destroy();
+	GameLogic::Destroy();
+	MeshList::Destroy();
+	EnvironmentManager::Destroy();
+	RenderManager::Destroy();
 }
 
 void Options::Init()
@@ -50,16 +59,25 @@ void Options::Init()
 	Graphics::GetInstance()->init();
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
-
+	vol = 0;
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 
 	Math::InitRNG();
 
-	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
+	axis = MeshBuilder::GenerateQuad("",Color(1,1,1),1);
 	//background = EntityBase::getInstance()->getEntity("BACKGROUND");
+	plusbutt.pos.Set(30, 5, 0);
+	plusbutt.resize_button(10, 10);
+	plusbutt.mesh = MeshList::GetInstance()->getMesh("PLUSBUTTON");
+	minusbutt.pos.Set(-23, 5, 0);
+	minusbutt.resize_button(10, 10);
+	minusbutt.mesh = MeshList::GetInstance()->getMesh("MINUSBUTTON");
 
+	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
 
+	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 }
 
 
@@ -67,15 +85,48 @@ void Options::Update(double dt)
 {
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
-
+	double x, y;
+	Application::GetCursorPos(&x, &y);
 
 	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions
 	CollisionManager::GetInstance()->update(dt);
 
+	int w = Application::GetWindowWidth();
+	int h = Application::GetWindowHeight();
 
 	fps = 1.0 / dt;
 	//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
+	Vector3 cursor_point_in_world_space(x / w * worldWidth - worldWidth * 0.5f, (Application::GetWindowHeight() - y) / h * worldHeight - worldHeight * 0.5f);
+	Collision cursor_collider;
+	cursor_collider.collisionType = Collision::POINT;
+	cursor_collider.mid = &cursor_point_in_world_space;
+	static bool pressle = false;
+	std::cout << "options:" << audioPlayer.getCurrentVolume() << std::endl;
+	if (Application::IsMousePressed(0) && !pressle)
+	{
+		if (plusbutt.collision.isCollide(cursor_collider))
+		{
+			if (vol > 0)
+			{
+				--vol;
+			}
+			audioPlayer.increaseVolume();
+		}
+		if (minusbutt.collision.isCollide(cursor_collider))
+		{
+			if (vol<10)
+			++vol;
+
+			audioPlayer.decreaseVolume();
+		}
+		pressle = true;
+	}
+	else if (!Application::IsMousePressed(0) && pressle)
+		pressle = false;
+
+	if (Application::IsKeyPressed('1'))
+		SceneManager::GetInstance()->setNextScene("MAIN");
 }
 
 
@@ -100,13 +151,27 @@ void Options::Render()
 	Graphics::GetInstance()->modelStack.LoadIdentity();
 
 	MS& ms = Graphics::GetInstance()->modelStack;
-	RenderHelper::RenderMesh(axis, false);
+	//RenderHelper::RenderMesh(axis, false);
 
+	ms.PushMatrix();
+	ms.Translate(-10, 0, 0);
+	for (int i = 0; i < 10 - vol; ++i)
+	{
+		ms.PushMatrix();
+		ms.Translate(i * 3, i * 0.5f, 0);
+		ms.Scale(3, 3 + i, 0);
+		RenderHelper::RenderMesh(axis, false);
+		ms.PopMatrix();
+	}
+	ms.PopMatrix();
+
+	plusbutt.render_button();
+	minusbutt.render_button();
 }
 
 void Options::Exit()
 {
-
+	audioPlayer.pause();
 	//if (axis)
 	//{
 	//	delete axis;

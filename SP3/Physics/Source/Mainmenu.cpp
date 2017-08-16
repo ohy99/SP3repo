@@ -18,7 +18,11 @@
 
 #include "PhysicsManager.h"
 #include "TextManager.h"
+#include "GameObjectManager.h"
 
+#include "GameLogic.h"
+#include "EnvironmentManager.h"
+#include "RenderManager.h"
 
 Mainmenu::Mainmenu()
 {
@@ -67,6 +71,11 @@ void Mainmenu::Init()
 	quitbutt.pos.Set(0, -30.5, 0);
 	quitbutt.resize_button(20, 10);
 	quitbutt.mesh = MeshList::GetInstance()->getMesh("QUITBUTTON");
+
+	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
+
+	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 }
 
 
@@ -106,6 +115,7 @@ void Mainmenu::Update(double dt)
 			SceneManager::GetInstance()->setExitGame(true);
 		}
 	}
+	std::cout<<"main:"<<audioPlayer.getCurrentVolume()<<std::endl;
 }
 
 
@@ -193,12 +203,8 @@ void Mainmenu::Render()
 
 void Mainmenu::Exit()
 {
+	audioPlayer.pause();
 
-	if (axis)
-	{
-		delete axis;
-		axis = nullptr;
-	}
 
 
 }
