@@ -3,10 +3,12 @@ worldwidth=100
 
 #OBJECTS
 #ID 0
-pos=5,5,0
-pos=50,5,0
+pos=5,20,0
+pos=50,20,0
 
 #ID 1 //background
 1	//need something to make it exist
 
-#ID 2
+#ID 2 //Tiles
+pos=5,5,0
+
