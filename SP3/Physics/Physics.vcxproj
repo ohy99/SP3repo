@@ -158,6 +158,7 @@
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AudioPlayer.cpp" />
     <ClCompile Include="Source\CharacterInfo.cpp" />
+    <ClCompile Include="Source\Collidable.cpp" />
     <ClCompile Include="Source\EnvironmentManager.cpp" />
     <ClCompile Include="Source\GameLogic.cpp" />
     <ClCompile Include="Source\GameObjectManager.cpp" />
@@ -174,8 +175,10 @@
     <ClCompile Include="Source\Mainmenu.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\ObjectPoolManager.cpp" />
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
+    <ClCompile Include="Source\Projectile.cpp" />
     <ClCompile Include="Source\Quit.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
@@ -191,6 +194,7 @@
     <ClInclude Include="Source\EnemyMinion.h" />
     <ClInclude Include="Source\EnemyTower.h" />
     <ClInclude Include="Source\EnvironmentManager.h" />
+    <ClInclude Include="Source\Faction.h" />
     <ClInclude Include="Source\FontType.h" />
     <ClInclude Include="Source\GameLogic.h" />
     <ClInclude Include="Source\GameObjectManager.h" />
@@ -214,8 +218,10 @@
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
+    <ClInclude Include="Source\ObjectPoolManager.h" />
     <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\PhysicsManager.h" />
+    <ClInclude Include="Source\Projectile.h" />
     <ClInclude Include="Source\Quit.h" />
     <ClInclude Include="Source\RenderHelper.h" />
     <ClInclude Include="Source\RenderManager.h" />

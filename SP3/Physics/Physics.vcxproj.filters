@@ -98,6 +98,15 @@
     <ClCompile Include="Source\Levelselect.cpp">
       <Filter>Header Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Collidable.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectile.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ObjectPoolManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -234,6 +243,14 @@
     </ClInclude>
     <ClInclude Include="Source\Shop.h">
       <Filter>Header Files</Filter>
+    <ClInclude Include="Source\ObjectPoolManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Faction.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Projectile.h">
+      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
