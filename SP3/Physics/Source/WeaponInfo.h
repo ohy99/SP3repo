@@ -2,22 +2,20 @@
 
 #include "Vector3.h"
 
-class CPlayerInfo;
-
-class CWeaponInfo
+class WeaponInfo
 {
 public:
-	CWeaponInfo();
-	virtual ~CWeaponInfo();
+	WeaponInfo();
+	virtual ~WeaponInfo();
 protected:
-	// The number of ammunition in a magazine for this weapon
-	int magRounds;
-	// The maximum number of ammunition for this magazine for this weapon
-	int maxMagRounds;
-	// The current total number of rounds currently carried by this player
-	int totalRounds;
-	// The max total number of rounds currently carried by this player
-	int maxTotalRounds;
+	//// The number of ammunition in a magazine for this weapon
+	//int magRounds;
+	//// The maximum number of ammunition for this magazine for this weapon
+	//int maxMagRounds;
+	//// The current total number of rounds currently carried by this player
+	//int totalRounds;
+	//// The max total number of rounds currently carried by this player
+	//int maxTotalRounds;
 
 	// The time between shots in milliseconds
 	double timeBetweenShots;
@@ -26,26 +24,26 @@ protected:
 	// Boolean flag to indicate if weapon can fire now
 	bool bFire;
 
-	double reloadTime;
+	//double reloadTime;
 
 public:
-	// Set the number of ammunition in the magazine for this player
-	virtual void SetMagRound(const int magRounds);
-	// Set the maximum number of ammunition in the magazine for this weapon
-	virtual void SetMaxMagRound(const int magRounds);
-	// The current total number of rounds currently carried by this player
-	virtual void SetTotalRound(const int totalRounds);
-	// The max total number of rounds currently carried by this player
-	virtual void SetMaxTotalRound(const int maxTotalRounds);
+	//// Set the number of ammunition in the magazine for this player
+	//virtual void SetMagRound(const int magRounds);
+	//// Set the maximum number of ammunition in the magazine for this weapon
+	//virtual void SetMaxMagRound(const int magRounds);
+	//// The current total number of rounds currently carried by this player
+	//virtual void SetTotalRound(const int totalRounds);
+	//// The max total number of rounds currently carried by this player
+	//virtual void SetMaxTotalRound(const int maxTotalRounds);
 
-	// Get the number of ammunition in the magazine for this player
-	virtual int GetMagRound(void) const;
-	// Get the maximum number of ammunition in the magazine for this weapon
-	virtual int GetMaxMagRound(void) const;
-	// Get the current total number of rounds currently carried by this player
-	virtual int GetTotalRound(void) const;
-	// Get the max total number of rounds currently carried by this player
-	virtual int GetMaxTotalRound(void) const;
+	//// Get the number of ammunition in the magazine for this player
+	//virtual int GetMagRound(void) const;
+	//// Get the maximum number of ammunition in the magazine for this weapon
+	//virtual int GetMaxMagRound(void) const;
+	//// Get the current total number of rounds currently carried by this player
+	//virtual int GetTotalRound(void) const;
+	//// Get the max total number of rounds currently carried by this player
+	//virtual int GetMaxTotalRound(void) const;
 
 	// Set the time between shots
 	virtual void SetTimeBetweenShots(const double timeBetweenShots);
@@ -66,13 +64,13 @@ public:
 	// Update the elapsed time
 	void Update(const double dt);
 	// Discharge this weapon
-	void Discharge(Vector3 position, Vector3 target, CPlayerInfo* _source = NULL);
-	// Reload this weapon
-	void Reload(const double dt);
+	void Discharge(Vector3 position, Vector3 dir);
+	//// Reload this weapon
+	//void Reload(const double dt);
 
-	// Add rounds
-	void AddRounds(const int newRounds);
+	//// Add rounds
+	//void AddRounds(const int newRounds);
 
-	// Print Self
-	void PrintSelf(void);
+	//// Print Self
+	//void PrintSelf(void);
 };
