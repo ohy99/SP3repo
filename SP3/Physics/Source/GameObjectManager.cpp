@@ -42,6 +42,33 @@ GameObject * GameObjectManager::request_new(GameObjectType id)
 	case GameObjectType::BACKGROUND:
 		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
 		break;
+
+	/*case GameObjectType::TILES2:
+		temp = new GameObject();
+		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		break;
+
+	case GameObjectType::BACKGROUND2:
+		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
+		break;
+
+	case GameObjectType::TILES3:
+		temp = new GameObject();
+		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		break;
+
+	case GameObjectType::BACKGROUND3:
+		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
+		break;
+
+	case GameObjectType::TILES4:
+		temp = new GameObject();
+		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		break;
+
+	case GameObjectType::BACKGROUND4:
+		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
+		break;*/
 	}
 	game_object_list.push_back(temp);
 	return temp;
@@ -145,6 +172,43 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 				break;
 				temp->pos = get_vector3(fileStream, bufstr);
 				temp->scale = get_vector3(fileStream, bufstr);
+			RenderManager::GetInstance()->attach_renderable(temp);
+			break;
+		case GameObjectType::BACKGROUND2:
+			EnvironmentManager::GetInstance()->attach_background
+			(dynamic_cast<GenericDecoration*>(temp));
+			break;
+
+		case GameObjectType::TILES2:
+			if (temp == nullptr)
+				break;
+			temp->pos = get_vector3(fileStream, bufstr);
+			temp->scale = get_vector3(fileStream, bufstr);
+			RenderManager::GetInstance()->attach_renderable(temp);
+			break;
+
+		case GameObjectType::BACKGROUND3:
+			EnvironmentManager::GetInstance()->attach_background
+			(dynamic_cast<GenericDecoration*>(temp));
+			break;
+
+		case GameObjectType::TILES3:
+			if (temp == nullptr)
+				break;
+			temp->pos = get_vector3(fileStream, bufstr);
+			temp->scale = get_vector3(fileStream, bufstr);
+			RenderManager::GetInstance()->attach_renderable(temp);
+			break;
+		case GameObjectType::BACKGROUND4:
+			EnvironmentManager::GetInstance()->attach_background
+			(dynamic_cast<GenericDecoration*>(temp));
+			break;
+
+		case GameObjectType::TILES4:
+			if (temp == nullptr)
+				break;
+			temp->pos = get_vector3(fileStream, bufstr);
+			temp->scale = get_vector3(fileStream, bufstr);
 			RenderManager::GetInstance()->attach_renderable(temp);
 			break;
 		}

@@ -178,12 +178,13 @@
     <ClCompile Include="Source\ObjectPoolManager.cpp" />
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
+    <ClCompile Include="Source\Lose.cpp" />
     <ClCompile Include="Source\Projectile.cpp" />
-    <ClCompile Include="Source\Quit.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
+    <ClCompile Include="Source\Win.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
@@ -221,18 +222,20 @@
     <ClInclude Include="Source\ObjectPoolManager.h" />
     <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\PhysicsManager.h" />
+    <ClInclude Include="Source\Lose.h" />
     <ClInclude Include="Source\Projectile.h" />
-    <ClInclude Include="Source\Quit.h" />
     <ClInclude Include="Source\RenderHelper.h" />
     <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
+    <ClInclude Include="Source\Shop.h" />
     <ClInclude Include="Source\SingletonTemplate.h" />
     <ClInclude Include="Source\sound.h" />
     <ClInclude Include="Source\TextManager.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="Source\Win.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

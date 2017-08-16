@@ -92,10 +92,13 @@
     <ClCompile Include="Source\Options.cpp">
       <Filter>Header Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Quit.cpp">
+    <ClCompile Include="Source\Levelselect.cpp">
       <Filter>Header Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Levelselect.cpp">
+    <ClCompile Include="Source\Lose.cpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Win.cpp">
       <Filter>Header Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Collidable.cpp">
@@ -235,10 +238,16 @@
     <ClInclude Include="Source\Options.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Quit.h">
+    <ClInclude Include="Source\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Lose.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Button.h">
+    <ClInclude Include="Source\Win.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\ObjectPoolManager.h">
