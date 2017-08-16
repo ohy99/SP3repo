@@ -42,6 +42,33 @@ GameObject * GameObjectManager::request_new(GameObjectType id)
 	case GameObjectType::BACKGROUND:
 		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
 		break;
+
+	/*case GameObjectType::TILES2:
+		temp = new GameObject();
+		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		break;
+
+	case GameObjectType::BACKGROUND2:
+		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
+		break;
+
+	case GameObjectType::TILES3:
+		temp = new GameObject();
+		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		break;
+
+	case GameObjectType::BACKGROUND3:
+		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
+		break;
+
+	case GameObjectType::TILES4:
+		temp = new GameObject();
+		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		break;
+
+	case GameObjectType::BACKGROUND4:
+		temp = new GenericDecoration(GenericDecoration::DECOTYPE::BACKGROUND);
+		break;*/
 	}
 	game_object_list.push_back(temp);
 	return temp;
@@ -129,8 +156,10 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 		switch (id)
 		{
 		case GameObjectType::PLAYERTOWER:
-			if (temp)
-				temp->pos = get_pos(bufstr);
+			if (temp == nullptr)
+				break;
+			temp->pos = get_vector3(fileStream, bufstr);
+			temp->scale = get_vector3(fileStream, bufstr);
 			RenderManager::GetInstance()->attach_renderable(temp);
 			break;
 		case GameObjectType::BACKGROUND:
@@ -139,8 +168,47 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 			break;
 
 		case GameObjectType::TILES:
-			if (temp)
-				temp->pos = get_pos(bufstr);
+			if (temp == nullptr)
+				break;
+				temp->pos = get_vector3(fileStream, bufstr);
+				temp->scale = get_vector3(fileStream, bufstr);
+			RenderManager::GetInstance()->attach_renderable(temp);
+			break;
+		case GameObjectType::BACKGROUND2:
+			EnvironmentManager::GetInstance()->attach_background
+			(dynamic_cast<GenericDecoration*>(temp));
+			break;
+
+		case GameObjectType::TILES2:
+			if (temp == nullptr)
+				break;
+			temp->pos = get_vector3(fileStream, bufstr);
+			temp->scale = get_vector3(fileStream, bufstr);
+			RenderManager::GetInstance()->attach_renderable(temp);
+			break;
+
+		case GameObjectType::BACKGROUND3:
+			EnvironmentManager::GetInstance()->attach_background
+			(dynamic_cast<GenericDecoration*>(temp));
+			break;
+
+		case GameObjectType::TILES3:
+			if (temp == nullptr)
+				break;
+			temp->pos = get_vector3(fileStream, bufstr);
+			temp->scale = get_vector3(fileStream, bufstr);
+			RenderManager::GetInstance()->attach_renderable(temp);
+			break;
+		case GameObjectType::BACKGROUND4:
+			EnvironmentManager::GetInstance()->attach_background
+			(dynamic_cast<GenericDecoration*>(temp));
+			break;
+
+		case GameObjectType::TILES4:
+			if (temp == nullptr)
+				break;
+			temp->pos = get_vector3(fileStream, bufstr);
+			temp->scale = get_vector3(fileStream, bufstr);
 			RenderManager::GetInstance()->attach_renderable(temp);
 			break;
 		}
@@ -152,20 +220,36 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 	
 }
 
-Vector3 GameObjectManager::get_pos(std::string& bufstr)
+Vector3 GameObjectManager::get_vector3(std::ifstream& fileStream, std::string& bufstr)
 {
 	std::string temp;
 	std::stringstream ss;
 	ss.str(bufstr);
 	getline(ss, temp, '=');
-
 	Vector3 ret;
+	
+	if (temp == "pos")
+		ret.Set(0, 0, 0);
+	else if (temp == "scale")
+		ret.Set(1, 1, 1);
+	else {
+		std::cerr << "MISSING TRANSFORM COMPONENT!" << std::endl;
+		throw std::exception("MISSING TRANSFORM COMPONENT!");
+	}
+	
+
 	getline(ss, temp, ',');
+	if (temp == "\r")
+		return ret;
 	ret.x = std::stof(temp);
 	getline(ss, temp, ',');
 	ret.y = std::stof(temp);
 	getline(ss, temp);
 	ret.z = std::stof(temp);
+
+	char buf[256];
+	fileStream.getline(buf, 256);
+	bufstr = buf;
 
 	return ret;
 }

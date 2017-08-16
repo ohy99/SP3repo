@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector3.h"
 #include <string>
+#include "Consumables.h"
 using namespace std;
 
 class Character {
@@ -21,7 +22,7 @@ private:
 	//Ecnomoy & highscore//
 	int coins;
 	int highscore;
-	//Irrklang stuff(link with irrklang next few days)
+	//Irrklang stuff
 	int soundtrack; 
 
 	bool mute;
