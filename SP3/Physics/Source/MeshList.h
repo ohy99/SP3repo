@@ -78,7 +78,7 @@ class MeshList : public Singleton <MeshList>
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("QUITBUTTON", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\quitbutton.tga");
-
+		assignMesh(temp);
 	}
 
 	void assignMesh(Mesh* a) {

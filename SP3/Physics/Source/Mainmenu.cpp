@@ -20,9 +20,9 @@
 #include "TextManager.h"
 
 
-
 Mainmenu::Mainmenu()
 {
+	axis = nullptr;
 }
 
 Mainmenu::~Mainmenu()
@@ -132,20 +132,50 @@ void Mainmenu::Render()
 		camera.position.x, camera.position.y, camera.position.z,
 		camera.target.x, camera.target.y, camera.target.z,
 		camera.up.x, camera.up.y, camera.up.z
-		);
+	);
 	// Model matrix : an identity matrix (model will be at the origin)
 	Graphics::GetInstance()->modelStack.LoadIdentity();
 
 	MS& ms = Graphics::GetInstance()->modelStack;
 	RenderHelper::RenderMesh(axis, false);
-	
+
 	//ms.PushMatrix();
 	//ms.Scale(Vector3(3, 1, 1));
 
-	//ms.PushMatrix();
-	//ms.Translate(0, 10, 0);
-	////RenderHelper::RenderMesh(play, false);
-	//ms.PopMatrix();
+	static int k = 0;
+	{
+		static bool pressle = false;
+		if (Application::IsMousePressed(0) && !pressle)
+		{
+			k++;
+			pressle = true;
+		}
+		else if (!Application::IsMousePressed(0) && pressle)
+			pressle = false;
+	}
+	{
+		static bool pressle = false;
+		if (Application::IsMousePressed(1) && !pressle)
+		{
+			k--;
+			pressle = true;
+		}
+		else if (!Application::IsMousePressed(1) && pressle)
+			pressle = false;
+	}
+
+	ms.PushMatrix();
+	ms.Translate(0, 0, 0);
+	for (int i = 0; i < 10 - k; ++i)
+	{
+		ms.PushMatrix();
+		ms.Translate(i * 3, i * 0.5f, 0);
+		ms.Scale(3, 3 + i, 0);
+		RenderHelper::RenderMesh(playbutt.mesh, false);
+		ms.PopMatrix();
+	}
+	ms.PopMatrix();
+
 
 	////ms.PushMatrix();
 	////ms.Translate(0, -30, 0);
