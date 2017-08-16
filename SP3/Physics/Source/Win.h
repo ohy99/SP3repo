@@ -5,6 +5,8 @@
 #include <vector>
 #include "Scene.h"
 #include "Camera.h"
+#include "AudioPlayer.h"
+#include "CharacterInfo.h"
 
 class Mesh;
 
