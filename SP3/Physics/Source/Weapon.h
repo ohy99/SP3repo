@@ -11,4 +11,5 @@ public:
 
 	// Initialise this instance to default values
 	void Init(void);
+
 };

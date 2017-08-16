@@ -3,16 +3,19 @@
 
 #include "SingletonTemplate.h"
 #include <vector>
-class GameObj;
+class GameObject;
 #include "Vector3.h"
 
 class PhysicsManager :public Singleton<PhysicsManager>
 {
 	friend Singleton;
+	std::vector<GameObject*> objects;
 
+	//just a constant -vel.y value
+	const Vector3 gravity;
 public:
 	void update(double dt);
-	//void add_obj(GameObj* go);
+	void add_object(GameObject* go);
 
 protected:
 	PhysicsManager();

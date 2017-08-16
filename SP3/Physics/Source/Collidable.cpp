@@ -2,6 +2,8 @@
 
 Collidable::Collidable()
 {
+	this->collider.mid = &this->pos;
+	this->collider.collisionType = Collision::CollisionType::AABB;
 }
 
 Collidable::~Collidable()
@@ -20,4 +22,26 @@ Faction::FACTION_SIDE Collidable::get_faction_side()
 void Collidable::collision_response(Collidable * obj)
 {
 	return;
+}
+
+void Collidable::update_collider()
+{
+	if (this->collider.collisionType == Collision::CollisionType::AABB)
+	{
+		this->collider.min.Set(-this->scale.x * 0.5f, -this->scale.y * 0.5f);
+		this->collider.min.Set(this->scale.x * 0.5f, this->scale.y * 0.5f);
+	}
+	else if (this->collider.collisionType == Collision::CollisionType::SPHERE)
+	{
+		this->collider.radius = this->scale.x * 0.5f;
+	}
+}
+void Collidable::set_collision_type(Collision::CollisionType type)
+{
+	this->collider.collisionType = type;
+}
+
+void Collidable::update(double dt)
+{
+
 }

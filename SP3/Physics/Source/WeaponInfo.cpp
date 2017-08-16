@@ -3,6 +3,8 @@
 
 #include <iostream>
 using namespace std;
+#include "ObjectPoolManager.h"
+#include "Projectile.h"
 
 WeaponInfo::WeaponInfo()
 	//: magRounds(1)
@@ -155,6 +157,13 @@ void WeaponInfo::Discharge(Vector3 position, Vector3 dir)
 			//												2.0f, 
 			//												500.0f,
 			//												_source);
+		Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::CANNONBALL);
+		if (proj)
+		{
+			proj->pos = position;
+			proj->dir = dir;
+			proj->velocity = dir * 20;
+		}
 			//aProjectile->SetCollider(true);
 			//aProjectile->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
 			bFire = false;

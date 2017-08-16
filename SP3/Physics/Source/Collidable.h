@@ -3,17 +3,24 @@
 
 #include "GameObject.h"
 #include "Faction.h"
+#include "Collision.h"
 
 class Collidable : public GameObject
 {
 	Faction faction;
+	Collision collider;
 public:
 	Faction::FACTION_SIDE get_faction_side();
 	void set_faction_side(Faction::FACTION_SIDE side);
 	virtual void collision_response(Collidable* obj);
+	virtual void update(double dt);
+
+	void set_collision_type(Collision::CollisionType type);
+	void update_collider();
 protected:
 	Collidable();
 	virtual ~Collidable();
+
 };
 
 #endif // !COLLIDABLE_H
