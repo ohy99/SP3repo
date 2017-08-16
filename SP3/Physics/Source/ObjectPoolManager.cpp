@@ -7,12 +7,14 @@ ObjectPoolManager::ObjectPoolManager()
 {
 	for (unsigned int i = 0; i < (unsigned)100;++i)
 		projectile_pool.push_back(new Projectile());
-	//projectile_mesh[PROJECTILE_TYPE::BULLET] = MeshList::GetInstance()->getMesh("BULLET");
-	//projectile_mesh[PROJECTILE_TYPE::CANNONBALL] = MeshList::GetInstance()->getMesh("CANNONBALL");
+	projectile_mesh[PROJECTILE_TYPE::BULLET] = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+	projectile_mesh[PROJECTILE_TYPE::CANNONBALL] = MeshList::GetInstance()->getMesh("PLAYERTOWER");
 }
 
 ObjectPoolManager::~ObjectPoolManager()
 {
+	for each (auto &proj in projectile_pool)
+		delete proj;
 }
 
 Projectile* ObjectPoolManager::get_projectile(PROJECTILE_TYPE id)
