@@ -232,5 +232,8 @@
     <ClInclude Include="Source\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Shop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

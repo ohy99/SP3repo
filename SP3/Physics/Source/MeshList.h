@@ -69,6 +69,29 @@ class MeshList : public Singleton <MeshList>
 
 
 
+		//Level 2
+
+		temp = MeshBuilder::GenerateQuad("BACKGROUND2", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//level2background.tga");
+		assignMesh(temp);
+		//Tiles same as level 1
+
+
+
+		//Level 3
+
+		temp = MeshBuilder::GenerateQuad("BACKGROUND3", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//level3background.tga");
+		assignMesh(temp);
+
+
+		//Level 4
+
+
+		temp = MeshBuilder::GenerateQuad("BACKGROUND4", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//level4background.tga");
+		assignMesh(temp);
+
 		//BUTTONS
 		temp = MeshBuilder::GenerateQuad("PLAYBUTTON", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\playbutton.tga");
@@ -79,6 +102,8 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("QUITBUTTON", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\quitbutton.tga");
 		assignMesh(temp);
+
+
 	}
 
 	void assignMesh(Mesh* a) {

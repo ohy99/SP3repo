@@ -222,6 +222,7 @@
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
+    <ClInclude Include="Source\Shop.h" />
     <ClInclude Include="Source\SingletonTemplate.h" />
     <ClInclude Include="Source\sound.h" />
     <ClInclude Include="Source\TextManager.h" />
