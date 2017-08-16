@@ -18,10 +18,25 @@ class GameObjectManager : public Singleton<GameObjectManager>
 	void load_objects(std::ifstream& file, std::string& bufstr);
 public:
 	enum GameObjectType {
+		//#ID IS NUMERICAL ASCENDING.
 		//Define the types of game objects here.
 		PLAYERTOWER = 0,
+		//Backgrounds & Tiles
 		BACKGROUND,
-		TILES
+		TILES,
+		BACKGROUND2,
+		TILES2,
+		BACKGROUND3,
+		TILES3,
+		BACKGROUND4,
+		TILES4,
+		//Enemies
+		ENEMY1,
+		ENEMY2,
+
+		/*PLAYERTOWER2,
+		ENEMYTOWER1,
+		ENEMYTOWER2,*/
 	};
 	GameObject* request_new(GameObjectType);
 

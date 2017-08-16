@@ -21,7 +21,8 @@
 #include "GameScene.h";
 #include "Mainmenu.h";
 #include "Levelselect.h";
-#include "Quit.h";
+#include "Lose.h";
+#include "Win.h";
 #include "Options.h";
 
 
@@ -146,14 +147,15 @@ void Application::Run()
 	SceneManager* SM = SceneManager::GetInstance();
 	SM->addScene("GAME", new GameScene());
 	SM->addScene("MAIN", new Mainmenu());
-	SM->addScene("QUIT", new Quit());
+	SM->addScene("LOSE", new Lose());
+	SM->addScene("WIN", new Win());
 	SM->addScene("OPTIONS", new Options());
 	SM->addScene("LEVELSELECT", new Levelselect());
-	SM->setCurrScene("GAME");
+	SM->setCurrScene("MAIN");
 
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
-	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
+	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE)&&!SM->checkShouldExit())
 	{
 
 		SM->update(m_timer.getElapsedTime());
