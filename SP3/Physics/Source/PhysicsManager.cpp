@@ -23,6 +23,7 @@ void PhysicsManager::update(double dt) {
 		if (proj)
 		{
 			proj->velocity += gravity * (float)dt;
+			proj->dir = proj->velocity.Normalized();
 			proj->pos += proj->velocity * (float)dt;
 		}
 	}
