@@ -2,8 +2,9 @@
 #define MINION_H
 
 #include "Collidable.h"
+#include "MinionInfo.h"
 
-class Minion : public Collidable
+class Minion : public Collidable, public MinionInfo
 {
 
 };

@@ -74,7 +74,7 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image//level1background.tga");
 		assignMesh(temp);*/
 
-		temp = MeshBuilder::GenerateQuad("Tile1", Color(0, 0, 0), 10);
+		temp = MeshBuilder::GenerateQuad("Tile1", Color(0, 0, 0), 1);
 		temp->textureID = LoadTGA("Image//level1tile.tga");
 		assignMesh(temp);
 

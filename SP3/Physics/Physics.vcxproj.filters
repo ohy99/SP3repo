@@ -74,9 +74,6 @@
     <ClCompile Include="Source\GameObject.cpp">
       <Filter>Header Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GenericDecoration.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EnvironmentManager.cpp">
       <Filter>Header Files\HY</Filter>
     </ClCompile>
@@ -114,6 +111,12 @@
       <Filter>Header Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Source\WeaponInfo.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GenericEnvironmentCollidable.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GenericDecoration.cpp">
       <Filter>Header Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -276,6 +279,15 @@
     </ClInclude>
     <ClInclude Include="Source\SeasonManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GenericEnvironmentCollidable.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Minion.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionInfo.h">
+      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -167,6 +167,7 @@
     <ClCompile Include="Source\CollisionManager.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GenericDecoration.cpp" />
+    <ClCompile Include="Source\GenericEnvironmentCollidable.cpp" />
     <ClCompile Include="Source\Levelselect.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTextData.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Source\CollisionManager.h" />
     <ClInclude Include="Source\DetectMemoryLeak.h" />
     <ClInclude Include="Source\GenericDecoration.h" />
+    <ClInclude Include="Source\GenericEnvironmentCollidable.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Levelselect.h" />
     <ClInclude Include="Source\Mainmenu.h" />
@@ -222,6 +224,8 @@
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
+    <ClInclude Include="Source\Minion.h" />
+    <ClInclude Include="Source\MinionInfo.h" />
     <ClInclude Include="Source\ObjectPoolManager.h" />
     <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\PhysicsManager.h" />

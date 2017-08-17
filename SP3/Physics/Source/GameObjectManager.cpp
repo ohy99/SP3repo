@@ -9,6 +9,7 @@
 #include "GenericDecoration.h"
 #include "EnvironmentManager.h"
 #include "RenderManager.h"
+#include "GenericEnvironmentCollidable.h"
 
 GameObjectManager::GameObjectManager()
 {
@@ -35,7 +36,7 @@ GameObject * GameObjectManager::request_new(GameObjectType id)
 		break;
 
 	case GameObjectType::TILES:
-		temp = new GameObject();
+		temp = new GenericEnvironmentCollider();
 		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
 		break;
 
@@ -99,6 +100,14 @@ void GameObjectManager::load_objects(const char* file_path)
 
 	fileStream.close();
 
+	//update collider's AABB
+	for each (auto &go in game_object_list)
+	{
+		Collidable* temp_collidable = dynamic_cast<Collidable*>(go);
+		if (temp_collidable)
+			temp_collidable->update_collider();
+		
+	}
 }
 
 void GameObjectManager::load_settings(std::ifstream& fileStream, std::string& bufstr)

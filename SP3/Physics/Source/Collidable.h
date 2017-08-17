@@ -4,9 +4,11 @@
 #include "GameObject.h"
 #include "Faction.h"
 #include "Collision.h"
+#include "CollisionManager.h"
 
 class Collidable : public GameObject
 {
+	friend CollisionManager;
 	Faction faction;
 	Collision collider;
 public:
