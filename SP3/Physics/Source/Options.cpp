@@ -60,6 +60,7 @@ void Options::Init()
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 	vol = 0;
+	vol = (100 - audioPlayer.getCurrentVolume()) / 10;
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 
@@ -74,7 +75,7 @@ void Options::Init()
 	minusbutt.resize_button(10, 10);
 	minusbutt.mesh = MeshList::GetInstance()->getMesh("MINUSBUTTON");
 
-	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
 
 	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);

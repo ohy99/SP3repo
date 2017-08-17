@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <windows.h>
 
+int AudioPlayer::volume = 100;
+
 /*******************************
 CONSTRUCTORS
 *******************************/
@@ -17,10 +19,10 @@ AudioPlayer::AudioPlayer()
 	}
 
 	fileName = "\0";
-	volume = 100;
+	//volume = 100;
 	position = 0;
 	soundEngine->setSoundVolume(1);
-}
+} 
 
 AudioPlayer::AudioPlayer(string soundFile)
 {
@@ -34,7 +36,7 @@ AudioPlayer::AudioPlayer(string soundFile)
 	}
 
 	fileName = soundFile;
-	volume = 100;
+	//volume = 100;
 	position = 0;
 	soundEngine->setSoundVolume(1);
 }
@@ -140,6 +142,7 @@ void AudioPlayer::playSoundThreaded()
 		cout << "Error: Could not play file" << endl;
 		exit(0);
 	}
+	currentSound->setVolume((double)volume / 100.0);
 }
 
 void AudioPlayer::playSoundThreaded(std::string fileName)
@@ -150,6 +153,7 @@ void AudioPlayer::playSoundThreaded(std::string fileName)
 		cout << "Error: Could not play file" << endl;
 		exit(0);
 	}
+	currentSound->setVolume((double)volume / 100.0);
 }
 
 void AudioPlayer::playSoundThreaded3D(std::string fileName, Vector3 pos)

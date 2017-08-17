@@ -20,7 +20,8 @@ private:
 		ISoundEngine* soundEngine;
 		ISound* currentSound;
 		string fileName;
-		int volume;
+		static int volume;
+		//static std::vector<
 		int position;
 public:
 		AudioPlayer();
