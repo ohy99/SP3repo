@@ -84,6 +84,7 @@ void GameScene::Init()
 	weap.scale.Set(5, 5, 5);
 	weap.active = true;
 	weap.pos.Set(7.5, 25);
+	RenderManager::GetInstance()->attach_renderable(&weap, 1);
 }
 
 
