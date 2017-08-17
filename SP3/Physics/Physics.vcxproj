@@ -184,6 +184,8 @@
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
+    <ClCompile Include="Source\Weapon.cpp" />
+    <ClCompile Include="Source\WeaponInfo.cpp" />
     <ClCompile Include="Source\Win.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +207,7 @@
     <ClInclude Include="Source\CollisionManager.h" />
     <ClInclude Include="Source\DetectMemoryLeak.h" />
     <ClInclude Include="Source\GenericDecoration.h" />
+    <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Levelselect.h" />
     <ClInclude Include="Source\Mainmenu.h" />
     <ClInclude Include="Source\MeshList.h" />
@@ -235,6 +238,8 @@
     <ClInclude Include="Source\TextManager.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="Source\Weapon.h" />
+    <ClInclude Include="Source\WeaponInfo.h" />
     <ClInclude Include="Source\Win.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

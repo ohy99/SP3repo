@@ -2,13 +2,24 @@
 
 #include "MeshList.h"
 #include "Projectile.h"
+#include "PhysicsManager.h"
+#include "RenderManager.h"
 
 ObjectPoolManager::ObjectPoolManager()
 {
-	for (unsigned int i = 0; i < (unsigned)100;++i)
-		projectile_pool.push_back(new Projectile());
-	projectile_mesh[PROJECTILE_TYPE::BULLET] = MeshList::GetInstance()->getMesh("PLAYERTOWER");
-	projectile_mesh[PROJECTILE_TYPE::CANNONBALL] = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+	for (unsigned int i = 0; i < (unsigned)100; ++i)
+	{
+		Projectile* temp_proj = new Projectile();
+		temp_proj->set_collision_type(Collision::CollisionType::SPHERE);
+		temp_proj->scale.Set(3, 3);
+		temp_proj->update_collider();
+
+		projectile_pool.push_back(temp_proj);
+		PhysicsManager::GetInstance()->add_object(temp_proj);
+		RenderManager::GetInstance()->attach_renderable(temp_proj);
+	}
+	projectile_mesh[PROJECTILE_TYPE::BULLET] = MeshList::GetInstance()->getMesh("BULLET");
+	projectile_mesh[PROJECTILE_TYPE::CANNONBALL] = MeshList::GetInstance()->getMesh("CANNONBALL");
 }
 
 ObjectPoolManager::~ObjectPoolManager()

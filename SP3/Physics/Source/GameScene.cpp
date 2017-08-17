@@ -19,7 +19,7 @@
 #include "PhysicsManager.h"
 #include "TextManager.h"
 #include "GameObjectManager.h"
-#include "AudioPlayer.h"
+
 #include "GameLogic.h"
 #include "EnvironmentManager.h"
 #include "RenderManager.h"
@@ -79,13 +79,37 @@ void GameScene::Init()
 	
 	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);*/
 	
-
+	weap.Init();
+	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
+	weap.scale.Set(5, 5, 5);
+	weap.active = true;
+	weap.pos.Set(7.5, 25);
 }
 
 
 void GameScene::Update(double dt)
 {
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+
+	double x, y;
+	Application::GetCursorPos(&x, &y);
+	int w = Application::GetWindowWidth();
+	int h = Application::GetWindowHeight();
+	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
+	static bool keypressed = false;
+	if (Application::GetInstance().IsMousePressed(1) && !keypressed)
+	{
+		weap.dir = -weap.pos + cursor_point_in_world_space;
+		weap.dir.Normalize();
+		weap.Discharge(weap.pos, weap.dir);
+		keypressed = true;
+	}
+	else if (!Application::GetInstance().IsMousePressed(1) && keypressed)
+	{
+		keypressed = false;
+	}
+
+	weap.WeaponInfo::Update(dt);
 
 	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions
@@ -94,6 +118,8 @@ void GameScene::Update(double dt)
 
 	fps = 1.0 / dt;
 	//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
+
+
 }
 
 

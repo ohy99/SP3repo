@@ -1,6 +1,9 @@
-#pragma once
+#ifndef ITEM_H
+#define ITEM_H
 
-class Item
+#include "GameObject.h"
+
+class Item : public GameObject
 {
 public:
 	//repair kits
@@ -30,3 +33,5 @@ protected:
 	//current weapon
 	int currWeapon;
 };
+
+#endif

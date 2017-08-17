@@ -18,7 +18,11 @@
 
 #include "PhysicsManager.h"
 #include "TextManager.h"
+#include "GameObjectManager.h"
 
+#include "GameLogic.h"
+#include "EnvironmentManager.h"
+#include "RenderManager.h"
 
 
 Win::Win()

@@ -6,6 +6,8 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "Button.h"
+#include "AudioPlayer.h"
+#include "CharacterInfo.h"
 class Mesh;
 
 class Mainmenu : public Scene
@@ -30,6 +32,7 @@ protected:
 	Button playbutt;
 	Button optionbutt;
 	Button quitbutt;
+	AudioPlayer audioPlayer;
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;

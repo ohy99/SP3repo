@@ -17,7 +17,7 @@ AudioPlayer::AudioPlayer()
 	}
 
 	fileName = "\0";
-	volume = 50;
+	volume = 100;
 	position = 0;
 	soundEngine->setSoundVolume(1);
 }
@@ -34,7 +34,7 @@ AudioPlayer::AudioPlayer(string soundFile)
 	}
 
 	fileName = soundFile;
-	volume = 50;
+	volume = 100;
 	position = 0;
 	soundEngine->setSoundVolume(1);
 }

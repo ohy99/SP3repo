@@ -5,11 +5,11 @@
 
 class Projectile : public Collidable
 {
-	Vector3 velocity;
 	int dmg;
-
 	//maybe can add variables to activate particles here
 public:
+	Vector3 velocity;
+
 	Projectile();
 	virtual ~Projectile();
 

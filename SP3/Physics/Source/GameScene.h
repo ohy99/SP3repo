@@ -10,6 +10,7 @@
 #include "CharacterInfo.h"
 class Mesh;
 
+#include "Weapon.h"
 class GameScene : public Scene
 {
 public:
@@ -30,6 +31,8 @@ protected:
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;
+
+	Weapon weap;
 };
 
 #endif

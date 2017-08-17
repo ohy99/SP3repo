@@ -110,6 +110,12 @@
     <ClCompile Include="Source\ObjectPoolManager.cpp">
       <Filter>Header Files\HY</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Weapon.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WeaponInfo.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -257,6 +263,15 @@
       <Filter>Header Files\HY</Filter>
     </ClInclude>
     <ClInclude Include="Source\Projectile.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Weapon.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WeaponInfo.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
