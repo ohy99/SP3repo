@@ -231,6 +231,7 @@
     <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
+    <ClInclude Include="Source\SeasonManager.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\Shop.h" />
     <ClInclude Include="Source\SingletonTemplate.h" />

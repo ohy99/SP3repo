@@ -274,5 +274,8 @@
     <ClInclude Include="Source\WeaponInfo.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SeasonManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
