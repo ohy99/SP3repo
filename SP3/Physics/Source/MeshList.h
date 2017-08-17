@@ -63,7 +63,7 @@ class MeshList : public Singleton <MeshList>
 		//temp->textureID = LoadTGA("Image//cannon.tga");
 		assignMesh(temp);
 
-		//Level 1 
+		//Level 1; 
 		
 		temp = MeshBuilder::GenerateQuad("PLAYERTOWER", Color(0, 0, 0), 1);
 		temp->textureID = LoadTGA("Image//tower(player).tga");
