@@ -17,8 +17,7 @@ public:
 		COUNT
 	}season;
 	
-	//Projectile* get_projectile(SEASON_TYPE id);
-
+	SEASON_TYPE get_season() { return season; };
 private:
 	friend Singleton;
 

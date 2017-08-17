@@ -6,8 +6,6 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "Button.h"
-
-
 #include "AudioPlayer.h"
 #include "CharacterInfo.h"
 class Mesh;
