@@ -5,7 +5,7 @@
 using namespace std;
 
 class Character {
-
+	
 private:
 	Vector3 defaultPosition, defaultTarget, defaultUp;
 	Vector3 pos,target, up;
@@ -28,7 +28,8 @@ private:
 	bool mute;
 
 public:
-
+	Character();
+	~Character();
 
 	//--------------------------Getters----------------------//
 	int getlevel();

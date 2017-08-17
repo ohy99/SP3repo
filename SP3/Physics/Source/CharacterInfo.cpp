@@ -7,8 +7,19 @@
 using namespace std;
 using std::string;
 
+Character::Character(): maxhealth(1000),
+health(100),
+damage(0),
+levels(0),
+coins(0),
+highscore(0)
+{ 
+}
 
+Character::~Character()
+{
 
+}
 //---------------------Getters------------------------------------//
 int Character::getlevel()
 {
