@@ -15,3 +15,11 @@ int Projectile::get_dmg()
 {
 	return dmg;
 }
+
+void Projectile::collision_response(Collidable* obj)
+{
+	//add projectile animation sprite
+	if (obj->get_faction_side() == this->get_faction_side())
+		return;
+	this->active = false;
+}

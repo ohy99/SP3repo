@@ -163,6 +163,7 @@ void WeaponInfo::Discharge(Vector3 position, Vector3 dir)
 			proj->pos = position;
 			proj->dir = dir;
 			proj->velocity = dir * 20;
+			proj->set_faction_side(this->faction.side);
 		}
 			//aProjectile->SetCollider(true);
 			//aProjectile->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
@@ -213,3 +214,14 @@ void WeaponInfo::Discharge(Vector3 position, Vector3 dir)
 //	cout << "elapsedTime\t\t:\t" << elapsedTime << endl;
 //	cout << "bFire\t\t:\t" << bFire << endl;
 //}
+
+
+
+void WeaponInfo::set_faction_side(Faction::FACTION_SIDE side)
+{
+	this->faction.side = side;
+}
+Faction::FACTION_SIDE WeaponInfo::get_faction_side()
+{
+	return this->faction.side;
+}

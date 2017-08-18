@@ -119,6 +119,9 @@
     <ClCompile Include="Source\GenericDecoration.cpp">
       <Filter>Header Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Tower.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -287,6 +290,9 @@
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Source\MinionInfo.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tower.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

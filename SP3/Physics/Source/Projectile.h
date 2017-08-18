@@ -16,6 +16,7 @@ public:
 	void set_dmg(int dmg);
 	int get_dmg();
 
+	virtual void collision_response(Collidable* obj);
 };
 
 #endif // !PROJECTILE_H

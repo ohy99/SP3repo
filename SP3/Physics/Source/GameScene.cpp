@@ -25,6 +25,8 @@
 #include "RenderManager.h"
 
 #include "CharacterInfo.h"
+#include "WeaponInfo.h"
+
 GameScene::GameScene()
 {
 }
@@ -80,6 +82,7 @@ void GameScene::Init()
 	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 	
 	weap.Init();
+	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
 	weap.scale.Set(5, 5, 5);
 	weap.active = true;

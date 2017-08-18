@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vector3.h"
+#include "Faction.h"
 
 class WeaponInfo
 {
@@ -25,7 +26,7 @@ protected:
 	bool bFire;
 
 	//double reloadTime;
-
+	Faction faction;
 public:
 	//// Set the number of ammunition in the magazine for this player
 	//virtual void SetMagRound(const int magRounds);
@@ -73,4 +74,8 @@ public:
 
 	//// Print Self
 	//void PrintSelf(void);
+
+
+	Faction::FACTION_SIDE get_faction_side();
+	void set_faction_side(Faction::FACTION_SIDE side);
 };

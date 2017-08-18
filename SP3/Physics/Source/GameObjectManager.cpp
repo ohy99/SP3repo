@@ -10,6 +10,7 @@
 #include "EnvironmentManager.h"
 #include "RenderManager.h"
 #include "GenericEnvironmentCollidable.h"
+#include "Tower.h"
 
 GameObjectManager::GameObjectManager()
 {
@@ -31,7 +32,7 @@ GameObject * GameObjectManager::request_new(GameObjectType id)
 	switch (id)
 	{
 	case GameObjectType::PLAYERTOWER:
-		temp = new GameObject();
+		temp = new Tower(Faction::FACTION_SIDE::PLAYER);
 		temp->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
 		break;
 

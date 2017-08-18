@@ -35,3 +35,4 @@ void Weapon::Init(void)
 	//reloadTime = 5.0;
 
 }
+
