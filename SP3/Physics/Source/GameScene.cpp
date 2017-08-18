@@ -25,7 +25,11 @@
 #include "RenderManager.h"
 
 #include "CharacterInfo.h"
+
 #include "SpriteAnimation.h"
+
+#include "WeaponInfo.h"
+
 GameScene::GameScene()
 {
 }
@@ -88,6 +92,7 @@ void GameScene::Init()
 		sa->m_anim->Set(0, 5, 1, 10.0f, true);
 	}
 	weap.Init();
+	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
 	weap.scale.Set(5, 5, 5);
 	weap.active = true;

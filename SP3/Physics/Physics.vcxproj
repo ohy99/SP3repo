@@ -184,6 +184,7 @@
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
+    <ClCompile Include="Source\Tower.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
     <ClCompile Include="Source\WeaponInfo.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="Source\SingletonTemplate.h" />
     <ClInclude Include="Source\sound.h" />
     <ClInclude Include="Source\TextManager.h" />
+    <ClInclude Include="Source\Tower.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
     <ClInclude Include="Source\Weapon.h" />

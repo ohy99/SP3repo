@@ -4,7 +4,7 @@
 class MinionInfo
 {
 	int health;
-
+	int max_health;
 public:
 	enum State
 	{

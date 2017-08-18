@@ -26,7 +26,7 @@ void CollisionManager::update(double dt)
 			if ((*first_iter)->collider.isCollide((*second_iter)->collider))
 			{
 				(*first_iter)->collision_response(*second_iter);
-				std::cout << "BAM" << std::endl;
+				(*second_iter)->collision_response(*first_iter);
 			}
 		}
 	}
