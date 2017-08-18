@@ -122,6 +122,12 @@
     <ClCompile Include="Source\Tower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MinionInfo.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Minion.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">

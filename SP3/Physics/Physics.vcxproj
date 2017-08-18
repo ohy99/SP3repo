@@ -176,6 +176,8 @@
     <ClCompile Include="Source\Mainmenu.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Minion.cpp" />
+    <ClCompile Include="Source\MinionInfo.cpp" />
     <ClCompile Include="Source\ObjectPoolManager.cpp" />
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
