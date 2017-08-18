@@ -22,6 +22,9 @@ void PhysicsManager::update(double dt) {
 		Projectile* proj = dynamic_cast<Projectile*>(go);
 		if (proj)
 		{
+			if (proj->pos.y < 0)
+				proj->active = false;
+
 			proj->velocity += gravity * (float)dt;
 			proj->dir = proj->velocity.Normalized();
 			proj->pos += proj->velocity * (float)dt;

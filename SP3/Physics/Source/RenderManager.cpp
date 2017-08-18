@@ -20,7 +20,8 @@ void RenderManager::render_all_active_objects()
 	{
 		//if (go->active)
 		for each (auto &go in gopair.second)
-			go->render();
+			if (go->active)
+				go->render();
 	}
 }
 
