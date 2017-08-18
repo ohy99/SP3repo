@@ -127,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="Source\Minion.cpp">
       <Filter>Header Files\GameObject</Filter>
+	  </ClCompile>
+    <ClCompile Include="Source\SpriteAnimation.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +303,9 @@
     </ClInclude>
     <ClInclude Include="Source\Tower.h">
       <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteAnimation.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

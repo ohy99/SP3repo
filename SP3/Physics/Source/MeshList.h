@@ -64,6 +64,8 @@ class MeshList : public Singleton <MeshList>
 		assignMesh(temp);
 
 
+	
+		
 		//Level 1; 
 		
 		temp = MeshBuilder::GenerateQuad("PLAYERTOWER", Color(0, 0, 0), 1);
@@ -128,6 +130,11 @@ class MeshList : public Singleton <MeshList>
 		//temp = MeshBuilder::GenerateQuad("TITLE", Color(1, 1, 1), 1);
 		//temp->textureID = LoadTGA("Image\\title.tga");
 		//assignMesh(temp);
+		temp = MeshBuilder::GenerateSpriteAnimation("Poster", 1, 6, 1.0f);
+		temp->textureID = LoadTGA("Image//animatedposter.tga");
+		assignMesh(temp);
+
+		
 	}
 
 	void assignMesh(Mesh* a) {
