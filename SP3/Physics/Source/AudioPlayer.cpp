@@ -176,7 +176,7 @@ PAUSE/RESUME
 ************************/
 void AudioPlayer::pause()
 {
-	position = currentSound->getPlayPosition();
+	/*position = currentSound->getPlayPosition();*/
 	soundEngine->setAllSoundsPaused();
 }
 

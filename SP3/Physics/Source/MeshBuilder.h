@@ -3,7 +3,7 @@
 
 #include "Mesh.h"
 #include "Vertex.h"
-
+#include "SpriteAnimation.h"
 /******************************************************************************/
 /*!
 		Class MeshBuilder:
@@ -25,6 +25,8 @@ public:
 	//static Mesh* GenerateMovingTextureQuad(const std::string &meshName, Color color, float length = 1.f, float numOfUVs = 1.f);
 
 	static Mesh* GenerateLine(const std::string &meshName, Color color, float length);
+
+	static SpriteAnimation* GenerateSpriteAnimation(const std::string& meshName, unsigned numRow, unsigned numCol, float alpha);
 };
 
 #endif

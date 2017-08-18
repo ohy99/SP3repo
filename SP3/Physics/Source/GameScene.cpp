@@ -25,6 +25,7 @@
 #include "RenderManager.h"
 
 #include "CharacterInfo.h"
+#include "SpriteAnimation.h"
 GameScene::GameScene()
 {
 }
@@ -78,7 +79,14 @@ void GameScene::Init()
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
 	
 	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
-	
+
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+	if (sa)
+	{
+
+		sa->m_anim = new Animation();
+		sa->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
 	weap.Init();
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
 	weap.scale.Set(5, 5, 5);
@@ -90,6 +98,15 @@ void GameScene::Init()
 
 void GameScene::Update(double dt)
 {
+
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+	if (sa)
+	{
+
+		sa->Update(dt);
+		sa->m_anim->animActive = true;
+	}
+
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
 	double x, y;
@@ -150,6 +167,14 @@ void GameScene::Render()
 	RenderHelper::RenderMesh(axis, false);
 
 	RenderManager::GetInstance()->render_all_active_objects();
+
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+	ms.PushMatrix();
+	ms.Translate(50, 50, 0);
+	ms.Scale(10, 10, 10);
+	RenderHelper::RenderMesh(sa,false);
+	//sa->Render();
+	ms.PopMatrix();
 }
 
 void GameScene::Exit()
