@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "PhysicsManager.h"
 #include "RenderManager.h"
+#include "CollisionManager.h"
 
 ObjectPoolManager::ObjectPoolManager()
 {

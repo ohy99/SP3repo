@@ -4,6 +4,7 @@ Collidable::Collidable()
 {
 	this->collider.mid = &this->pos;
 	this->collider.collisionType = Collision::CollisionType::AABB;
+	CollisionManager::GetInstance()->add_collider(this);
 }
 
 Collidable::~Collidable()
@@ -29,7 +30,7 @@ void Collidable::update_collider()
 	if (this->collider.collisionType == Collision::CollisionType::AABB)
 	{
 		this->collider.min.Set(-this->scale.x * 0.5f, -this->scale.y * 0.5f);
-		this->collider.min.Set(this->scale.x * 0.5f, this->scale.y * 0.5f);
+		this->collider.max.Set(this->scale.x * 0.5f, this->scale.y * 0.5f);
 	}
 	else if (this->collider.collisionType == Collision::CollisionType::SPHERE)
 	{
