@@ -23,6 +23,7 @@
 #include "GameLogic.h"
 #include "EnvironmentManager.h"
 #include "RenderManager.h"
+#include "MinionManager.h"
 
 #include "CharacterInfo.h"
 
@@ -43,6 +44,7 @@ GameScene::~GameScene()
 	MeshList::Destroy();
 	EnvironmentManager::Destroy();
 	RenderManager::Destroy();
+	MinionManager::Destroy();
 }
 
 void GameScene::Init()
@@ -134,6 +136,31 @@ void GameScene::Update(double dt)
 
 	weap.WeaponInfo::Update(dt);
 
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('1') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('1') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('2') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(false);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('2') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	MinionManager::GetInstance()->update(dt);
 	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions
 	CollisionManager::GetInstance()->update(dt);

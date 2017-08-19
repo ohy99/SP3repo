@@ -1,6 +1,8 @@
 #ifndef MINIONINFO_H
 #define MINIONINFO_H
 
+#include "Vector3.h"
+
 class MinionInfo
 {
 	int health;
@@ -16,6 +18,10 @@ public:
 	virtual ~MinionInfo();
 
 	void get_hit(int dmg);
+	void reset();
+
+protected:
+	Vector3 prev_pos;
 };
 
 #endif // !MINIONINFO_H

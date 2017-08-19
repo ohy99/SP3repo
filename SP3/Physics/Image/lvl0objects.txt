@@ -5,15 +5,17 @@ worldwidth=100
 #ID 0
 pos=5,20,0
 scale=10,40,1
-
-pos=50,20,0
-scale=10,40,1
 //end of id0
 
-#ID 1 //background
+#ID 1	//ENEMY TOWER
+pos=50,20,0
+scale=10,40,1
+//end of id1
+
+#ID 2 //background
 1	//need something to make it exist
 
-#ID 2 //Tiles
+#ID 3 //Tiles
 pos=50,5,0
 scale=100,10,1
 

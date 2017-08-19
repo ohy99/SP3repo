@@ -178,6 +178,7 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\Minion.cpp" />
     <ClCompile Include="Source\MinionInfo.cpp" />
+    <ClCompile Include="Source\MinionManager.cpp" />
     <ClCompile Include="Source\ObjectPoolManager.cpp" />
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Source\Button.h" />
     <ClInclude Include="Source\CharacterInfo.h" />
     <ClInclude Include="Source\Collidable.h" />
+    <ClInclude Include="Source\MinionManager.h" />
     <ClInclude Include="Source\EnemyMinion.h" />
     <ClInclude Include="Source\EnemyTower.h" />
     <ClInclude Include="Source\EnvironmentManager.h" />

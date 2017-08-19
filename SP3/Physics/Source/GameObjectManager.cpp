@@ -36,6 +36,11 @@ GameObject * GameObjectManager::request_new(GameObjectType id)
 		temp->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
 		break;
 
+	case GameObjectType::ENEMYTOWER:
+		temp = new Tower(Faction::FACTION_SIDE::ENEMY);
+		temp->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+		break;
+
 	case GameObjectType::TILES:
 		temp = new GenericEnvironmentCollider();
 		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
@@ -166,6 +171,13 @@ void GameObjectManager::load_object(std::ifstream& fileStream, std::string& bufs
 		switch (id)
 		{
 		case GameObjectType::PLAYERTOWER:
+			if (temp == nullptr)
+				break;
+			temp->pos = get_vector3(fileStream, bufstr);
+			temp->scale = get_vector3(fileStream, bufstr);
+			RenderManager::GetInstance()->attach_renderable(temp);
+			break;
+		case GameObjectType::ENEMYTOWER:
 			if (temp == nullptr)
 				break;
 			temp->pos = get_vector3(fileStream, bufstr);

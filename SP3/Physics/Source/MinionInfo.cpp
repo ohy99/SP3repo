@@ -13,3 +13,9 @@ void MinionInfo::get_hit(int dmg)
 {
 	this->health = Math::Clamp(health - dmg, 0, max_health);
 }
+
+void MinionInfo::reset()
+{
+	this->health = this->max_health;
+	this->current_state = WALK;
+}
