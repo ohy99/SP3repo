@@ -16,7 +16,7 @@ public:
 		AUTUMN,	
 		COUNT
 	}season;
-	
+	void set_season(SEASON_TYPE a) { season = a; };
 	SEASON_TYPE get_season() { return season; };
 private:
 	friend Singleton;
@@ -24,8 +24,8 @@ private:
 	Mesh* season_mesh[SEASON_TYPE::COUNT];
 	
 protected:
-	SeasonManager();
-	~SeasonManager();
+	SeasonManager() {};
+	~SeasonManager() {};
 };
 
 #endif // !SEASONMANAGER_H

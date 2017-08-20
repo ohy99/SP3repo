@@ -31,6 +31,7 @@
 
 #include "WeaponInfo.h"
 
+#include "SeasonManager.h"
 GameScene::GameScene()
 {
 }
@@ -45,6 +46,7 @@ GameScene::~GameScene()
 	EnvironmentManager::Destroy();
 	RenderManager::Destroy();
 	MinionManager::Destroy();
+	SeasonManager::Destroy();
 }
 
 void GameScene::Init()
@@ -69,6 +71,7 @@ void GameScene::Init()
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
+	
 
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
@@ -100,6 +103,9 @@ void GameScene::Init()
 	weap.active = true;
 	weap.pos.Set(7.5, 25);
 	RenderManager::GetInstance()->attach_renderable(&weap, 1);
+
+	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0, 3));
+	//cout << SeasonManager::GetInstance()->get_season() << endl;
 }
 
 
@@ -199,7 +205,6 @@ void GameScene::Render()
 	RenderHelper::RenderMesh(axis, false);
 
 	RenderManager::GetInstance()->render_all_active_objects();
-
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
 	ms.PushMatrix();
 	ms.Translate(50, 50, 0);
