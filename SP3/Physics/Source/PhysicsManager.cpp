@@ -36,3 +36,8 @@ void PhysicsManager::add_object(GameObject* go)
 {
 	objects.push_back(go);
 }
+
+Vector3 PhysicsManager::get_gravity()
+{
+	return gravity;
+}

@@ -99,6 +99,7 @@ void GameScene::Init()
 	weap.scale.Set(5, 5, 5);
 	weap.active = true;
 	weap.pos.Set(7.5, 25);
+	weap.set_damage(50);
 	RenderManager::GetInstance()->attach_renderable(&weap, 1);
 }
 
@@ -152,10 +153,34 @@ void GameScene::Update(double dt)
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('2') && !dakeypressed)
 		{
-			MinionManager::GetInstance()->spawn_minion(false);
+			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
 			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('2') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('3') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(false);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('3') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('4') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_RANGE);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('4') && dakeypressed)
 		{
 			dakeypressed = false;
 		}

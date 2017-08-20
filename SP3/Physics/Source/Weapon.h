@@ -5,7 +5,7 @@
 
 class Weapon:public WeaponInfo, public Item
 {
-
+	
 public:
 	Weapon();
 	virtual ~Weapon();

@@ -4,8 +4,9 @@
 #include "Vector3.h"
 #include "Mesh.h"
 
-struct GameObject
+class GameObject
 {
+public:
 	Mesh* mesh;
 
 	Vector3 pos;
