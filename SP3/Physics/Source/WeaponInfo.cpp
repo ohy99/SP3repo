@@ -163,6 +163,7 @@ void WeaponInfo::Discharge(Vector3 position, Vector3 dir)
 			proj->pos = position;
 			proj->dir = dir;
 			proj->velocity = dir * 20;
+			proj->set_dmg(this->get_damage());
 			proj->set_faction_side(this->faction.side);
 		}
 			//aProjectile->SetCollider(true);
@@ -225,3 +226,14 @@ Faction::FACTION_SIDE WeaponInfo::get_faction_side()
 {
 	return this->faction.side;
 }
+
+void WeaponInfo::set_damage(int dmg)
+{
+	this->damage = dmg;
+}
+
+int WeaponInfo::get_damage()
+{
+	return this->damage;
+}
+

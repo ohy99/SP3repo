@@ -18,6 +18,7 @@ public:
 
 	void set_collision_type(Collision::CollisionType type);
 	void update_collider();
+	bool check_collision(Collision& tat);
 protected:
 	Collidable();
 	virtual ~Collidable();

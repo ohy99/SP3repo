@@ -159,6 +159,7 @@
     <ClCompile Include="Source\AudioPlayer.cpp" />
     <ClCompile Include="Source\CharacterInfo.cpp" />
     <ClCompile Include="Source\Collidable.cpp" />
+    <ClCompile Include="Source\DamageArea.cpp" />
     <ClCompile Include="Source\EnvironmentManager.cpp" />
     <ClCompile Include="Source\GameLogic.cpp" />
     <ClCompile Include="Source\GameObjectManager.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
     <ClCompile Include="Source\Tower.cpp" />
+    <ClCompile Include="Source\TowerManager.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
     <ClCompile Include="Source\WeaponInfo.cpp" />
@@ -200,6 +202,8 @@
     <ClInclude Include="Source\Button.h" />
     <ClInclude Include="Source\CharacterInfo.h" />
     <ClInclude Include="Source\Collidable.h" />
+    <ClInclude Include="Source\DamageArea.h" />
+    <ClInclude Include="Source\HpBar.h" />
     <ClInclude Include="Source\MinionManager.h" />
     <ClInclude Include="Source\EnemyMinion.h" />
     <ClInclude Include="Source\EnemyTower.h" />
@@ -249,6 +253,7 @@
     <ClInclude Include="Source\SpriteAnimation.h" />
     <ClInclude Include="Source\TextManager.h" />
     <ClInclude Include="Source\Tower.h" />
+    <ClInclude Include="Source\TowerManager.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
     <ClInclude Include="Source\Weapon.h" />
