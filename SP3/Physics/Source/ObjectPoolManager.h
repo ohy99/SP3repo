@@ -4,6 +4,7 @@
 #include "SingletonTemplate.h"
 #include <vector>
 class Projectile;
+class Particle;
 class Mesh;
 class ObjectPoolManager : public Singleton<ObjectPoolManager>
 {
@@ -15,15 +16,26 @@ public:
 		ARROWS,
 		COUNT
 	};
+	enum PARTICLE_CASE
+	{
+		GROUND,
+		ETOWER,
+		TOWER,
+		COUNT2
+	};
 	//RETURNS ACTIVATED PROJECTILE
 	Projectile* get_projectile(PROJECTILE_TYPE id);
-
+	Particle* get_particle(PARTICLE_CASE id);
+	void Update(double dt);
 private:
 	friend Singleton;
 
 	std::vector<Projectile*> projectile_pool;
+	std::vector<Particle*>particle_pool;
 	Mesh* projectile_mesh[PROJECTILE_TYPE::COUNT];
+	Mesh* particle_mesh[PARTICLE_CASE::COUNT2];
 	Projectile* get_inactive_projectile();
+	Particle* get_inaactive_particle();
 protected:
 	ObjectPoolManager();
 	~ObjectPoolManager();
