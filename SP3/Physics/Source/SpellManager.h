@@ -14,14 +14,14 @@ public:
 	DamageArea* lightning;
 	void useLightningSpell();
 
-	int getQuantity();
-	void setQuantity(int amt);
+	int getLQuantity();
+	void setLQuantity(int amt);
 
 protected:
 	SpellManager();
 	virtual ~SpellManager();
 
-	double lightningactivetime;
+	double lightningReuseTime;
 
-	int quantity;
+	int lightningQuantity;
 };

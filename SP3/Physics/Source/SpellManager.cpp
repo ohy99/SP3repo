@@ -13,13 +13,14 @@ SpellManager::SpellManager()
 	lightning = new DamageArea();
 	lightning->set_damage(50);
 	lightning->set_collision_type(Collision::CollisionType::AABB);
-	lightning->scale.Set(5, 100);
+	lightning->scale.Set(10, 100);
 	lightning->update_collider();
 	lightning->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
 
-	lightningactivetime = 0.0;
+	lightningQuantity = 5;
+	lightningReuseTime = 3.0;
 
-	lightning->set_duration(3.0);
+	lightning->set_duration(0.5);
 	lightning->set_faction_side(Faction::FACTION_SIDE::PLAYER);
 
 	RenderManager::GetInstance()->attach_renderable(lightning);
@@ -30,18 +31,11 @@ SpellManager::~SpellManager()
 }
 
 void SpellManager::update(double dt)
-{
-	float worldWidth, worldHeight;
-	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
-	double x, y;
-	Application::GetCursorPos(&x, &y);
-	int w = Application::GetWindowWidth();
-	int h = Application::GetWindowHeight();
-	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
-
-	lightning->pos = cursor_point_in_world_space;
+{	
+	lightningReuseTime += dt;
 	lightning->update(dt);
 
+	cout << lightningQuantity << endl;
 	//if (lightning->active)
 	//{
 	//	lightning->pos = cursor_point_in_world_space;
@@ -66,15 +60,30 @@ void SpellManager::update(double dt)
 
 void SpellManager::useLightningSpell()
 {
-	lightning->active = true;
+	float worldWidth, worldHeight;
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+	double x, y;
+	Application::GetCursorPos(&x, &y);
+	int w = Application::GetWindowWidth();
+	int h = Application::GetWindowHeight();
+	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
+
+	lightning->pos = cursor_point_in_world_space;
+
+	if (lightningQuantity > 0 && lightningReuseTime>3.0)
+	{
+		lightning->active = true;
+		lightningQuantity--;
+		lightningReuseTime = 0.0;
+	}
 }
 
-int SpellManager::getQuantity()
+int SpellManager::getLQuantity()
 {
-	return quantity;
+	return lightningQuantity;
 }
 
-void SpellManager::setQuantity(int amt)
+void SpellManager::setLQuantity(int amt)
 {
-	this->quantity = amt;
+	this->lightningQuantity = amt;
 }
