@@ -18,7 +18,7 @@ MinionManager::MinionManager()
 		temp->scale.Set(5, 5, 5);
 		temp->set_collision_type(Collision::AABB);
 		temp->update_collider();
-		temp->mesh = MeshList::GetInstance()->getMesh("CANNON");
+		temp->mesh = MeshList::GetInstance()->getMesh("GREENDRAGON");
 		temp->init_info(100, 10, 1, 6.f, 5);
 		minions.push_back(temp);
 		RenderManager::GetInstance()->attach_renderable(temp, 1);

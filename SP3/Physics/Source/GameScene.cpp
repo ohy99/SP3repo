@@ -121,6 +121,7 @@ void GameScene::Update(double dt)
 		sa->m_anim->animActive = true;
 	}
 
+	GameLogic::GetInstance()->update(dt);
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
 	double x, y;

@@ -84,8 +84,12 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("Tile1", Color(0, 0, 0), 1);
 		temp->textureID = LoadTGA("Image//level1tile.tga");
 		assignMesh(temp);
-
-
+		temp = MeshBuilder::GenerateSpriteAnimation("GREENDRAGON", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//greendragon.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateSpriteAnimation("GREENATTACK", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//greenattack.tga");
+		assignMesh(temp);
 
 		//Level 2
 
@@ -139,7 +143,7 @@ class MeshList : public Singleton <MeshList>
 		//temp->textureID = LoadTGA("Image\\title.tga");
 		//assignMesh(temp);
 		temp = MeshBuilder::GenerateSpriteAnimation("Poster", 1, 6, 1.0f);
-		temp->textureID = LoadTGA("Image//animatedposter.tga");
+		temp->textureID = LoadTGA("Image//greendragon.tga");
 		assignMesh(temp);
 
 
