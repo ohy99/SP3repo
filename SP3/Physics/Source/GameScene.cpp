@@ -194,12 +194,18 @@ void GameScene::Update(double dt)
 			dakeypressed = false;
 		}
 	}
-
-	if (Application::GetInstance().IsKeyPressed('6'))
 	{
-		SpellManager::GetInstance()->useLightningSpell();
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
+		{
+			SpellManager::GetInstance()->useLightningSpell();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
 	}
-
 	SpellManager::GetInstance()->update(dt);
 	MinionManager::GetInstance()->update(dt);
 	PhysicsManager::GetInstance()->update(dt);
