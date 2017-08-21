@@ -182,12 +182,14 @@
     <ClCompile Include="Source\MinionManager.cpp" />
     <ClCompile Include="Source\ObjectPoolManager.cpp" />
     <ClCompile Include="Source\Options.cpp" />
+    <ClCompile Include="Source\ParticleManager.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
     <ClCompile Include="Source\Lose.cpp" />
     <ClCompile Include="Source\Projectile.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
+    <ClCompile Include="Source\SpellManager.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
     <ClCompile Include="Source\Tower.cpp" />
     <ClCompile Include="Source\TowerManager.cpp" />
@@ -238,6 +240,7 @@
     <ClInclude Include="Source\MinionInfo.h" />
     <ClInclude Include="Source\ObjectPoolManager.h" />
     <ClInclude Include="Source\Options.h" />
+    <ClInclude Include="Source\ParticleManager.h" />
     <ClInclude Include="Source\PhysicsManager.h" />
     <ClInclude Include="Source\Lose.h" />
     <ClInclude Include="Source\Projectile.h" />
@@ -250,6 +253,7 @@
     <ClInclude Include="Source\Shop.h" />
     <ClInclude Include="Source\SingletonTemplate.h" />
     <ClInclude Include="Source\sound.h" />
+    <ClInclude Include="Source\SpellManager.h" />
     <ClInclude Include="Source\SpriteAnimation.h" />
     <ClInclude Include="Source\TextManager.h" />
     <ClInclude Include="Source\Tower.h" />

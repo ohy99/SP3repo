@@ -26,7 +26,7 @@ protected:
 	double fps;
 
 	Mesh* axis;
-	Mesh* play;
+	Button title;
 	Mesh* quit;
 	Mesh* option;
 	Button playbutt;

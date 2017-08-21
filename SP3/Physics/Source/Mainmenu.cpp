@@ -61,7 +61,6 @@ void Mainmenu::Init()
 	Math::InitRNG();
 
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
-
 	playbutt.pos.Set(0, 9, 0);
 	playbutt.resize_button(20, 10);
 	playbutt.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");
@@ -74,6 +73,9 @@ void Mainmenu::Init()
 	levelselectbutt.pos.Set(0, -7.5, 0);
 	levelselectbutt.resize_button(40, 10);
 	levelselectbutt.mesh = MeshList::GetInstance()->getMesh("LEVELSELECTBUTTON");
+	title.pos.Set(0, 35, 0);
+	title.resize_button(80, 30);
+	title.mesh = MeshList::GetInstance()->getMesh("TITLE");
 
 	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
@@ -109,10 +111,14 @@ void Mainmenu::Update(double dt)
 		{
 			SceneManager::GetInstance()->setNextScene("GAME");
 		}
+		if (levelselectbutt.collision.isCollide(cursor_collider))
+		{
+			SceneManager::GetInstance()->setNextScene("LEVELSELECT");
+		}
 		if (optionbutt.collision.isCollide(cursor_collider))
 		{
 			SceneManager::GetInstance()->setNextScene("OPTIONS");
-		}
+		}	
 		if (quitbutt.collision.isCollide(cursor_collider))
 		{
 			SceneManager::GetInstance()->setExitGame(true);
@@ -194,10 +200,7 @@ void Mainmenu::Render()
 	////RenderHelper::RenderMesh(quit, false);
 	////ms.PopMatrix();
 
-	////ms.PushMatrix();
-	////ms.Translate(0, -10, 0);
-	////RenderHelper::RenderMesh(option, false);
-	////ms.PopMatrix();
+
 
 
 	//ms.PopMatrix();
@@ -207,7 +210,7 @@ void Mainmenu::Render()
 	optionbutt.render_button();
 	quitbutt.render_button();
 	levelselectbutt.render_button();
-
+	title.render_button();
 }
 
 void Mainmenu::Exit()

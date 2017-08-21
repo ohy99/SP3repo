@@ -8,7 +8,6 @@
 #include "Button.h"
 #include "AudioPlayer.h"
 #include "CharacterInfo.h"
-
 class Mesh;
 
 class Win : public Scene
@@ -27,6 +26,14 @@ protected:
 	double fps;
 
 	Mesh* axis;
+	Button title;
+	Mesh* quit;
+	Mesh* option;
+	Button playbutt;
+	Button optionbutt;
+	Button quitbutt;
+	Button levelselectbutt;
+	AudioPlayer audioPlayer;
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;

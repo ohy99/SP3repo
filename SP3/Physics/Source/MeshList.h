@@ -139,9 +139,9 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("LEVELSELECTBUTTON", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\levelselect.tga");
 		assignMesh(temp);
-		//temp = MeshBuilder::GenerateQuad("TITLE", Color(1, 1, 1), 1);
-		//temp->textureID = LoadTGA("Image\\title.tga");
-		//assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("TITLE", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\title.tga");
+		assignMesh(temp);
 		temp = MeshBuilder::GenerateSpriteAnimation("Poster", 1, 6, 1.0f);
 		temp->textureID = LoadTGA("Image//greendragon.tga");
 		assignMesh(temp);
