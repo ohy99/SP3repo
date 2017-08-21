@@ -119,10 +119,25 @@
     <ClCompile Include="Source\GenericDecoration.cpp">
       <Filter>Header Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Tower.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\MinionInfo.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Minion.cpp">
+      <Filter>Header Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Source\SpriteAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DamageArea.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tower.cpp">
+      <Filter>Header Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TowerManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -300,6 +315,18 @@
     </ClInclude>
     <ClInclude Include="Source\SpriteAnimation.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionManager.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DamageArea.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HpBar.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TowerManager.h">
+      <Filter>Header Files\HY</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

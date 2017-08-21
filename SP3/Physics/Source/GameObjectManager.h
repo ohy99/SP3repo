@@ -21,6 +21,7 @@ public:
 		//#ID IS NUMERICAL ASCENDING.
 		//Define the types of game objects here.
 		PLAYERTOWER = 0,
+		ENEMYTOWER,
 		//Backgrounds & Tiles
 		BACKGROUND,
 		TILES,

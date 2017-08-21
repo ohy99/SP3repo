@@ -23,6 +23,7 @@
 #include "GameLogic.h"
 #include "EnvironmentManager.h"
 #include "RenderManager.h"
+#include "MinionManager.h"
 
 #include "CharacterInfo.h"
 
@@ -30,6 +31,7 @@
 
 #include "WeaponInfo.h"
 
+#include "SeasonManager.h"
 GameScene::GameScene()
 {
 }
@@ -43,6 +45,8 @@ GameScene::~GameScene()
 	MeshList::Destroy();
 	EnvironmentManager::Destroy();
 	RenderManager::Destroy();
+	MinionManager::Destroy();
+	SeasonManager::Destroy();
 }
 
 void GameScene::Init()
@@ -67,6 +71,7 @@ void GameScene::Init()
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
+	
 
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
@@ -97,7 +102,11 @@ void GameScene::Init()
 	weap.scale.Set(5, 5, 5);
 	weap.active = true;
 	weap.pos.Set(7.5, 25);
+	weap.set_damage(50);
 	RenderManager::GetInstance()->attach_renderable(&weap, 1);
+
+	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0, 3));
+	//cout << SeasonManager::GetInstance()->get_season() << endl;
 }
 
 
@@ -134,6 +143,55 @@ void GameScene::Update(double dt)
 
 	weap.WeaponInfo::Update(dt);
 
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('1') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('1') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('2') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('2') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('3') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(false);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('3') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('4') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_RANGE);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('4') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	MinionManager::GetInstance()->update(dt);
 	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions
 	CollisionManager::GetInstance()->update(dt);
@@ -172,7 +230,6 @@ void GameScene::Render()
 	RenderHelper::RenderMesh(axis, false);
 
 	RenderManager::GetInstance()->render_all_active_objects();
-
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
 	ms.PushMatrix();
 	ms.Translate(50, 50, 0);

@@ -16,7 +16,7 @@ class PhysicsManager :public Singleton<PhysicsManager>
 public:
 	void update(double dt);
 	void add_object(GameObject* go);
-
+	Vector3 get_gravity();
 protected:
 	PhysicsManager();
 	virtual ~PhysicsManager();

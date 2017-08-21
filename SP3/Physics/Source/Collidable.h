@@ -10,7 +10,6 @@ class Collidable : public GameObject
 {
 	friend CollisionManager;
 	Faction faction;
-	Collision collider;
 public:
 	Faction::FACTION_SIDE get_faction_side();
 	void set_faction_side(Faction::FACTION_SIDE side);
@@ -19,9 +18,11 @@ public:
 
 	void set_collision_type(Collision::CollisionType type);
 	void update_collider();
+	bool check_collision(Collision& tat);
 protected:
 	Collidable();
 	virtual ~Collidable();
+	Collision collider;
 
 };
 

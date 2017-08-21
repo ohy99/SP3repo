@@ -1,109 +1,57 @@
-﻿  Win.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\rendermanager.h(8): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): note: see declaration of 'GameObject'
-  WeaponInfo.cpp
-  Weapon.cpp
-  Utility.cpp
-  shader.cpp
-  RenderManager.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): warning C4099: 'GameObject': type name first seen using 'class' now seen using 'struct'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(7): note: see declaration of 'GameObject'
-  RenderHelper.cpp
-  Projectile.cpp
-  Lose.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\rendermanager.h(8): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): note: see declaration of 'GameObject'
-  PhysicsManager.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): warning C4099: 'GameObject': type name first seen using 'class' now seen using 'struct'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(7): note: see declaration of 'GameObject'
-  Options.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\rendermanager.h(8): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\options.cpp(100): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\options.cpp(161): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\options.cpp(162): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  ObjectPoolManager.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\rendermanager.h(8): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): note: see declaration of 'GameObject'
-  MeshBuilder.cpp
-  Mesh.cpp
-  Mainmenu.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\rendermanager.h(8): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\mainmenu.cpp(99): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  LoadTGA.cpp
-  LoadTextData.cpp
-  LoadOBJ.cpp
-  Levelselect.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
-  GenericDecoration.cpp
-  Generating Code...
-  Compiling...
-  GameObject.cpp
-  Camera.cpp
-  GameScene.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\physicsmanager.h(6): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\rendermanager.h(8): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobjectmanager.h(6): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\gamescene.cpp(99): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  GameObjectManager.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): warning C4099: 'GameObject': type name first seen using 'class' now seen using 'struct'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(7): note: see declaration of 'GameObject'
-c:\users\530\documents\github\sp3repo\sp3\physics\source\rendermanager.h(8): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
-  c:\users\530\documents\github\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
-  GameLogic.cpp
-  EnvironmentManager.cpp
-  Collidable.cpp
-  CharacterInfo.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(135): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(139): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(143): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(147): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(151): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(155): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(159): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(216): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(218): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\characterinfo.cpp(220): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  AudioPlayer.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\audioplayer.cpp(213): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\audioplayer.cpp(222): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\audioplayer.cpp(231): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\audioplayer.cpp(240): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
-c:\users\530\documents\github\sp3repo\sp3\physics\source\audioplayer.cpp(249): warning C4244: 'argument': conversion from 'double' to 'irrklang::ik_f32', possible loss of data
-  Application.cpp
-c:\users\530\documents\github\sp3repo\sp3\physics\source\application.cpp(21): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\530\documents\github\sp3repo\sp3\physics\source\application.cpp(22): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\530\documents\github\sp3repo\sp3\physics\source\application.cpp(23): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\530\documents\github\sp3repo\sp3\physics\source\application.cpp(24): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\530\documents\github\sp3repo\sp3\physics\source\application.cpp(25): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\530\documents\github\sp3repo\sp3\physics\source\application.cpp(26): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
-  CollisionManager.cpp
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Physics.vcxproj -> C:\Users\530\Documents\GitHub\SP3repo\SP3\Debug\Physics.exe
-  Physics.vcxproj -> C:\Users\530\Documents\GitHub\SP3repo\SP3\Debug\Physics.pdb (Full PDB)
+﻿Build started 20/8/2017 9:58:15 PM.
+     1>Project "D:\SP3repo\SP3\Physics\Physics.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ID:\SP3repo\SP3\\Common\Source /ID:\SP3repo\SP3\\glfw\include /ID:\SP3repo\SP3\\glew\include /ID:\SP3repo\SP3\\irrKlang\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Mainmenu.cpp
+         Mainmenu.cpp
+     1>d:\sp3repo\sp3\physics\source\physicsmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
+         d:\sp3repo\sp3\physics\source\gameobject.h(8): note: see declaration of 'GameObject'
+     1>d:\sp3repo\sp3\physics\source\gameobjectmanager.h(6): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
+         d:\sp3repo\sp3\physics\source\physicsmanager.h(6): note: see declaration of 'GameObject'
+     1>d:\sp3repo\sp3\physics\source\rendermanager.h(8): warning C4099: 'GameObject': type name first seen using 'struct' now seen using 'class'
+         d:\sp3repo\sp3\physics\source\gameobjectmanager.h(6): note: see declaration of 'GameObject'
+     1>d:\sp3repo\sp3\physics\source\mainmenu.cpp(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\SP3repo\SP3\Debug\Physics.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\SP3repo\SP3\Debug /LIBPATH:D:\SP3repo\SP3\\glew\lib /LIBPATH:"D:\SP3repo\SP3\\glfw\lib-vc2015" /LIBPATH:"D:\SP3repo\SP3\\irrKlang\lib\Win32-visualStudio" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\SP3repo\SP3\Debug\Physics.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\SP3repo\SP3\Debug\Physics.lib" /MACHINE:X86 Debug\Application.obj
+         Debug\AudioPlayer.obj
+         Debug\CharacterInfo.obj
+         Debug\Collidable.obj
+         Debug\EnvironmentManager.obj
+         Debug\GameLogic.obj
+         Debug\GameObjectManager.obj
+         Debug\GameScene.obj
+         Debug\Camera.obj
+         Debug\CollisionManager.obj
+         Debug\GameObject.obj
+         Debug\GenericDecoration.obj
+         Debug\GenericEnvironmentCollidable.obj
+         Debug\Levelselect.obj
+         Debug\LoadOBJ.obj
+         Debug\LoadTextData.obj
+         Debug\LoadTGA.obj
+         Debug\main.obj
+         Debug\Mainmenu.obj
+         Debug\Mesh.obj
+         Debug\MeshBuilder.obj
+         Debug\Minion.obj
+         Debug\MinionInfo.obj
+         Debug\MinionManager.obj
+         Debug\ObjectPoolManager.obj
+         Debug\Options.obj
+         Debug\PhysicsManager.obj
+         Debug\Lose.obj
+         Debug\Projectile.obj
+         Debug\RenderHelper.obj
+         Debug\RenderManager.obj
+         Debug\shader.obj
+         Debug\SpriteAnimation.obj
+         Debug\Tower.obj
+         Debug\Utility.obj
+         Debug\Weapon.obj
+         Debug\WeaponInfo.obj
+         Debug\Win.obj
+         Physics.vcxproj -> D:\SP3repo\SP3\Debug\Physics.exe
+     1>Done Building Project "D:\SP3repo\SP3\Physics\Physics.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.42

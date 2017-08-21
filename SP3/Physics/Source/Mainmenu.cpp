@@ -62,15 +62,18 @@ void Mainmenu::Init()
 
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
 
-	playbutt.pos.Set(0, 5.5, 0);
+	playbutt.pos.Set(0, 9, 0);
 	playbutt.resize_button(20, 10);
 	playbutt.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");
-	optionbutt.pos.Set(0, -12, 0);
+	optionbutt.pos.Set(0, -25, 0);
 	optionbutt.resize_button(35, 10);
 	optionbutt.mesh = MeshList::GetInstance()->getMesh("OPTIONSBUTTON");
-	quitbutt.pos.Set(0, -30.5, 0);
+	quitbutt.pos.Set(0, -40.5, 0);
 	quitbutt.resize_button(20, 10);
 	quitbutt.mesh = MeshList::GetInstance()->getMesh("QUITBUTTON");
+	levelselectbutt.pos.Set(0, -7.5, 0);
+	levelselectbutt.resize_button(40, 10);
+	levelselectbutt.mesh = MeshList::GetInstance()->getMesh("LEVELSELECTBUTTON");
 
 	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
@@ -115,7 +118,13 @@ void Mainmenu::Update(double dt)
 			SceneManager::GetInstance()->setExitGame(true);
 		}
 	}
-	std::cout<<"main:"<<audioPlayer.getCurrentVolume()<<std::endl;
+	if (Application::IsKeyPressed('1'))
+		SceneManager::GetInstance()->setNextScene("WIN");
+	if (Application::IsKeyPressed('2'))
+		SceneManager::GetInstance()->setNextScene("LOSE");
+	if (Application::IsKeyPressed('3'))
+		SceneManager::GetInstance()->setNextScene("LEVELSELECT");
+	//std::cout<<"main:"<<audioPlayer.getCurrentVolume()<<std::endl;
 }
 
 
@@ -140,7 +149,7 @@ void Mainmenu::Render()
 	Graphics::GetInstance()->modelStack.LoadIdentity();
 
 	MS& ms = Graphics::GetInstance()->modelStack;
-	RenderHelper::RenderMesh(axis, false);
+	//RenderHelper::RenderMesh(axis, false);
 
 	//ms.PushMatrix();
 	//ms.Scale(Vector3(3, 1, 1));
@@ -197,7 +206,7 @@ void Mainmenu::Render()
 	playbutt.render_button();
 	optionbutt.render_button();
 	quitbutt.render_button();
-
+	levelselectbutt.render_button();
 
 }
 

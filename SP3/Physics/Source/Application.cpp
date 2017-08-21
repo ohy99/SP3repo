@@ -18,12 +18,12 @@
 #include "MeshList.h"
 #include "Graphics.h"
 
-#include "GameScene.h";
-#include "Mainmenu.h";
-#include "Levelselect.h";
-#include "Lose.h";
-#include "Win.h";
-#include "Options.h";
+#include "GameScene.h"
+#include "Mainmenu.h"
+#include "Levelselect.h"
+#include "Lose.h"
+#include "Win.h"
+#include "Options.h"
 
 
 struct AtExit
