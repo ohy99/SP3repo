@@ -5,17 +5,23 @@
 
 using namespace std;
 
-class Projectile;
+class DamageArea;
 class SpellManager:public Singleton<SpellManager>
 {
-public:
 	friend Singleton;
+public:
 	void update(double dt);
-	Projectile* lightning;
+	DamageArea* lightning;
+	void useLightningSpell();
+
+	int getQuantity();
+	void setQuantity(int amt);
 
 protected:
 	SpellManager();
 	virtual ~SpellManager();
 
 	double lightningactivetime;
+
+	int quantity;
 };
