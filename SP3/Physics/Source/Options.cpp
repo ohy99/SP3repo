@@ -103,7 +103,7 @@ void Options::Update(double dt)
 	cursor_collider.collisionType = Collision::POINT;
 	cursor_collider.mid = &cursor_point_in_world_space;
 	static bool pressle = false;
-	std::cout << "options:" << audioPlayer.getCurrentVolume() << std::endl;
+//	std::cout << "options:" << audioPlayer.getCurrentVolume() << std::endl;
 	if (Application::IsMousePressed(0) && !pressle)
 	{
 		if (plusbutt.collision.isCollide(cursor_collider))

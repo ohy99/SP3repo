@@ -32,6 +32,7 @@ protected:
 	Button playbutt;
 	Button optionbutt;
 	Button quitbutt;
+	Button levelselectbutt;
 	AudioPlayer audioPlayer;
 	//Mesh* background;
 	float worldHeight;

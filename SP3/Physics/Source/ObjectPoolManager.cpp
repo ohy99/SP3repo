@@ -17,7 +17,7 @@ ObjectPoolManager::ObjectPoolManager()
 
 		projectile_pool.push_back(temp_proj);
 		PhysicsManager::GetInstance()->add_object(temp_proj);
-		RenderManager::GetInstance()->attach_renderable(temp_proj);
+		RenderManager::GetInstance()->attach_renderable(temp_proj, 2);
 	}
 	projectile_mesh[PROJECTILE_TYPE::BULLET] = MeshList::GetInstance()->getMesh("BULLET");
 	projectile_mesh[PROJECTILE_TYPE::CANNONBALL] = MeshList::GetInstance()->getMesh("CANNONBALL");

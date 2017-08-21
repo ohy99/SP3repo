@@ -37,6 +37,10 @@ void Collidable::update_collider()
 		this->collider.radius = this->scale.x * 0.5f;
 	}
 }
+bool Collidable::check_collision(Collision & tat)
+{
+	return this->collider.isCollide(tat);
+}
 void Collidable::set_collision_type(Collision::CollisionType type)
 {
 	this->collider.collisionType = type;

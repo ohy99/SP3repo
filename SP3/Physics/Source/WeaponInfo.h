@@ -25,6 +25,7 @@ protected:
 	// Boolean flag to indicate if weapon can fire now
 	bool bFire;
 
+	int damage;
 	//double reloadTime;
 	Faction faction;
 public:
@@ -75,6 +76,8 @@ public:
 	//// Print Self
 	//void PrintSelf(void);
 
+	void set_damage(int dmg);
+	int get_damage();
 
 	Faction::FACTION_SIDE get_faction_side();
 	void set_faction_side(Faction::FACTION_SIDE side);

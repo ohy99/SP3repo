@@ -1,6 +1,13 @@
 #include "Minion.h"
 
 #include "Tower.h"
+#include "MinionManager.h"
+#include "DamageArea.h"
+#include "Projectile.h"
+#include "ObjectPoolManager.h"
+#include "PhysicsManager.h"
+#include "HpBar.h"
+#include "Collidable.h"
 
 Minion::Minion()
 {
@@ -13,15 +20,138 @@ Minion::~Minion()
 void Minion::update(double dt)
 {
 	this->prev_pos = this->pos;
+	this->update_info(dt);
+	this->update_state();
+
+	respond_to_state(dt);
 }
+
+void Minion::respond_to_state(double dt)
+{
+	switch (current_state)
+	{
+	case STATE::DEAD:
+		this->active = false;
+		break;
+	case STATE::WALK:
+		this->pos += this->move_direction * this->get_move_speed() * (float)dt;
+		break;
+	case STATE::ATTACK:
+		attack();
+		break;
+	}
+}
+
+void Minion::attack()
+{
+	//check if there is eligible target. if no, then return
+	if (nearest_target == nullptr)
+		return;
+	if (this->can_attack() == false)
+		return;
+
+	switch (this->minion_type)
+	{
+	case MINION_TYPE::BASIC_MELEE:
+	{
+		//generate a collidable hit
+		DamageArea* temp = MinionManager::GetInstance()->request_inactive_collidable(MINION_TYPE::BASIC_MELEE);
+		if (temp)
+		{
+			temp->active = true;
+			temp->pos.Set(this->pos.x + (this->move_direction * this->scale.x * 0.5f).x, 
+				this->pos.y, this->pos.z);
+			temp->set_damage(this->get_attack_damage());
+			temp->set_faction_side(this->get_faction_side());
+			temp->set_duration(0.5f);
+			//successful attack
+			this->reset_attack();
+		}
+		break;
+	}
+	case MINION_TYPE::BASIC_RANGE:
+	{
+		Projectile* temp = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::PROJECTILE_TYPE::CANNONBALL);
+		if (temp)
+		{
+			temp->active = true;
+			temp->pos = this->pos;
+			temp->set_dmg(this->get_attack_damage());
+			temp->set_faction_side(this->get_faction_side());
+			temp->velocity.Set(this->move_direction.x * 7.5f, 0, 0);
+			//calculate needed y-vel to reach target
+			Vector3 displacement = *nearest_target - this->pos;
+			float time_to_hit = displacement.x / 7.5f;
+			if (time_to_hit <= 0)
+				time_to_hit = -time_to_hit;
+			temp->velocity.y = time_to_hit * 0.5f * -PhysicsManager::GetInstance()->get_gravity().y;
+			this->reset_attack();
+		}
+	}
+		break;
+	}
+}
+
+void Minion::update_state()
+{
+	if (this->health <= 0)
+	{
+		this->current_state = DEAD;
+		return;
+	}
+	if (enemy_target->size() == 0)
+	{
+		nearest_target = nullptr;
+		this->current_state = WALK;
+		return;
+	}
+	Collision temp;
+	temp.setCollisionType(Collision::CollisionType::SPHERE);
+	temp.mid = &this->pos;
+	temp.radius = (this->scale.x * 0.5f) * attack_range * 1.1f;//1.1 is da offset
+
+	for each (auto &target in *enemy_target)
+	{
+		if (target->check_collision(temp))
+		{
+			//now set as attack the first one if first one is inside
+			this->current_state = ATTACK;
+			nearest_target = &target->pos;
+			if (dynamic_cast<Minion*>(target))
+				break;//if the target is minion, break
+		}
+		else
+		{
+			//nothing in range
+			this->current_state = WALK;
+			nearest_target = nullptr;
+		}
+	}
+}
+
 
 void Minion::collision_response(Collidable * obj)
 {
 	Minion* temp_minion = dynamic_cast<Minion*>(obj);
 	Tower* temp_tower = dynamic_cast<Tower*>(obj);
-	if (temp_minion)
-		this->pos = prev_pos;
+	if (temp_minion)//stop when hit any minion
+	{
+		Vector3 relativepos = obj->pos - this->pos;
+		if (this->move_direction.Dot(relativepos) > 0)
+			this->pos = prev_pos;//collded with obj infront of me, so i stop
+	}
 	else if (temp_tower)
 		if (this->get_faction_side() != obj->get_faction_side())
 			this->pos = prev_pos;
+}
+
+void Minion::render()
+{
+	GameObject::render();
+
+	HpBar* hp = HpBar::GetInstance();
+	hp->pos = this->pos;
+	hp->pos.y += this->scale.y;
+	hp->scale.Set(this->scale.x, 1);
+	hp->render((float)this->health / (float)this->max_health);
 }
