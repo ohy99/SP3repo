@@ -143,7 +143,7 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image\\title.tga");
 		assignMesh(temp);
 		temp = MeshBuilder::GenerateSpriteAnimation("Poster", 1, 6, 1.0f);
-		temp->textureID = LoadTGA("Image//greendragon.tga");
+		temp->textureID = LoadTGA("Image//animatedposter.tga");
 		assignMesh(temp);
 
 

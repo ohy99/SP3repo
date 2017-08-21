@@ -14,7 +14,8 @@ public:
 	{
 		DEAD = 0,
 		WALK,
-		ATTACK
+		ATTACK,
+		STATE_COUNT
 	} current_state;
 	enum MINION_TYPE
 	{
