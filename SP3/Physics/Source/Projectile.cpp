@@ -2,6 +2,8 @@
 
 #include "Minion.h"
 #include "Tower.h"
+#include "ObjectPoolManager.h"
+#include "ParticleManager.h"
 
 Projectile::Projectile() : velocity(0,0,0), dmg(0)
 {
@@ -35,6 +37,10 @@ void Projectile::collision_response(Collidable* obj)
 	else if (temp_tower)
 	{
 		temp_tower->get_hit(this->get_dmg());
+		Particle* p = ObjectPoolManager::GetInstance()->get_particle(ObjectPoolManager::PARTICLE_CASE::GROUND);
+		p->pos = this->pos;
+		p->scale = this->scale;
+
 		this->active = false;
 	}
 	//else if (temp_tower)

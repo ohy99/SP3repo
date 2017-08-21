@@ -8,6 +8,8 @@
 #include "Camera.h"
 #include "AudioPlayer.h"
 #include "CharacterInfo.h"
+
+
 class Mesh;
 
 #include "Weapon.h"
@@ -33,6 +35,7 @@ protected:
 	float worldWidth;
 
 	Weapon weap;
+
 };
 
 #endif

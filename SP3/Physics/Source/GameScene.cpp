@@ -32,6 +32,8 @@
 #include "WeaponInfo.h"
 
 #include "SeasonManager.h"
+
+#include "SpellManager.h"
 GameScene::GameScene()
 {
 }
@@ -192,6 +194,13 @@ void GameScene::Update(double dt)
 			dakeypressed = false;
 		}
 	}
+
+	if (Application::GetInstance().IsKeyPressed('6'))
+	{
+		SpellManager::GetInstance()->useLightningSpell();
+	}
+
+	SpellManager::GetInstance()->update(dt);
 	MinionManager::GetInstance()->update(dt);
 	PhysicsManager::GetInstance()->update(dt);
 	//Update collisions

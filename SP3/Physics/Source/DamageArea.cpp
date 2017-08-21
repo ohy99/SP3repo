@@ -1,6 +1,7 @@
 #include "DamageArea.h"
 
 #include "Minion.h"
+#include "Tower.h"
 
 DamageArea::DamageArea() : active_duration(0.0), active_elapsed(0.0), damage(0)
 {
@@ -37,6 +38,8 @@ void DamageArea::collision_response(Collidable * obj)
 	if (temp_minion)
 	{
 		//if is minion
+		if (this->get_faction_side() == obj->get_faction_side())
+			return;
 		temp_minion->get_hit(this->get_damage());
 		collided.push_back(obj);
 	}
