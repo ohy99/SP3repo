@@ -11,6 +11,21 @@
 
 Minion::Minion()
 {
+	mesh_state[MinionInfo::STATE::DEAD] = nullptr;
+	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
+	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("GREENATTACK");
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
+	if (sa)
+	{
+		sa->m_anim = new Animation();
+		sa->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENATTACK"));
+	if (sa2)
+	{
+		sa2->m_anim = new Animation();
+		sa2->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
 }
 
 Minion::~Minion()
@@ -19,6 +34,20 @@ Minion::~Minion()
 
 void Minion::update(double dt)
 {
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
+	if (sa)
+	{
+
+		sa->Update(dt);
+		sa->m_anim->animActive = true;
+	}
+	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENATTACK"));
+	if (sa2)
+	{
+
+		sa2->Update(dt);
+		sa2->m_anim->animActive = true;
+	}
 	this->prev_pos = this->pos;
 	this->update_info(dt);
 	this->update_state();
@@ -28,6 +57,7 @@ void Minion::update(double dt)
 
 void Minion::respond_to_state(double dt)
 {
+	this->mesh = mesh_state[current_state];
 	switch (current_state)
 	{
 	case STATE::DEAD:

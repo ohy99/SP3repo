@@ -143,6 +143,9 @@
     <ClCompile Include="Source\ParticleManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SpellManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -332,6 +335,9 @@
       <Filter>Header Files\HY</Filter>
     </ClInclude>
     <ClInclude Include="Source\ParticleManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpellManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

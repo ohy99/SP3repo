@@ -9,6 +9,7 @@ class Minion : public Collidable, public MinionInfo
 {
 	friend MinionManager;
 public:
+	Mesh* mesh_state[MinionInfo::STATE::STATE_COUNT];
 	Minion();
 	virtual ~Minion();
 
