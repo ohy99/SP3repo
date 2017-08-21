@@ -7,16 +7,16 @@ class Spells
 {
 public:
 	Spells();
-	~Spells();
+	virtual ~Spells();
 
 	int getLightningQuantity();
 	void setLightningQuantity(int amt);
 
-	void lightningSpell(double dt);
-	void freezeSpell();
-	void blastSpell();
+	//void lightningSpell(double dt);
+	//void freezeSpell();
+	//void blastSpell();
 
-	void renderSpells();
+	//void renderSpells();
 
 	
 protected:
@@ -24,6 +24,6 @@ protected:
 	int freezeQuantity;
 	int blastQuantity;
 
-	Projectile* lightning;
-	double lightningactivetime;
+	//Projectile* lightning;
+	//double lightningactivetime;
 };
