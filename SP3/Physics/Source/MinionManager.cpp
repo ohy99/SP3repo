@@ -100,7 +100,8 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 		//check if any existing minions are in tower. if there is, dont spawn to avoid collision
 		for each (auto& pm in player_minions)
 		{
-			temp_minion->pos = Vector3(5, 12.5, 0);
+			temp_minion->pos = TowerManager::GetInstance()->player->pos;
+			temp_minion->pos.y -= TowerManager::GetInstance()->player->scale.y * 0.275f;
 			Minion* temp_check = dynamic_cast<Minion*>(pm);
 			if (temp_check)
 				if (temp_minion->collider.isCollide(dynamic_cast<Minion*>(pm)->collider))
@@ -111,7 +112,8 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 	{
 		for each (auto& em in enemy_minions)
 		{
-			temp_minion->pos = Vector3(50, 12.5, 0);
+			temp_minion->pos = TowerManager::GetInstance()->enemy->pos;
+			temp_minion->pos.y -= TowerManager::GetInstance()->enemy->scale.y * 0.275f;
 			Minion* temp_check = dynamic_cast<Minion*>(em);
 			if (temp_check)
 				if (temp_minion->collider.isCollide(temp_check->collider))
@@ -122,16 +124,11 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 	temp_minion->active = true;
 	temp_minion->reset();
 	init_info(temp_minion, type);
-	//switch (type)
-	//{
-	//case MinionInfo::MINION_TYPE::BASIC_MELEE:
-	//	break;
-	//case MinionInfo::MINION_TYPE::BASIC_RANGE:
-	//	break;
-	//}
+
 	if (is_player_side)
 	{
-		temp_minion->pos = Vector3(5, 12.5, 0);
+		temp_minion->pos = TowerManager::GetInstance()->player->pos;
+		temp_minion->pos.y -= TowerManager::GetInstance()->player->scale.y * 0.275f;
 		temp_minion->set_faction_side(Faction::FACTION_SIDE::PLAYER);
 		temp_minion->attach_list_of_targets(&enemy_minions);
 		temp_minion->set_walking_direction(this->player_movement_direction);
@@ -139,7 +136,8 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 	}
 	else
 	{
-		temp_minion->pos = Vector3(50, 12.5, 0);
+		temp_minion->pos = TowerManager::GetInstance()->enemy->pos;
+		temp_minion->pos.y -= TowerManager::GetInstance()->enemy->scale.y * 0.275f;
 		temp_minion->set_faction_side(Faction::FACTION_SIDE::ENEMY);
 		temp_minion->attach_list_of_targets(&player_minions);
 		temp_minion->set_walking_direction(this->enemy_movement_direction);

@@ -11,6 +11,7 @@ class GameLogic : public Singleton<GameLogic>
 	float world_height;
 
 	void update_world_size();
+	void debuging_things();
 public:
 	void update(double dt);
 

@@ -148,54 +148,6 @@ void GameScene::Update(double dt)
 
 	{
 		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('1') && !dakeypressed)
-		{
-			MinionManager::GetInstance()->spawn_minion();
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('1') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('2') && !dakeypressed)
-		{
-			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('2') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('3') && !dakeypressed)
-		{
-			MinionManager::GetInstance()->spawn_minion(false);
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('3') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('4') && !dakeypressed)
-		{
-			MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_RANGE);
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('4') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
-	{
-		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
 		{
 			SpellManager::GetInstance()->useLightningSpell();
@@ -245,7 +197,11 @@ void GameScene::Render()
 	MS& ms = Graphics::GetInstance()->modelStack;
 	RenderHelper::RenderMesh(axis, false);
 
+	ms.PushMatrix();
+	ms.Translate(0, 5.f * ((800.f / 600.f) - ((float)Application::GetWindowWidth() / (float)Application::GetWindowHeight())), 0);
 	RenderManager::GetInstance()->render_all_active_objects();
+	ms.PopMatrix();
+
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
 	ms.PushMatrix();
 	ms.Translate(50, 50, 0);
