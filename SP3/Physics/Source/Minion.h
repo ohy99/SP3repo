@@ -19,6 +19,7 @@ public:
 	void update_state();
 	void respond_to_state(double dt);
 
+	virtual void get_hit(int dmg);
 	virtual void collision_response(Collidable* obj);
 
 	virtual void render();

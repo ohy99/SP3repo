@@ -1,4 +1,5 @@
-//#pragma once
+//#ifndef TEXTMANAGER_H
+//#define TEXTMANAGER_H
 //
 //#include "SingletonTemplate.h"
 //#include <map>
@@ -9,18 +10,21 @@
 //#include "LoadTGA.h"
 //#include "Mesh.h"
 //#include "LoadTextData.h"
-//#include "EntityBase.h"
-//#include "CalibriStyle.h"
+//#include "FontType.h"
 //#include "GlobalVariableManager.h"
+//#include <utility>
+//#include "Vector3.h"
 //
 ////FOR DEBUGING PURPOSES
 //class TextManager : public Singleton<TextManager>
 //{
 //	friend Singleton;
+//	
 //	std::map<int, std::string> text;
 //	//Mesh* text_mesh;
+//	
 //public:
-//	CalibriStyle calibri;
+//	FontType calibri;
 //	void add_text(int row, std::string text) {
 //		this->text[row] = text;
 //	}
@@ -60,3 +64,6 @@
 //	};
 //	virtual ~TextManager() {};
 //};
+//
+//
+//#endif

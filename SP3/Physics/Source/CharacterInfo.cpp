@@ -4,11 +4,12 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
 using namespace std;
 using std::string;
 
-Character::Character(): maxhealth(1000),
-health(100),
+Character::Character(): maxhealth(0),
+health(0),
 damage(0),
 levels(0),
 coins(0),
@@ -20,6 +21,44 @@ Character::~Character()
 {
 
 }
+
+
+void Character::Update(double dt)
+{
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+	double x, y;
+	Application::GetCursorPos(&x, &y);
+	int w = Application::GetWindowWidth();
+	int h = Application::GetWindowHeight();
+	static bool keypressed = false;
+	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
+	if (Application::GetInstance().IsMousePressed(1) && !keypressed)
+	{
+		weap.dir = -weap.pos + cursor_point_in_world_space;
+		weap.dir.Normalize();
+		weap.Discharge(weap.pos, weap.dir);
+		keypressed = true;
+	}
+	else if (!Application::GetInstance().IsMousePressed(1) && keypressed)
+	{
+		keypressed = false;
+	}
+	weap.WeaponInfo::Update(dt);
+}
+
+void Character::Init()
+{
+	weap.Init();
+	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
+	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
+	weap.scale.Set(5, 5, 5);
+	weap.active = true;
+	weap.pos.Set(7.5, 25);
+	weap.set_damage(50);
+	RenderManager::GetInstance()->attach_renderable(&weap, 1);
+}
+
+
 //---------------------Getters------------------------------------//
 int Character::getlevel()
 {
@@ -122,6 +161,8 @@ void Character::SetUp(const Vector3 & up)
 // Load this class
 bool Character::Load(const string saveFileName)
 {
+	int temp[9];
+
 	ifstream myfile(saveFileName.c_str(), ios::in);
 	if (myfile.is_open())
 	{
@@ -173,8 +214,47 @@ bool Character::Load(const string saveFileName)
 				{
 					mute = Token2Bool(aToken);
 				}
+				else if (theTag == "i_smallrepair")
+				{
+					temp[0] = Token2Double(aToken);
+				}
+				else if (theTag == "i_medrepair")
+				{
+					temp[1] = Token2Double(aToken);
+				}
+				else if (theTag == "i_bigrepair")
+				{
+					temp[2] = Token2Double(aToken);
+				}
+				else if (theTag == "i_greendrake")
+				{
+					temp[3] = Token2Double(aToken);
+				}
+				else if (theTag == "i_bluedrake")
+				{
+					temp[4] = Token2Double(aToken);
+				}
+				else if (theTag == "i_browndrake")
+				{
+					temp[5] = Token2Double(aToken);
+				}
+				else if (theTag == "i_blackdrake")
+				{
+					temp[6] = Token2Double(aToken);
+				}
+				else if (theTag == "i_weaplevel")
+				{
+					temp[7] = Token2Double(aToken);
+				}
+				else if (theTag == "i_towerlevel")
+				{
+					temp[8] = Token2Double(aToken);
+				}
 			}
 		}
+
+		//int 1 = Token2Double(aToken);
+		wallet.wLoad(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8]);
 		myfile.close();
 	}
 	else

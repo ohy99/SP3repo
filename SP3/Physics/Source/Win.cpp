@@ -75,7 +75,7 @@ void Win::Init()
 	levelselectbutt.mesh = MeshList::GetInstance()->getMesh("LEVELSELECTBUTTON");
 	title.pos.Set(0, 35, 0);
 	title.resize_button(80, 30);
-	title.mesh = MeshList::GetInstance()->getMesh("WIN O");
+	title.mesh = MeshList::GetInstance()->getMesh("WIN");
 
 	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));

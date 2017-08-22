@@ -79,6 +79,10 @@ void SpellManager::update(double dt)
 	blastReuseTime += dt;
 	blastDuration -= dt;
 	blast->update(dt);
+
+
+	//cout << lightningQuantity << endl;
+
 	//if (lightning->active)
 	//{
 	//	lightning->pos = cursor_point_in_world_space;

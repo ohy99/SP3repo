@@ -35,12 +35,18 @@ void DamageArea::collision_response(Collidable * obj)
 			return;
 
 	Minion* temp_minion = dynamic_cast<Minion*>(obj);
+	Tower* temp_tower = dynamic_cast<Tower*>(obj);
+	if (this->get_faction_side() == obj->get_faction_side())
+		return;
 	if (temp_minion)
 	{
 		//if is minion
-		if (this->get_faction_side() == obj->get_faction_side())
-			return;
 		temp_minion->get_hit(this->get_damage());
+		collided.push_back(obj);
+	}
+	else if (temp_tower)
+	{
+		temp_tower->get_hit(this->get_damage());
 		collided.push_back(obj);
 	}
 }
