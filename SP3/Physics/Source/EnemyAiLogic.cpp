@@ -1,5 +1,7 @@
 #include "EnemyAiLogic.h"
 
+#include "MinionManager.h"
+
 EnemyAiLogic::EnemyAiLogic(int level) : logic_level(level),
 	resource(0), resource_gain(0), resource_gain_delay(0.0), resource_gain_elapsed_time(0.0),
 	player_threat_level(0)
@@ -48,15 +50,20 @@ void EnemyAiLogic::queue_spawn_horde(std::string pattern)
 
 void EnemyAiLogic::attempt_to_unqueue_spawn()
 {
+	//when to pop
+
+
 	char type = spawn_queue.front();
 	spawn_queue.pop();
 	switch (type)
 	{
 	case 'R':
+		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_RANGE);
 		break;
 	case 'S':
 		break;
 	default:
+		MinionManager::GetInstance()->spawn_minion(false);
 		break;
 	}
 }
