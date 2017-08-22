@@ -149,6 +149,9 @@
     <ClCompile Include="Source\SpellManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ShowHpManager.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -342,6 +345,9 @@
     </ClInclude>
     <ClInclude Include="Source\SpellManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShowHpManager.h">
+      <Filter>Header Files\HY</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
