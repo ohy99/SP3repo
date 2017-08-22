@@ -93,6 +93,8 @@ void GameScene::Init()
 		sa->m_anim->Set(0, 5, 1, 10.0f, true);
 	}
 	CharacterInfo.Init();
+	CharacterInfo.Load();       
+	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0, 3));
 	/*weap.Init();
 	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
@@ -102,9 +104,9 @@ void GameScene::Init()
 	weap.set_damage(50);
 	RenderManager::GetInstance()->attach_renderable(&weap, 1);
 */
-	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0, 3));
+	
 	//cout << SeasonManager::GetInstance()->get_season() << endl;
-	CharacterInfo.Load();
+
 }
 
 
@@ -113,25 +115,8 @@ void GameScene::Update(double dt)
 
 	
 //Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
-	if (sa)
-	{
-
-		sa->Update(dt);
-		sa->m_anim->animActive = true;
-	}
-	CharacterInfo.Update(dt);
-
-	/*GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
 
-	double x, y;
-	Application::GetCursorPos(&x, &y);
-	int w = Application::GetWindowWidth();
-	int h = Application::GetWindowHeight();
-	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
-	cout << isPause << endl;
-	*/
 	static bool PButtonState = false;
 	if (Application::IsKeyPressed('P') && !PButtonState)
 	{
@@ -152,6 +137,7 @@ void GameScene::Update(double dt)
 
 	if (!isPause)
 	{
+		CharacterInfo.Update(dt);
 		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
 		if (sa)
 		{
@@ -160,11 +146,29 @@ void GameScene::Update(double dt)
 			sa->m_anim->animActive = true;
 		}
 
+		SpellManager::GetInstance()->update(dt);
+		MinionManager::GetInstance()->update(dt);
+		PhysicsManager::GetInstance()->update(dt);
+		//Update collisions
+		CollisionManager::GetInstance()->update(dt);
+		//update the show hp thing
+		ShowHpManager::GetInstance()->update(dt);
 
 		GameLogic::GetInstance()->update(dt);
 		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+		fps = 1.0 / dt;
 
 
+		/*GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+
+
+		double x, y;
+		Application::GetCursorPos(&x, &y);
+		int w = Application::GetWindowWidth();
+		int h = Application::GetWindowHeight();
+		Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
+		cout << isPause << endl;
+		*/
 		//static bool keypressed = false;
 		//if (Application::GetInstance().IsMousePressed(1) && !keypressed)
 		//{
@@ -179,62 +183,53 @@ void GameScene::Update(double dt)
 		//}
 		//weap.WeaponInfo::Update(dt);
 
-		{
-			static bool dakeypressed = false;
-			if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
-			{
-				SpellManager::GetInstance()->useLightningSpell();
-				dakeypressed = true;
-			}
-			else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
-			{
-				dakeypressed = false;
-			}
-		}
+	//	{
+	//		static bool dakeypressed = false;
+	//		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
+	//		{
+	//			SpellManager::GetInstance()->useLightningSpell();
+	//			dakeypressed = true;
+	//		}
+	//		else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
+	//		{
+	//			dakeypressed = false;
+	//		}
+	//	}
 
 
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('7') && !dakeypressed)
-		{
-			SpellManager::GetInstance()->useFreezeSpell();
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('7') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
+	//{
+	//	static bool dakeypressed = false;
+	//	if (Application::GetInstance().IsKeyPressed('7') && !dakeypressed)
+	//	{
+	//		SpellManager::GetInstance()->useFreezeSpell();
+	//		dakeypressed = true;
+	//	}
+	//	else if (!Application::GetInstance().IsKeyPressed('7') && dakeypressed)
+	//	{
+	//		dakeypressed = false;
+	//	}
+	//}
 
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('8') && !dakeypressed)
-		{
-			SpellManager::GetInstance()->useBlastSpell();
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('8') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
-
-
-		SpellManager::GetInstance()->update(dt);
-		MinionManager::GetInstance()->update(dt);
-		PhysicsManager::GetInstance()->update(dt);
-		//Update collisions
-		CollisionManager::GetInstance()->update(dt);
+	//{
+	//	static bool dakeypressed = false;
+	//	if (Application::GetInstance().IsKeyPressed('8') && !dakeypressed)
+	//	{
+	//		SpellManager::GetInstance()->useBlastSpell();
+	//		dakeypressed = true;
+	//	}
+	//	else if (!Application::GetInstance().IsKeyPressed('8') && dakeypressed)
+	//	{
+	//		dakeypressed = false;
+	//	}
+	//}
 
 
-		//update the show hp thing
-		ShowHpManager::GetInstance()->update(dt);
 
-		fps = 1.0 / dt;
-	}
+
+
 
 		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
-
+	}
 	
 }
 

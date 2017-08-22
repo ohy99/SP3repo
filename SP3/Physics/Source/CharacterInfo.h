@@ -8,6 +8,8 @@
 #include "Weapon.h"
 #include "RenderManager.h"
 #include "MeshList.h"
+#include "MinionManager.h"
+#include "SpellManager.h"
 using namespace std;
 class Wallet;
 class Character {

@@ -25,6 +25,8 @@ Character::~Character()
 
 void Character::Update(double dt)
 {
+
+	//Weapons Section Update--------------------------------//
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	double x, y;
 	Application::GetCursorPos(&x, &y);
@@ -44,6 +46,75 @@ void Character::Update(double dt)
 		keypressed = false;
 	}
 	weap.WeaponInfo::Update(dt);
+
+	//------------Minon Section Update-------------------------------//
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('1') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('1') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('2') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('2') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	
+	//------------------------Spell Section Update--------------------------//
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
+		{
+			SpellManager::GetInstance()->useLightningSpell();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('7') && !dakeypressed)
+		{
+			SpellManager::GetInstance()->useFreezeSpell();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('7') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('8') && !dakeypressed)
+		{
+			SpellManager::GetInstance()->useBlastSpell();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('8') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
 }
 
 void Character::Init()
