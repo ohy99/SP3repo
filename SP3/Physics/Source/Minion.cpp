@@ -164,7 +164,7 @@ void Minion::update_state()
 void Minion::get_hit(int dmg)
 {
 	this->health = Math::Clamp(health - dmg, 0, max_health);
-	ShowHpManager::GetInstance()->generate_hp_text(this->pos + this->scale.y * 0.5f, dmg);
+	ShowHpManager::GetInstance()->generate_hp_text(this->pos + Vector3(0, this->scale.y * 0.5f, 0), dmg);
 }
 
 void Minion::collision_response(Collidable * obj)
