@@ -192,7 +192,6 @@ void GameScene::Update(double dt)
 			}
 		}
 
-	}
 
 	{
 		static bool dakeypressed = false;
@@ -232,6 +231,7 @@ void GameScene::Update(double dt)
 		ShowHpManager::GetInstance()->update(dt);
 
 		fps = 1.0 / dt;
+	}
 
 		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
 
