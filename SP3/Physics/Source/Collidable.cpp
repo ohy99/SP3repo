@@ -41,6 +41,10 @@ bool Collidable::check_collision(Collision & tat)
 {
 	return this->collider.isCollide(tat);
 }
+Collision & Collidable::get_collider()
+{
+	return collider;
+}
 void Collidable::set_collision_type(Collision::CollisionType type)
 {
 	this->collider.collisionType = type;

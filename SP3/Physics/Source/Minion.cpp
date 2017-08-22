@@ -14,6 +14,7 @@ Minion::Minion()
 	mesh_state[MinionInfo::STATE::DEAD] = nullptr;
 	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
 	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("GREENATTACK");
+	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
 	if (sa)
 	{
@@ -69,6 +70,19 @@ void Minion::respond_to_state(double dt)
 	case STATE::ATTACK:
 		attack();
 		break;
+	case STATE::KNOCKBACK:
+	{
+		this->knockback_elapsed += dt;
+		if (this->knockback_elapsed < this->knockback_duration)
+			this->pos += this->knockback_direction * this->knockback_force * (float)dt;
+		else
+		{
+			this->current_state = STATE::WALK;
+			this->knockback_elapsed = 0.0;
+			this->is_CCed = false;
+		}
+		break;
+	}
 	}
 }
 
@@ -129,6 +143,9 @@ void Minion::update_state()
 		this->current_state = DEAD;
 		return;
 	}
+	//kena Cc, cannot perform normal actions
+	if (this->is_CCed)
+		return;
 	if (enemy_target->size() == 0)
 	{
 		nearest_target = nullptr;
@@ -168,7 +185,16 @@ void Minion::collision_response(Collidable * obj)
 	{
 		Vector3 relativepos = obj->pos - this->pos;
 		if (this->move_direction.Dot(relativepos) > 0)
+		{
 			this->pos = prev_pos;//collded with obj infront of me, so i stop
+			//if i kena knockback but i hit tio other minion, i stop too
+			//at least 0.5f cc time
+			if (this->current_state == MinionInfo::STATE::KNOCKBACK && knockback_elapsed >= 0.5)
+			{
+				this->current_state = MinionInfo::STATE::WALK;
+				this->is_CCed = false;
+			}
+		}
 	}
 	else if (temp_tower)
 		if (this->get_faction_side() != obj->get_faction_side())

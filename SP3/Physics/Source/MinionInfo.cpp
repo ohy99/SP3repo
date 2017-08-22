@@ -3,7 +3,8 @@
 #include "Minion.h"
 
 MinionInfo::MinionInfo() : health(0), max_health(100), attack_damage(0),
-attack_speed(0), attack_range(0), move_speed(0), attack_delay(0.0), move_direction(0, 0, 0),
+attack_speed(0), attack_range(0), move_speed(0), attack_delay(0.0), move_direction(0, 0, 0), is_CCed(false), 
+knockback_direction(0, 0, 0), knockback_duration(0.0), knockback_force(0.0), knockback_elapsed(0.0),
 nearest_target(nullptr)
 {
 }
@@ -43,6 +44,7 @@ void MinionInfo::reset()
 	this->current_state = WALK;
 	this->enemy_target = nullptr;
 	this->nearest_target = nullptr;
+	this->is_CCed = false;
 }
 
 void MinionInfo::update_info(double dt)
@@ -110,4 +112,13 @@ bool MinionInfo::can_attack()
 void MinionInfo::reset_attack()
 {
 	this->attack_delay = 1.0 / this->attack_speed;
+}
+
+void MinionInfo::set_knockback(Vector3 direction, float knockback_duration, float knockback_force)
+{
+	this->knockback_direction = direction;
+	this->knockback_duration = knockback_duration;
+	this->knockback_force = knockback_force;
+	this->current_state = STATE::KNOCKBACK;
+	this->is_CCed = true;
 }

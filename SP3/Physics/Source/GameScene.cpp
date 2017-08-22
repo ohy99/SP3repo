@@ -158,6 +158,32 @@ void GameScene::Update(double dt)
 			dakeypressed = false;
 		}
 	}
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('7') && !dakeypressed)
+		{
+			SpellManager::GetInstance()->useFreezeSpell();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('7') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('8') && !dakeypressed)
+		{
+			SpellManager::GetInstance()->useBlastSpell();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('8') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
 	SpellManager::GetInstance()->update(dt);
 	MinionManager::GetInstance()->update(dt);
 	PhysicsManager::GetInstance()->update(dt);

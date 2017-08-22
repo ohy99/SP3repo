@@ -9,9 +9,12 @@ class CollisionManager : public Singleton<CollisionManager>
 {
 	friend Singleton;
 	std::vector<Collidable*> colliders;
+	Collidable* ground;
 public:
 	void update(double dt);
 	void add_collider(Collidable* collidable);
+	void add_ground(Collidable* ground);
+	Collidable* get_ground();
 protected:
 	CollisionManager();
 	virtual ~CollisionManager();
