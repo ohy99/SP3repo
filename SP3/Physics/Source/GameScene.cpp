@@ -98,7 +98,8 @@ void GameScene::Init()
 		sa->m_anim = new Animation();
 		sa->m_anim->Set(0, 5, 1, 10.0f, true);
 	}
-	weap.Init();
+	CharacterInfo.Init();
+	/*weap.Init();
 	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
 	weap.scale.Set(5, 5, 5);
@@ -106,15 +107,17 @@ void GameScene::Init()
 	weap.pos.Set(7.5, 25);
 	weap.set_damage(50);
 	RenderManager::GetInstance()->attach_renderable(&weap, 1);
-
+*/
 	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0, 3));
 	//cout << SeasonManager::GetInstance()->get_season() << endl;
+	CharacterInfo.Load();
 }
 
 
 void GameScene::Update(double dt)
 {
-
+	
+//Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
 	if (sa)
 	{
@@ -122,9 +125,9 @@ void GameScene::Update(double dt)
 		sa->Update(dt);
 		sa->m_anim->animActive = true;
 	}
-
+	CharacterInfo.Update(dt);
 	GameLogic::GetInstance()->update(dt);
-	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+	/*GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
 	double x, y;
 	Application::GetCursorPos(&x, &y);
@@ -143,8 +146,8 @@ void GameScene::Update(double dt)
 	{
 		keypressed = false;
 	}
-
-	weap.WeaponInfo::Update(dt);
+*/
+//	weap.WeaponInfo::Update(dt);
 
 	{
 		static bool dakeypressed = false;

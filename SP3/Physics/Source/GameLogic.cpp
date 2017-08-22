@@ -14,7 +14,7 @@ GameLogic::~GameLogic()
 void GameLogic::update(double dt)
 {
 	update_world_size();
-
+	
 	debuging_things();
 }
 

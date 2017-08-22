@@ -2,8 +2,14 @@
 #include "Vector3.h"
 #include <string>
 #include "Consumables.h"
+#include "Tower.h"
+#include "Wallet.h"
+#include "GameLogic.h"
+#include "Weapon.h"
+#include "RenderManager.h"
+#include "MeshList.h"
 using namespace std;
-
+class Wallet;
 class Character {
 	
 private:
@@ -26,7 +32,10 @@ private:
 	int soundtrack; 
 
 	bool mute;
-
+	Wallet wallet;
+	Weapon weap;
+	float worldWidth;
+	float worldHeight;
 public:
 	Character();
 	~Character();
@@ -77,6 +86,8 @@ public:
 
 
 	//-----------Functions--------------------//
+	void Update(double dt);
+	void Init();
 protected:
 
 
