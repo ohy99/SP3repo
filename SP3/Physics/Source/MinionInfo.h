@@ -31,7 +31,7 @@ public:
 	void set_walking_direction(Vector3 dir);
 
 	void init_info(int max_hp, int att_dmg, float att_spd, float att_range, float move_spd);
-	void get_hit(int dmg);
+	virtual void get_hit(int dmg);
 	void reset();
 
 	void update_info(double dt);

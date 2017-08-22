@@ -8,6 +8,7 @@
 #include "PhysicsManager.h"
 #include "HpBar.h"
 #include "Collidable.h"
+#include "ShowHpManager.h"
 
 Minion::Minion()
 {
@@ -159,6 +160,12 @@ void Minion::update_state()
 	}
 }
 
+
+void Minion::get_hit(int dmg)
+{
+	this->health = Math::Clamp(health - dmg, 0, max_health);
+	ShowHpManager::GetInstance()->generate_hp_text(this->pos + this->scale.y * 0.5f, dmg);
+}
 
 void Minion::collision_response(Collidable * obj)
 {

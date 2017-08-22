@@ -69,7 +69,9 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image//greenhpbar.tga");
 		assignMesh(temp);
 
-	
+		temp = MeshBuilder::GenerateText("CHILLER", 16, 16);
+		temp->textureID = LoadTGA("Image//chiller.tga");
+		assignMesh(temp);
 		
 		//Level 1; 
 		

@@ -3,6 +3,7 @@
 #include "HpBar.h"
 #include "MyMath.h"
 #include "TowerManager.h"
+#include "ShowHpManager.h"
 
 Tower::Tower()
 {
@@ -41,4 +42,5 @@ void Tower::render()
 void Tower::get_hit(int dmg)
 {
 	this->health = Math::Clamp(health - dmg, 0, maxhealth);
+	ShowHpManager::GetInstance()->generate_hp_text(this->pos + this->scale.y * 0.5f, dmg);
 }

@@ -8,31 +8,25 @@
 #include "Graphics.h"
 
 #include "GlobalVariableManager.h"
-
 #include "MeshBuilder.h"
-
-
 #include "SceneManager.h"
 
 #include "CollisionManager.h"
-
 #include "PhysicsManager.h"
 #include "TextManager.h"
 #include "GameObjectManager.h"
-
 #include "GameLogic.h"
 #include "EnvironmentManager.h"
 #include "RenderManager.h"
 #include "MinionManager.h"
+#include "ShowHpManager.h"
 
 #include "CharacterInfo.h"
-
 #include "SpriteAnimation.h"
-
-#include "WeaponInfo.h"
 
 #include "SeasonManager.h"
 
+#include "WeaponInfo.h"
 #include "SpellManager.h"
 GameScene::GameScene()
 {
@@ -164,6 +158,8 @@ void GameScene::Update(double dt)
 	//Update collisions
 	CollisionManager::GetInstance()->update(dt);
 
+	//update the show hp thing
+	ShowHpManager::GetInstance()->update(dt);
 
 	fps = 1.0 / dt;
 	//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
@@ -200,6 +196,7 @@ void GameScene::Render()
 	ms.PushMatrix();
 	ms.Translate(0, 5.f * ((800.f / 600.f) - ((float)Application::GetWindowWidth() / (float)Application::GetWindowHeight())), 0);
 	RenderManager::GetInstance()->render_all_active_objects();
+	ShowHpManager::GetInstance()->render_all_hp_text();
 	ms.PopMatrix();
 
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
