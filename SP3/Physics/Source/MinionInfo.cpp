@@ -35,6 +35,7 @@ void MinionInfo::init_info(int max_hp, int att_dmg, float att_spd, float att_ran
 void MinionInfo::get_hit(int dmg)
 {
 	this->health = Math::Clamp(health - dmg, 0, max_health);
+	//ShowHpManager::GetInstance()->generate_hp_text(this->)
 }
 
 void MinionInfo::reset()

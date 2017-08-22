@@ -69,7 +69,9 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image//greenhpbar.tga");
 		assignMesh(temp);
 
-	
+		temp = MeshBuilder::GenerateText("CHILLER", 16, 16);
+		temp->textureID = LoadTGA("Image//chiller.tga");
+		assignMesh(temp);
 		
 		//Level 1; 
 		
@@ -145,8 +147,9 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateSpriteAnimation("Poster", 1, 6, 1.0f);
 		temp->textureID = LoadTGA("Image//animatedposter.tga");
 		assignMesh(temp);
-
-
+		temp = MeshBuilder::GenerateQuad("PAUSE", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//pause.tga");
+		assignMesh(temp);
 		
 	}
 
