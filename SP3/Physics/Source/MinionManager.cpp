@@ -7,6 +7,7 @@
 #include "Collidable.h"
 #include "TowerManager.h"
 #include "Tower.h"
+#include "SpellManager.h"
 
 MinionManager::MinionManager()
 {
@@ -69,6 +70,8 @@ void MinionManager::update(double dt)
 		++player_minion_iter;
 	}
 
+	if (SpellManager::GetInstance()->isFreezeActive())
+		return;
 
 	for (std::list<Collidable*>::iterator enemy_minion_iter = enemy_minions.begin(); enemy_minion_iter != enemy_minions.end(); )
 	{
@@ -158,6 +161,16 @@ DamageArea * MinionManager::request_inactive_collidable(MinionInfo::MINION_TYPE 
 		}
 	}
 	return nullptr;
+}
+
+std::list<Collidable*>* MinionManager::get_player_minion_list()
+{
+	return &this->player_minions;
+}
+
+std::list<Collidable*>* MinionManager::get_enemy_minion_list()
+{
+	return &this->enemy_minions;
 }
 
 Minion* MinionManager::get_inactive_minion()

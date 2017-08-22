@@ -14,7 +14,7 @@ GameLogic::~GameLogic()
 void GameLogic::update(double dt)
 {
 	update_world_size();
-
+	
 	debuging_things();
 }
 
@@ -46,30 +46,8 @@ void GameLogic::get_world_size(float& world_width, float& world_height)
 
 void GameLogic::debuging_things()
 {
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('1') && !dakeypressed)
-		{
-			MinionManager::GetInstance()->spawn_minion();
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('1') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('2') && !dakeypressed)
-		{
-			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('2') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
+	
+	
 	{
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('3') && !dakeypressed)

@@ -6,7 +6,7 @@
 class GenericEnvironmentCollider : public Collidable
 {
 public:
-	GenericEnvironmentCollider();
+	GenericEnvironmentCollider(bool is_ground = false);
 	~GenericEnvironmentCollider();
 };
 

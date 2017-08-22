@@ -42,7 +42,7 @@ GameObject * GameObjectManager::request_new(GameObjectType id)
 		break;
 
 	case GameObjectType::TILES:
-		temp = new GenericEnvironmentCollider();
+		temp = new GenericEnvironmentCollider(true);
 		temp->mesh = MeshList::GetInstance()->getMesh("Tile1");
 		break;
 

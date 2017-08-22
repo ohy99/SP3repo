@@ -15,6 +15,10 @@ public:
 		DEAD = 0,
 		WALK,
 		ATTACK,
+
+		//CC
+		KNOCKBACK,
+
 		STATE_COUNT
 	} current_state;
 	enum MINION_TYPE
@@ -43,6 +47,8 @@ public:
 	float get_move_speed();
 	bool can_attack();
 	void reset_attack();
+
+	void set_knockback(Vector3 direction, float knockback_duration, float knockback_force);
 protected:
 	int health;
 	int max_health;
@@ -55,6 +61,11 @@ protected:
 
 	Vector3 prev_pos;
 	Vector3 move_direction;
+	bool is_CCed;
+	Vector3 knockback_direction;
+	double knockback_duration;
+	double knockback_force;
+	double knockback_elapsed;
 	Vector3 *nearest_target;
 
 	std::list<Collidable*> *enemy_target;

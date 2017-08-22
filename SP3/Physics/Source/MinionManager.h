@@ -40,6 +40,9 @@ public:
 	void spawn_minion(bool is_Player_Side = true, MinionInfo::MINION_TYPE type = MinionInfo::MINION_TYPE::BASIC_MELEE);
 
 	DamageArea* request_inactive_collidable(MinionInfo::MINION_TYPE type = MinionInfo::MINION_TYPE::BASIC_MELEE);
+
+	std::list<Collidable*> * get_player_minion_list();
+	std::list<Collidable*> * get_enemy_minion_list();
 protected:
 	MinionManager();
 	~MinionManager();

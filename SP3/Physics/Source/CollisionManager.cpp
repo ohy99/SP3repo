@@ -36,3 +36,13 @@ void CollisionManager::add_collider(Collidable* collidable)
 {
 	this->colliders.push_back(collidable);
 }
+
+void CollisionManager::add_ground(Collidable * ground)
+{
+	this->ground = ground;
+}
+
+Collidable * CollisionManager::get_ground()
+{
+	return ground;
+}
