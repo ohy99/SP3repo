@@ -29,11 +29,12 @@ protected:
 	double fps;
 	AudioPlayer audioPlayer;
 	Mesh* axis;
+	Mesh* pausescreen;
 	Character CharacterInfo;
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;
-
+	bool isPause;
 	Weapon weap;
 
 };

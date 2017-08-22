@@ -81,10 +81,10 @@ void GameScene::Init()
 
 	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
 	//background = EntityBase::getInstance()->getEntity("BACKGROUND");
-
+	pausescreen = MeshList::GetInstance()->getMesh("PAUSE");
 	GameObjectManager::GetInstance()->load_objects("Image\\lvl0objects.txt");
 
-	
+	isPause = false;
 		//Example of Audio playing //
 	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
@@ -114,61 +114,79 @@ void GameScene::Init()
 
 void GameScene::Update(double dt)
 {
-
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
-	if (sa)
-	{
-
-		sa->Update(dt);
-		sa->m_anim->animActive = true;
-	}
-
-	GameLogic::GetInstance()->update(dt);
-	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
-
 	double x, y;
 	Application::GetCursorPos(&x, &y);
 	int w = Application::GetWindowWidth();
 	int h = Application::GetWindowHeight();
 	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
-	static bool keypressed = false;
-	if (Application::GetInstance().IsMousePressed(1) && !keypressed)
+	cout << isPause << endl;
+	static bool PButtonState = false;
+	if (Application::IsKeyPressed('P') && !PButtonState)
 	{
-		weap.dir = -weap.pos + cursor_point_in_world_space;
-		weap.dir.Normalize();
-		weap.Discharge(weap.pos, weap.dir);
-		keypressed = true;
-	}
-	else if (!Application::GetInstance().IsMousePressed(1) && keypressed)
-	{
-		keypressed = false;
-	}
+		if (!isPause)
+			isPause = true;
+		else
+			isPause = false;
 
-	weap.WeaponInfo::Update(dt);
-
+		PButtonState = true;
+	}
+	else if (!Application::IsKeyPressed('P') && PButtonState)
 	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
+		PButtonState = false;
+	}
+	if (!isPause)
+	{
+		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+		if (sa)
 		{
-			SpellManager::GetInstance()->useLightningSpell();
-			dakeypressed = true;
+
+			sa->Update(dt);
+			sa->m_anim->animActive = true;
 		}
-		else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
+
+		GameLogic::GetInstance()->update(dt);
+		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+
+
+		static bool keypressed = false;
+		if (Application::GetInstance().IsMousePressed(1) && !keypressed)
 		{
-			dakeypressed = false;
+			weap.dir = -weap.pos + cursor_point_in_world_space;
+			weap.dir.Normalize();
+			weap.Discharge(weap.pos, weap.dir);
+			keypressed = true;
 		}
+		else if (!Application::GetInstance().IsMousePressed(1) && keypressed)
+		{
+			keypressed = false;
+		}
+
+		weap.WeaponInfo::Update(dt);
+
+		{
+			static bool dakeypressed = false;
+			if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
+			{
+				SpellManager::GetInstance()->useLightningSpell();
+				dakeypressed = true;
+			}
+			else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
+			{
+				dakeypressed = false;
+			}
+		}
+		SpellManager::GetInstance()->update(dt);
+		MinionManager::GetInstance()->update(dt);
+		PhysicsManager::GetInstance()->update(dt);
+		//Update collisions
+		CollisionManager::GetInstance()->update(dt);
+
+
+		fps = 1.0 / dt;
+
+		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
+
 	}
-	SpellManager::GetInstance()->update(dt);
-	MinionManager::GetInstance()->update(dt);
-	PhysicsManager::GetInstance()->update(dt);
-	//Update collisions
-	CollisionManager::GetInstance()->update(dt);
-
-
-	fps = 1.0 / dt;
-	//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
-
-
 }
 
 
@@ -206,9 +224,18 @@ void GameScene::Render()
 	ms.PushMatrix();
 	ms.Translate(50, 50, 0);
 	ms.Scale(10, 10, 10);
-	RenderHelper::RenderMesh(sa,false);
+	RenderHelper::RenderMesh(sa, false);
 	//sa->Render();
 	ms.PopMatrix();
+
+	if (isPause)
+	{
+		ms.PushMatrix();
+		ms.Translate(worldWidth/2,worldHeight/2, 0);
+		ms.Scale(Vector3(100, 80, 1));
+		RenderHelper::RenderMesh(pausescreen, false);
+		ms.PopMatrix();
+	}
 }
 
 void GameScene::Exit()
