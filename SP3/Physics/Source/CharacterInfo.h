@@ -10,8 +10,8 @@
 #include "MeshList.h"
 #include "MinionManager.h"
 #include "SpellManager.h"
+#include "Wallet.h"
 using namespace std;
-class Wallet;
 class Character {
 	
 private:
@@ -35,6 +35,7 @@ private:
 
 	bool mute;
 	Wallet wallet;
+	Consumables consumables;
 	Weapon weap;
 	float worldWidth;
 	float worldHeight;

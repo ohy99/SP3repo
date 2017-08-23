@@ -2,20 +2,23 @@
 #define CONSUMABLES_H
 
 #include "Application.h"
-#include "Item.h"
 
-class Consumables : public Item
+class Wallet;
+class Character;
+class Consumables
 {
+	Wallet *wallet;
+	Character *character;
 public:
-	Consumables(){}
-	~Consumables(){}
+	Consumables();
+	~Consumables();
 	void UseSmallRepairKit();
 	void UseMedRepairKit();
 	void UseBigRepairKit();
 
-	void addSmallRepair(int amt);
-	void addMedRepair(int amt);
-	void addBigRepair(int amt);
+	//void addSmallRepair(int amt);
+	//void addMedRepair(int amt);
+	//void addBigRepair(int amt);
 
 	void Addhealth(int amt);
 
@@ -26,8 +29,8 @@ public:
 	//int smallRepairKit = 0; // restores 5 hp
 	//int medRepairKit = 0; // restores 10 hp
 	//int bigRepairKit = 0; // restores 20 hp
-
-	Item consumable;
+	void attachWallet(Wallet* wallet);
+	void attachCharacter(Character* character);
 };
 
 
