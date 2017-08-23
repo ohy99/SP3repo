@@ -13,6 +13,10 @@
 #include "MinionSiege.h"
 #include "MinionHealer.h"
 
+//to fix:
+//have a attack timer
+//so the animation can play
+
 MinionManager::MinionManager()
 {
 	init_info();
@@ -218,6 +222,10 @@ void MinionManager::init_info()
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_spd = 2.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_range = 7.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].move_spd = 7.f;
+
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		default_minion_info[i] = minion_info[i];
+
 }
 
 void MinionManager::init_pool()
@@ -279,3 +287,5 @@ void MinionManager::init_info(Minion * minion, MinionInfo::MINION_TYPE type)
 MinionManager::MINION_INFO::MINION_INFO() : max_hp(0), dmg(0), att_spd(0.f), att_range(0.f), move_spd(0.f)
 {
 }
+
+

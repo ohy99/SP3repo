@@ -170,6 +170,12 @@
     <ClCompile Include="Source\MinionRange.cpp">
       <Filter>Header Files\GameObject\Minion</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Consumables.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shop.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -381,6 +387,9 @@
     </ClInclude>
     <ClInclude Include="Source\MinionSiege.h">
       <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Consumables.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

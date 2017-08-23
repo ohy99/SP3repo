@@ -20,6 +20,7 @@ class MinionManager : public Singleton<MinionManager>
 		float move_spd;
 		MINION_INFO();
 	};
+	MINION_INFO default_minion_info[MinionInfo::MINION_TYPE::MINION_TYPE_COUNT];
 	MINION_INFO minion_info[MinionInfo::MINION_TYPE::MINION_TYPE_COUNT];
 	friend Singleton;
 	float minion_scale;
