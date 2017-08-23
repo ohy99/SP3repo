@@ -27,8 +27,9 @@ ObjectPoolManager::ObjectPoolManager()
 	for (unsigned int i = 0; i < (unsigned)100; ++i)
 	{
 		Particle* temp_proj = new Particle();
+		temp_proj->init();
 		temp_proj->scale.Set(3, 3);
-
+		temp_proj->set_duration(2.0);
 		particle_pool.push_back(temp_proj);
 		//PhysicsManager::GetInstance()->add_object(temp_proj);
 		RenderManager::GetInstance()->attach_renderable(temp_proj, 2);
@@ -72,6 +73,7 @@ Particle * ObjectPoolManager::get_particle(PARTICLE_CASE id)
 			Particle* p = get_inaactive_particle();
 			p->mesh = particle_mesh[id];
 			p->active = true;
+			p->init();
 			return p;
 		}
 			break;

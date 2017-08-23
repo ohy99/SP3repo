@@ -29,6 +29,7 @@
 
 #include "WeaponInfo.h"
 #include "SpellManager.h"
+#include "ObjectPoolManager.h"
 GameScene::GameScene()
 {
 }
@@ -153,7 +154,7 @@ void GameScene::Update(double dt)
 
 	//	weap.WeaponInfo::Update(dt);
 
-	if (!isPause)
+	if (!isPause && !isShop)
 	{
 		CharacterInfo.Update(dt);
 		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
@@ -175,6 +176,7 @@ void GameScene::Update(double dt)
 		CollisionManager::GetInstance()->update(dt);
 		//update the show hp thing
 		ShowHpManager::GetInstance()->update(dt);
+		ObjectPoolManager::GetInstance()->Update(dt);
 
 		GameLogic::GetInstance()->update(dt);
 		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
