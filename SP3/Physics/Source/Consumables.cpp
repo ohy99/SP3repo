@@ -51,11 +51,8 @@ void Consumables::UseBigRepairKit()
 
 void Consumables::Addhealth(int amt)
 {
-	if (character->getcurrenthealth() + amt > character->getmaxhealth())
-		character->setcurrenthealth(character->getmaxhealth());
-	else
-		character->setcurrenthealth(character->getcurrenthealth() + amt);
-	
+	character->changetowerhp(amt);
+
 	cout << "used" << endl;
 }
 

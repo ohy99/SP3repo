@@ -95,7 +95,7 @@ void GameScene::Init()
 		sa->m_anim->Set(0, 5, 1, 10.0f, true);
 	}
 	CharacterInfo.Init();
-	CharacterInfo.Load();
+	//CharacterInfo.Load();
 	shop.init();
 	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0, 3));
 	/*weap.Init();

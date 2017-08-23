@@ -13,6 +13,7 @@
 #include "SpellManager.h"
 using namespace std;
 class Wallet;
+class Tower;
 class Character {
 
 private:
@@ -38,6 +39,7 @@ private:
 	Wallet wallet;
 	Consumables consumables;
 	Weapon weap;
+	Tower* charTower;
 	float worldWidth;
 	float worldHeight;
 public:
@@ -45,6 +47,7 @@ public:
 	~Character();
 
 	//--------------------------Getters----------------------//
+	void changetowerhp(int hp);
 	int getlevel();
 	int getmaxhealth();
 	int getcurrenthealth();

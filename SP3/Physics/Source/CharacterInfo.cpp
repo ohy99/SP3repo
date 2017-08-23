@@ -10,7 +10,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-
+#include "Tower.h"
+#include "TowerManager.h"
 using namespace std;
 using std::string;
 
@@ -125,12 +126,12 @@ void Character::Update(double dt)
 
 	{
 	static bool dakeypressed = false;
-	if (Application::GetInstance().IsKeyPressed('3') && !dakeypressed)
+	if (Application::GetInstance().IsKeyPressed('5') && !dakeypressed)
 	{
 		consumables.UseBigRepairKit();
 		dakeypressed = true;
 	}
-	else if (!Application::GetInstance().IsKeyPressed('3') && dakeypressed)
+	else if (!Application::GetInstance().IsKeyPressed('5') && dakeypressed)
 	{
 		dakeypressed = false;
 	}
@@ -140,6 +141,7 @@ void Character::Update(double dt)
 
 void Character::Init()
 {
+	this->Load();
 	weap.Init();
 	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
@@ -150,8 +152,16 @@ void Character::Init()
 	RenderManager::GetInstance()->attach_renderable(&weap, 1);
 	consumables.attachCharacter(this);
 	consumables.attachWallet(&this->wallet);
+	charTower = TowerManager::GetInstance()->player;
+	charTower->health = this->health;
+	charTower->maxhealth = this->maxhealth;
 }
 
+
+void Character::changetowerhp(int hp)
+{
+	charTower->get_hit(-hp);
+}
 
 //---------------------Getters------------------------------------//
 int Character::getlevel()
@@ -383,6 +393,14 @@ bool Character::Save(const string saveFileName)
 		myfile << "currentsound=" << soundtrack << endl;
 		myfile << "muteornot=" << mute << endl;
 		myfile << "i_smallrepair=" << wallet.getsmallrepair() << endl;
+		myfile << "i_mediumrepair=" << wallet.getmediumrepair() << endl;
+		myfile << "i_bigrepair=" << wallet.getbigrepair() << endl;
+		myfile << "i_greendrake" << wallet.getgreendrake() << endl;
+		myfile << "i_bluedrake" << wallet.getbluedrake() << endl;
+		myfile << "i_browndrake" << wallet.getbrowndrake() << endl;
+		myfile << "i_blackdrake" << wallet.getblackdrake() << endl;
+		myfile << "i_weaplevel" << wallet.getweaplevel() << endl;
+		myfile << "i_towerlevel" << wallet.gettowerlevel() << endl;
 		myfile.close();
 		return true;
 	}
