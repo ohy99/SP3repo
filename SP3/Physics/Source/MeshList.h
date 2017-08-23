@@ -165,6 +165,11 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateSpriteAnimation("Poster", 1, 6, 1.0f);
 		temp->textureID = LoadTGA("Image//animatedposter.tga");
 		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateSpriteAnimation("Fire", 1, 6, 1.0f);
+		temp->textureID = LoadTGA("Image//animatedfire.tga");
+		assignMesh(temp);
+
 		temp = MeshBuilder::GenerateQuad("PAUSE", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image//pause.tga");
 		assignMesh(temp);
