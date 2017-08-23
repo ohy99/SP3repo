@@ -165,10 +165,38 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateSpriteAnimation("Poster", 1, 6, 1.0f);
 		temp->textureID = LoadTGA("Image//animatedposter.tga");
 		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateSpriteAnimation("Fire", 1, 6, 1.0f);
+		temp->textureID = LoadTGA("Image//animatedfire.tga");
+		assignMesh(temp);
+
 		temp = MeshBuilder::GenerateQuad("PAUSE", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image//pause.tga");
 		assignMesh(temp);
-		
+		temp = MeshBuilder::GenerateQuad("VOLUME", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//volume.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("INSTRUCTIONS", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//instructions.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("SUMMER", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//summer.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("SPRING", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//spring.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("WINTER", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//winter.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("AUTUMN", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//autumn.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("BACK", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//back.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("MENUBACKGROUND", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//background.tga");
+		assignMesh(temp);
 		//Shop Button
 		temp = MeshBuilder::GenerateQuad("Buy", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\buy.tga");
@@ -180,6 +208,19 @@ class MeshList : public Singleton <MeshList>
 		//Shop 
 		temp = MeshBuilder::GenerateQuad("Shop", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\Shop.tga");
+		assignMesh(temp);
+
+		//Spells
+		temp = MeshBuilder::GenerateQuad("lightning", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\lightning.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("freeze", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\blizzard.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("blast", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\blast.tga");
 		assignMesh(temp);
 	}
 
