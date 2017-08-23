@@ -169,6 +169,18 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image//pause.tga");
 		assignMesh(temp);
 		
+		//Shop Button
+		temp = MeshBuilder::GenerateQuad("Buy", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\buy.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("Sell", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\sell.tga");
+		assignMesh(temp);
+		//Shop 
+		temp = MeshBuilder::GenerateQuad("Shop", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\Shop.tga");
+		assignMesh(temp);
 	}
 
 	void assignMesh(Mesh* a) {

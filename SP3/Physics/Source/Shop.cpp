@@ -13,16 +13,18 @@ Shop::~Shop()
 
 void Shop::init()
 {
-
+	ShopUI.pos.Set(40, 40, 0);
+	ShopUI.resize_button(80,70);
+	ShopUI.mesh = MeshList::GetInstance()->getMesh("Shop");
 	//Buy Items
 	Buy1.pos.Set(80, 50, 0);
-	Buy1.resize_button(20, 10);
-	Buy1.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");
+	Buy1.resize_button(10, 10);
+	Buy1.mesh = MeshList::GetInstance()->getMesh("Buy");
 
 
 	Buy2.pos.Set(80, 40, 0);
-	Buy2.resize_button(20, 10);
-	Buy2.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");
+	Buy2.resize_button(10, 10);
+	Buy2.mesh = MeshList::GetInstance()->getMesh("Buy");
 	/*
 	Buy3.pos.Set(0, 9, 0);
 	Buy3.resize_button(20, 10);
@@ -53,12 +55,12 @@ void Shop::init()
 	Buy9.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");*/
 	//Sell Items--------------------------------------------------------------------------------//
 	Sell1.pos.Set(90, 50, 0);
-	Sell1.resize_button(20, 10);
-	Sell1.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");
+	Sell1.resize_button(10, 10);
+	Sell1.mesh = MeshList::GetInstance()->getMesh("Sell");
 
 	Sell2.pos.Set(90, 40, 0);
-	Sell2.resize_button(20, 10);
-	Sell2.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");
+	Sell2.resize_button(10, 10);
+	Sell2.mesh = MeshList::GetInstance()->getMesh("Sell");
 
 	//Sell3.pos.Set(0, 9, 0);
 	//Sell3.resize_button(20, 10);
@@ -92,7 +94,7 @@ void Shop::init()
 void Shop::Update(double dt)
 {
 	//cout << "test" << endl;
-	//cout << walletshop->getsmallrepair() << endl;
+	cout << walletshop->getsmallrepair() << endl;
 	worldHeight = 100;
 	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 	double x, y;
@@ -112,6 +114,7 @@ void Shop::Update(double dt)
 		if (Buy1.collision.isCollide(cursor_collider))
 		{
 			walletshop->addi_smallrepair(walletshop->getsmallrepair());
+			
 		}
 		if (Sell1.collision.isCollide(cursor_collider))
 		{
@@ -123,6 +126,7 @@ void Shop::Update(double dt)
 
 void Shop::Render()
 {
+	ShopUI.render_button();
 	//Buy
 	Buy1.render_button();
 	Buy2.render_button();

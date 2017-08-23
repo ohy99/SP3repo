@@ -165,7 +165,7 @@ void GameScene::Update(double dt)
 			sa->Update(dt);
 			sa->m_anim->animActive = true;
 		}
-
+	}
 		if (isShop)
 		{
 			shop.Update(dt);
@@ -257,7 +257,7 @@ void GameScene::Update(double dt)
 
 
 		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
-	}
+	
 
 }
 
