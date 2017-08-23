@@ -49,6 +49,15 @@ public:
 
 	float get_move_spd_of_type(MinionInfo::MINION_TYPE type);
 	float get_minion_scale();
+
+	void adjust_minions_move_speed(float percentage_of_default);
+	void reset_minions_move_speed();
+	void adjust_minions_dmg(float percentage_of_default);
+	void reset_minions_dmg();
+	void adjust_minions_att_spd(float percentage_of_default);
+	void reset_minions_att_spd();
+	void adjust_minions_hp(float percentage_of_default);
+	void reset_minions_hp();
 protected:
 	MinionManager();
 	~MinionManager();
