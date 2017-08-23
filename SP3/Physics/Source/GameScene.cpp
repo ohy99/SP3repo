@@ -320,13 +320,13 @@ void GameScene::Render()
 	ShowHpManager::GetInstance()->render_all_hp_text();
 	ms.PopMatrix();
 
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
-	ms.PushMatrix();
-	ms.Translate(50, 50, 0);
-	ms.Scale(10, 10, 10);
-	RenderHelper::RenderMesh(sa, false);
-	//sa->Render();
-	ms.PopMatrix();
+	//SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+	//ms.PushMatrix();
+	//ms.Translate(50, 50, 0);
+	//ms.Scale(10, 10, 10);
+	//RenderHelper::RenderMesh(sa, false);
+	////sa->Render();
+	//ms.PopMatrix();
 
 	if (isPause)
 	{
