@@ -3,7 +3,7 @@
 #include "Minion.h"
 #include "Tower.h"
 
-DamageArea::DamageArea() : active_duration(0.0), active_elapsed(0.0), damage(0)
+DamageArea::DamageArea() : active_duration(0.0), active_elapsed(0.0), damage(0), hit_once(true)
 {
 }
 
@@ -30,9 +30,13 @@ void DamageArea::update(double dt)
 void DamageArea::collision_response(Collidable * obj)
 {
 	//damage area will be responsible for dealing dmg
-	for each (auto c in collided)
-		if (c == obj)//hit once alr
-			return;
+	if (hit_once)
+	{
+		for each (auto c in collided)
+			if (c == obj)//hit once alr
+				return;
+	}
+	
 
 	Minion* temp_minion = dynamic_cast<Minion*>(obj);
 	Tower* temp_tower = dynamic_cast<Tower*>(obj);
@@ -51,9 +55,10 @@ void DamageArea::collision_response(Collidable * obj)
 	}
 }
 
-void DamageArea::set_damage(int dmg)
+void DamageArea::set_damage(int dmg, bool once_only)
 {
 	this->damage = dmg;
+	this->hit_once = once_only;
 }
 
 int DamageArea::get_damage()

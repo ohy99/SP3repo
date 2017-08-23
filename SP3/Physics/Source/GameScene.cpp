@@ -20,6 +20,7 @@
 #include "RenderManager.h"
 #include "MinionManager.h"
 #include "ShowHpManager.h"
+#include "EnemyAiLogic.h"
 
 #include "CharacterInfo.h"
 #include "SpriteAnimation.h"
@@ -147,7 +148,10 @@ void GameScene::Update(double dt)
 		}
 
 		SpellManager::GetInstance()->update(dt);
+		//Update enemies
+		EnemyAiLogic::GetInstance()->update(dt);
 		MinionManager::GetInstance()->update(dt);
+		//Update Physics
 		PhysicsManager::GetInstance()->update(dt);
 		//Update collisions
 		CollisionManager::GetInstance()->update(dt);

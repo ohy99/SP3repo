@@ -1,10 +1,13 @@
 #include "EnemyAiLogic.h"
 
 #include "MinionManager.h"
+#include <string>
 
 EnemyAiLogic::EnemyAiLogic(int level) : logic_level(level),
 	resource(0), resource_gain(0), resource_gain_delay(0.0), resource_gain_elapsed_time(0.0),
-	player_threat_level(0)
+	player_threat_level(0), 
+	random_spawn_cooldown(0.0), random_spawn_min_time(10.0), random_spawn_max_time(15.0),
+	spawn_cooldown(0.0), spawn_min_time(3.0), spawn_max_time(5.0)
 {
 	set_spawn_pattern();
 }
@@ -16,18 +19,26 @@ EnemyAiLogic::~EnemyAiLogic()
 void EnemyAiLogic::update(double dt)
 {
 	resource_gain_elapsed_time += dt;
+	spawn_cooldown = Math::Max(spawn_cooldown - dt, 0.0);
+	random_spawn_cooldown = Math::Max(random_spawn_cooldown - dt, 0.0);
 
+	//std::cout << "gen rand: " << random_spawn_cooldown << "   spawn cd: " << spawn_cooldown << std::endl;
+
+
+	random_spawn();
 	attempt_to_unqueue_spawn();
 }
 
 
 void EnemyAiLogic::random_spawn()
 {
+	if (random_spawn_cooldown > 0.0)
+		return;
 	//higher threat, more tendency to spawn harder minions
 
 	//index to limit which one will spawn
-	int lower_index, higher_index;
-	int difference_index = higher_index - lower_index;
+	//int lower_index, higher_index;
+	//int difference_index = higher_index - lower_index;
 
 	//find probability 0 - 1
 	//float probability = 
@@ -37,20 +48,31 @@ void EnemyAiLogic::random_spawn()
 	//temp
 	int rand = Math::RandIntMinMax(0, spawn_pattern.size() - 1);
 
-	queue_spawn_horde(spawn_pattern.at(0).second);
+	queue_spawn_horde(spawn_pattern.at(rand).second);
+	//depending on how big the pattern is 
+	random_spawn_min_time = spawn_pattern.at(rand).second.size() * 3.f;//adjust this 3.f
+	random_spawn_max_time = random_spawn_min_time * 1.5f;
+
+	random_spawn_cooldown = Math::RandFloatMinMax(random_spawn_min_time, random_spawn_max_time);
 }
 
 void EnemyAiLogic::queue_spawn_horde(std::string pattern)
 {
-	for (int i = 0; i < pattern.size() - 1; ++i)
+	for (int i = 0; i < pattern.size(); ++i)
 	{
 		spawn_queue.push(pattern.at(i));
 	}
+	std::cout << pattern << std::endl;
 }
 
 void EnemyAiLogic::attempt_to_unqueue_spawn()
 {
 	//when to pop
+	if (spawn_cooldown > 0.0)
+		return;
+
+	if (spawn_queue.size() == 0)
+		return;
 
 
 	char type = spawn_queue.front();
@@ -59,13 +81,32 @@ void EnemyAiLogic::attempt_to_unqueue_spawn()
 	{
 	case 'R':
 		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_RANGE);
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_RANGE);
+		spawn_max_time = spawn_min_time * 1.5f;
 		break;
 	case 'S':
+		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_SIEGE);
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_SIEGE);
+		spawn_max_time = spawn_min_time * 1.5f;
+		break;
+	case 'H':
+		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_HEALER);
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_HEALER);
+		spawn_max_time = spawn_min_time * 1.5f;
 		break;
 	default:
 		MinionManager::GetInstance()->spawn_minion(false);
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_MELEE);
+		spawn_max_time = spawn_min_time * 1.5f;
 		break;
 	}
+	
+	//adjust depends on what type is spawned
+	spawn_cooldown = (double)Math::RandFloatMinMax(spawn_min_time, spawn_max_time);
 }
 
 void EnemyAiLogic::set_spawn_pattern()

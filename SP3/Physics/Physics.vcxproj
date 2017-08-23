@@ -160,6 +160,7 @@
     <ClCompile Include="Source\CharacterInfo.cpp" />
     <ClCompile Include="Source\Collidable.cpp" />
     <ClCompile Include="Source\DamageArea.cpp" />
+    <ClCompile Include="Source\EnemyAiLogic.cpp" />
     <ClCompile Include="Source\EnvironmentManager.cpp" />
     <ClCompile Include="Source\GameLogic.cpp" />
     <ClCompile Include="Source\GameObjectManager.cpp" />
@@ -178,8 +179,12 @@
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\Minion.cpp" />
+    <ClCompile Include="Source\MinionHealer.cpp" />
     <ClCompile Include="Source\MinionInfo.cpp" />
     <ClCompile Include="Source\MinionManager.cpp" />
+    <ClCompile Include="Source\MinionMelee.cpp" />
+    <ClCompile Include="Source\MinionRange.cpp" />
+    <ClCompile Include="Source\MinionSiege.cpp" />
     <ClCompile Include="Source\ObjectPoolManager.cpp" />
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\ParticleManager.cpp" />
@@ -206,7 +211,9 @@
     <ClInclude Include="Source\CharacterInfo.h" />
     <ClInclude Include="Source\Collidable.h" />
     <ClInclude Include="Source\DamageArea.h" />
+    <ClInclude Include="Source\EnemyAiLogic.h" />
     <ClInclude Include="Source\HpBar.h" />
+    <ClInclude Include="Source\MinionHealer.h" />
     <ClInclude Include="Source\MinionManager.h" />
     <ClInclude Include="Source\EnemyMinion.h" />
     <ClInclude Include="Source\EnemyTower.h" />
@@ -239,6 +246,9 @@
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\Minion.h" />
     <ClInclude Include="Source\MinionInfo.h" />
+    <ClInclude Include="Source\MinionMelee.h" />
+    <ClInclude Include="Source\MinionRange.h" />
+    <ClInclude Include="Source\MinionSiege.h" />
     <ClInclude Include="Source\ObjectPoolManager.h" />
     <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\ParticleManager.h" />

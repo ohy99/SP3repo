@@ -10,6 +10,7 @@ class DamageArea : public Collidable
 	double active_elapsed;
 	double active_duration;
 	int damage;
+	bool hit_once;
 public:
 	DamageArea();
 	~DamageArea();
@@ -17,7 +18,7 @@ public:
 
 	virtual void collision_response(Collidable* obj);
 
-	void set_damage(int dmg);
+	void set_damage(int dmg, bool once_only = true);
 	int get_damage();
 	void set_duration(double duration);
 };

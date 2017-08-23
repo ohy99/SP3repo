@@ -25,6 +25,8 @@ public:
 	{
 		BASIC_MELEE,
 		BASIC_RANGE,
+		BASIC_SIEGE,
+		BASIC_HEALER,
 
 		MINION_TYPE_COUNT
 	} minion_type;
@@ -32,6 +34,7 @@ public:
 	virtual ~MinionInfo();
 
 	void attach_list_of_targets(std::list<Collidable*>* list);
+	void attach_list_of_ally(std::list<Collidable*>* list);
 	void set_walking_direction(Vector3 dir);
 
 	void init_info(int max_hp, int att_dmg, float att_spd, float att_range, float move_spd);
@@ -39,9 +42,7 @@ public:
 	void reset();
 
 	void update_info(double dt);
-
-	//void attack(Faction::FACTION_SIDE side);
-	//void update_state(Vector3 m_pos);
+	virtual void find_nearest_target(Vector3 &pos, Vector3 &scale);
 
 	int get_attack_damage();
 	float get_move_speed();
@@ -69,6 +70,7 @@ protected:
 	Vector3 *nearest_target;
 
 	std::list<Collidable*> *enemy_target;
+	std::list<Collidable*> *ally_target;
 };
 
 #endif // !MINIONINFO_H

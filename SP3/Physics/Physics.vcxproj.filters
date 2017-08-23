@@ -18,6 +18,9 @@
     <Filter Include="Header Files\GameObject">
       <UniqueIdentifier>{93d2b6b0-7add-417a-be06-92f5f31d7d1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObject\Minion">
+      <UniqueIdentifier>{dd80a9e3-2c7a-4857-b31b-54e74a7f6ac9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -119,12 +122,6 @@
     <ClCompile Include="Source\GenericDecoration.cpp">
       <Filter>Header Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MinionInfo.cpp">
-      <Filter>Header Files\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Minion.cpp">
-      <Filter>Header Files\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Source\SpriteAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -151,6 +148,27 @@
     </ClCompile>
     <ClCompile Include="Source\ShowHpManager.cpp">
       <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyAiLogic.cpp">
+      <Filter>Header Files\HY</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionSiege.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Minion.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionHealer.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionInfo.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionMelee.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MinionRange.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,12 +334,6 @@
     <ClInclude Include="Source\GenericEnvironmentCollidable.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Minion.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MinionInfo.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Tower.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
@@ -348,6 +360,27 @@
     </ClInclude>
     <ClInclude Include="Source\ShowHpManager.h">
       <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAiLogic.h">
+      <Filter>Header Files\HY</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Minion.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionHealer.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionInfo.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionMelee.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionRange.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionSiege.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

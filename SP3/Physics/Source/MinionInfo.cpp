@@ -18,6 +18,11 @@ void MinionInfo::attach_list_of_targets(std::list<Collidable*>* list)
 	this->enemy_target = list;
 }
 
+void MinionInfo::attach_list_of_ally(std::list<Collidable*>* list)
+{
+	this->ally_target = list;
+}
+
 void MinionInfo::set_walking_direction(Vector3 dir)
 {
 	this->move_direction = dir;
@@ -53,45 +58,38 @@ void MinionInfo::update_info(double dt)
 	attack_delay = Math::Max(attack_delay - dt, 0.0);
 }
 
-//void MinionInfo::attack(Faction::FACTION_SIDE side)
-//{
-//	if (attack_delay > 0.0)
-//		return;
-//
-//
-//}
+void MinionInfo::find_nearest_target(Vector3 &pos, Vector3 &scale)
+{
+	if (this->can_attack() == false)
+	{
+		this->current_state = WALK;
+		return;
+	}
 
-//void MinionInfo::update_state(Vector3 m_pos)
-//{
-//	if (this->health <= 0)
-//	{
-//		this->current_state = DEAD;
-//		return;
-//	}
-//	if (enemy_target->size() == 0)
-//	{
-//		nearest_target = nullptr;
-//		this->current_state = WALK;
-//		return;
-//	}
-//	for each (auto &target in *enemy_target)
-//	{
-//		if ((target->pos - m_pos).LengthSquared() < attack_range * attack_range * 1.1f)//offset
-//		{
-//			//now set as attack the first one
-//			this->current_state = ATTACK;
-//			nearest_target = &target->pos;
-//			break;
-//		}
-//		else
-//		{
-//			//nothing in range
-//			this->current_state = WALK;
-//			nearest_target = nullptr;
-//			break;
-//		}
-//	}
-//}
+	//finding nearest target
+	Collision temp;
+	temp.setCollisionType(Collision::CollisionType::SPHERE);
+	temp.mid = &pos;
+	temp.radius = (scale.x * 0.5f) * attack_range * 1.1f;//1.1 is da offset
+
+	for each (auto &target in *enemy_target)
+	{
+		if (target->check_collision(temp))
+		{
+			//now set as attack the first one if first one is inside
+			this->current_state = ATTACK;
+			nearest_target = &target->pos;
+			if (dynamic_cast<Minion*>(target))
+				break;//if the target is minion, break
+		}
+		else
+		{
+			//nothing in range
+			this->current_state = WALK;
+			nearest_target = nullptr;
+		}
+	}
+}
 
 int MinionInfo::get_attack_damage()
 {

@@ -8,22 +8,16 @@
 #include "TowerManager.h"
 #include "Tower.h"
 #include "SpellManager.h"
+#include "MinionMelee.h"
+#include "MinionRange.h"
+#include "MinionSiege.h"
+#include "MinionHealer.h"
 
 MinionManager::MinionManager()
 {
 	init_info();
-
-	for (int i = 0; i < 100; ++i)
-	{
-		Minion* temp = new Minion;
-		temp->scale.Set(5, 5, 5);
-		temp->set_collision_type(Collision::AABB);
-		temp->update_collider();
-		temp->mesh = MeshList::GetInstance()->getMesh("GREENDRAGON");
-		temp->init_info(100, 10, 1, 6.f, 5);
-		minions.push_back(temp);
-		RenderManager::GetInstance()->attach_renderable(temp, 1);
-	}
+	minion_scale = 5.f;
+	init_pool();
 
 	player_movement_direction.Set(1, 0, 0);
 	enemy_movement_direction.Set(-1, 0, 0);
@@ -97,7 +91,7 @@ void MinionManager::update(double dt)
 
 void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE type)
 {
-	Minion* temp_minion = get_inactive_minion();
+	Minion* temp_minion = get_inactive_minion(type);
 	if (is_player_side)
 	{
 		//check if any existing minions are in tower. if there is, dont spawn to avoid collision
@@ -123,7 +117,7 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 					return;
 		}
 	}
-	temp_minion->minion_type = type;
+	//temp_minion->minion_type = type;
 	temp_minion->active = true;
 	temp_minion->reset();
 	init_info(temp_minion, type);
@@ -134,6 +128,7 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 		temp_minion->pos.y -= TowerManager::GetInstance()->player->scale.y * 0.275f;
 		temp_minion->set_faction_side(Faction::FACTION_SIDE::PLAYER);
 		temp_minion->attach_list_of_targets(&enemy_minions);
+		temp_minion->attach_list_of_ally(&player_minions);
 		temp_minion->set_walking_direction(this->player_movement_direction);
 		player_minions.push_back(temp_minion);
 	}
@@ -143,6 +138,7 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 		temp_minion->pos.y -= TowerManager::GetInstance()->enemy->scale.y * 0.275f;
 		temp_minion->set_faction_side(Faction::FACTION_SIDE::ENEMY);
 		temp_minion->attach_list_of_targets(&player_minions);
+		temp_minion->attach_list_of_ally(&enemy_minions);
 		temp_minion->set_walking_direction(this->enemy_movement_direction);
 		enemy_minions.push_back(temp_minion);
 	}
@@ -173,13 +169,24 @@ std::list<Collidable*>* MinionManager::get_enemy_minion_list()
 	return &this->enemy_minions;
 }
 
-Minion* MinionManager::get_inactive_minion()
+float MinionManager::get_move_spd_of_type(MinionInfo::MINION_TYPE type)
+{
+	return minion_info[type].move_spd;
+}
+
+float MinionManager::get_minion_scale()
+{
+	return minion_scale;
+}
+
+Minion* MinionManager::get_inactive_minion(MinionInfo::MINION_TYPE type)
 {
 	for each (auto &m in minions)
 	{
 		if (m->active)
 			continue;
-		return m;
+		if (m->minion_type == type)
+			return m;
 	}
 	return nullptr;
 }
@@ -187,6 +194,7 @@ Minion* MinionManager::get_inactive_minion()
 
 void MinionManager::init_info()
 {
+	//att range is the number of half scales. 3.f is 2unit range
 	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].max_hp = 100;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].dmg = 10;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].att_spd = 1.f;
@@ -198,6 +206,65 @@ void MinionManager::init_info()
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].att_spd = 1.5f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].att_range = 3.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].move_spd = 10.f;
+
+	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].max_hp = 120;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].dmg = 25;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].att_spd = 0.5f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].att_range = 5.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].move_spd = 3.f;
+
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].max_hp = 60;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].dmg = 25;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_spd = 2.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_range = 7.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].move_spd = 7.f;
+}
+
+void MinionManager::init_pool()
+{
+	for (int i = 0; i < 20; ++i)
+	{
+		Minion* temp = new MinionMelee;
+		temp->scale.Set(minion_scale, minion_scale, 5);
+		temp->set_collision_type(Collision::AABB);
+		temp->update_collider();
+		temp->init_info(100, 10, 1, 6.f, 5);
+		minions.push_back(temp);
+		RenderManager::GetInstance()->attach_renderable(temp, 1);
+	}
+
+	for (int i = 0; i < 20; ++i)
+	{
+		Minion* temp = new MinionRange;
+		temp->scale.Set(minion_scale, minion_scale, 5);
+		temp->set_collision_type(Collision::AABB);
+		temp->update_collider();
+		temp->init_info(100, 10, 1, 6.f, 5);
+		minions.push_back(temp);
+		RenderManager::GetInstance()->attach_renderable(temp, 1);
+	}
+
+	for (int i = 0; i < 20; ++i)
+	{
+		Minion* temp = new MinionSiege;
+		temp->scale.Set(minion_scale, minion_scale, 5);
+		temp->set_collision_type(Collision::AABB);
+		temp->update_collider();
+		temp->init_info(100, 10, 1, 6.f, 5);
+		minions.push_back(temp);
+		RenderManager::GetInstance()->attach_renderable(temp, 1);
+	}
+
+	for (int i = 0; i < 20; ++i)
+	{
+		Minion* temp = new MinionHealer;
+		temp->scale.Set(minion_scale, minion_scale, 5);
+		temp->set_collision_type(Collision::AABB);
+		temp->update_collider();
+		temp->init_info(100, 10, 1, 6.f, 5);
+		minions.push_back(temp);
+		RenderManager::GetInstance()->attach_renderable(temp, 1);
+	}
 }
 
 void MinionManager::init_info(Minion * minion, MinionInfo::MINION_TYPE type)

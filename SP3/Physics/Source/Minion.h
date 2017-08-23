@@ -15,8 +15,9 @@ public:
 
 	virtual void update(double dt);
 
-	void attack();
-	void update_state();
+	//every minion different attack style
+	virtual void attack();
+	virtual void update_state();
 	void respond_to_state(double dt);
 
 	virtual void get_hit(int dmg);
