@@ -9,44 +9,17 @@ public:
 	WeaponInfo();
 	virtual ~WeaponInfo();
 protected:
-	//// The number of ammunition in a magazine for this weapon
-	//int magRounds;
-	//// The maximum number of ammunition for this magazine for this weapon
-	//int maxMagRounds;
-	//// The current total number of rounds currently carried by this player
-	//int totalRounds;
-	//// The max total number of rounds currently carried by this player
-	//int maxTotalRounds;
-
 	// The time between shots in milliseconds
-	double timeBetweenShots;
 	// The elapsed time (between shots) in milliseconds
 	double elapsedTime;
+	double timeBetweenShots;
 	// Boolean flag to indicate if weapon can fire now
 	bool bFire;
-
 	int damage;
-	//double reloadTime;
+	float force;
+	float projectile_mass;
 	Faction faction;
 public:
-	//// Set the number of ammunition in the magazine for this player
-	//virtual void SetMagRound(const int magRounds);
-	//// Set the maximum number of ammunition in the magazine for this weapon
-	//virtual void SetMaxMagRound(const int magRounds);
-	//// The current total number of rounds currently carried by this player
-	//virtual void SetTotalRound(const int totalRounds);
-	//// The max total number of rounds currently carried by this player
-	//virtual void SetMaxTotalRound(const int maxTotalRounds);
-
-	//// Get the number of ammunition in the magazine for this player
-	//virtual int GetMagRound(void) const;
-	//// Get the maximum number of ammunition in the magazine for this weapon
-	//virtual int GetMaxMagRound(void) const;
-	//// Get the current total number of rounds currently carried by this player
-	//virtual int GetTotalRound(void) const;
-	//// Get the max total number of rounds currently carried by this player
-	//virtual int GetMaxTotalRound(void) const;
-
 	// Set the time between shots
 	virtual void SetTimeBetweenShots(const double timeBetweenShots);
 	// Set the firing rate in rounds per min
@@ -66,19 +39,14 @@ public:
 	// Update the elapsed time
 	void Update(const double dt);
 	// Discharge this weapon
-	void Discharge(Vector3 position, Vector3 dir);
-	//// Reload this weapon
-	//void Reload(const double dt);
-
-	//// Add rounds
-	//void AddRounds(const int newRounds);
-
-	//// Print Self
-	//void PrintSelf(void);
+	virtual void Discharge(Vector3 position, Vector3 dir);
 
 	void set_damage(int dmg);
 	int get_damage();
 
 	Faction::FACTION_SIDE get_faction_side();
 	void set_faction_side(Faction::FACTION_SIDE side);
+
+	void set_attackspeed(float attspd);
+	float get_attackspeed();
 };
