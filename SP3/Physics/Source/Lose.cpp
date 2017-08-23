@@ -60,7 +60,7 @@ void Lose::Init()
 
 	Math::InitRNG();
 
-	axis = MeshBuilder::GenerateAxes("", 100, 100, 100);
+	axis = MeshList::GetInstance()->getMesh("MENUBACKGROUND");
 	playbutt.pos.Set(0, 9, 0);
 	playbutt.resize_button(20, 10);
 	playbutt.mesh = MeshList::GetInstance()->getMesh("PLAYBUTTON");
@@ -155,7 +155,10 @@ void Lose::Render()
 	Graphics::GetInstance()->modelStack.LoadIdentity();
 
 	MS& ms = Graphics::GetInstance()->modelStack;
-	//RenderHelper::RenderMesh(axis, false);
+	ms.PushMatrix();
+	ms.Scale(135, 100, 1);
+	RenderHelper::RenderMesh(axis, false);
+	ms.PopMatrix();
 
 	//ms.PushMatrix();
 	//ms.Scale(Vector3(3, 1, 1));

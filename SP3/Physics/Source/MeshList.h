@@ -173,7 +173,30 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("PAUSE", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image//pause.tga");
 		assignMesh(temp);
-		
+		temp = MeshBuilder::GenerateQuad("VOLUME", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//volume.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("INSTRUCTIONS", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//instructions.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("SUMMER", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//summer.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("SPRING", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//spring.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("WINTER", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//winter.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("AUTUMN", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//autumn.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("BACK", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//back.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("MENUBACKGROUND", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image//background.tga");
+		assignMesh(temp);
 		//Shop Button
 		temp = MeshBuilder::GenerateQuad("Buy", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\buy.tga");
