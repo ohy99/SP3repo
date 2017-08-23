@@ -1,3 +1,5 @@
+//GameScene_H
+
 
 #ifndef GameScene_H
 #define GameScene_H
@@ -8,7 +10,7 @@
 #include "Camera.h"
 #include "AudioPlayer.h"
 #include "CharacterInfo.h"
-
+#include "Shop.h"
 
 class Mesh;
 
@@ -35,8 +37,10 @@ protected:
 	float worldHeight;
 	float worldWidth;
 	bool isPause;
+	bool isShop;
+	bool isFreeze;
 	Weapon weap;
-
+	Shop shop;
 };
 
 #endif
