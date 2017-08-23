@@ -13,6 +13,10 @@
 #include "MinionSiege.h"
 #include "MinionHealer.h"
 
+//to fix:
+//have a attack timer
+//so the animation can play
+
 MinionManager::MinionManager()
 {
 	init_info();
@@ -218,6 +222,10 @@ void MinionManager::init_info()
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_spd = 2.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_range = 7.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].move_spd = 7.f;
+
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		default_minion_info[i] = minion_info[i];
+
 }
 
 void MinionManager::init_pool()
@@ -276,6 +284,57 @@ void MinionManager::init_info(Minion * minion, MinionInfo::MINION_TYPE type)
 		minion_info[type].move_spd);
 }
 
+void MinionManager::adjust_minions_move_speed(float percentage_of_default)
+{
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		minion_info[i].move_spd = default_minion_info[i].move_spd * percentage_of_default;
+}
+
+void MinionManager::reset_minions_move_speed()
+{
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		minion_info[i].move_spd = default_minion_info[i].move_spd;
+}
+
+void MinionManager::adjust_minions_dmg(float percentage_of_default)
+{
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		minion_info[i].dmg = default_minion_info[i].dmg * percentage_of_default;
+}
+
+void MinionManager::reset_minions_dmg()
+{
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		minion_info[i].dmg = default_minion_info[i].dmg;
+}
+
+void MinionManager::adjust_minions_att_spd(float percentage_of_default)
+{
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		minion_info[i].att_spd = default_minion_info[i].att_spd * percentage_of_default;
+}
+
+void MinionManager::reset_minions_att_spd()
+{
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		minion_info[i].att_spd = default_minion_info[i].att_spd;
+}
+
+void MinionManager::adjust_minions_hp(float percentage_of_default)
+{
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		minion_info[i].max_hp = default_minion_info[i].max_hp * percentage_of_default;
+}
+
+void MinionManager::reset_minions_hp()
+{
+	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+		minion_info[i].max_hp = default_minion_info[i].max_hp;
+}
+
+
 MinionManager::MINION_INFO::MINION_INFO() : max_hp(0), dmg(0), att_spd(0.f), att_range(0.f), move_spd(0.f)
 {
 }
+
+

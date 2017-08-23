@@ -159,6 +159,7 @@
     <ClCompile Include="Source\AudioPlayer.cpp" />
     <ClCompile Include="Source\CharacterInfo.cpp" />
     <ClCompile Include="Source\Collidable.cpp" />
+    <ClCompile Include="Source\Consumables.cpp" />
     <ClCompile Include="Source\DamageArea.cpp" />
     <ClCompile Include="Source\EnemyAiLogic.cpp" />
     <ClCompile Include="Source\EnvironmentManager.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
+    <ClCompile Include="Source\Shop.cpp" />
     <ClCompile Include="Source\ShowHpManager.cpp" />
     <ClCompile Include="Source\SpellManager.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
@@ -210,6 +212,7 @@
     <ClInclude Include="Source\Button.h" />
     <ClInclude Include="Source\CharacterInfo.h" />
     <ClInclude Include="Source\Collidable.h" />
+    <ClInclude Include="Source\Consumables.h" />
     <ClInclude Include="Source\DamageArea.h" />
     <ClInclude Include="Source\EnemyAiLogic.h" />
     <ClInclude Include="Source\HpBar.h" />
