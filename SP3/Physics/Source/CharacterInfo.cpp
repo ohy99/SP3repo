@@ -1,20 +1,28 @@
+//Characterinfo.cpp
+
+#ifndef  CHARACTERINFO_H
+#define CHARACTERINFO_H
+
+
 #include "CharacterInfo.h"
 #include "Mtx44.h"
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
-
+#include "Tower.h"
+#include "TowerManager.h"
 using namespace std;
 using std::string;
 
-Character::Character(): maxhealth(0),
+Character::Character() : maxhealth(0),
 health(0),
 damage(0),
 levels(0),
 coins(0),
 highscore(0)
-{ 
+{
+
 }
 
 Character::~Character()
@@ -74,7 +82,7 @@ void Character::Update(double dt)
 			dakeypressed = false;
 		}
 	}
-	
+
 	//------------------------Spell Section Update--------------------------//
 	{
 		static bool dakeypressed = false;
@@ -115,10 +123,25 @@ void Character::Update(double dt)
 			dakeypressed = false;
 		}
 	}
+
+	{
+	static bool dakeypressed = false;
+	if (Application::GetInstance().IsKeyPressed('5') && !dakeypressed)
+	{
+		consumables.UseBigRepairKit();
+		dakeypressed = true;
+	}
+	else if (!Application::GetInstance().IsKeyPressed('5') && dakeypressed)
+	{
+		dakeypressed = false;
+	}
+}
+
 }
 
 void Character::Init()
 {
+	this->Load();
 	weap.Init();
 	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
@@ -127,8 +150,18 @@ void Character::Init()
 	weap.pos.Set(7.5, 25);
 	weap.set_damage(50);
 	RenderManager::GetInstance()->attach_renderable(&weap, 1);
+	consumables.attachCharacter(this);
+	consumables.attachWallet(&this->wallet);
+	charTower = TowerManager::GetInstance()->player;
+	charTower->health = this->health;
+	charTower->maxhealth = this->maxhealth;
 }
 
+
+void Character::changetowerhp(int hp)
+{
+	charTower->get_hit(-hp);
+}
 
 //---------------------Getters------------------------------------//
 int Character::getlevel()
@@ -179,7 +212,7 @@ void Character::setcurrenthealth(int health)
 
 void Character::setcurrentcoins(int coin)
 {
-	this->coins = coins;		
+	this->coins = coins;
 }
 
 void Character::setcurrenthighscore(int highscore)
@@ -206,6 +239,11 @@ Vector3 Character::GetTarget(void) const
 Vector3 Character::GetUp(void) const
 {
 	return up;
+}
+
+Wallet & Character::getWallet()
+{
+	return wallet;
 }
 
 void Character::SetPos(const Vector3 & pos)
@@ -289,7 +327,7 @@ bool Character::Load(const string saveFileName)
 				{
 					temp[0] = Token2Double(aToken);
 				}
-				else if (theTag == "i_medrepair")
+				else if (theTag == "i_mediumrepair")
 				{
 					temp[1] = Token2Double(aToken);
 				}
@@ -346,7 +384,7 @@ bool Character::Save(const string saveFileName)
 	myfile.open(saveFileName.c_str(), ios::out | ios::ate);
 	if (myfile.is_open())
 	{
-		myfile << "maxhealth=" << maxhealth  << endl;
+		myfile << "maxhealth=" << maxhealth << endl;
 		myfile << "health=" << health << endl;
 		myfile << "damage=" << damage << endl;
 		myfile << "levels=" << levels << endl;
@@ -354,6 +392,15 @@ bool Character::Save(const string saveFileName)
 		myfile << "highscore=" << highscore << endl;
 		myfile << "currentsound=" << soundtrack << endl;
 		myfile << "muteornot=" << mute << endl;
+		myfile << "i_smallrepair=" << wallet.getsmallrepair() << endl;
+		myfile << "i_mediumrepair=" << wallet.getmediumrepair() << endl;
+		myfile << "i_bigrepair=" << wallet.getbigrepair() << endl;
+		myfile << "i_greendrake=" << wallet.getgreendrake() << endl;
+		myfile << "i_bluedrake=" << wallet.getbluedrake() << endl;
+		myfile << "i_browndrake=" << wallet.getbrowndrake() << endl;
+		myfile << "i_blackdrake=" << wallet.getblackdrake() << endl;
+		myfile << "i_weaplevel=" << wallet.getweaplevel() << endl;
+		myfile << "i_towerlevel=" << wallet.gettowerlevel() << endl;
 		myfile.close();
 		return true;
 	}
@@ -392,3 +439,4 @@ bool Character::Token2Bool(const string token)
 {
 	return token.at(0) == '1';
 }
+#endif // ! CHARACTERINFO_H

@@ -16,9 +16,11 @@ void Particle::update(double dt)
 	}
 
 	active_elapsed += dt;
+	
 
-	if (active_elapsed >= active_duration)
+	if (active_elapsed >= active_duration)  // elapsed more than duration
 	{
+		
 		this->active = false;
 		active_elapsed = 0.0;
 	}
@@ -26,6 +28,7 @@ void Particle::update(double dt)
 
 void Particle::init()
 {
+	active_elapsed = 0.0;
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
 	if (sa)
 	{
@@ -37,16 +40,16 @@ void Particle::init()
 void Particle::render()
 {
 
-
-	MS& ms = Graphics::GetInstance()->modelStack;
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
-	ms.PushMatrix();
-	ms.Translate(this->pos);
-	ms.Scale(this->scale);
-	RenderHelper::RenderMesh(sa, false);
-	//sa->Render();
-	ms.PopMatrix();
-
+	
+		MS& ms = Graphics::GetInstance()->modelStack;
+		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+		ms.PushMatrix();
+		ms.Translate(this->pos);
+		ms.Scale(this->scale);
+		RenderHelper::RenderMesh(sa, false);
+		//sa->Render();
+		ms.PopMatrix();
+	
 
 }
 

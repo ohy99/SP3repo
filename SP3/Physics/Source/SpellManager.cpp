@@ -116,6 +116,7 @@ void SpellManager::useLightningSpell()
 	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
 
 	lightning->pos = cursor_point_in_world_space;
+	lightning->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + lightning->scale.y * 0.5f;
 
 	if (lightningQuantity > 0 && lightningReuseTime>3.0)
 	{
@@ -136,6 +137,7 @@ void SpellManager::useFreezeSpell()
 	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
 
 	freeze->pos = cursor_point_in_world_space;
+	freeze->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + freeze->scale.y * 0.5f;
 
 	if (freezeReuseTime>3.0)
 	{
@@ -158,7 +160,7 @@ void SpellManager::useBlastSpell()
 
 	blast->pos = cursor_point_in_world_space;
 	//adjust the pos to make it at the surface of the ground mesh
-	blast->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y + CollisionManager::GetInstance()->get_ground()->scale.y * 0.5f;
+	blast->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + blast->scale.y * 0.5f;
 
 	std::list<Collidable*> * enemy_minion_list = MinionManager::GetInstance()->get_enemy_minion_list();
 

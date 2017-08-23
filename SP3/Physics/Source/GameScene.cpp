@@ -1,3 +1,4 @@
+//gamescene.cpp
 #include "GameScene.h"
 #include "GL\glew.h"
 #include "Application.h"
@@ -29,6 +30,7 @@
 
 #include "WeaponInfo.h"
 #include "SpellManager.h"
+#include "ObjectPoolManager.h"
 GameScene::GameScene()
 {
 }
@@ -48,8 +50,8 @@ GameScene::~GameScene()
 
 void GameScene::Init()
 {
-	
-	
+
+
 	glClearColor(0.0f, 0.0f, 0.f, 0.0f);
 	// Enable depth test
 	//glEnable(GL_DEPTH_TEST);
@@ -68,7 +70,7 @@ void GameScene::Init()
 
 	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
-	
+
 
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
@@ -80,10 +82,11 @@ void GameScene::Init()
 	GameObjectManager::GetInstance()->load_objects("Image\\lvl0objects.txt");
 
 	isPause = false;
-		//Example of Audio playing //
+	isShop = false;
+	//Example of Audio playing //
 	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
-	
+
 	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
@@ -94,7 +97,8 @@ void GameScene::Init()
 		sa->m_anim->Set(0, 5, 1, 10.0f, true);
 	}
 	CharacterInfo.Init();
-	CharacterInfo.Load();       
+	//CharacterInfo.Load();
+	shop.init();
 	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0, 3));
 	/*weap.Init();
 	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
@@ -104,18 +108,18 @@ void GameScene::Init()
 	weap.pos.Set(7.5, 25);
 	weap.set_damage(50);
 	RenderManager::GetInstance()->attach_renderable(&weap, 1);
-*/
-	
-	//cout << SeasonManager::GetInstance()->get_season() << endl;
+	*/
 
+	//cout << SeasonManager::GetInstance()->get_season() << endl;
+	shop.attachWalletInfo(&this->CharacterInfo.getWallet());
 }
 
 
 void GameScene::Update(double dt)
 {
 
-	
-//Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
+
+	//Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
 
 
 	static bool PButtonState = false;
@@ -133,10 +137,25 @@ void GameScene::Update(double dt)
 		PButtonState = false;
 	}
 
+	static bool SButtonState = false;
+	if (Application::IsKeyPressed('S') && !SButtonState)
+	{
+		if (!isShop)
+			isShop = true;
+		else
+			isShop = false;
+		CharacterInfo.Save();
+		SButtonState = true;
+	}
+	else if (!Application::IsKeyPressed('S') && SButtonState)
+	{
+		SButtonState = false;
+	}
 
-//	weap.WeaponInfo::Update(dt);
 
-	if (!isPause)
+	//	weap.WeaponInfo::Update(dt);
+
+	if (!isPause && !isShop)
 	{
 		CharacterInfo.Update(dt);
 		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
@@ -147,6 +166,10 @@ void GameScene::Update(double dt)
 			sa->m_anim->animActive = true;
 		}
 
+		if (isShop)
+		{
+			shop.Update(dt);
+		}
 		SpellManager::GetInstance()->update(dt);
 		//Update enemies
 		EnemyAiLogic::GetInstance()->update(dt);
@@ -157,6 +180,7 @@ void GameScene::Update(double dt)
 		CollisionManager::GetInstance()->update(dt);
 		//update the show hp thing
 		ShowHpManager::GetInstance()->update(dt);
+		ObjectPoolManager::GetInstance()->Update(dt);
 
 		GameLogic::GetInstance()->update(dt);
 		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
@@ -187,45 +211,45 @@ void GameScene::Update(double dt)
 		//}
 		//weap.WeaponInfo::Update(dt);
 
-	//	{
-	//		static bool dakeypressed = false;
-	//		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
-	//		{
-	//			SpellManager::GetInstance()->useLightningSpell();
-	//			dakeypressed = true;
-	//		}
-	//		else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
-	//		{
-	//			dakeypressed = false;
-	//		}
-	//	}
+		//	{
+		//		static bool dakeypressed = false;
+		//		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
+		//		{
+		//			SpellManager::GetInstance()->useLightningSpell();
+		//			dakeypressed = true;
+		//		}
+		//		else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
+		//		{
+		//			dakeypressed = false;
+		//		}
+		//	}
 
 
-	//{
-	//	static bool dakeypressed = false;
-	//	if (Application::GetInstance().IsKeyPressed('7') && !dakeypressed)
-	//	{
-	//		SpellManager::GetInstance()->useFreezeSpell();
-	//		dakeypressed = true;
-	//	}
-	//	else if (!Application::GetInstance().IsKeyPressed('7') && dakeypressed)
-	//	{
-	//		dakeypressed = false;
-	//	}
-	//}
+		//{
+		//	static bool dakeypressed = false;
+		//	if (Application::GetInstance().IsKeyPressed('7') && !dakeypressed)
+		//	{
+		//		SpellManager::GetInstance()->useFreezeSpell();
+		//		dakeypressed = true;
+		//	}
+		//	else if (!Application::GetInstance().IsKeyPressed('7') && dakeypressed)
+		//	{
+		//		dakeypressed = false;
+		//	}
+		//}
 
-	//{
-	//	static bool dakeypressed = false;
-	//	if (Application::GetInstance().IsKeyPressed('8') && !dakeypressed)
-	//	{
-	//		SpellManager::GetInstance()->useBlastSpell();
-	//		dakeypressed = true;
-	//	}
-	//	else if (!Application::GetInstance().IsKeyPressed('8') && dakeypressed)
-	//	{
-	//		dakeypressed = false;
-	//	}
-	//}
+		//{
+		//	static bool dakeypressed = false;
+		//	if (Application::GetInstance().IsKeyPressed('8') && !dakeypressed)
+		//	{
+		//		SpellManager::GetInstance()->useBlastSpell();
+		//		dakeypressed = true;
+		//	}
+		//	else if (!Application::GetInstance().IsKeyPressed('8') && dakeypressed)
+		//	{
+		//		dakeypressed = false;
+		//	}
+		//}
 
 
 
@@ -234,7 +258,7 @@ void GameScene::Update(double dt)
 
 		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
 	}
-	
+
 }
 
 
@@ -280,11 +304,13 @@ void GameScene::Render()
 	if (isPause)
 	{
 		ms.PushMatrix();
-		ms.Translate(worldWidth/2,worldHeight/2, 0);
+		ms.Translate(worldWidth / 2, worldHeight / 2, 0);
 		ms.Scale(Vector3(100, 80, 1));
 		RenderHelper::RenderMesh(pausescreen, false);
 		ms.PopMatrix();
 	}
+	if (isShop)
+		shop.Render();
 }
 
 void GameScene::Exit()
@@ -300,3 +326,4 @@ void GameScene::Exit()
 	//CharacterInfo.Save();
 
 }
+

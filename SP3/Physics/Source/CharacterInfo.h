@@ -1,3 +1,4 @@
+//Char info.h
 #pragma once
 #include "Vector3.h"
 #include <string>
@@ -12,11 +13,12 @@
 #include "SpellManager.h"
 using namespace std;
 class Wallet;
+class Tower;
 class Character {
-	
+
 private:
 	Vector3 defaultPosition, defaultTarget, defaultUp;
-	Vector3 pos,target, up;
+	Vector3 pos, target, up;
 
 	//Health system//
 	int maxhealth;
@@ -31,11 +33,13 @@ private:
 	int coins;
 	int highscore;
 	//Irrklang stuff
-	int soundtrack; 
+	int soundtrack;
 
 	bool mute;
 	Wallet wallet;
+	Consumables consumables;
 	Weapon weap;
+	Tower* charTower;
 	float worldWidth;
 	float worldHeight;
 public:
@@ -43,6 +47,7 @@ public:
 	~Character();
 
 	//--------------------------Getters----------------------//
+	void changetowerhp(int hp);
 	int getlevel();
 	int getmaxhealth();
 	int getcurrenthealth();
@@ -55,7 +60,7 @@ public:
 	// Get Up
 	Vector3 GetUp(void) const;
 
-
+	Wallet & getWallet();
 
 
 	//-----------------------Setters---------------------//
@@ -76,11 +81,11 @@ public:
 
 	//Bool//
 	bool Load(const string saveFileName = ".//Image//Stats.sav"); // .sav files
-																   // Save this class
+																  // Save this class
 	bool Save(const string saveFileName = ".//Image//Stats.sav"); // .sav files
 
 
-	//---------------------Token Convers-----------------//
+																  //---------------------Token Convers-----------------//
 	Vector3 Token2Vector(const string token);
 	double Token2Double(const string token);
 	bool Token2Bool(const string token);

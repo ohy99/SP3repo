@@ -1,8 +1,6 @@
 #ifndef WALLET_H
 #define WALLET_H
 
-#include "Shop.h"
-
 
 class Wallet 
 {
@@ -36,15 +34,16 @@ public:
 	//Functions
 	void wLoad(int getsmallrepair, int getmediumrepair, int getbigrepair, int getgreendrake, int getbrowndrake, int getbluedrake, int getblackdrake, int getweaplevel, int gettowerlevel)
 	{
-		this->i_smallrepair = i_smallrepair;
-		this->i_medrepair = i_medrepair;
-		this->i_bigrepair = i_bigrepair;
+		this->i_smallrepair = getsmallrepair;
+		this->i_medrepair = getmediumrepair;
+		this->i_bigrepair = getbigrepair;
 
-		this->i_greendrake = i_greendrake;
-		this->i_browndrake = i_browndrake;
-		this->i_blackdrake = i_blackdrake;
-		this->i_weaplevel = i_weaplevel;
-		this->i_towerlevel = i_towerlevel;
+		this->i_greendrake = getgreendrake;
+		this->i_browndrake = getbrowndrake;
+		this->i_bluedrake = getbluedrake;
+		this->i_blackdrake = getblackdrake;
+		this->i_weaplevel = getweaplevel;
+		this->i_towerlevel = gettowerlevel;
 	};
 	//Getters
 	int getsmallrepair()

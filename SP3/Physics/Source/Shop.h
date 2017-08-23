@@ -1,49 +1,59 @@
-#include "CharacterInfo.h"
-#include "Mtx44.h"
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
+//Shop.h
+#ifndef SHOP_H
+#define SHOP_H
+
+#include "GameObject.h"
+
+#include "Button.h"
+
+
 using namespace std;
 using std::string;
 
-
-
+class Wallet;
+class Mesh;
 class Shop {
 
-private:
-	
-	//Coin Pouch//
-	
-	//Price//
-	int ID;//ID for items 
-	int damage;
-	int price;
-	//Levels//
-	int levelsreq;
 
-	//Ecnomoy & highscore//
-	int coinsreq;
-	string name;
-	string description;
-
-public:
-
-	//Loading of csv file
-
-
-	//Changing ID to name
-	  //---------------------Token Converts-----------------//
-	Vector3 Token2Vector(const string token);
-	double Token2Double(const string token);
-	bool Token2Bool(const string token);
 
 
 
-	//-----------Functions--------------------//
+public:
+	Shop();
+	~Shop();
+	void Render();
+	void init();
+	void Update(double dt);
+	void attachWalletInfo(Wallet* walletshop);
+protected:
+	Wallet *walletshop;
 
-	bool LoadCSV(const string fileName);
-	void CheckReader(const string fileName = "CSV//Sample.csv");
+	//Title
+	Button Title;
+	//Buy Buttons
 
+	Button Buy1;
+	Button Buy2;
+	Button Buy3;
+	Button Buy4;
+	Button Buy5;
+	Button Buy6;
+	Button Buy7;
+	Button Buy8;
+	Button Buy9;
+	//Sell Buttons
+	Button Sell1;
+	Button Sell2;
+	Button Sell3;
+	Button Sell4;
+	Button Sell5;
+	Button Sell6;
+	Button Sell7;
+	Button Sell8;
+	Button Sell9;
+
+	float worldWidth;
+	float worldHeight;
 };
 
+#endif
