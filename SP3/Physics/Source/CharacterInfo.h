@@ -38,7 +38,10 @@ private:
 	bool mute;
 	Wallet wallet;
 	Consumables consumables;
-	Weapon weap;
+	Weapon* weap;
+	//temp
+	Weapon* weapsah[3];
+	int currweap;
 	Tower* charTower;
 	float worldWidth;
 	float worldHeight;
