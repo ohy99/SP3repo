@@ -7,7 +7,7 @@
 void Particle::update(double dt)
 {
 
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Fire"));
 	if (sa)
 	{
 
@@ -29,7 +29,7 @@ void Particle::update(double dt)
 void Particle::init()
 {
 	active_elapsed = 0.0;
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Fire"));
 	if (sa)
 	{
 		sa->m_anim = new Animation();
@@ -42,10 +42,10 @@ void Particle::render()
 
 	
 		MS& ms = Graphics::GetInstance()->modelStack;
-		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Fire"));
 		ms.PushMatrix();
 		ms.Translate(this->pos);
-		ms.Scale(this->scale);
+		ms.Scale(this->scale * 1.5);
 		RenderHelper::RenderMesh(sa, false);
 		//sa->Render();
 		ms.PopMatrix();
