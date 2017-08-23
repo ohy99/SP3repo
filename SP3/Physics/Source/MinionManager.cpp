@@ -287,7 +287,7 @@ void MinionManager::init_info(Minion * minion, MinionInfo::MINION_TYPE type)
 void MinionManager::adjust_minions_move_speed(float percentage_of_default)
 {
 	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
-		minion_info[i].move_spd = default_minion_info[i].move_spd * percentage_of_default;
+		minion_info[i].move_spd = default_minion_info[i].move_spd * percentage_of_default/100;
 }
 
 void MinionManager::reset_minions_move_speed()
@@ -299,7 +299,7 @@ void MinionManager::reset_minions_move_speed()
 void MinionManager::adjust_minions_dmg(float percentage_of_default)
 {
 	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
-		minion_info[i].dmg = default_minion_info[i].dmg * percentage_of_default;
+		minion_info[i].dmg = default_minion_info[i].dmg * percentage_of_default/100;
 }
 
 void MinionManager::reset_minions_dmg()
@@ -311,7 +311,7 @@ void MinionManager::reset_minions_dmg()
 void MinionManager::adjust_minions_att_spd(float percentage_of_default)
 {
 	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
-		minion_info[i].att_spd = default_minion_info[i].att_spd * percentage_of_default;
+		minion_info[i].att_spd = default_minion_info[i].att_spd * percentage_of_default/100;
 }
 
 void MinionManager::reset_minions_att_spd()
@@ -323,7 +323,7 @@ void MinionManager::reset_minions_att_spd()
 void MinionManager::adjust_minions_hp(float percentage_of_default)
 {
 	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
-		minion_info[i].max_hp = default_minion_info[i].max_hp * percentage_of_default;
+		minion_info[i].max_hp = default_minion_info[i].max_hp * percentage_of_default/100;
 }
 
 void MinionManager::reset_minions_hp()

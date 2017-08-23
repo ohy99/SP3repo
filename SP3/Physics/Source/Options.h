@@ -27,7 +27,11 @@ protected:
 	double fps;
 	Button plusbutt;
 	Button minusbutt;
+	Button instructions;
+	Button bvolume;
+	Button back;
 	Mesh* axis;
+	Mesh* bar;
 	int vol;
 	AudioPlayer audioPlayer;
 	//Mesh* background;

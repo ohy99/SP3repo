@@ -66,14 +66,24 @@ void Options::Init()
 
 	Math::InitRNG();
 
-	axis = MeshBuilder::GenerateQuad("",Color(1,1,1),1);
+	axis = MeshList::GetInstance()->getMesh("MENUBACKGROUND");
+	bar = MeshBuilder::GenerateQuad("", Color(1, 1, 1), 1);
 	//background = EntityBase::getInstance()->getEntity("BACKGROUND");
-	plusbutt.pos.Set(30, 5, 0);
+	plusbutt.pos.Set(30, 15, 0);
 	plusbutt.resize_button(10, 10);
 	plusbutt.mesh = MeshList::GetInstance()->getMesh("PLUSBUTTON");
-	minusbutt.pos.Set(-23, 5, 0);
+	minusbutt.pos.Set(-23, 15, 0);
 	minusbutt.resize_button(10, 10);
 	minusbutt.mesh = MeshList::GetInstance()->getMesh("MINUSBUTTON");
+	bvolume.pos.Set(0, 35, 0);
+	bvolume.resize_button(30, 15);
+	bvolume.mesh= MeshList::GetInstance()->getMesh("VOLUME");
+	instructions.pos.Set(0,-10, 0);
+	instructions.resize_button(40, 15);
+	instructions.mesh = MeshList::GetInstance()->getMesh("INSTRUCTIONS");
+	back.pos.Set(35, -40, 0);
+	back.resize_button(30, 15);
+	back.mesh = MeshList::GetInstance()->getMesh("BACK");
 
 	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
@@ -121,13 +131,14 @@ void Options::Update(double dt)
 
 			audioPlayer.decreaseVolume();
 		}
+		if (back.collision.isCollide(cursor_collider))
+			SceneManager::GetInstance()->setNextScene("MAIN");
 		pressle = true;
 	}
 	else if (!Application::IsMousePressed(0) && pressle)
 		pressle = false;
 
-	if (Application::IsKeyPressed('1'))
-		SceneManager::GetInstance()->setNextScene("MAIN");
+
 }
 
 
@@ -152,22 +163,27 @@ void Options::Render()
 	Graphics::GetInstance()->modelStack.LoadIdentity();
 
 	MS& ms = Graphics::GetInstance()->modelStack;
-	//RenderHelper::RenderMesh(axis, false);
-
+	ms.PushMatrix();
+	ms.Scale(135, 100, 1);
+	RenderHelper::RenderMesh(axis, false);
+	ms.PopMatrix();
 	ms.PushMatrix();
 	ms.Translate(-10, 0, 0);
 	for (int i = 0; i < 10 - vol; ++i)
 	{
 		ms.PushMatrix();
-		ms.Translate(i * 3, i * 0.5f, 0);
+		ms.Translate(i * 3, i * 0.5f+12, 0);
 		ms.Scale(3, 3 + i, 0);
-		RenderHelper::RenderMesh(axis, false);
+		RenderHelper::RenderMesh(bar, false);
 		ms.PopMatrix();
 	}
 	ms.PopMatrix();
 
 	plusbutt.render_button();
 	minusbutt.render_button();
+	bvolume.render_button();
+	instructions.render_button();
+	back.render_button();
 }
 
 void Options::Exit()
