@@ -327,7 +327,7 @@ bool Character::Load(const string saveFileName)
 				{
 					temp[0] = Token2Double(aToken);
 				}
-				else if (theTag == "i_medrepair")
+				else if (theTag == "i_mediumrepair")
 				{
 					temp[1] = Token2Double(aToken);
 				}
@@ -395,12 +395,12 @@ bool Character::Save(const string saveFileName)
 		myfile << "i_smallrepair=" << wallet.getsmallrepair() << endl;
 		myfile << "i_mediumrepair=" << wallet.getmediumrepair() << endl;
 		myfile << "i_bigrepair=" << wallet.getbigrepair() << endl;
-		myfile << "i_greendrake" << wallet.getgreendrake() << endl;
-		myfile << "i_bluedrake" << wallet.getbluedrake() << endl;
-		myfile << "i_browndrake" << wallet.getbrowndrake() << endl;
-		myfile << "i_blackdrake" << wallet.getblackdrake() << endl;
-		myfile << "i_weaplevel" << wallet.getweaplevel() << endl;
-		myfile << "i_towerlevel" << wallet.gettowerlevel() << endl;
+		myfile << "i_greendrake=" << wallet.getgreendrake() << endl;
+		myfile << "i_bluedrake=" << wallet.getbluedrake() << endl;
+		myfile << "i_browndrake=" << wallet.getbrowndrake() << endl;
+		myfile << "i_blackdrake=" << wallet.getblackdrake() << endl;
+		myfile << "i_weaplevel=" << wallet.getweaplevel() << endl;
+		myfile << "i_towerlevel=" << wallet.gettowerlevel() << endl;
 		myfile.close();
 		return true;
 	}
