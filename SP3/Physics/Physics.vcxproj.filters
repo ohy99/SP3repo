@@ -21,6 +21,9 @@
     <Filter Include="Header Files\GameObject\Minion">
       <UniqueIdentifier>{dd80a9e3-2c7a-4857-b31b-54e74a7f6ac9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObject\Weapon">
+      <UniqueIdentifier>{b8d69183-04a7-4937-9ffc-2969fe4060db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -110,9 +113,6 @@
     <ClCompile Include="Source\ObjectPoolManager.cpp">
       <Filter>Header Files\HY</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Weapon.cpp">
-      <Filter>Header Files\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Source\WeaponInfo.cpp">
       <Filter>Header Files\GameObject</Filter>
     </ClCompile>
@@ -175,6 +175,24 @@
     </ClCompile>
     <ClCompile Include="Source\Shop.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Weapon.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WeaponCannon.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NoobBow.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GoodBow.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OkayBow.cpp">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProjectileRainArrow.cpp">
+      <Filter>Header Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -328,9 +346,6 @@
     <ClInclude Include="Source\Item.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Weapon.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Source\WeaponInfo.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
@@ -390,6 +405,24 @@
     </ClInclude>
     <ClInclude Include="Source\Consumables.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Weapon.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WeaponCannon.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NoobBow.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OkayBow.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GoodBow.h">
+      <Filter>Header Files\GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ProjectileRainArrow.h">
+      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

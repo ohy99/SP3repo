@@ -24,7 +24,7 @@ public:
 		COUNT2
 	};
 	//RETURNS ACTIVATED PROJECTILE
-	Projectile* get_projectile(PROJECTILE_TYPE id);
+	Projectile* get_projectile(PROJECTILE_TYPE id, int type = 0);
 	Particle* get_particle(PARTICLE_CASE id);
 	void Update(double dt);
 private:
@@ -34,7 +34,7 @@ private:
 	std::vector<Particle*>particle_pool;
 	Mesh* projectile_mesh[PROJECTILE_TYPE::COUNT];
 	Mesh* particle_mesh[PARTICLE_CASE::COUNT2];
-	Projectile* get_inactive_projectile();
+	Projectile* get_inactive_projectile(int type = 0);//0 normal, 1 rain
 	Particle* get_inaactive_particle();
 protected:
 	ObjectPoolManager();

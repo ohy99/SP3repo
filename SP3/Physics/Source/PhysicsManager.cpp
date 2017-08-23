@@ -25,7 +25,7 @@ void PhysicsManager::update(double dt) {
 			if (proj->pos.y < 0)
 				proj->active = false;
 
-			proj->velocity += gravity * (float)dt;
+			proj->velocity += proj->get_mass() * gravity * (float)dt;
 			proj->dir = proj->velocity.Normalized();
 			proj->pos += proj->velocity * (float)dt;
 		}
