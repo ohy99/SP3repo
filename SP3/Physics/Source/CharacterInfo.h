@@ -36,6 +36,7 @@ private:
 
 	bool mute;
 	Wallet wallet;
+	Consumables consumables;
 	Weapon weap;
 	float worldWidth;
 	float worldHeight;

@@ -122,6 +122,20 @@ void Character::Update(double dt)
 			dakeypressed = false;
 		}
 	}
+
+	{
+	static bool dakeypressed = false;
+	if (Application::GetInstance().IsKeyPressed('3') && !dakeypressed)
+	{
+		consumables.UseBigRepairKit();
+		dakeypressed = true;
+	}
+	else if (!Application::GetInstance().IsKeyPressed('3') && dakeypressed)
+	{
+		dakeypressed = false;
+	}
+}
+
 }
 
 void Character::Init()
@@ -134,6 +148,8 @@ void Character::Init()
 	weap.pos.Set(7.5, 25);
 	weap.set_damage(50);
 	RenderManager::GetInstance()->attach_renderable(&weap, 1);
+	consumables.attachCharacter(this);
+	consumables.attachWallet(&this->wallet);
 }
 
 
