@@ -94,10 +94,11 @@ void Shop::init()
 void Shop::Update(double dt)
 {
 	//cout << "test" << endl;
-	cout << walletshop->getsmallrepair() << endl;
-	worldHeight = 100;
-	worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
+	//cout << walletshop->getsmallrepair() << endl;
+	//worldHeight = 100;
+	//worldWidth = worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 	double x, y;
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	Application::GetCursorPos(&x, &y);
 
 	int w = Application::GetWindowWidth();
@@ -126,7 +127,20 @@ void Shop::Update(double dt)
 
 void Shop::Render()
 {
+	MS& ms = Graphics::GetInstance()->modelStack;
+
+	float defaultheight = 100.f * 600.f / 800.f;
+
+	//hardcoded values are the default values
+	Buy1.resize_button(10.f * worldHeight / defaultheight, 10.f * worldHeight / defaultheight);
+	Buy1.pos.x = 80 * worldHeight / defaultheight;
+	Buy1.pos.y = 50 * worldHeight / defaultheight;
+	
+	ms.PushMatrix();
+	//this is here to make the shop image looks legit
+	ms.Scale(worldHeight / defaultheight, worldHeight / defaultheight, 1);
 	ShopUI.render_button();
+	ms.PopMatrix();
 	//Buy
 	Buy1.render_button();
 	Buy2.render_button();
@@ -147,6 +161,7 @@ void Shop::Render()
 	Sell7.render_button();
 	Sell8.render_button();
 	Sell9.render_button();*/
+
 }
 
 void Shop::attachWalletInfo(Wallet * walletshop)
