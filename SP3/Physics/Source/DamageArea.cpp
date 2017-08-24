@@ -3,7 +3,7 @@
 #include "Minion.h"
 #include "Tower.h"
 
-DamageArea::DamageArea() : active_duration(0.0), active_elapsed(0.0), damage(0), hit_once(true)
+DamageArea::DamageArea() : active_duration(0.0), active_elapsed(0.0), damage(0), hit_once(true), hits_per_sec(0.f)
 {
 }
 
@@ -55,10 +55,11 @@ void DamageArea::collision_response(Collidable * obj)
 	}
 }
 
-void DamageArea::set_damage(int dmg, bool once_only)
+void DamageArea::set_damage(int dmg, bool once_only, float hits_per_sec)
 {
 	this->damage = dmg;
 	this->hit_once = once_only;
+	this->hits_per_sec = hits_per_sec;
 }
 
 int DamageArea::get_damage()

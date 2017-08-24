@@ -20,7 +20,7 @@ SpellManager::SpellManager()
 	lightning->update_collider();
 	lightning->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
 
-	lightningQuantity = 5;
+	//lightningQuantity = 5;
 	lightningReuseTime = 3.0;
 
 	lightning->set_duration(0.5);
@@ -61,6 +61,21 @@ SpellManager::SpellManager()
 	blast->set_faction_side(Faction::FACTION_SIDE::PLAYER);
 
 	RenderManager::GetInstance()->attach_renderable(blast);
+
+	fire = new DamageArea();
+	fire->set_damage(1, false);
+	fire->set_collision_type(Collision::CollisionType::AABB);
+	fire->scale.Set(20, 20);
+	fire->update_collider();
+	fire->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+
+	//lightningQuantity = 5;
+	fireReuseTime = 10.0;
+
+	fire->set_duration(10.0);
+	fire->set_faction_side(Faction::FACTION_SIDE::PLAYER);
+
+	RenderManager::GetInstance()->attach_renderable(fire);
 }
 
 SpellManager::~SpellManager()
@@ -79,6 +94,9 @@ void SpellManager::update(double dt)
 	blastReuseTime += dt;
 	blastDuration -= dt;
 	blast->update(dt);
+
+	fireReuseTime += dt;
+	fire->update(dt);
 
 
 	//cout << lightningQuantity << endl;
@@ -118,10 +136,10 @@ void SpellManager::useLightningSpell()
 	lightning->pos = cursor_point_in_world_space;
 	lightning->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + lightning->scale.y * 0.5f;
 
-	if (lightningQuantity > 0 && lightningReuseTime>3.0)
+	if (lightningReuseTime>3.0)
 	{
 		lightning->active = true;
-		lightningQuantity--;
+		//lightningQuantity--;
 		lightningReuseTime = 0.0;
 	}
 }
@@ -191,21 +209,42 @@ void SpellManager::useBlastSpell()
 	if (blastReuseTime > 3.0)
 	{
 		blast->active = true;
-		blastQuantity--;
+		//blastQuantity--;
 		blastReuseTime = 0.0;
 		blastDuration = 1.0;
 	}
 }
 
-int SpellManager::getLQuantity()
+void SpellManager::useFireSpell()
 {
-	return lightningQuantity;
+	float worldWidth, worldHeight;
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+	double x, y;
+	Application::GetCursorPos(&x, &y);
+	int w = Application::GetWindowWidth();
+	int h = Application::GetWindowHeight();
+	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
+
+	fire->pos = cursor_point_in_world_space;
+	fire->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + fire->scale.y * 0.5f;
+
+	if (fireReuseTime > 10.0)
+	{
+		fire->active = true;
+		//lightningQuantity--;
+		fireReuseTime = 0.0;
+	}
 }
 
-void SpellManager::setLQuantity(int amt)
-{
-	this->lightningQuantity = amt;
-}
+//int SpellManager::getLQuantity()
+//{
+//	return lightningQuantity;
+//}
+//
+//void SpellManager::setLQuantity(int amt)
+//{
+//	this->lightningQuantity = amt;
+//}
 
 bool SpellManager::isFreezeActive()
 {

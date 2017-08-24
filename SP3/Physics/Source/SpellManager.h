@@ -12,14 +12,14 @@ class SpellManager :public Singleton<SpellManager>
 public:
 	void update(double dt);
 
-	int getLQuantity();
-	void setLQuantity(int amt);
+	//int getLQuantity();
+	//void setLQuantity(int amt);
 
-	int getFQuantity();
-	void setFQuantity(int amt);
+	//int getFQuantity();
+	//void setFQuantity(int amt);
 
-	int getBQuantity();
-	void setBQuantity(int amt);
+	//int getBQuantity();
+	//void setBQuantity(int amt);
 
 	bool isFreezeActive();
 	bool isBlastActive();
@@ -27,11 +27,13 @@ public:
 	void useLightningSpell();
 	void useFreezeSpell();
 	void useBlastSpell();
+	void useFireSpell();
 
 private:
 	DamageArea* lightning;
 	DamageArea* freeze;
 	DamageArea* blast;
+	DamageArea* fire;
 
 protected:
 	SpellManager();
@@ -45,7 +47,9 @@ protected:
 	double blastReuseTime;
 	double blastDuration;
 
-	int lightningQuantity;
-	int freezeQuantity;
-	int blastQuantity;
+	double fireReuseTime;
+
+	//int lightningQuantity;
+	//int freezeQuantity;
+	//int blastQuantity;
 };
