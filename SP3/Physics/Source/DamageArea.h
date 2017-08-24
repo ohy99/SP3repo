@@ -12,6 +12,7 @@ class DamageArea : public Collidable
 	int damage;
 	bool hit_once;
 	float hits_per_sec;
+	double elapsed_time;
 public:
 	DamageArea();
 	~DamageArea();

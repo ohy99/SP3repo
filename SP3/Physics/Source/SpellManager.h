@@ -39,14 +39,18 @@ protected:
 	SpellManager();
 	virtual ~SpellManager();
 
+	double lightningCooldown;
 	double lightningReuseTime;
 
+	double freezeCooldown;
 	double freezeReuseTime;
 	double freezeDuration;
 
+	double blastCooldown;
 	double blastReuseTime;
 	double blastDuration;
 
+	double fireCooldown;
 	double fireReuseTime;
 
 	//int lightningQuantity;
