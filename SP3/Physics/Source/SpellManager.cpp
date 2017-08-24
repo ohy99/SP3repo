@@ -18,7 +18,7 @@ SpellManager::SpellManager()
 	lightning->set_collision_type(Collision::CollisionType::AABB);
 	lightning->scale.Set(10, 100);
 	lightning->update_collider();
-	lightning->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+	lightning->mesh = MeshList::GetInstance()->getMesh("lightning");
 
 	//lightningQuantity = 5;
 	lightningReuseTime = 3.0;
@@ -34,7 +34,7 @@ SpellManager::SpellManager()
 	freeze->set_collision_type(Collision::CollisionType::AABB);
 	freeze->scale.Set(50, 50);
 	freeze->update_collider();
-	freeze->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+	freeze->mesh = MeshList::GetInstance()->getMesh("freeze");
 
 	//lightningQuantity = 5;
 	freezeReuseTime = 3.0;
@@ -51,7 +51,7 @@ SpellManager::SpellManager()
 	blast->set_collision_type(Collision::CollisionType::AABB);
 	blast->scale.Set(20, 20);
 	blast->update_collider();
-	blast->mesh = MeshList::GetInstance()->getMesh("GREENDRAGON");
+	blast->mesh = MeshList::GetInstance()->getMesh("blast");
 
 	//lightningQuantity = 5;
 	blastReuseTime = 3.0;

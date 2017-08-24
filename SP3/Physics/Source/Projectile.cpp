@@ -5,7 +5,7 @@
 #include "ObjectPoolManager.h"
 #include "ParticleManager.h"
 
-Projectile::Projectile() : velocity(0,0,0), dmg(0)
+Projectile::Projectile() : velocity(0,0,0), dmg(0), mass(1.f)
 {
 }
 Projectile::~Projectile()
@@ -19,6 +19,16 @@ void Projectile::set_dmg(int dmg)
 int Projectile::get_dmg()
 {
 	return dmg;
+}
+
+void Projectile::set_mass(float mass)
+{
+	this->mass = mass;
+}
+
+float Projectile::get_mass()
+{
+	return mass;
 }
 
 void Projectile::collision_response(Collidable* obj)

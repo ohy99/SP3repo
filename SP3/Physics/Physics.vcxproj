@@ -159,6 +159,7 @@
     <ClCompile Include="Source\AudioPlayer.cpp" />
     <ClCompile Include="Source\CharacterInfo.cpp" />
     <ClCompile Include="Source\Collidable.cpp" />
+    <ClCompile Include="Source\Consumables.cpp" />
     <ClCompile Include="Source\DamageArea.cpp" />
     <ClCompile Include="Source\EnemyAiLogic.cpp" />
     <ClCompile Include="Source\EnvironmentManager.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GenericDecoration.cpp" />
     <ClCompile Include="Source\GenericEnvironmentCollidable.cpp" />
+    <ClCompile Include="Source\GoodBow.cpp" />
     <ClCompile Include="Source\Levelselect.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTextData.cpp" />
@@ -185,15 +187,19 @@
     <ClCompile Include="Source\MinionMelee.cpp" />
     <ClCompile Include="Source\MinionRange.cpp" />
     <ClCompile Include="Source\MinionSiege.cpp" />
+    <ClCompile Include="Source\NoobBow.cpp" />
     <ClCompile Include="Source\ObjectPoolManager.cpp" />
+    <ClCompile Include="Source\OkayBow.cpp" />
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\ParticleManager.cpp" />
     <ClCompile Include="Source\PhysicsManager.cpp" />
     <ClCompile Include="Source\Lose.cpp" />
     <ClCompile Include="Source\Projectile.cpp" />
+    <ClCompile Include="Source\ProjectileRainArrow.cpp" />
     <ClCompile Include="Source\RenderHelper.cpp" />
     <ClCompile Include="Source\RenderManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
+    <ClCompile Include="Source\Shop.cpp" />
     <ClCompile Include="Source\ShowHpManager.cpp" />
     <ClCompile Include="Source\SpellManager.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
@@ -201,6 +207,7 @@
     <ClCompile Include="Source\TowerManager.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
+    <ClCompile Include="Source\WeaponCannon.cpp" />
     <ClCompile Include="Source\WeaponInfo.cpp" />
     <ClCompile Include="Source\Win.cpp" />
   </ItemGroup>
@@ -210,8 +217,10 @@
     <ClInclude Include="Source\Button.h" />
     <ClInclude Include="Source\CharacterInfo.h" />
     <ClInclude Include="Source\Collidable.h" />
+    <ClInclude Include="Source\Consumables.h" />
     <ClInclude Include="Source\DamageArea.h" />
     <ClInclude Include="Source\EnemyAiLogic.h" />
+    <ClInclude Include="Source\GoodBow.h" />
     <ClInclude Include="Source\HpBar.h" />
     <ClInclude Include="Source\MinionHealer.h" />
     <ClInclude Include="Source\MinionManager.h" />
@@ -249,12 +258,15 @@
     <ClInclude Include="Source\MinionMelee.h" />
     <ClInclude Include="Source\MinionRange.h" />
     <ClInclude Include="Source\MinionSiege.h" />
+    <ClInclude Include="Source\NoobBow.h" />
     <ClInclude Include="Source\ObjectPoolManager.h" />
+    <ClInclude Include="Source\OkayBow.h" />
     <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\ParticleManager.h" />
     <ClInclude Include="Source\PhysicsManager.h" />
     <ClInclude Include="Source\Lose.h" />
     <ClInclude Include="Source\Projectile.h" />
+    <ClInclude Include="Source\ProjectileRainArrow.h" />
     <ClInclude Include="Source\RenderHelper.h" />
     <ClInclude Include="Source\RenderManager.h" />
     <ClInclude Include="Source\Scene.h" />
@@ -273,6 +285,7 @@
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
     <ClInclude Include="Source\Weapon.h" />
+    <ClInclude Include="Source\WeaponCannon.h" />
     <ClInclude Include="Source\WeaponInfo.h" />
     <ClInclude Include="Source\Win.h" />
   </ItemGroup>

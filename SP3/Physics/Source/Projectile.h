@@ -6,6 +6,7 @@
 class Projectile : public Collidable
 {
 	int dmg;
+	float mass;
 	//maybe can add variables to activate particles here
 public:
 	Vector3 velocity;
@@ -15,6 +16,8 @@ public:
 
 	void set_dmg(int dmg);
 	int get_dmg();
+	void set_mass(float mass);
+	float get_mass();
 
 	virtual void collision_response(Collidable* obj);
 };

@@ -20,6 +20,7 @@ class MinionManager : public Singleton<MinionManager>
 		float move_spd;
 		MINION_INFO();
 	};
+	MINION_INFO default_minion_info[MinionInfo::MINION_TYPE::MINION_TYPE_COUNT];
 	MINION_INFO minion_info[MinionInfo::MINION_TYPE::MINION_TYPE_COUNT];
 	friend Singleton;
 	float minion_scale;
@@ -48,6 +49,15 @@ public:
 
 	float get_move_spd_of_type(MinionInfo::MINION_TYPE type);
 	float get_minion_scale();
+
+	void adjust_minions_move_speed(float percentage_of_default);
+	void reset_minions_move_speed();
+	void adjust_minions_dmg(float percentage_of_default);
+	void reset_minions_dmg();
+	void adjust_minions_att_spd(float percentage_of_default);
+	void reset_minions_att_spd();
+	void adjust_minions_hp(float percentage_of_default);
+	void reset_minions_hp();
 protected:
 	MinionManager();
 	~MinionManager();

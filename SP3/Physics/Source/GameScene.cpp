@@ -99,7 +99,34 @@ void GameScene::Init()
 	CharacterInfo.Init();
 	//CharacterInfo.Load();
 	shop.init();
-	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0, 3));
+	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0,3));
+	switch (SeasonManager::GetInstance()->get_season())
+	{
+	case SeasonManager::WINTER:
+		MinionManager::GetInstance()->adjust_minions_move_speed(80);
+		MinionManager::GetInstance()->adjust_minions_dmg(90);
+		MinionManager::GetInstance()->adjust_minions_hp(110);
+		MinionManager::GetInstance()->adjust_minions_att_spd(80);
+		break;
+	case SeasonManager::SUMMER:
+		MinionManager::GetInstance()->adjust_minions_move_speed(110);
+		MinionManager::GetInstance()->adjust_minions_dmg(120);
+		MinionManager::GetInstance()->adjust_minions_att_spd(110);
+		MinionManager::GetInstance()->adjust_minions_hp(90);
+		break;
+	case SeasonManager::SPRING:
+		MinionManager::GetInstance()->reset_minions_att_spd();
+		MinionManager::GetInstance()->reset_minions_dmg();
+		MinionManager::GetInstance()->reset_minions_hp();
+		MinionManager::GetInstance()->reset_minions_move_speed();
+		break;
+	case SeasonManager::AUTUMN:
+		MinionManager::GetInstance()->adjust_minions_hp(80);
+		MinionManager::GetInstance()->adjust_minions_dmg(80);
+		MinionManager::GetInstance()->adjust_minions_move_speed(120);
+		MinionManager::GetInstance()->adjust_minions_att_spd(80);
+		break;
+	}
 	/*weap.Init();
 	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
@@ -165,7 +192,7 @@ void GameScene::Update(double dt)
 			sa->Update(dt);
 			sa->m_anim->animActive = true;
 		}
-
+	}
 		if (isShop)
 		{
 			shop.Update(dt);
@@ -257,7 +284,7 @@ void GameScene::Update(double dt)
 
 
 		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
-	}
+	
 
 }
 
@@ -288,18 +315,19 @@ void GameScene::Render()
 	RenderHelper::RenderMesh(axis, false);
 
 	ms.PushMatrix();
+	//ms.Scale(600.f / Application::GetWindowHeight(), 600.f/ Application::GetWindowHeight(), 1);
 	ms.Translate(0, 5.f * ((800.f / 600.f) - ((float)Application::GetWindowWidth() / (float)Application::GetWindowHeight())), 0);
 	RenderManager::GetInstance()->render_all_active_objects();
 	ShowHpManager::GetInstance()->render_all_hp_text();
 	ms.PopMatrix();
 
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
-	ms.PushMatrix();
-	ms.Translate(50, 50, 0);
-	ms.Scale(10, 10, 10);
-	RenderHelper::RenderMesh(sa, false);
-	//sa->Render();
-	ms.PopMatrix();
+	//SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
+	//ms.PushMatrix();
+	//ms.Translate(50, 50, 0);
+	//ms.Scale(10, 10, 10);
+	//RenderHelper::RenderMesh(sa, false);
+	////sa->Render();
+	//ms.PopMatrix();
 
 	if (isPause)
 	{

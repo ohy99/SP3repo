@@ -7,14 +7,12 @@ using namespace std;
 #include "Projectile.h"
 
 WeaponInfo::WeaponInfo()
-	//: magRounds(1)
-	//, maxMagRounds(1)
-	//, totalRounds(8)
-	//, maxTotalRounds(8)
 	: timeBetweenShots(0.5)
 	, elapsedTime(0.0)
 	, bFire(true)
-	//, reloadTime(2.0)
+	, damage(0)
+	, force(1.f)
+	, projectile_mass(1.f)
 {
 }
 
@@ -22,55 +20,6 @@ WeaponInfo::WeaponInfo()
 WeaponInfo::~WeaponInfo()
 {
 }
-
-//// Set the number of ammunition in the magazine for this player
-//void CWeaponInfo::SetMagRound(const int magRounds)
-//{
-//	this->magRounds = magRounds;
-//}
-//
-//// Set the maximum number of ammunition in the magazine for this weapon
-//void CWeaponInfo::SetMaxMagRound(const int magRounds)
-//{
-//	this->magRounds = magRounds;
-//}
-//
-//// The current total number of rounds currently carried by this player
-//void CWeaponInfo::SetTotalRound(const int totalRounds)
-//{
-//	this->totalRounds = totalRounds;
-//}
-//
-//// The max total number of rounds currently carried by this player
-//void CWeaponInfo::SetMaxTotalRound(const int maxTotalRounds)
-//{
-//	this->maxTotalRounds = maxTotalRounds;
-//}
-//
-//
-//// Get the number of ammunition in the magazine for this player
-//int CWeaponInfo::GetMagRound(void) const
-//{
-//	return magRounds;
-//}
-//
-//// Get the maximum number of ammunition in the magazine for this weapon
-//int CWeaponInfo::GetMaxMagRound(void) const
-//{
-//	return maxMagRounds;
-//}
-//
-//// Get the current total number of rounds currently carried by this player
-//int CWeaponInfo::GetTotalRound(void) const
-//{
-//	return totalRounds;
-//}
-//
-//// Get the max total number of rounds currently carried by this player
-//int CWeaponInfo::GetMaxTotalRound(void) const
-//{
-//	return maxTotalRounds;
-//}
 
 // Set the time between shots
 void WeaponInfo::SetTimeBetweenShots(const double timeBetweenShots)
@@ -111,23 +60,13 @@ bool WeaponInfo::GetCanFire(void) const
 // Initialise this instance to default values
 void WeaponInfo::Init(void)
 {
-	//// The number of ammunition in a magazine for this weapon
-	//magRounds = 30;
-	//// The maximum number of ammunition for this magazine for this weapon
-	//maxMagRounds = 30;
-	//// The current total number of rounds currently carried by this player
-	//totalRounds = 90;
-	//// The max total number of rounds currently carried by this player
-	//maxTotalRounds = 90;
-
 	// The time between shots
 	timeBetweenShots = 0.5;
 	// The elapsed time (between shots)
 	elapsedTime = 0.0;
 	// Boolean flag to indicate if weapon can fire now
 	bFire = true;
-
-	//reloadTime = 0.0;
+	force = 20;
 }
 
 // Update the elapsed time
@@ -146,81 +85,31 @@ void WeaponInfo::Discharge(Vector3 position, Vector3 dir)
 {
 	if (bFire)
 	{
-		// If there is still ammo in the magazine, then fire
-		//if (magRounds > 0)
-		//{
-			// Create a projectile with a cube mesh. Its position and direction is same as the player.
-			// It will last for 3.0 seconds and travel at 500 units per second
-			//CProjectile* aProjectile = Create::Projectile("bullet", 
-			//												position, 
-			//												(target - position).Normalized(), 
-			//												2.0f, 
-			//												500.0f,
-			//												_source);
 		Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::CANNONBALL);
 		if (proj)
 		{
 			proj->pos = position;
 			proj->dir = dir;
-			proj->velocity = dir * 20;
+			proj->velocity = dir * force;
 			proj->set_dmg(this->get_damage());
 			proj->set_faction_side(this->faction.side);
+			proj->set_mass(projectile_mass);
 		}
-			//aProjectile->SetCollider(true);
-			//aProjectile->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-			bFire = false;
-			//magRounds--;
-		//}
+		bFire = false;
 	}
 }
-
-// Reload this weapon
-//void CWeaponInfo::Reload(const double dt)
-//{
-//	if (magRounds < maxMagRounds)
-//	{
-//		if (maxMagRounds - magRounds <= totalRounds)
-//		{
-//			totalRounds -= maxMagRounds - magRounds;
-//			magRounds = maxMagRounds;
-//		}
-//		else
-//		{
-//			magRounds += totalRounds;
-//			totalRounds = 0;
-//		}
-//	}
-//	
-//}
-
-//// Add rounds
-//void CWeaponInfo::AddRounds(const int newRounds)
-//{
-//	if (totalRounds + newRounds > maxTotalRounds)
-//		totalRounds = maxTotalRounds;
-//	else
-//		totalRounds += newRounds;
-//}
-
-//// Print Self
-//void CWeaponInfo::PrintSelf(void)
-//{
-//	cout << "CWeaponInfo::PrintSelf()" << endl;
-//	cout << "========================" << endl;
-//	cout << "magRounds\t\t:\t" << magRounds << endl;
-//	cout << "maxMagRounds\t\t:\t" << maxMagRounds << endl;
-//	cout << "totalRounds\t\t:\t" << totalRounds << endl;
-//	cout << "maxTotalRounds\t\t:\t" << maxTotalRounds << endl;
-//	cout << "timeBetweenShots\t:\t" << timeBetweenShots << endl;
-//	cout << "elapsedTime\t\t:\t" << elapsedTime << endl;
-//	cout << "bFire\t\t:\t" << bFire << endl;
-//}
-
-
 
 void WeaponInfo::set_faction_side(Faction::FACTION_SIDE side)
 {
 	this->faction.side = side;
+}
+void WeaponInfo::set_attackspeed(float attspd)
+{
+	this->timeBetweenShots = 1.f / attspd;
+}
+float WeaponInfo::get_attackspeed()
+{
+	return 1.f / timeBetweenShots;
 }
 Faction::FACTION_SIDE WeaponInfo::get_faction_side()
 {

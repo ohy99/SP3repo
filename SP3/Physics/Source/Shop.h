@@ -52,6 +52,7 @@ protected:
 	Button Sell8;
 	Button Sell9;
 
+	Button ShopUI;
 	float worldWidth;
 	float worldHeight;
 };

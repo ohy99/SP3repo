@@ -42,6 +42,7 @@ void MinionHealer::attack()
 	if (temp)
 	{
 		temp->active = true;
+		temp->mesh = nullptr;// MeshList::GetInstance()->getMesh("CANNONBALL");
 		temp->pos.Set(this->pos.x + (this->move_direction * this->scale.x * 0.5f).x,
 			this->pos.y, this->pos.z);
 		temp->set_collision_type(Collision::CollisionType::SPHERE);

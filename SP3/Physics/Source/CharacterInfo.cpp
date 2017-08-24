@@ -12,6 +12,10 @@
 #include <sstream>
 #include "Tower.h"
 #include "TowerManager.h"
+#include "WeaponCannon.h"
+#include "NoobBow.h"
+#include "OkayBow.h"
+#include "GoodBow.h"
 using namespace std;
 using std::string;
 
@@ -20,14 +24,16 @@ health(0),
 damage(0),
 levels(0),
 coins(0),
-highscore(0)
+highscore(0),
+weap(nullptr)
 {
 
 }
 
 Character::~Character()
 {
-
+	if(weap)
+	delete weap;
 }
 
 
@@ -40,20 +46,16 @@ void Character::Update(double dt)
 	Application::GetCursorPos(&x, &y);
 	int w = Application::GetWindowWidth();
 	int h = Application::GetWindowHeight();
-	static bool keypressed = false;
+	//static bool keypressed = false;
 	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
-	if (Application::GetInstance().IsMousePressed(1) && !keypressed)
+	if (Application::GetInstance().IsMousePressed(1))
 	{
-		weap.dir = -weap.pos + cursor_point_in_world_space;
-		weap.dir.Normalize();
-		weap.Discharge(weap.pos, weap.dir);
-		keypressed = true;
+		weap->dir = -weap->pos + cursor_point_in_world_space;
+		weap->dir.Normalize();
+		weap->Discharge(weap->pos, weap->dir);
 	}
-	else if (!Application::GetInstance().IsMousePressed(1) && keypressed)
-	{
-		keypressed = false;
-	}
-	weap.WeaponInfo::Update(dt);
+
+	weap->WeaponInfo::Update(dt);
 
 	//------------Minon Section Update-------------------------------//
 
@@ -137,19 +139,76 @@ void Character::Update(double dt)
 	}
 }
 
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('Q') && !dakeypressed)
+		{
+			weapsah[currweap]->active = false;
+			currweap = Math::Wrap(currweap - 1, 0, 2);
+			weapsah[currweap]->active = true;
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('Q') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('E') && !dakeypressed)
+		{
+			weapsah[currweap]->active = false;
+			currweap = Math::Wrap(currweap + 1, 0, 2);
+			weapsah[currweap]->active = true;
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('E') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+	weap = weapsah[currweap];
 }
 
 void Character::Init()
 {
 	this->Load();
-	weap.Init();
-	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
-	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
-	weap.scale.Set(5, 5, 5);
-	weap.active = true;
-	weap.pos.Set(7.5, 25);
-	weap.set_damage(50);
-	RenderManager::GetInstance()->attach_renderable(&weap, 1);
+	//weap->Init();
+	//weap->set_faction_side(Faction::FACTION_SIDE::PLAYER);
+	//weap->mesh = MeshList::GetInstance()->getMesh("CANNON");
+	//weap->scale.Set(5, 5, 5);
+	//weap->active = true;
+	//weap->pos.Set(7.5, 25);
+	//weap->set_damage(50);
+	weap = new NoobBow();
+	weap->pos.Set(7.5, 25);
+	weap->scale.Set(5, 5, 5);
+	weap->set_faction_side(Faction::FACTION_SIDE::PLAYER);
+	weap->mesh = MeshList::GetInstance()->getMesh("CANNON");
+	weap->active = false;
+	RenderManager::GetInstance()->attach_renderable(weap, 1);
+	weapsah[0] = weap;
+	weap = new OkayBow();
+	weap->pos.Set(7.5, 25);
+	weap->scale.Set(5, 5, 5);
+	weap->set_faction_side(Faction::FACTION_SIDE::PLAYER);
+	weap->mesh = MeshList::GetInstance()->getMesh("CANNON");
+	weap->active = false;
+	RenderManager::GetInstance()->attach_renderable(weap, 1);
+	weapsah[1] = weap;
+	weap = new GoodBow();
+	weap->pos.Set(7.5, 25);
+	weap->scale.Set(5, 5, 5);
+	weap->set_faction_side(Faction::FACTION_SIDE::PLAYER);
+	weap->mesh = MeshList::GetInstance()->getMesh("CANNON");
+	weap->active = false;
+	RenderManager::GetInstance()->attach_renderable(weap, 1);
+	weapsah[2] = weap;
+	weap = weapsah[0];
+	currweap = 0;
+	weap->active = true;
+
+	//RenderManager::GetInstance()->attach_renderable(weap, 1);
 	consumables.attachCharacter(this);
 	consumables.attachWallet(&this->wallet);
 	charTower = TowerManager::GetInstance()->player;
