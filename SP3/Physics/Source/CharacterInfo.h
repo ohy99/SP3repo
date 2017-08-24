@@ -100,5 +100,5 @@ public:
 	void Init();
 protected:
 
-
+	double keypresscooldown;
 };

@@ -25,6 +25,7 @@ damage(0),
 levels(0),
 coins(0),
 highscore(0),
+keypresscooldown(3.0),
 weap(nullptr)
 {
 
@@ -56,7 +57,7 @@ void Character::Update(double dt)
 	}
 
 	weap->WeaponInfo::Update(dt);
-
+	keypresscooldown += dt;
 	//------------Minon Section Update-------------------------------//
 
 	{
@@ -138,20 +139,48 @@ void Character::Update(double dt)
 			dakeypressed = false;
 		}
 	}
-
+	if(keypresscooldown>=3.0f)
 	{
-	static bool dakeypressed = false;
-	if (Application::GetInstance().IsKeyPressed('5') && !dakeypressed)
-	{
-		consumables.UseBigRepairKit();
-		dakeypressed = true;
+		{
+			static bool dakeypressed = false;
+			if (Application::GetInstance().IsKeyPressed('Z') && !dakeypressed)
+			{
+				consumables.UseSmallRepairKit();
+				dakeypressed = true;
+				keypresscooldown = 0;
+			}
+			else if (!Application::GetInstance().IsKeyPressed('Z') && dakeypressed)
+			{
+				dakeypressed = false;
+			}
+		}
+		{
+			static bool dakeypressed = false;
+			if (Application::GetInstance().IsKeyPressed('X') && !dakeypressed)
+			{
+				consumables.UseMedRepairKit();
+				dakeypressed = true;
+				keypresscooldown = 0;
+			}
+			else if (!Application::GetInstance().IsKeyPressed('X') && dakeypressed)
+			{
+				dakeypressed = false;
+			}
+		}
+		{
+			static bool dakeypressed = false;
+			if (Application::GetInstance().IsKeyPressed('C') && !dakeypressed)
+			{
+				consumables.UseBigRepairKit();
+				dakeypressed = true;
+				keypresscooldown = 0;
+			}
+			else if (!Application::GetInstance().IsKeyPressed('C') && dakeypressed)
+			{
+				dakeypressed = false;
+			}
+		}
 	}
-	else if (!Application::GetInstance().IsKeyPressed('5') && dakeypressed)
-	{
-		dakeypressed = false;
-	}
-}
-
 	{
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('Q') && !dakeypressed)
