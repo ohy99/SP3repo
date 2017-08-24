@@ -28,6 +28,10 @@ public:
 	void useFreezeSpell();
 	void useBlastSpell();
 
+	double getLcooldown();
+	double getFcooldown();
+	double getBcooldown();
+
 private:
 	DamageArea* lightning;
 	DamageArea* freeze;

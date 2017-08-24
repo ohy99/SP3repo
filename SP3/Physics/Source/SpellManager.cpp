@@ -197,6 +197,21 @@ void SpellManager::useBlastSpell()
 	}
 }
 
+double SpellManager::getLcooldown()
+{
+	return lightningReuseTime;
+}
+
+double SpellManager::getFcooldown()
+{
+	return freezeReuseTime;
+}
+
+double SpellManager::getBcooldown()
+{
+	return blastReuseTime;
+}
+
 int SpellManager::getLQuantity()
 {
 	return lightningQuantity;
