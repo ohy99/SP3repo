@@ -53,6 +53,6 @@ void MinionRange::attack()
 		if (time_to_hit <= 0)
 			time_to_hit = -time_to_hit;
 		temp->velocity.y = time_to_hit * 0.5f * -PhysicsManager::GetInstance()->get_gravity().y;
-		this->reset_attack();
+		//this->reset_attack();
 	}
 }

@@ -1,11 +1,14 @@
 #include "MinionInfo.h"
 #include "MyMath.h"
 #include "Minion.h"
+#include "CharacterInfo.h"
+
+Character* MinionInfo::character = nullptr;
 
 MinionInfo::MinionInfo() : health(0), max_health(100), attack_damage(0),
 attack_speed(0), attack_range(0), move_speed(0), attack_delay(0.0), move_direction(0, 0, 0), is_CCed(false), 
 knockback_direction(0, 0, 0), knockback_duration(0.0), knockback_force(0.0), knockback_elapsed(0.0),
-nearest_target(nullptr)
+nearest_target(nullptr), cast_time(0.0), cast_elapsed(0.0)
 {
 }
 
@@ -28,7 +31,7 @@ void MinionInfo::set_walking_direction(Vector3 dir)
 	this->move_direction = dir;
 }
 
-void MinionInfo::init_info(int max_hp, int att_dmg, float att_spd, float att_range, float move_spd)
+void MinionInfo::init_info(int max_hp, int att_dmg, float att_spd, float att_range, float move_spd, double cast_time)
 {
 	this->health = max_hp;
 	this->max_health = max_hp;
@@ -36,6 +39,7 @@ void MinionInfo::init_info(int max_hp, int att_dmg, float att_spd, float att_ran
 	this->attack_speed = att_spd;
 	this->attack_range = att_range;
 	this->move_speed = move_spd;
+	this->cast_time = cast_time;
 }
 
 void MinionInfo::get_hit(int dmg)
@@ -55,7 +59,10 @@ void MinionInfo::reset()
 
 void MinionInfo::update_info(double dt)
 {
-	attack_delay = Math::Max(attack_delay - dt, 0.0);
+	if (current_state != STATE::ATTACK)
+		attack_delay = Math::Max(attack_delay - dt, 0.0);
+	else
+		cast_elapsed = Math::Min(cast_elapsed + dt, cast_time);
 }
 
 void MinionInfo::find_nearest_target(Vector3 &pos, Vector3 &scale)
@@ -120,4 +127,14 @@ void MinionInfo::set_knockback(Vector3 direction, float knockback_duration, floa
 	this->knockback_force = knockback_force;
 	this->current_state = STATE::KNOCKBACK;
 	this->is_CCed = true;
+}
+
+void MinionInfo::attach_character(Character * character)
+{
+	this->character = character;
+}
+
+void MinionInfo::add_coin_to_character(int value)
+{
+	this->character->add_coins(value);
 }

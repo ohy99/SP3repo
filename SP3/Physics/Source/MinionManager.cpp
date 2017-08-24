@@ -135,6 +135,12 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 		temp_minion->attach_list_of_ally(&player_minions);
 		temp_minion->set_walking_direction(this->player_movement_direction);
 		player_minions.push_back(temp_minion);
+
+		//lastly check if it is a healer. if it is then let it fly
+		if (type == MinionInfo::MINION_TYPE::BASIC_HEALER) {
+			temp_minion->pos = TowerManager::GetInstance()->player->pos;
+			temp_minion->pos.y += TowerManager::GetInstance()->player->scale.y * 0.5f;
+		}
 	}
 	else
 	{
@@ -145,6 +151,11 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 		temp_minion->attach_list_of_ally(&enemy_minions);
 		temp_minion->set_walking_direction(this->enemy_movement_direction);
 		enemy_minions.push_back(temp_minion);
+		if (type == MinionInfo::MINION_TYPE::BASIC_HEALER)
+		{
+			temp_minion->pos = TowerManager::GetInstance()->enemy->pos;
+			temp_minion->pos.y += TowerManager::GetInstance()->enemy->scale.y * 0.5f;
+		}
 	}
 }
 
@@ -204,24 +215,28 @@ void MinionManager::init_info()
 	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].att_spd = 1.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].att_range = 1.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].move_spd = 5.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].cast_time = 2.f;
 
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].max_hp = 80;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].dmg = 8;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].att_spd = 1.5f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].att_range = 3.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].move_spd = 10.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].cast_time = 1.f;
 
 	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].max_hp = 120;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].dmg = 25;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].att_spd = 0.5f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].att_range = 5.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].move_spd = 3.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].cast_time = 3.f;
 
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].max_hp = 60;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].dmg = 25;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_spd = 2.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_range = 7.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].move_spd = 7.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].cast_time = 3.f;
 
 	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
 		default_minion_info[i] = minion_info[i];
@@ -281,7 +296,8 @@ void MinionManager::init_info(Minion * minion, MinionInfo::MINION_TYPE type)
 		minion_info[type].dmg,
 		minion_info[type].att_spd,
 		minion_info[type].att_range,
-		minion_info[type].move_spd);
+		minion_info[type].move_spd,
+		minion_info[type].cast_time);
 }
 
 void MinionManager::adjust_minions_move_speed(float percentage_of_default)
@@ -311,13 +327,19 @@ void MinionManager::reset_minions_dmg()
 void MinionManager::adjust_minions_att_spd(float percentage_of_default)
 {
 	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+	{
 		minion_info[i].att_spd = default_minion_info[i].att_spd * percentage_of_default/100;
+		minion_info[i].cast_time = default_minion_info[i].cast_time * percentage_of_default / 100;
+	}
 }
 
 void MinionManager::reset_minions_att_spd()
 {
 	for (int i = 0; i < MinionInfo::MINION_TYPE::MINION_TYPE_COUNT; ++i)
+	{
 		minion_info[i].att_spd = default_minion_info[i].att_spd;
+		minion_info[i].cast_time = default_minion_info[i].cast_time;
+	}
 }
 
 void MinionManager::adjust_minions_hp(float percentage_of_default)
@@ -332,8 +354,15 @@ void MinionManager::reset_minions_hp()
 		minion_info[i].max_hp = default_minion_info[i].max_hp;
 }
 
+void MinionManager::attach_character(Character * character)
+{
+	this->characterinfo = character;
+	minions.at(0)->attach_character(this->characterinfo);//static ma
+}
 
-MinionManager::MINION_INFO::MINION_INFO() : max_hp(0), dmg(0), att_spd(0.f), att_range(0.f), move_spd(0.f)
+
+MinionManager::MINION_INFO::MINION_INFO() : max_hp(0), dmg(0), att_spd(0.f), att_range(0.f),
+	move_spd(0.f), cast_time(0.0)
 {
 }
 

@@ -10,16 +10,16 @@ MinionSiege::MinionSiege()
 {
 	this->minion_type = MinionInfo::MINION_TYPE::BASIC_SIEGE;
 	mesh_state[MinionInfo::STATE::DEAD] = nullptr;
-	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("BROWNDRAGON");
-	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("BLUEATTACK");
-	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("BLUEDRAGON");
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLUEDRAGON"));
+	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
+	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("GREENATTACK");
+	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
 	if (sa)
 	{
 		sa->m_anim = new Animation();
 		sa->m_anim->Set(0, 5, 1, 10.0f, true);
 	}
-	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLUEATTACK"));
+	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENATTACK"));
 	if (sa2)
 	{
 		sa2->m_anim = new Animation();
@@ -53,6 +53,6 @@ void MinionSiege::attack()
 		if (time_to_hit <= 0)
 			time_to_hit = -time_to_hit;
 		temp->velocity.y = time_to_hit * 0.5f * -PhysicsManager::GetInstance()->get_gravity().y;
-		this->reset_attack();
+		//this->reset_attack();
 	}
 }

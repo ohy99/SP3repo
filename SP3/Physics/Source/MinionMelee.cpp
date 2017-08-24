@@ -52,6 +52,6 @@ void MinionMelee::attack()
 		temp->set_faction_side(this->get_faction_side());
 		temp->set_duration(0.5f);
 		//successful attack
-		this->reset_attack();
+		//this->reset_attack();
 	}
 }

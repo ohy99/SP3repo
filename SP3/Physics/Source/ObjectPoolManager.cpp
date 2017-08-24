@@ -11,7 +11,7 @@
 
 ObjectPoolManager::ObjectPoolManager()
 {
-	for (unsigned int i = 0; i < (unsigned)100; ++i)
+	for (unsigned int i = 0; i < (unsigned)200; ++i)
 	{
 		Projectile* temp_proj = new Projectile();
 		temp_proj->set_collision_type(Collision::CollisionType::SPHERE);

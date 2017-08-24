@@ -11,7 +11,7 @@ GoodBow::GoodBow()
 	this->force = 40.f;
 	this->projectile_mass = 2.f;
 
-	this->num_of_splits = 3.f;
+	this->num_of_splits = 18.f;
 	this->spliting_time = 1.f;
 	this->percentage_force_transfered = 0.75f;
 	this->degree_apart = 20.f;

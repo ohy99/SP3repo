@@ -9,6 +9,7 @@
 #include "HpBar.h"
 #include "Collidable.h"
 #include "ShowHpManager.h"
+#include "CharacterInfo.h"
 
 Minion::Minion()
 {
@@ -28,6 +29,8 @@ Minion::Minion()
 		sa2->m_anim = new Animation();
 		sa2->m_anim->Set(0, 5, 1, 10.0f, true);
 	}
+
+	attacked = false;
 }
 
 Minion::~Minion()
@@ -69,7 +72,22 @@ void Minion::respond_to_state(double dt)
 		this->pos += this->move_direction * this->get_move_speed() * (float)dt;
 		break;
 	case STATE::ATTACK:
-		attack();
+		//wait 0.5
+		if (cast_elapsed >= cast_time * 0.5);
+		{
+			if (attacked == false)
+			{
+				attack();
+				attacked = true;
+			}
+			if (cast_elapsed >= cast_time)
+			{
+				this->reset_attack();
+				attacked = false;
+				cast_elapsed = 0.0;
+			}
+		}
+		//0.5//finish the animation
 		break;
 	case STATE::KNOCKBACK:
 	{
@@ -116,6 +134,9 @@ void Minion::get_hit(int dmg)
 {
 	this->health = Math::Clamp(health - dmg, 0, max_health);
 	ShowHpManager::GetInstance()->generate_hp_text(this->pos + Vector3(0, this->scale.y * 0.5f, 0), dmg);
+	if (dmg > 0)
+		if (this->get_faction_side() == Faction::FACTION_SIDE::ENEMY)
+			this->add_coin_to_character(dmg);
 }
 
 void Minion::collision_response(Collidable * obj)
@@ -140,6 +161,7 @@ void Minion::collision_response(Collidable * obj)
 	else if (temp_tower)
 		if (this->get_faction_side() != obj->get_faction_side())
 			this->pos = prev_pos;
+
 }
 
 void Minion::render()
