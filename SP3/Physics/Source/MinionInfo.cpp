@@ -138,3 +138,8 @@ void MinionInfo::add_coin_to_character(int value)
 {
 	this->character->add_coins(value);
 }
+
+void MinionInfo::send_damage_feedback_to_character(int dmg, bool killed_target, int target_hp)
+{
+	this->character->set_damage_feedback(dmg, killed_target, target_hp);
+}
