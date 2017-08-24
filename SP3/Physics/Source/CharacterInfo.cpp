@@ -127,6 +127,19 @@ void Character::Update(double dt)
 	}
 
 	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('9') && !dakeypressed)
+		{
+			SpellManager::GetInstance()->useFireSpell();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('9') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
+	{
 	static bool dakeypressed = false;
 	if (Application::GetInstance().IsKeyPressed('5') && !dakeypressed)
 	{

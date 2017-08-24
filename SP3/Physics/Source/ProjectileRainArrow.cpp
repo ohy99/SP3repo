@@ -48,6 +48,7 @@ void ProjectileRainArrow::update(double dt)
 void ProjectileRainArrow::set_spliting_time(double time)
 {
 	this->spliting_time = time;
+	elapsed_time = 0.0;
 }
 
 void ProjectileRainArrow::set_num_of_splits(unsigned num)

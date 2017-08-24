@@ -7,7 +7,7 @@ OkayBow::OkayBow()
 {
 	this->set_attackspeed(3.f);
 	this->damage = 8;
-	this->force = 25.f;
+	this->force = 35.f;
 	this->projectile_mass = 1.f;
 
 	this->num_of_shots = 3;

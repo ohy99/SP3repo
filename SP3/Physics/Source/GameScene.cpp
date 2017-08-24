@@ -318,6 +318,7 @@ void GameScene::Render()
 	//ms.Scale(600.f / Application::GetWindowHeight(), 600.f/ Application::GetWindowHeight(), 1);
 	ms.Translate(0, 5.f * ((800.f / 600.f) - ((float)Application::GetWindowWidth() / (float)Application::GetWindowHeight())), 0);
 	RenderManager::GetInstance()->render_all_active_objects();
+	SeasonManager::GetInstance()->render_season();
 	ShowHpManager::GetInstance()->render_all_hp_text();
 	ms.PopMatrix();
 

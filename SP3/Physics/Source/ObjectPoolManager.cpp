@@ -46,8 +46,13 @@ ObjectPoolManager::ObjectPoolManager()
 		//PhysicsManager::GetInstance()->add_object(temp_proj);
 		RenderManager::GetInstance()->attach_renderable(temp_proj, 2);
 	}
-	particle_mesh[PARTICLE_CASE::GROUND] = MeshList::GetInstance()->getMesh("Poster");
-	particle_mesh[PARTICLE_CASE::ETOWER] = MeshList::GetInstance()->getMesh("Poster");
+	//particle_mesh[PARTICLE_CASE::GROUND] = MeshList::GetInstance()->getMesh("Poster");
+	//particle_mesh[PARTICLE_CASE::ETOWER] = MeshList::GetInstance()->getMesh("Poster");
+
+	particle_mesh[PARTICLE_CASE::SPRING] = MeshList::GetInstance()->getMesh("SPRING");
+	particle_mesh[PARTICLE_CASE::SUMMER] = MeshList::GetInstance()->getMesh("SUMMER");
+	particle_mesh[PARTICLE_CASE::AUTUMN] = MeshList::GetInstance()->getMesh("AUTUMN");
+	particle_mesh[PARTICLE_CASE::WINTER] = MeshList::GetInstance()->getMesh("WINTER");
 }
 
 ObjectPoolManager::~ObjectPoolManager()
@@ -94,18 +99,11 @@ Projectile* ObjectPoolManager::get_inactive_projectile(int type)
 
 Particle * ObjectPoolManager::get_particle(PARTICLE_CASE id)
 {
-	switch(id)
-	{
-	case PARTICLE_CASE::GROUND:
-		{ 
-			Particle* p = get_inaactive_particle();
-			p->mesh = particle_mesh[id];
-			p->active = true;
-			p->init();
-			return p;
-		}
-			break;
-	}
+	Particle* p = get_inaactive_particle();
+	p->mesh = particle_mesh[id];
+	p->active = true;
+	p->init();
+	return p;
 	return nullptr;
 }
 
