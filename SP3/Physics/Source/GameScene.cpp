@@ -151,7 +151,7 @@ void GameScene::Update(double dt)
 
 
 	static bool PButtonState = false;
-	if (Application::IsKeyPressed('P') && !PButtonState)
+	if (Application::IsKeyPressed('P') && !PButtonState&&!isShop)
 	{
 		if (!isPause)
 			isPause = true;
@@ -166,7 +166,7 @@ void GameScene::Update(double dt)
 	}
 
 	static bool SButtonState = false;
-	if (Application::IsKeyPressed('S') && !SButtonState)
+	if (Application::IsKeyPressed('S') && !SButtonState&&!isPause)
 	{
 		if (!isShop)
 			isShop = true;
@@ -193,11 +193,8 @@ void GameScene::Update(double dt)
 			sa->Update(dt);
 			sa->m_anim->animActive = true;
 		}
-	}
-		if (isShop)
-		{
-			shop.Update(dt);
-		}
+	
+		
 		SpellManager::GetInstance()->update(dt);
 		//Update enemies
 		EnemyAiLogic::GetInstance()->update(dt);
@@ -213,7 +210,11 @@ void GameScene::Update(double dt)
 		GameLogic::GetInstance()->update(dt);
 		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 		fps = 1.0 / dt;
-
+	}
+		if (isShop)
+		{
+			shop.Update(dt);
+		}
 
 		/*GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 
