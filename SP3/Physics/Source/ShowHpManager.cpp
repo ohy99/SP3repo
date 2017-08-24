@@ -72,6 +72,8 @@ void ShowHpManager::HPTEXT::render(FontType* font)
 	ms.PushMatrix();
 	ms.Translate(this->pos);
 	ms.Scale(this->scale);
+	if (this->value < 0)
+		this->value = -this->value;
 	RenderHelper::RenderText(font, std::to_string(this->value), this->color);
 	ms.PopMatrix();
 }

@@ -64,7 +64,7 @@ public:
 	Vector3 GetUp(void) const;
 
 	Wallet & getWallet();
-
+	void add_coins(int value);
 
 	//-----------------------Setters---------------------//
 	void SetPos(const Vector3& pos);

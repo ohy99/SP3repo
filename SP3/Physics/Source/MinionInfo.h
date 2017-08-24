@@ -6,9 +6,10 @@
 #include "Faction.h"
 class Minion;
 class Collidable;
+class Character;
 class MinionInfo
 {
-
+	static Character* character;
 public:
 	enum STATE
 	{
@@ -37,7 +38,7 @@ public:
 	void attach_list_of_ally(std::list<Collidable*>* list);
 	void set_walking_direction(Vector3 dir);
 
-	void init_info(int max_hp, int att_dmg, float att_spd, float att_range, float move_spd);
+	void init_info(int max_hp, int att_dmg, float att_spd, float att_range, float move_spd, double cast_time = 1.f);
 	virtual void get_hit(int dmg);
 	void reset();
 
@@ -50,6 +51,9 @@ public:
 	void reset_attack();
 
 	void set_knockback(Vector3 direction, float knockback_duration, float knockback_force);
+
+	void attach_character(Character* character);
+	void add_coin_to_character(int value);
 protected:
 	int health;
 	int max_health;
@@ -57,6 +61,8 @@ protected:
 	float attack_speed;//how many hits per sec
 	float attack_range;
 	float move_speed;
+	double cast_time;
+	double cast_elapsed;
 
 	double attack_delay;
 

@@ -9,6 +9,7 @@
 class DamageArea;
 class Minion;
 class Collidable;
+class Character;
 class MinionManager : public Singleton<MinionManager>
 {
 	struct MINION_INFO
@@ -18,10 +19,12 @@ class MinionManager : public Singleton<MinionManager>
 		float att_spd;
 		float att_range;
 		float move_spd;
+		double cast_time;
 		MINION_INFO();
 	};
 	MINION_INFO default_minion_info[MinionInfo::MINION_TYPE::MINION_TYPE_COUNT];
 	MINION_INFO minion_info[MinionInfo::MINION_TYPE::MINION_TYPE_COUNT];
+	Character* characterinfo;
 	friend Singleton;
 	float minion_scale;
 	std::vector<Minion*> minions;
@@ -58,6 +61,8 @@ public:
 	void reset_minions_att_spd();
 	void adjust_minions_hp(float percentage_of_default);
 	void reset_minions_hp();
+
+	void attach_character(Character* character);
 protected:
 	MinionManager();
 	~MinionManager();

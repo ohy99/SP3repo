@@ -318,6 +318,13 @@ Wallet & Character::getWallet()
 	return wallet;
 }
 
+void Character::add_coins(int value)
+{
+	this->coins += value;
+
+	std::cout << coins << std::endl;
+}
+
 void Character::SetPos(const Vector3 & pos)
 {
 	this->pos = pos;
