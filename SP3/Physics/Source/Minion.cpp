@@ -136,7 +136,10 @@ void Minion::get_hit(int dmg)
 	ShowHpManager::GetInstance()->generate_hp_text(this->pos + Vector3(0, this->scale.y * 0.5f, 0), dmg);
 	if (dmg > 0)
 		if (this->get_faction_side() == Faction::FACTION_SIDE::ENEMY)
+		{
 			this->add_coin_to_character(dmg);
+			this->send_damage_feedback_to_character(dmg, (this->health <= 0 ? true : false), this->max_health);
+		}
 }
 
 void Minion::collision_response(Collidable * obj)

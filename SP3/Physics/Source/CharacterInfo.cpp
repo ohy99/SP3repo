@@ -26,7 +26,10 @@ levels(0),
 coins(0),
 highscore(0),
 keypresscooldown(3.0),
-weap(nullptr)
+weap(nullptr),
+ulti_charge(0.f),
+max_ulti_charge(1500.f),
+kill_enemy_extra_charge_percent(0.5f)
 {
 
 }
@@ -351,7 +354,15 @@ void Character::add_coins(int value)
 {
 	this->coins += value;
 
-	std::cout << coins << std::endl;
+	//std::cout << coins << std::endl;
+}
+
+void Character::set_damage_feedback(int dmg, bool killed_target, int target_max_hp)
+{
+	//gains 1 charge for every dmg dealt
+	//if killed target, gain extra 50% charge of its max hp
+	this->ulti_charge += (killed_target ? (float)dmg + (float)target_max_hp * kill_enemy_extra_charge_percent : (float)dmg);
+	std::cout << ulti_charge << std::endl;
 }
 
 void Character::SetPos(const Vector3 & pos)

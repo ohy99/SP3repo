@@ -45,6 +45,10 @@ private:
 	Tower* charTower;
 	float worldWidth;
 	float worldHeight;
+
+	float ulti_charge;//dmg / 10
+	float kill_enemy_extra_charge_percent;//0 - 1.f
+	float max_ulti_charge;
 public:
 	Character();
 	~Character();
@@ -65,6 +69,7 @@ public:
 
 	Wallet & getWallet();
 	void add_coins(int value);
+	void set_damage_feedback(int dmg, bool killed_target = false, int target_max_hp = 0);
 
 	//-----------------------Setters---------------------//
 	void SetPos(const Vector3& pos);

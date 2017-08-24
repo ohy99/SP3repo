@@ -54,6 +54,7 @@ public:
 
 	void attach_character(Character* character);
 	void add_coin_to_character(int value);
+	void send_damage_feedback_to_character(int dmg, bool killed_target = false, int target_hp = 0);
 protected:
 	int health;
 	int max_health;
