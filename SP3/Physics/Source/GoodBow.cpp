@@ -8,7 +8,7 @@ GoodBow::GoodBow()
 {
 	this->set_attackspeed(2.f);
 	this->damage = 40;
-	this->force = 30.f;
+	this->force = 40.f;
 	this->projectile_mass = 2.f;
 
 	this->num_of_splits = 3.f;
