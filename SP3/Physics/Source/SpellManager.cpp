@@ -14,14 +14,15 @@
 SpellManager::SpellManager()
 {
 	lightning = new DamageArea();
-	lightning->set_damage(100);
+	lightning->set_damage(100, true);
 	lightning->set_collision_type(Collision::CollisionType::AABB);
 	lightning->scale.Set(10, 100);
 	lightning->update_collider();
 	lightning->mesh = MeshList::GetInstance()->getMesh("lightning");
 
 	//lightningQuantity = 5;
-	lightningReuseTime = 3.0;
+	lightningCooldown = 3.0;
+	lightningReuseTime = lightningCooldown;
 
 	lightning->set_duration(0.5);
 	lightning->set_faction_side(Faction::FACTION_SIDE::PLAYER);
@@ -30,14 +31,14 @@ SpellManager::SpellManager()
 
 
 	freeze = new DamageArea();
-	freeze->set_damage(10);
+	freeze->set_damage(10, true);
 	freeze->set_collision_type(Collision::CollisionType::AABB);
 	freeze->scale.Set(50, 50);
 	freeze->update_collider();
 	freeze->mesh = MeshList::GetInstance()->getMesh("freeze");
 
-	//lightningQuantity = 5;
-	freezeReuseTime = 3.0;
+	freezeCooldown = 3.0;
+	freezeReuseTime = freezeCooldown;
 	freezeDuration = 0.0;
 
 	freeze->set_duration(0.5);
@@ -47,14 +48,14 @@ SpellManager::SpellManager()
 
 
 	blast = new DamageArea();
-	blast->set_damage(10);
+	blast->set_damage(10,true);
 	blast->set_collision_type(Collision::CollisionType::AABB);
 	blast->scale.Set(20, 20);
 	blast->update_collider();
 	blast->mesh = MeshList::GetInstance()->getMesh("blast");
 
-	//lightningQuantity = 5;
-	blastReuseTime = 3.0;
+	blastCooldown = 10.0;
+	blastReuseTime = blastCooldown;
 	blastDuration = 0.0;
 
 	blast->set_duration(0.5);
@@ -63,14 +64,14 @@ SpellManager::SpellManager()
 	RenderManager::GetInstance()->attach_renderable(blast);
 
 	fire = new DamageArea();
-	fire->set_damage(1, false);
+	fire->set_damage(10, false, 1.0);
 	fire->set_collision_type(Collision::CollisionType::AABB);
 	fire->scale.Set(20, 20);
 	fire->update_collider();
 	fire->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
 
-	//lightningQuantity = 5;
-	fireReuseTime = 10.0;
+	fireCooldown = 15.0;
+	fireReuseTime = fireCooldown;
 
 	fire->set_duration(10.0);
 	fire->set_faction_side(Faction::FACTION_SIDE::PLAYER);
@@ -125,6 +126,8 @@ void SpellManager::update(double dt)
 
 void SpellManager::useLightningSpell()
 {
+	if (lightning->active || lightningReuseTime < lightningCooldown)
+		return;
 	float worldWidth, worldHeight;
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	double x, y;
@@ -136,7 +139,7 @@ void SpellManager::useLightningSpell()
 	lightning->pos = cursor_point_in_world_space;
 	lightning->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + lightning->scale.y * 0.5f;
 
-	if (lightningReuseTime>3.0)
+	if (lightningReuseTime > lightningCooldown)
 	{
 		lightning->active = true;
 		//lightningQuantity--;
@@ -146,7 +149,10 @@ void SpellManager::useLightningSpell()
 
 void SpellManager::useFreezeSpell()
 {
-	float worldWidth, worldHeight;
+	if (freeze->active || freezeReuseTime < freezeCooldown)
+		return;
+
+		float worldWidth, worldHeight;
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	double x, y;
 	Application::GetCursorPos(&x, &y);
@@ -157,17 +163,20 @@ void SpellManager::useFreezeSpell()
 	freeze->pos = cursor_point_in_world_space;
 	freeze->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + freeze->scale.y * 0.5f;
 
-	if (freezeReuseTime>3.0)
+	if (freezeReuseTime > freezeCooldown)
 	{
 		freeze->active = true;
 		//freezeQuantity--;
 		freezeReuseTime = 0.0;
 		freezeDuration = 2.0;
 	}
+
 }
 
 void SpellManager::useBlastSpell()
 {
+	if (blast->active || blastReuseTime < blastCooldown)
+		return;
 	float worldWidth, worldHeight;
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	double x, y;
@@ -206,10 +215,9 @@ void SpellManager::useBlastSpell()
 		}
 	}
 
-	if (blastReuseTime > 3.0)
+	if (blastReuseTime > blastCooldown)
 	{
 		blast->active = true;
-		//blastQuantity--;
 		blastReuseTime = 0.0;
 		blastDuration = 1.0;
 	}
@@ -217,6 +225,8 @@ void SpellManager::useBlastSpell()
 
 void SpellManager::useFireSpell()
 {
+	if (fire->active || fireReuseTime < fireCooldown)
+		return;
 	float worldWidth, worldHeight;
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	double x, y;
@@ -228,7 +238,7 @@ void SpellManager::useFireSpell()
 	fire->pos = cursor_point_in_world_space;
 	fire->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + fire->scale.y * 0.5f;
 
-	if (fireReuseTime > 10.0)
+	if (fireReuseTime > fireCooldown)
 	{
 		fire->active = true;
 		//lightningQuantity--;
