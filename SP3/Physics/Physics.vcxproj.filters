@@ -194,6 +194,9 @@
     <ClCompile Include="Source\ProjectileRainArrow.cpp">
       <Filter>Header Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Source\HUDManager.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -423,6 +426,9 @@
     </ClInclude>
     <ClInclude Include="Source\ProjectileRainArrow.h">
       <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HUDManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

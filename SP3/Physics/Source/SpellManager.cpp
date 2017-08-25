@@ -10,6 +10,9 @@
 #include "CollisionManager.h"
 #include "MinionManager.h"
 #include "Minion.h"
+#include "CharacterInfo.h"
+#include "GameObject.h"
+#include "TowerManager.h"
 
 SpellManager::SpellManager()
 {
@@ -77,29 +80,64 @@ SpellManager::SpellManager()
 	fire->set_faction_side(Faction::FACTION_SIDE::PLAYER);
 
 	RenderManager::GetInstance()->attach_renderable(fire);
+
+	is_longkang_charging_active = false;
+	is_longkang_active = false;
+	longkang_elasped = 0.0;
+	longkang_chargeup = 2.0;
+
+	longkang = new DamageArea();
+	longkang->set_damage(1, false, 5.f);
+	longkang->set_collision_type(Collision::CollisionType::AABB);
+	longkang->scale.Set(100, 10);
+	longkang->update_collider();
+	longkang->mesh = MeshList::GetInstance()->getMesh("blast");
+
+	longkang_active_elapsed = 0.0;
+	longkang_active_duration = 3.0;
+	longkang->set_duration(longkang_active_duration);
+	longkang->set_faction_side(Faction::FACTION_SIDE::NONE);
+
+	RenderManager::GetInstance()->attach_renderable(longkang);
+	longkang_charging_mesh = new GameObject();
+	longkang_charging_mesh->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+	longkang_charging_mesh->pos = CollisionManager::GetInstance()->get_ground()->pos;
+	RenderManager::GetInstance()->attach_renderable(longkang_charging_mesh);
 }
 
 SpellManager::~SpellManager()
 {
+	delete fire;
+	delete freeze;
+	delete blast;
+	delete lightning;
+	delete longkang;
 }
 
 void SpellManager::update(double dt)
 {	
-	lightningReuseTime += dt;
+	//lightningReuseTime += dt;
+	//why keep on adding without limit?!
+	lightningReuseTime = Math::Min(lightningReuseTime + dt, lightningCooldown);
+	//CLAMP THE REUSE TIME!
 	lightning->update(dt);
 
-	freezeReuseTime += dt;
-	freezeDuration -= dt;
+	freezeReuseTime = Math::Min(freezeReuseTime + dt, freezeCooldown);
+	//freezeDuration -= dt;//FOR???
+	freezeDuration = Math::Max(freezeDuration - dt, 0.0);
 	freeze->update(dt);
 
-	blastReuseTime += dt;
-	blastDuration -= dt;
+	blastReuseTime = Math::Min(blastReuseTime + dt, blastCooldown);
+	//blastDuration -= dt; THIS WILL CAUSE ERROR IF PROGRAME IS LEFT FOR DEMN LONG
+	blastDuration = Math::Max(blastDuration - dt, 0.0);
 	blast->update(dt);
 
-	fireReuseTime += dt;
+	fireReuseTime = Math::Min(fireReuseTime + dt, fireCooldown);
 	fire->update(dt);
 
-
+	update_charging_longkang(dt);
+	longkang->update(dt);
+	update_active_longkang(dt);
 	//cout << lightningQuantity << endl;
 
 	//if (lightning->active)
@@ -139,7 +177,7 @@ void SpellManager::useLightningSpell()
 	lightning->pos = cursor_point_in_world_space;
 	lightning->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + lightning->scale.y * 0.5f;
 
-	if (lightningReuseTime > lightningCooldown)
+	if (lightningReuseTime >= lightningCooldown)
 	{
 		lightning->active = true;
 		//lightningQuantity--;
@@ -163,7 +201,7 @@ void SpellManager::useFreezeSpell()
 	freeze->pos = cursor_point_in_world_space;
 	freeze->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + freeze->scale.y * 0.5f;
 
-	if (freezeReuseTime > freezeCooldown)
+	if (freezeReuseTime >= freezeCooldown)
 	{
 		freeze->active = true;
 		//freezeQuantity--;
@@ -215,7 +253,7 @@ void SpellManager::useBlastSpell()
 		}
 	}
 
-	if (blastReuseTime > blastCooldown)
+	if (blastReuseTime >= blastCooldown)
 	{
 		blast->active = true;
 		blastReuseTime = 0.0;
@@ -226,17 +264,17 @@ void SpellManager::useBlastSpell()
 
 double SpellManager::getLcooldown()
 {
-	return lightningReuseTime;
+	return lightningReuseTime / lightningCooldown;
 }
 
 double SpellManager::getFcooldown()
 {
-	return freezeReuseTime;
+	return freezeReuseTime / freezeCooldown;
 }
 
 double SpellManager::getBcooldown()
 {
-	return blastReuseTime;
+	return blastReuseTime / blastCooldown;
 }
 
 void SpellManager::useFireSpell()
@@ -254,7 +292,7 @@ void SpellManager::useFireSpell()
 	fire->pos = cursor_point_in_world_space;
 	fire->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + fire->scale.y * 0.5f;
 
-	if (fireReuseTime > fireCooldown)
+	if (fireReuseTime >= fireCooldown)
 	{
 		fire->active = true;
 		//lightningQuantity--;
@@ -277,4 +315,138 @@ bool SpellManager::isBlastActive()
 		return true;
 	else
 		return false;
+}
+
+
+void SpellManager::use_longkang_spell()
+{
+	//if (!character->can_use_ulti())
+	//	return;
+
+	longkang->pos = CollisionManager::GetInstance()->get_ground()->pos;
+	//longkang->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y;
+
+	this->character->set_use_ulti(true);
+
+	is_longkang_charging_active = true;
+	longkang_charging_mesh->active = true;
+}
+float SpellManager::get_longkang_charge() {
+	return this->character->get_ulti_charge();
+}
+
+void SpellManager::update_charging_longkang(double dt)
+{
+	if (!is_longkang_charging_active && !longkang_charging_mesh->active)
+		return;
+
+	static bool after_midway = false;
+
+	static float xoffset = 0.75f, yoffset = 1.5f;
+
+	//charge up the longkang first
+	if (after_midway == false)
+	{
+		longkang_elasped = Math::Min(longkang_elasped + dt, longkang_chargeup);
+		longkang_charging_mesh->scale.x = CollisionManager::GetInstance()->get_ground()->scale.x * xoffset
+			* (float)(longkang_elasped / longkang_chargeup);
+		longkang_charging_mesh->scale.y = CollisionManager::GetInstance()->get_ground()->scale.y * yoffset
+			* (float)(longkang_elasped / longkang_chargeup);
+	}
+	else
+	{
+		longkang_elasped = Math::Max(longkang_elasped - dt, 0.0);
+		longkang_charging_mesh->scale.x = CollisionManager::GetInstance()->get_ground()->scale.x * xoffset
+			* (float)(longkang_elasped / longkang_chargeup);
+		longkang_charging_mesh->scale.y = CollisionManager::GetInstance()->get_ground()->scale.y * yoffset
+			* (float)(longkang_elasped / longkang_chargeup);
+	}
+
+	
+	if (longkang_elasped >= longkang_chargeup && after_midway == false)
+	{
+		longkang->active = true;
+		longkang->scale = longkang_charging_mesh->scale;
+		longkang->update_collider();
+		//longkang->scale.Set(100, 10);
+
+		//longkang_elasped = 0.0;
+		is_longkang_charging_active = false;
+
+		longkang_charging_mesh->active = false;
+		//longkang_charging_mesh->scale.SetZero();
+		after_midway = true;
+
+		is_longkang_active = true;
+	}
+	else if (longkang_elasped == 0.0 && after_midway == true)
+	{
+		is_longkang_charging_active = false;
+		longkang_charging_mesh->active = false;
+		after_midway = false;
+	}
+}
+
+void SpellManager::update_active_longkang(double dt)
+{
+	if (!is_longkang_active)
+		return;
+	longkang_active_elapsed = Math::Min(longkang_active_elapsed + dt, longkang_active_duration);
+	bool instantkill = false;
+	if (longkang_active_elapsed == longkang_active_duration)
+		instantkill = true;
+
+	static float kbduration, kbforce;
+	kbduration = 5.f;
+	kbforce = 10.f;
+
+	//make everyone drop
+	std::list<Collidable*> * enemy_minion_list = MinionManager::GetInstance()->get_enemy_minion_list();
+
+	for each (auto &em in *enemy_minion_list)
+	{
+		//applying knockback
+		Minion* minion = dynamic_cast<Minion*>(em);
+		if (minion)
+		{
+			if (minion->check_collision(longkang->get_collider()))
+			{
+				Vector3 direction(0, -1, 0);
+
+				minion->set_knockback(direction, kbduration, kbforce);
+				
+				if (minion->pos.y < 0 || instantkill)
+					minion->active = false;
+			}
+		}
+	}
+	std::list<Collidable*> * player_minion_list = MinionManager::GetInstance()->get_player_minion_list();
+
+	for each (auto &pm in *player_minion_list)
+	{
+		//applying knockback
+		Minion* minion = dynamic_cast<Minion*>(pm);
+		if (minion)
+		{
+			if (minion->check_collision(longkang->get_collider()))
+			{
+				Vector3 direction(0, -1, 0);
+
+				minion->set_knockback(direction, kbduration, kbforce);
+
+				if (minion->pos.y < 0 || instantkill)
+					minion->active = false;
+			}
+		}
+	}
+
+	
+	if (longkang_active_elapsed == longkang_active_duration)
+	{
+		longkang_charging_mesh->active = true;
+		is_longkang_charging_active = false;
+		is_longkang_active = false;
+		//instantly kill those who still collide with
+		longkang_active_elapsed = 0.0;
+	}
 }

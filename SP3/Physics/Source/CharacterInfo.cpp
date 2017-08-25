@@ -36,8 +36,10 @@ kill_enemy_extra_charge_percent(0.5f)
 
 Character::~Character()
 {
-	if(weap)
-	delete weap;
+	//if(weap)
+	//delete weap;
+	for (int i = 0 ; i < 3; ++i)
+	delete weapsah[i];
 }
 
 
@@ -213,6 +215,19 @@ void Character::Update(double dt)
 		}
 	}
 	weap = weapsah[currweap];
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed(VK_SPACE) && !dakeypressed)
+		{
+			SpellManager::GetInstance()->use_longkang_spell();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed(VK_SPACE) && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
 }
 
 void Character::Init()
@@ -323,6 +338,7 @@ void Character::setcurrenthighscore(int highscore)
 {
 	this->highscore = highscore;
 }
+
 void Character::setcurrentst(int soundtrack)
 {
 	this->soundtrack = soundtrack;
@@ -357,13 +373,32 @@ void Character::add_coins(int value)
 	//std::cout << coins << std::endl;
 }
 
+//ULTI
 void Character::set_damage_feedback(int dmg, bool killed_target, int target_max_hp)
 {
 	//gains 1 charge for every dmg dealt
 	//if killed target, gain extra 50% charge of its max hp
-	this->ulti_charge += (killed_target ? (float)dmg + (float)target_max_hp * kill_enemy_extra_charge_percent : (float)dmg);
+	this->ulti_charge += Math::Min( (killed_target ? (float)dmg + (float)target_max_hp * kill_enemy_extra_charge_percent : (float)dmg), 
+		max_ulti_charge - ulti_charge);
 	std::cout << ulti_charge << std::endl;
 }
+
+bool Character::can_use_ulti()
+{
+	return ulti_charge == max_ulti_charge;
+}
+
+void Character::set_use_ulti(bool use)
+{
+	if (use == true)
+		this->ulti_charge = 0.f;
+}
+
+float Character::get_ulti_charge()
+{
+	return ulti_charge;
+}
+
 
 void Character::SetPos(const Vector3 & pos)
 {

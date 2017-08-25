@@ -62,16 +62,16 @@ void MinionInfo::update_info(double dt)
 	if (current_state != STATE::ATTACK)
 		attack_delay = Math::Max(attack_delay - dt, 0.0);
 	else
-		cast_elapsed = Math::Min(cast_elapsed + dt, cast_time);
+		cast_elapsed = Math::Min(cast_elapsed + dt, cast_time);//if attack state
 }
 
 void MinionInfo::find_nearest_target(Vector3 &pos, Vector3 &scale)
 {
-	if (this->can_attack() == false)
+	if (this->can_attack() == false)// && this->current_state != STATE::ATTACK)
 	{
-		this->current_state = WALK;
 		return;
 	}
+	//come in only when can attack and when should attack
 
 	//finding nearest target
 	Collision temp;

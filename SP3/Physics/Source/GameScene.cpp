@@ -22,6 +22,7 @@
 #include "MinionManager.h"
 #include "ShowHpManager.h"
 #include "EnemyAiLogic.h"
+#include "TowerManager.h"
 
 #include "CharacterInfo.h"
 #include "SpriteAnimation.h"
@@ -31,6 +32,7 @@
 #include "WeaponInfo.h"
 #include "SpellManager.h"
 #include "ObjectPoolManager.h"
+#include "HUDManager.h"
 GameScene::GameScene()
 {
 }
@@ -46,6 +48,12 @@ GameScene::~GameScene()
 	RenderManager::Destroy();
 	MinionManager::Destroy();
 	SeasonManager::Destroy();
+	ObjectPoolManager::Destroy();
+	HUDManager::Destroy();
+	EnemyAiLogic::Destroy();
+	ShowHpManager::Destroy();
+	SpellManager::Destroy();
+	TowerManager::Destroy();
 }
 
 void GameScene::Init()
@@ -86,16 +94,9 @@ void GameScene::Init()
 	//Example of Audio playing //
 	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
+	audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
+	
 
-	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
-
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
-	if (sa)
-	{
-
-		sa->m_anim = new Animation();
-		sa->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
 	CharacterInfo.Init();
 	//CharacterInfo.Load();
 	shop.init();
@@ -127,6 +128,58 @@ void GameScene::Init()
 		MinionManager::GetInstance()->adjust_minions_att_spd(80);
 		break;
 	}
+
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
+	if (sa)
+	{
+		sa->m_anim = new Animation();
+		sa->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENATTACK"));
+	if (sa2)
+	{
+		sa2->m_anim = new Animation();
+		sa2->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+
+	SpriteAnimation* sa3 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLUEDRAGON"));
+	if (sa3)
+	{
+		sa3->m_anim = new Animation();
+		sa3->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+	SpriteAnimation* sa4 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLUEATTACK"));
+	if (sa4)
+	{
+		sa4->m_anim = new Animation();
+		sa4->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+
+	SpriteAnimation* sa5 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BROWNDRAGON"));
+	if (sa5)
+	{
+		sa5->m_anim = new Animation();
+		sa5->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+	SpriteAnimation* sa6 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BROWNATTACK"));
+	if (sa6)
+	{
+		sa6->m_anim = new Animation();
+		sa6->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+
+	SpriteAnimation* sa7 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLACKDRAGON"));
+	if (sa7)
+	{
+		sa7->m_anim = new Animation();
+		sa7->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+	SpriteAnimation* sa8 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLACKATTACK"));
+	if (sa8)
+	{
+		sa8->m_anim = new Animation();
+		sa8->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
 	/*weap.Init();
 	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
@@ -141,13 +194,16 @@ void GameScene::Init()
 	shop.attachWalletInfo(&this->CharacterInfo.getWallet());
 	MinionManager::GetInstance()->attach_character(&this->CharacterInfo);
 	EnemyAiLogic::GetInstance()->attachCharacter(&this->CharacterInfo);
+	SpellManager::GetInstance()->character = &this->CharacterInfo;
 }
 
 
 void GameScene::Update(double dt)
 {
 
-
+	
+	
+	
 	//Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
 
 
@@ -187,15 +243,8 @@ void GameScene::Update(double dt)
 	if (!isPause && !isShop)
 	{
 		CharacterInfo.Update(dt);
-		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
-		if (sa)
-		{
 
-			sa->Update(dt);
-			sa->m_anim->animActive = true;
-		}
 	
-		
 		SpellManager::GetInstance()->update(dt);
 		//Update enemies
 		EnemyAiLogic::GetInstance()->update(dt);
@@ -207,7 +256,7 @@ void GameScene::Update(double dt)
 		//update the show hp thing
 		ShowHpManager::GetInstance()->update(dt);
 		ObjectPoolManager::GetInstance()->Update(dt);
-
+		SeasonManager::GetInstance()->update(dt);
 		GameLogic::GetInstance()->update(dt);
 		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 		fps = 1.0 / dt;
@@ -322,6 +371,7 @@ void GameScene::Render()
 	ms.Translate(0, 5.f * ((800.f / 600.f) - ((float)Application::GetWindowWidth() / (float)Application::GetWindowHeight())), 0);
 	RenderManager::GetInstance()->render_all_active_objects();
 	SeasonManager::GetInstance()->render_season();
+	HUDManager::GetInstance()->render();
 	ShowHpManager::GetInstance()->render_all_hp_text();
 	ms.PopMatrix();
 

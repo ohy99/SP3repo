@@ -57,8 +57,12 @@ ObjectPoolManager::ObjectPoolManager()
 
 ObjectPoolManager::~ObjectPoolManager()
 {
-	for each (auto &proj in projectile_pool)
+	for each (auto proj in projectile_pool)
 		delete proj;
+	projectile_pool.clear();
+	for each (auto particle in particle_pool)
+		delete particle;
+	particle_pool.clear();
 }
 
 Projectile* ObjectPoolManager::get_projectile(PROJECTILE_TYPE id, int type)

@@ -8,6 +8,7 @@
 #include "ObjectPoolManager.h"
 #include "ParticleManager.h"
 #include "MeshList.h"
+#include "SpriteAnimation.h"
 class Mesh;
 class SeasonManager : public Singleton<SeasonManager>
 {
@@ -20,9 +21,15 @@ public:
 		AUTUMN,	
 		COUNT
 	}season;
+	Animation season_animation[SEASON_TYPE::COUNT];
 	void set_season(SEASON_TYPE a) { season = a; };
 	SEASON_TYPE get_season() { return season; };
-	void update(double dt) {}
+	void update(double dt) 
+	{
+		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(season_mesh[season]);
+		sa->m_anim = &season_animation[season];
+		sa->Update(dt);
+	}
 	void render_season()
 	{
 		MS& ms = Graphics::GetInstance()->modelStack;
@@ -48,7 +55,11 @@ protected:
 		season_mesh[SUMMER] = MeshList::GetInstance()->getMesh("SUMMER");
 		season_mesh[SPRING] = MeshList::GetInstance()->getMesh("SPRING");
 		season_mesh[AUTUMN] = MeshList::GetInstance()->getMesh("AUTUMN");
-		
+
+		season_animation[SEASON_TYPE::WINTER].Set(0, 8, 1, 10.f, true);
+		season_animation[SEASON_TYPE::SUMMER].Set(0, 8, 1, 10.f, true);
+		season_animation[SEASON_TYPE::SPRING].Set(0, 8, 1, 10.f, true);
+		season_animation[SEASON_TYPE::AUTUMN].Set(0, 8, 1, 10.f, true);
 	};
 	~SeasonManager() {};
 };

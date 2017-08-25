@@ -69,7 +69,12 @@ public:
 
 	Wallet & getWallet();
 	void add_coins(int value);
+
+	//ULTI
 	void set_damage_feedback(int dmg, bool killed_target = false, int target_max_hp = 0);
+	bool can_use_ulti();
+	void set_use_ulti(bool use);
+	float get_ulti_charge();
 
 	//-----------------------Setters---------------------//
 	void SetPos(const Vector3& pos);
