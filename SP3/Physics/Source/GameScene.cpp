@@ -206,7 +206,7 @@ void GameScene::Update(double dt)
 		//update the show hp thing
 		ShowHpManager::GetInstance()->update(dt);
 		ObjectPoolManager::GetInstance()->Update(dt);
-
+		SeasonManager::GetInstance()->update(dt);
 		GameLogic::GetInstance()->update(dt);
 		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 		fps = 1.0 / dt;
