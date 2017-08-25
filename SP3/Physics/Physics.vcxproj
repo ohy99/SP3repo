@@ -172,6 +172,7 @@
     <ClCompile Include="Source\GenericDecoration.cpp" />
     <ClCompile Include="Source\GenericEnvironmentCollidable.cpp" />
     <ClCompile Include="Source\GoodBow.cpp" />
+    <ClCompile Include="Source\HUDManager.cpp" />
     <ClCompile Include="Source\Levelselect.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTextData.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="Source\EnemyAiLogic.h" />
     <ClInclude Include="Source\GoodBow.h" />
     <ClInclude Include="Source\HpBar.h" />
+    <ClInclude Include="Source\HUDManager.h" />
     <ClInclude Include="Source\MinionHealer.h" />
     <ClInclude Include="Source\MinionManager.h" />
     <ClInclude Include="Source\EnemyMinion.h" />

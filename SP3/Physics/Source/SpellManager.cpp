@@ -107,22 +107,32 @@ SpellManager::SpellManager()
 
 SpellManager::~SpellManager()
 {
+	delete fire;
+	delete freeze;
+	delete blast;
+	delete lightning;
+	delete longkang;
 }
 
 void SpellManager::update(double dt)
 {	
-	lightningReuseTime += dt;
+	//lightningReuseTime += dt;
+	//why keep on adding without limit?!
+	lightningReuseTime = Math::Min(lightningReuseTime + dt, lightningCooldown);
+	//CLAMP THE REUSE TIME!
 	lightning->update(dt);
 
-	freezeReuseTime += dt;
-	freezeDuration -= dt;
+	freezeReuseTime = Math::Min(freezeReuseTime + dt, freezeCooldown);
+	//freezeDuration -= dt;//FOR???
+	freezeDuration = Math::Max(freezeDuration - dt, 0.0);
 	freeze->update(dt);
 
-	blastReuseTime += dt;
-	blastDuration -= dt;
+	blastReuseTime = Math::Min(blastReuseTime + dt, blastCooldown);
+	//blastDuration -= dt; THIS WILL CAUSE ERROR IF PROGRAME IS LEFT FOR DEMN LONG
+	blastDuration = Math::Max(blastDuration - dt, 0.0);
 	blast->update(dt);
 
-	fireReuseTime += dt;
+	fireReuseTime = Math::Min(fireReuseTime + dt, fireCooldown);
 	fire->update(dt);
 
 	update_charging_longkang(dt);
@@ -167,7 +177,7 @@ void SpellManager::useLightningSpell()
 	lightning->pos = cursor_point_in_world_space;
 	lightning->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + lightning->scale.y * 0.5f;
 
-	if (lightningReuseTime > lightningCooldown)
+	if (lightningReuseTime >= lightningCooldown)
 	{
 		lightning->active = true;
 		//lightningQuantity--;
@@ -191,7 +201,7 @@ void SpellManager::useFreezeSpell()
 	freeze->pos = cursor_point_in_world_space;
 	freeze->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + freeze->scale.y * 0.5f;
 
-	if (freezeReuseTime > freezeCooldown)
+	if (freezeReuseTime >= freezeCooldown)
 	{
 		freeze->active = true;
 		//freezeQuantity--;
@@ -243,7 +253,7 @@ void SpellManager::useBlastSpell()
 		}
 	}
 
-	if (blastReuseTime > blastCooldown)
+	if (blastReuseTime >= blastCooldown)
 	{
 		blast->active = true;
 		blastReuseTime = 0.0;
@@ -254,17 +264,17 @@ void SpellManager::useBlastSpell()
 
 double SpellManager::getLcooldown()
 {
-	return lightningReuseTime;
+	return lightningReuseTime / lightningCooldown;
 }
 
 double SpellManager::getFcooldown()
 {
-	return freezeReuseTime;
+	return freezeReuseTime / freezeCooldown;
 }
 
 double SpellManager::getBcooldown()
 {
-	return blastReuseTime;
+	return blastReuseTime / blastCooldown;
 }
 
 void SpellManager::useFireSpell()
@@ -282,7 +292,7 @@ void SpellManager::useFireSpell()
 	fire->pos = cursor_point_in_world_space;
 	fire->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y * 2.f + fire->scale.y * 0.5f;
 
-	if (fireReuseTime > fireCooldown)
+	if (fireReuseTime >= fireCooldown)
 	{
 		fire->active = true;
 		//lightningQuantity--;

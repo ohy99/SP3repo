@@ -22,6 +22,7 @@
 #include "MinionManager.h"
 #include "ShowHpManager.h"
 #include "EnemyAiLogic.h"
+#include "TowerManager.h"
 
 #include "CharacterInfo.h"
 #include "SpriteAnimation.h"
@@ -31,6 +32,7 @@
 #include "WeaponInfo.h"
 #include "SpellManager.h"
 #include "ObjectPoolManager.h"
+#include "HUDManager.h"
 GameScene::GameScene()
 {
 }
@@ -46,6 +48,12 @@ GameScene::~GameScene()
 	RenderManager::Destroy();
 	MinionManager::Destroy();
 	SeasonManager::Destroy();
+	ObjectPoolManager::Destroy();
+	HUDManager::Destroy();
+	EnemyAiLogic::Destroy();
+	ShowHpManager::Destroy();
+	SpellManager::Destroy();
+	TowerManager::Destroy();
 }
 
 void GameScene::Init()
@@ -360,6 +368,7 @@ void GameScene::Render()
 	ms.Translate(0, 5.f * ((800.f / 600.f) - ((float)Application::GetWindowWidth() / (float)Application::GetWindowHeight())), 0);
 	RenderManager::GetInstance()->render_all_active_objects();
 	SeasonManager::GetInstance()->render_season();
+	HUDManager::GetInstance()->render();
 	ShowHpManager::GetInstance()->render_all_hp_text();
 	ms.PopMatrix();
 

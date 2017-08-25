@@ -36,8 +36,10 @@ kill_enemy_extra_charge_percent(0.5f)
 
 Character::~Character()
 {
-	if(weap)
-	delete weap;
+	//if(weap)
+	//delete weap;
+	for (int i = 0 ; i < 3; ++i)
+	delete weapsah[i];
 }
 
 
