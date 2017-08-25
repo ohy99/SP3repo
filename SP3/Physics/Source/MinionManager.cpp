@@ -233,7 +233,7 @@ void MinionManager::init_info()
 
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].max_hp = 60;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].dmg = 25;
-	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_spd = 2.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_spd = 1.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_range = 7.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].move_spd = 7.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].cast_time = 3.f;

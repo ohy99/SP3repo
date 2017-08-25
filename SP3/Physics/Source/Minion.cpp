@@ -17,20 +17,12 @@ Minion::Minion()
 	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
 	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("GREENATTACK");
 	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
-	if (sa)
-	{
-		sa->m_anim = new Animation();
-		sa->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENATTACK"));
-	if (sa2)
-	{
-		sa2->m_anim = new Animation();
-		sa2->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
+
 
 	attacked = false;
+
+
+	animation.Set(0, 5, 1, this->move_speed, true);
 }
 
 Minion::~Minion()
@@ -39,23 +31,32 @@ Minion::~Minion()
 
 void Minion::update(double dt)
 {
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
+	//anim_time += (float)dt;
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(mesh_state[current_state]);
 	if (sa)
 	{
-
+		sa->m_anim = &this->animation;
 		sa->Update(dt);
-		sa->m_anim->animActive = true;
 	}
-	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENATTACK"));
-	if (sa2)
-	{
-
-		sa2->Update(dt);
-		sa2->m_anim->animActive = true;
-	}
+	//SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(mesh_state[current_state]);
+	//if (sa2)
+	//{
+	//	sa2->Update(dt);
+	//	sa2->m_anim->animActive = true;
+	//	sa->m_anim->animTime = anim_time;
+	//}
+	MinionInfo::STATE prev_state = current_state;
 	this->prev_pos = this->pos;
 	this->update_info(dt);
 	this->update_state();
+	if (prev_state != current_state)
+	{
+		animation.m_currentTime = 0.f;
+		if (current_state == MinionInfo::STATE::ATTACK)
+			animation.Set(0, 5, 1, this->cast_time, true);
+		else
+			animation.Set(0, 5, 1, this->move_speed, true);
+	}
 
 	respond_to_state(dt);
 }
@@ -73,18 +74,21 @@ void Minion::respond_to_state(double dt)
 		break;
 	case STATE::ATTACK:
 		//wait 0.5
+		std::cout << cast_elapsed << std::endl;
 		if (cast_elapsed >= cast_time * 0.5);
 		{
+			std::cout << cast_elapsed << "   " << cast_time * 0.5 << std::endl;
 			if (attacked == false)
 			{
 				attack();
 				attacked = true;
 			}
-			if (cast_elapsed >= cast_time)
+			if (cast_elapsed >= cast_time && attacked == true)
 			{
-				this->reset_attack();
+				this->reset_attack();//reset attack delay
 				attacked = false;
 				cast_elapsed = 0.0;
+				current_state = WALK;
 			}
 		}
 		//0.5//finish the animation
@@ -120,12 +124,7 @@ void Minion::update_state()
 	//kena Cc, cannot perform normal actions
 	if (this->is_CCed)
 		return;
-	if (enemy_target->size() == 0)
-	{
-		nearest_target = nullptr;
-		this->current_state = WALK;
-		return;
-	}
+
 	this->find_nearest_target(this->pos, this->scale);
 }
 
@@ -169,7 +168,19 @@ void Minion::collision_response(Collidable * obj)
 
 void Minion::render()
 {
-	GameObject::render();
+	//GameObject::render();
+
+	MS& ms = Graphics::GetInstance()->modelStack;
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(this->mesh);
+	sa->m_anim = &this->animation;
+	ms.PushMatrix();
+	ms.Translate(this->pos);
+	ms.Rotate(Math::RadianToDegree(atan2(this->dir.y, this->dir.x)) - 90.f, 0, 0, 1);
+	ms.Scale(this->scale);
+	RenderHelper::RenderMesh(this->mesh, false);
+	ms.PopMatrix();
+
+	sa->m_anim = nullptr;
 
 	HpBar* hp = HpBar::GetInstance();
 	hp->pos = this->pos;

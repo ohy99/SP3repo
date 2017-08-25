@@ -97,13 +97,6 @@ void GameScene::Init()
 
 	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
-	if (sa)
-	{
-
-		sa->m_anim = new Animation();
-		sa->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
 	CharacterInfo.Init();
 	//CharacterInfo.Load();
 	shop.init();
@@ -134,6 +127,58 @@ void GameScene::Init()
 		MinionManager::GetInstance()->adjust_minions_move_speed(120);
 		MinionManager::GetInstance()->adjust_minions_att_spd(80);
 		break;
+	}
+
+	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
+	if (sa)
+	{
+		sa->m_anim = new Animation();
+		sa->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENATTACK"));
+	if (sa2)
+	{
+		sa2->m_anim = new Animation();
+		sa2->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+
+	SpriteAnimation* sa3 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLUEDRAGON"));
+	if (sa3)
+	{
+		sa3->m_anim = new Animation();
+		sa3->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+	SpriteAnimation* sa4 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLUEATTACK"));
+	if (sa4)
+	{
+		sa4->m_anim = new Animation();
+		sa4->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+
+	SpriteAnimation* sa5 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BROWNDRAGON"));
+	if (sa5)
+	{
+		sa5->m_anim = new Animation();
+		sa5->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+	SpriteAnimation* sa6 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BROWNATTACK"));
+	if (sa6)
+	{
+		sa6->m_anim = new Animation();
+		sa6->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+
+	SpriteAnimation* sa7 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLACKDRAGON"));
+	if (sa7)
+	{
+		sa7->m_anim = new Animation();
+		sa7->m_anim->Set(0, 5, 1, 10.0f, true);
+	}
+	SpriteAnimation* sa8 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLACKATTACK"));
+	if (sa8)
+	{
+		sa8->m_anim = new Animation();
+		sa8->m_anim->Set(0, 5, 1, 10.0f, true);
 	}
 	/*weap.Init();
 	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
@@ -195,15 +240,8 @@ void GameScene::Update(double dt)
 	if (!isPause && !isShop)
 	{
 		CharacterInfo.Update(dt);
-		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
-		if (sa)
-		{
 
-			sa->Update(dt);
-			sa->m_anim->animActive = true;
-		}
 	
-		
 		SpellManager::GetInstance()->update(dt);
 		//Update enemies
 		EnemyAiLogic::GetInstance()->update(dt);
