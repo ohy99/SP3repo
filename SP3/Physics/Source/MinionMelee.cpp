@@ -12,18 +12,7 @@ MinionMelee::MinionMelee()
 	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("BROWNDRAGON");
 	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("BROWNATTACK");
 	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("BROWNDRAGON");
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BROWNDRAGON"));
-	if (sa)
-	{
-		sa->m_anim = new Animation();
-		sa->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BROWNATTACK"));
-	if (sa2)
-	{
-		sa2->m_anim = new Animation();
-		sa2->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
+
 }
 
 MinionMelee::~MinionMelee()

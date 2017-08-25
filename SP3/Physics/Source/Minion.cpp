@@ -74,18 +74,21 @@ void Minion::respond_to_state(double dt)
 		break;
 	case STATE::ATTACK:
 		//wait 0.5
+		std::cout << cast_elapsed << std::endl;
 		if (cast_elapsed >= cast_time * 0.5);
 		{
+			std::cout << cast_elapsed << "   " << cast_time * 0.5 << std::endl;
 			if (attacked == false)
 			{
 				attack();
 				attacked = true;
 			}
-			if (cast_elapsed >= cast_time)
+			if (cast_elapsed >= cast_time && attacked == true)
 			{
-				this->reset_attack();
+				this->reset_attack();//reset attack delay
 				attacked = false;
 				cast_elapsed = 0.0;
+				current_state = WALK;
 			}
 		}
 		//0.5//finish the animation
@@ -121,12 +124,7 @@ void Minion::update_state()
 	//kena Cc, cannot perform normal actions
 	if (this->is_CCed)
 		return;
-	if (enemy_target->size() == 0)
-	{
-		nearest_target = nullptr;
-		this->current_state = WALK;
-		return;
-	}
+
 	this->find_nearest_target(this->pos, this->scale);
 }
 

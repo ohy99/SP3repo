@@ -10,21 +10,9 @@ MinionHealer::MinionHealer()
 	this->minion_type = MinionInfo::MINION_TYPE::BASIC_HEALER;
 
 	mesh_state[MinionInfo::STATE::DEAD] = nullptr;
-	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("BLACKATTACK");
+	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
 	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("BLACKATTACK");
 	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLACKDRAGON"));
-	if (sa)
-	{
-		sa->m_anim = new Animation();
-		sa->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLACKATTACK"));
-	if (sa2)
-	{
-		sa2->m_anim = new Animation();
-		sa2->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
 }
 
 MinionHealer::~MinionHealer()
@@ -56,7 +44,6 @@ void MinionHealer::attack()
 			temp->set_faction_side(Faction::FACTION_SIDE::PLAYER);
 		temp->set_duration(0.5);
 		//successful attack
-		this->reset_attack();
 	}
 }
 
