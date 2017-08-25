@@ -5,8 +5,8 @@
 
 OkayBow::OkayBow()
 {
-	this->set_attackspeed(3.f);
-	this->damage = 8;
+	this->set_attackspeed(5.f);
+	this->damage = 3;
 	this->force = 35.f;
 	this->projectile_mass = 1.f;
 
