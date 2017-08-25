@@ -74,8 +74,8 @@ void Minion::respond_to_state(double dt)
 		break;
 	case STATE::ATTACK:
 		//wait 0.5
-		std::cout << cast_elapsed << std::endl;
-		if (cast_elapsed >= cast_time * 0.5);
+		//std::cout << cast_elapsed << std::endl;
+		if (cast_elapsed >= cast_time * 0.5)
 		{
 			std::cout << cast_elapsed << "   " << cast_time * 0.5 << std::endl;
 			if (attacked == false)
