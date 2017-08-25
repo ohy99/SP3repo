@@ -8,6 +8,7 @@
 #include "ObjectPoolManager.h"
 #include "ParticleManager.h"
 #include "MeshList.h"
+#include "SpriteAnimation.h"
 class Mesh;
 class SeasonManager : public Singleton<SeasonManager>
 {
@@ -20,38 +21,14 @@ public:
 		AUTUMN,	
 		COUNT
 	}season;
+	Animation season_animation[SEASON_TYPE::COUNT];
 	void set_season(SEASON_TYPE a) { season = a; };
 	SEASON_TYPE get_season() { return season; };
 	void update(double dt) 
 	{
-		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("WINTER"));
-		if (sa)
-		{
-
-			sa->Update(dt);
-			sa->m_anim->animActive = true;
-		}
-		SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("SUMMER"));
-		if (sa2)
-		{
-
-			sa2->Update(dt);
-			sa2->m_anim->animActive = true;
-		}
-		SpriteAnimation* sa3 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("SPRING"));
-		if (sa3)
-		{
-
-			sa3->Update(dt);
-			sa3->m_anim->animActive = true;
-		}
-		SpriteAnimation* sa4 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("AUTUMN"));
-		if (sa4)
-		{
-
-			sa4->Update(dt);
-			sa4->m_anim->animActive = true;
-		}
+		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(season_mesh[season]);
+		sa->m_anim = &season_animation[season];
+		sa->Update(dt);
 	}
 	void render_season()
 	{
@@ -78,31 +55,11 @@ protected:
 		season_mesh[SUMMER] = MeshList::GetInstance()->getMesh("SUMMER");
 		season_mesh[SPRING] = MeshList::GetInstance()->getMesh("SPRING");
 		season_mesh[AUTUMN] = MeshList::GetInstance()->getMesh("AUTUMN");
-		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("WINTER"));
-		if (sa)
-		{
-			sa->m_anim = new Animation();
-			sa->m_anim->Set(0, 8, 1, 10.0f, true);
-		}
-		SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("SUMMER"));
-		if (sa2)
-		{
-			sa2->m_anim = new Animation();
-			sa2->m_anim->Set(0, 8, 1, 10.0f, true);
-		}
-		SpriteAnimation* sa3 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("SPRING"));
-		if (sa3)
-		{
-			sa3->m_anim = new Animation();
-			sa3->m_anim->Set(0, 8, 1, 10.0f, true);
-		}
-		SpriteAnimation* sa4 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("AUTUMN"));
-		if (sa4)
-		{
-			sa4->m_anim = new Animation();
-			sa4->m_anim->Set(0, 8, 1, 10.0f, true);
-		}
-		
+
+		season_animation[SEASON_TYPE::WINTER].Set(0, 8, 1, 10.f, true);
+		season_animation[SEASON_TYPE::SUMMER].Set(0, 8, 1, 10.f, true);
+		season_animation[SEASON_TYPE::SPRING].Set(0, 8, 1, 10.f, true);
+		season_animation[SEASON_TYPE::AUTUMN].Set(0, 8, 1, 10.f, true);
 	};
 	~SeasonManager() {};
 };

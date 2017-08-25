@@ -4,11 +4,12 @@
 #include "Collidable.h"
 #include "MinionInfo.h"
 class MinionManager;
-
+#include "SpriteAnimation.h"
 class Minion : public Collidable, public MinionInfo
 {
 	friend MinionManager;
 	bool attacked;
+	Animation animation;
 public:
 	Mesh* mesh_state[MinionInfo::STATE::STATE_COUNT];
 	Minion();
