@@ -41,7 +41,8 @@ public:
 		void playSoundThreaded(std::string fileName); //overloaded sound playing
 		void playSoundThreaded3D(std::string fileName, Vector3 pos);
 		bool isSoundPlaying(); // True = music is playing
-
+		void playLoop();
+		void playLoop(std::string fileName);
 		// Pause/Resume, works like any other media player
 		void pause();
 		void resume();

@@ -94,8 +94,8 @@ void GameScene::Init()
 	//Example of Audio playing //
 	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
-
-	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
+	audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
+	
 
 	CharacterInfo.Init();
 	//CharacterInfo.Load();
@@ -200,7 +200,9 @@ void GameScene::Init()
 void GameScene::Update(double dt)
 {
 
-
+	
+	
+	
 	//Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
 
 

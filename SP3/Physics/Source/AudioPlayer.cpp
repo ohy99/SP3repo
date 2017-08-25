@@ -171,6 +171,28 @@ bool AudioPlayer::isSoundPlaying()
 	return !currentSound->isFinished();
 }
 
+void AudioPlayer::playLoop()
+{
+	currentSound = soundEngine->play2D(fileName.c_str(), true, false, true);
+	if (!currentSound)
+	{
+		cout << "Error: Could not play file" << endl;
+		exit(0);
+	}
+	currentSound->setVolume((double)volume / 100.0);
+}
+
+
+void AudioPlayer::playLoop(std::string fileName)
+{
+	currentSound = soundEngine->play2D(fileName.c_str(), true, false, true);
+	if (!currentSound)
+	{
+		cout << "Error: Could not play file" << endl;
+		exit(0);
+	}
+	currentSound->setVolume((double)volume / 100.0);
+}
 /************************
 PAUSE/RESUME
 ************************/
