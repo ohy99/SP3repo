@@ -17,7 +17,7 @@ public:
 	virtual ~Tower();
 	virtual void render();
 	void get_hit(int dmg);
-	
+	int get_health() { return health; }
 };
 
 
