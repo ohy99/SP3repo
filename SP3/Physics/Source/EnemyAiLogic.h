@@ -8,12 +8,13 @@
 #include <vector>
 #include <queue>
 
+class Character;
 class EnemyAiLogic : public Singleton<EnemyAiLogic>
 {
 	friend Singleton;
 
 	//difficulty. 0 - 4?
-	const int logic_level;
+	int logic_level;
 	//to determine how much/ what can be spawned
 	int resource;
 	int resource_gain;
@@ -35,11 +36,16 @@ class EnemyAiLogic : public Singleton<EnemyAiLogic>
 	double spawn_cooldown;
 	double spawn_min_time, spawn_max_time;
 	//const double default_spawn_min_time, default_spawn_max_time;
+
+	Character *character;
+	int level;
 public:
 	void update(double dt);
-protected:
+	void attachCharacter(Character *character);
+	void set_level(int level);
 	EnemyAiLogic(int level = 0);
 	~EnemyAiLogic();
+protected:
 };
 
 #endif // !ENEMYAILOGIC_H

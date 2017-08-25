@@ -140,6 +140,7 @@ void GameScene::Init()
 	//cout << SeasonManager::GetInstance()->get_season() << endl;
 	shop.attachWalletInfo(&this->CharacterInfo.getWallet());
 	MinionManager::GetInstance()->attach_character(&this->CharacterInfo);
+	EnemyAiLogic::GetInstance()->attachCharacter(&this->CharacterInfo);
 }
 
 
