@@ -32,25 +32,25 @@ public:
 			sa->m_anim->animActive = true;
 		}
 		SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("SUMMER"));
-		if (sa)
+		if (sa2)
 		{
 
-			sa->Update(dt);
-			sa->m_anim->animActive = true;
+			sa2->Update(dt);
+			sa2->m_anim->animActive = true;
 		}
 		SpriteAnimation* sa3 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("SPRING"));
-		if (sa)
+		if (sa3)
 		{
 
-			sa->Update(dt);
-			sa->m_anim->animActive = true;
+			sa3->Update(dt);
+			sa3->m_anim->animActive = true;
 		}
 		SpriteAnimation* sa4 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("AUTUMN"));
-		if (sa)
+		if (sa4)
 		{
 
-			sa->Update(dt);
-			sa->m_anim->animActive = true;
+			sa4->Update(dt);
+			sa4->m_anim->animActive = true;
 		}
 	}
 	void render_season()
@@ -85,22 +85,22 @@ protected:
 			sa->m_anim->Set(0, 8, 1, 10.0f, true);
 		}
 		SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("SUMMER"));
-		if (sa)
+		if (sa2)
 		{
-			sa->m_anim = new Animation();
-			sa->m_anim->Set(0, 8, 1, 10.0f, true);
+			sa2->m_anim = new Animation();
+			sa2->m_anim->Set(0, 8, 1, 10.0f, true);
 		}
 		SpriteAnimation* sa3 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("SPRING"));
-		if (sa)
+		if (sa3)
 		{
-			sa->m_anim = new Animation();
-			sa->m_anim->Set(0, 8, 1, 10.0f, true);
+			sa3->m_anim = new Animation();
+			sa3->m_anim->Set(0, 8, 1, 10.0f, true);
 		}
 		SpriteAnimation* sa4 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("AUTUMN"));
-		if (sa)
+		if (sa4)
 		{
-			sa->m_anim = new Animation();
-			sa->m_anim->Set(0, 8, 1, 10.0f, true);
+			sa4->m_anim = new Animation();
+			sa4->m_anim->Set(0, 8, 1, 10.0f, true);
 		}
 		
 	};
