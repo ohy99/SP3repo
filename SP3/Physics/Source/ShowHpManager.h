@@ -34,6 +34,7 @@ public:
 	void update(double dt);
 	void render_all_hp_text();
 	void generate_hp_text(Vector3 pos, int value = 0, bool is_crit = false);//in case doing crit can just enable tat
+	FontType& get_font();
 protected:
 	ShowHpManager();
 	~ShowHpManager();

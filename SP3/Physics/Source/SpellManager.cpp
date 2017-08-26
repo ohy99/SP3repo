@@ -320,8 +320,8 @@ bool SpellManager::isBlastActive()
 
 void SpellManager::use_longkang_spell()
 {
-	//if (!character->can_use_ulti())
-	//	return;
+	if (!character->can_use_ulti())
+		return;
 
 	longkang->pos = CollisionManager::GetInstance()->get_ground()->pos;
 	//longkang->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y;

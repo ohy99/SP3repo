@@ -53,6 +53,11 @@ void ShowHpManager::generate_hp_text(Vector3 pos, int value, bool is_crit)
 	hp_text.push_back(temp);
 }
 
+FontType & ShowHpManager::get_font()
+{
+	return chiller_font;
+}
+
 
 ShowHpManager::HPTEXT::HPTEXT(Vector3 pos, int value, double duration) :
 	value(value), 

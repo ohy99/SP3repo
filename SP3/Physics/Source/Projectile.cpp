@@ -38,7 +38,12 @@ void Projectile::collision_response(Collidable* obj)
 		return;
 	Minion* temp_minion = dynamic_cast<Minion*>(obj);
 	Tower* temp_tower = dynamic_cast<Tower*>(obj);
-
+	if (obj == CollisionManager::GetInstance()->get_ground())
+	{
+		//priority. test to see if it is neccesary
+		this->active = false;
+		return;
+	}
 	if (temp_minion)
 	{
 		temp_minion->get_hit(this->get_dmg());

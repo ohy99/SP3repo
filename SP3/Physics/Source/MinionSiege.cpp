@@ -31,14 +31,16 @@ void MinionSiege::attack()
 	if (temp)
 	{
 		static float x_vel = 5.f;
+		static float proj_mass = 2.f;
 		temp->active = true;
 		temp->pos = this->pos;
 		temp->set_dmg(this->get_attack_damage());
 		temp->set_faction_side(this->get_faction_side());
 		temp->velocity.Set(this->move_direction.x * x_vel, 0, 0);
+		temp->set_mass(proj_mass);
 		//calculate needed y-vel to reach target
 		Vector3 displacement = *nearest_target - this->pos;
-		float time_to_hit = displacement.x / x_vel;
+		float time_to_hit = displacement.x / (x_vel / proj_mass);
 		if (time_to_hit <= 0)
 			time_to_hit = -time_to_hit;
 		temp->velocity.y = time_to_hit * 0.5f * -PhysicsManager::GetInstance()->get_gravity().y;

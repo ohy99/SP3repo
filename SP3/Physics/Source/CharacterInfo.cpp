@@ -47,14 +47,20 @@ kill_enemy_extra_charge_percent(0.5f)
 	audioPlayer.playlist.push_back(new Sound("Audio//BigRepair.mp3"));//6
 
 	audioPlayer.playlist.push_back(new Sound("Audio//Drain.mp3"));//7
+
+	//set nullptr
+	weapsah[0] = nullptr;
+	weapsah[1] = nullptr;
+	weapsah[2] = nullptr;
 }
 
 Character::~Character()
 {
 	//if(weap)
 	//delete weap;
-	for (int i = 0 ; i < 3; ++i)
-	delete weapsah[i];
+	for (int i = 0; i < 3; ++i)
+		if (weapsah[i])
+			delete weapsah[i];
 }
 
 
@@ -427,7 +433,7 @@ void Character::set_use_ulti(bool use)
 
 float Character::get_ulti_charge()
 {
-	return ulti_charge;
+	return ulti_charge / max_ulti_charge;
 }
 
 

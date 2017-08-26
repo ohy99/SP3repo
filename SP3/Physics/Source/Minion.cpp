@@ -173,15 +173,16 @@ void Minion::render()
 
 	MS& ms = Graphics::GetInstance()->modelStack;
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(this->mesh);
-	sa->m_anim = &this->animation;
+	if (sa)
+		sa->m_anim = &this->animation;
 	ms.PushMatrix();
 	ms.Translate(this->pos);
 	ms.Rotate(Math::RadianToDegree(atan2(this->dir.y, this->dir.x)) - 90.f, 0, 0, 1);
 	ms.Scale(this->scale);
 	RenderHelper::RenderMesh(this->mesh, false);
 	ms.PopMatrix();
-
-	sa->m_anim = nullptr;
+	if (sa)
+		sa->m_anim = nullptr;
 
 	HpBar* hp = HpBar::GetInstance();
 	hp->pos = this->pos;

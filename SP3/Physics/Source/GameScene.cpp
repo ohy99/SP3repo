@@ -244,6 +244,8 @@ void GameScene::Update(double dt)
 	{
 		CharacterInfo.Update(dt);
 
+		GameLogic::GetInstance()->update(dt);
+		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	
 		SpellManager::GetInstance()->update(dt);
 		//Update enemies
@@ -257,8 +259,7 @@ void GameScene::Update(double dt)
 		ShowHpManager::GetInstance()->update(dt);
 		ObjectPoolManager::GetInstance()->Update(dt);
 		SeasonManager::GetInstance()->update(dt);
-		GameLogic::GetInstance()->update(dt);
-		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+		HUDManager::GetInstance()->update(dt);
 		fps = 1.0 / dt;
 	}
 		if (isShop)

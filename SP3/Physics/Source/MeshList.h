@@ -234,6 +234,17 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("blast", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\blast.tga");
 		assignMesh(temp);
+
+		//temp = MeshBuilder::GenerateQuad("fire", Color(1, 1, 1), 1);
+		//temp->textureID = LoadTGA("Image\\fire.tga");
+		//assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("SPELLHUD", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\spellhud.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("ULTIREADY", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\ultiready.tga");
+		assignMesh(temp);
 	}
 
 	void assignMesh(Mesh* a) {
