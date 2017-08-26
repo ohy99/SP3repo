@@ -11,6 +11,7 @@
 #include "MeshList.h"
 #include "MinionManager.h"
 #include "SpellManager.h"
+#include "AudioPlayer.h"
 using namespace std;
 class Wallet;
 class Tower;
@@ -50,6 +51,8 @@ private:
 	float kill_enemy_extra_charge_percent;//0 - 1.f
 	float max_ulti_charge;
 public:
+
+	AudioPlayer audioPlayer;
 	Character();
 	~Character();
 

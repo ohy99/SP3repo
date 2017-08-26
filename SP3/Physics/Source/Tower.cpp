@@ -8,6 +8,7 @@
 Tower::Tower()
 {
 	this->active = true;
+	
 }
 
 Tower::Tower(Faction::FACTION_SIDE side)
@@ -17,7 +18,7 @@ Tower::Tower(Faction::FACTION_SIDE side)
 
 	this->maxhealth = 1000;
 	this->health = this->maxhealth;
-
+	audioPlayer.playlist.push_back(new Sound("Audio//Towerhit.mp3"));
 	if (side == Faction::FACTION_SIDE::PLAYER)
 		TowerManager::GetInstance()->player = this;
 	else
@@ -41,6 +42,11 @@ void Tower::render()
 
 void Tower::get_hit(int dmg)
 {
+	
 	this->health = Math::Clamp(health - dmg, 0, maxhealth);
+	if (dmg > 0)
+	{
+		audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
+	}
 	ShowHpManager::GetInstance()->generate_hp_text(this->pos + Vector3(0, this->scale.y * 0.5f, 0), dmg);
 }

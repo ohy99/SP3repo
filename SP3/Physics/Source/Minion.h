@@ -5,11 +5,13 @@
 #include "MinionInfo.h"
 class MinionManager;
 #include "SpriteAnimation.h"
+#include "AudioPlayer.h"
 class Minion : public Collidable, public MinionInfo
 {
 	friend MinionManager;
 	bool attacked;
 	Animation animation;
+	AudioPlayer audioPlayer;
 public:
 	Mesh* mesh_state[MinionInfo::STATE::STATE_COUNT];
 	Minion();

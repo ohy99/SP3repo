@@ -85,7 +85,7 @@ void Options::Init()
 	back.resize_button(30, 15);
 	back.mesh = MeshList::GetInstance()->getMesh("BACK");
 
-	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level1.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
 
 	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);

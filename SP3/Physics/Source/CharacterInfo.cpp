@@ -16,6 +16,7 @@
 #include "NoobBow.h"
 #include "OkayBow.h"
 #include "GoodBow.h"
+#include "AudioPlayer.h"
 using namespace std;
 using std::string;
 
@@ -31,7 +32,21 @@ ulti_charge(0.f),
 max_ulti_charge(1500.f),
 kill_enemy_extra_charge_percent(0.5f)
 {
+	//Audio stuff lul
+	//Playlist starting from 0 
 
+	//Spells
+	audioPlayer.playlist.push_back(new Sound("Audio//lightning.mp3")); //0
+	audioPlayer.playlist.push_back(new Sound("Audio//Blast.mp3")); //1
+	audioPlayer.playlist.push_back(new Sound("Audio//Blizzard.mp3")); //2
+	audioPlayer.playlist.push_back(new Sound("Audio//Drain.mp3")); //3
+
+	//Consumables
+	audioPlayer.playlist.push_back(new Sound("Audio//SmallRepair.mp3")); //4
+	audioPlayer.playlist.push_back(new Sound("Audio//Repair.mp3"));//5
+	audioPlayer.playlist.push_back(new Sound("Audio//BigRepair.mp3"));//6
+
+	audioPlayer.playlist.push_back(new Sound("Audio//Drain.mp3"));//7
 }
 
 Character::~Character()
@@ -97,7 +112,10 @@ void Character::Update(double dt)
 		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
 		{
 			SpellManager::GetInstance()->useLightningSpell();
+			
 			dakeypressed = true;
+			if(dakeypressed == true)
+				audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 		}
 		else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
 		{
@@ -112,6 +130,8 @@ void Character::Update(double dt)
 		{
 			SpellManager::GetInstance()->useFreezeSpell();
 			dakeypressed = true;
+			if (dakeypressed == true)
+				audioPlayer.playSoundThreaded(audioPlayer.playlist[2]->fileName_);
 		}
 		else if (!Application::GetInstance().IsKeyPressed('7') && dakeypressed)
 		{
@@ -125,6 +145,8 @@ void Character::Update(double dt)
 		{
 			SpellManager::GetInstance()->useBlastSpell();
 			dakeypressed = true;
+			if (dakeypressed == true)
+				audioPlayer.playSoundThreaded(audioPlayer.playlist[1]->fileName_);
 		}
 		else if (!Application::GetInstance().IsKeyPressed('8') && dakeypressed)
 		{
@@ -153,6 +175,8 @@ void Character::Update(double dt)
 				consumables.UseSmallRepairKit();
 				dakeypressed = true;
 				keypresscooldown = 0;
+				if (dakeypressed == true)
+					audioPlayer.playSoundThreaded(audioPlayer.playlist[4]->fileName_);
 			}
 			else if (!Application::GetInstance().IsKeyPressed('Z') && dakeypressed)
 			{
@@ -166,6 +190,8 @@ void Character::Update(double dt)
 				consumables.UseMedRepairKit();
 				dakeypressed = true;
 				keypresscooldown = 0;
+				if (dakeypressed == true)
+					audioPlayer.playSoundThreaded(audioPlayer.playlist[5]->fileName_);
 			}
 			else if (!Application::GetInstance().IsKeyPressed('X') && dakeypressed)
 			{
@@ -179,6 +205,8 @@ void Character::Update(double dt)
 				consumables.UseBigRepairKit();
 				dakeypressed = true;
 				keypresscooldown = 0;
+				if (dakeypressed == true)
+					audioPlayer.playSoundThreaded(audioPlayer.playlist[6]->fileName_);
 			}
 			else if (!Application::GetInstance().IsKeyPressed('C') && dakeypressed)
 			{
@@ -222,6 +250,9 @@ void Character::Update(double dt)
 		{
 			SpellManager::GetInstance()->use_longkang_spell();
 			dakeypressed = true;
+			if (dakeypressed == true)
+				audioPlayer.playSoundThreaded(audioPlayer.playlist[7]->fileName_);
+
 		}
 		else if (!Application::GetInstance().IsKeyPressed(VK_SPACE) && dakeypressed)
 		{

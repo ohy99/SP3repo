@@ -77,10 +77,10 @@ void Mainmenu::Init()
 	title.resize_button(80, 30);
 	title.mesh = MeshList::GetInstance()->getMesh("TITLE");
 
-	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level1.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
 
-	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
+	audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
 }
 
 

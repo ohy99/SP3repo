@@ -18,7 +18,7 @@ Minion::Minion()
 	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("GREENATTACK");
 	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
 
-
+	audioPlayer.playlist.push_back(new Sound("Audio//Dragondie.mp3"));
 	attacked = false;
 
 
@@ -68,6 +68,7 @@ void Minion::respond_to_state(double dt)
 	{
 	case STATE::DEAD:
 		this->active = false;
+		audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 		break;
 	case STATE::WALK:
 		this->pos += this->move_direction * this->get_move_speed() * (float)dt;
