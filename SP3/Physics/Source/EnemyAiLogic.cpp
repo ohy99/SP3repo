@@ -1,19 +1,31 @@
 #include "EnemyAiLogic.h"
 
 #include "MinionManager.h"
+#include "CharacterInfo.h"
 #include <string>
 
 EnemyAiLogic::EnemyAiLogic(int level) : logic_level(level),
 	resource(0), resource_gain(0), resource_gain_delay(0.0), resource_gain_elapsed_time(0.0),
 	player_threat_level(0), 
 	random_spawn_cooldown(0.0), random_spawn_min_time(10.0), random_spawn_max_time(15.0),
-	spawn_cooldown(0.0), spawn_min_time(3.0), spawn_max_time(5.0)
+	spawn_cooldown(0.0), spawn_min_time(3.0), spawn_max_time(5.0),
+	level(1)
 {
 	set_spawn_pattern();
 }
 
 EnemyAiLogic::~EnemyAiLogic()
 {
+}
+
+void EnemyAiLogic::attachCharacter(Character *character)
+{
+	this->character = character;
+}
+
+void EnemyAiLogic::set_level(int level)
+{
+	this->level = level;
 }
 
 void EnemyAiLogic::update(double dt)
@@ -45,13 +57,17 @@ void EnemyAiLogic::random_spawn()
 	//current tower hp, player existing minions, difference in minion count, 
 	//player coin, player total level, 
 
+	//level = 1 + (character->getcurrenthighscore() / 1000);
+
 	//temp
 	int rand = Math::RandIntMinMax(0, spawn_pattern.size() - 1);
+	while (spawn_pattern.at(rand).first > level)
+		rand = Math::RandIntMinMax(0, spawn_pattern.size() - 1);
 
 	queue_spawn_horde(spawn_pattern.at(rand).second);
 	//depending on how big the pattern is 
-	random_spawn_min_time = spawn_pattern.at(rand).second.size() * 3.f;//adjust this 3.f
-	random_spawn_max_time = random_spawn_min_time * 1.5f;
+	random_spawn_min_time = spawn_pattern.at(rand).second.size() * 3.0;//adjust this 3.f
+	random_spawn_max_time = random_spawn_min_time * 1.5;
 
 	random_spawn_cooldown = Math::RandFloatMinMax(random_spawn_min_time, random_spawn_max_time);
 }
@@ -151,7 +167,7 @@ void EnemyAiLogic::set_spawn_pattern()
 	temp.second = "MRSH";
 	spawn_pattern.push_back(temp);
 
-	//bonus wierd stuffs
+	//bonus weird stuffs
 	temp.second = "HRSH";
 	spawn_pattern.push_back(temp);
 	temp.second = "HHS";
@@ -159,3 +175,4 @@ void EnemyAiLogic::set_spawn_pattern()
 	temp.second = "MRSHS";
 	spawn_pattern.push_back(temp);
 }
+

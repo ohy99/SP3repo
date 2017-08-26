@@ -159,6 +159,18 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("LEVELSELECTBUTTON", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\levelselect.tga");
 		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("LEVEL1", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\level1.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("LEVEL2", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\level2.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("LEVEL3", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\level3.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("LEVEL4", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\level4.tga");
+		assignMesh(temp);
 		temp = MeshBuilder::GenerateQuad("TITLE", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\title.tga");
 		assignMesh(temp);

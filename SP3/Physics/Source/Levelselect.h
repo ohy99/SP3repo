@@ -5,6 +5,9 @@
 #include <vector>
 #include "Scene.h"
 #include "Camera.h"
+#include "Button.h"
+#include "AudioPlayer.h"
+#include "CharacterInfo.h"
 
 class Mesh;
 
@@ -23,7 +26,15 @@ protected:
 	Camera camera;
 	double fps;
 
+	Button LevelSelect;
+	Button Level1;
+	Button Level2;
+	Button Level3;
+	Button Level4;
+	Button Back;
+
 	Mesh* axis;
+	AudioPlayer audioPlayer;
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;

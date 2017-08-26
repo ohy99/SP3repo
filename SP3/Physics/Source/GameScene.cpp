@@ -193,6 +193,7 @@ void GameScene::Init()
 	//cout << SeasonManager::GetInstance()->get_season() << endl;
 	shop.attachWalletInfo(&this->CharacterInfo.getWallet());
 	MinionManager::GetInstance()->attach_character(&this->CharacterInfo);
+	EnemyAiLogic::GetInstance()->attachCharacter(&this->CharacterInfo);
 	SpellManager::GetInstance()->character = &this->CharacterInfo;
 }
 
@@ -336,7 +337,8 @@ void GameScene::Update(double dt)
 
 		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
 	
-
+		if (TowerManager::GetInstance()->player->get_health() <= 999)
+			SceneManager::GetInstance()->setNextScene("LOSE");
 }
 
 
