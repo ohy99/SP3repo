@@ -111,6 +111,31 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image//blackattack.tga");
 		assignMesh(temp);
 
+
+		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OGREENDRAGON", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//greendragon.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OGREENATTACK", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//greenattack.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OBLUEDRAGON", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//bluedragon.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OBLUEATTACK", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//blueattack.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OBROWNDRAGON", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//browndragon.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OBROWNATTACK", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//brownattack.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OBLACKDRAGON", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//blackdragon.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OBLACKATTACK", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//blackattack.tga");
+		assignMesh(temp);
 		//Level 2
 
 		temp = MeshBuilder::GenerateQuad("BACKGROUND2", Color(1, 1, 1), 1);

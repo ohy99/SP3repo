@@ -98,3 +98,24 @@ void MinionHealer::find_nearest_target(Vector3 & pos, Vector3 & scale)
 		}
 	}
 }
+
+void MinionHealer::set_faction_side(Faction::FACTION_SIDE side)
+{
+	this->Collidable::set_faction_side(side);
+
+	if (side == Faction::FACTION_SIDE::PLAYER)
+	{
+		mesh_state[MinionInfo::STATE::DEAD] = nullptr;
+		mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("#OBLACKDRAGON");
+		mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("#OBLACKATTACK");
+		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("#OBLACKDRAGON");
+	}
+	else
+	{
+		mesh_state[MinionInfo::STATE::DEAD] = nullptr;
+		mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
+		mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("BLACKATTACK");
+		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
+	}
+
+}

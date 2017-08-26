@@ -31,7 +31,7 @@ void MinionSiege::attack()
 	if (temp)
 	{
 		static float x_vel = 5.f;
-		static float proj_mass = 2.f;
+		static float proj_mass = 2.5f;
 		temp->active = true;
 		temp->pos = this->pos;
 		temp->set_dmg(this->get_attack_damage());
@@ -45,5 +45,25 @@ void MinionSiege::attack()
 			time_to_hit = -time_to_hit;
 		temp->velocity.y = time_to_hit * 0.5f * -PhysicsManager::GetInstance()->get_gravity().y;
 		//this->reset_attack();
+	}
+}
+
+void MinionSiege::set_faction_side(Faction::FACTION_SIDE side)
+{
+	this->Collidable::set_faction_side(side);
+
+	switch (side)
+	{
+	case Faction::FACTION_SIDE::PLAYER:
+		mesh_state[MinionInfo::STATE::DEAD] = nullptr;
+		mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("#OGREENDRAGON");
+		mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("#OGREENATTACK");
+		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("#OGREENDRAGON");
+		break;
+	default:
+		mesh_state[MinionInfo::STATE::DEAD] = nullptr;
+		mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
+		mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("GREENATTACK");
+		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("GREENDRAGON");
 	}
 }

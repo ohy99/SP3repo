@@ -60,8 +60,15 @@ void EnemyAiLogic::random_spawn()
 	//level = 1 + (character->getcurrenthighscore() / 1000);
 
 	//temp
+	int max_spawns = 1 + (level) * 5;
+	int minion_size = MinionManager::GetInstance()->get_enemy_minion_list()->size();
+	if (minion_size >= max_spawns)
+		return;
+
+	int left_over_space = max_spawns - minion_size;
+
 	int rand = Math::RandIntMinMax(0, spawn_pattern.size() - 1);
-	while (spawn_pattern.at(rand).first > level)
+	while (spawn_pattern.at(rand).first > level || spawn_pattern.at(rand).second.size() > left_over_space)
 		rand = Math::RandIntMinMax(0, spawn_pattern.size() - 1);
 
 	queue_spawn_horde(spawn_pattern.at(rand).second);

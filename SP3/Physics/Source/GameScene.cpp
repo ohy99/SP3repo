@@ -267,75 +267,6 @@ void GameScene::Update(double dt)
 			shop.Update(dt);
 		}
 
-		/*GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
-
-
-		double x, y;
-		Application::GetCursorPos(&x, &y);
-		int w = Application::GetWindowWidth();
-		int h = Application::GetWindowHeight();
-		Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
-		cout << isPause << endl;
-		*/
-		//static bool keypressed = false;
-		//if (Application::GetInstance().IsMousePressed(1) && !keypressed)
-		//{
-		//	weap.dir = -weap.pos + cursor_point_in_world_space;
-		//	weap.dir.Normalize();
-		//	weap.Discharge(weap.pos, weap.dir);
-		//	keypressed = true;
-		//}
-		//else if (!Application::GetInstance().IsMousePressed(1) && keypressed)
-		//{
-		//	keypressed = false;
-		//}
-		//weap.WeaponInfo::Update(dt);
-
-		//	{
-		//		static bool dakeypressed = false;
-		//		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
-		//		{
-		//			SpellManager::GetInstance()->useLightningSpell();
-		//			dakeypressed = true;
-		//		}
-		//		else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
-		//		{
-		//			dakeypressed = false;
-		//		}
-		//	}
-
-
-		//{
-		//	static bool dakeypressed = false;
-		//	if (Application::GetInstance().IsKeyPressed('7') && !dakeypressed)
-		//	{
-		//		SpellManager::GetInstance()->useFreezeSpell();
-		//		dakeypressed = true;
-		//	}
-		//	else if (!Application::GetInstance().IsKeyPressed('7') && dakeypressed)
-		//	{
-		//		dakeypressed = false;
-		//	}
-		//}
-
-		//{
-		//	static bool dakeypressed = false;
-		//	if (Application::GetInstance().IsKeyPressed('8') && !dakeypressed)
-		//	{
-		//		SpellManager::GetInstance()->useBlastSpell();
-		//		dakeypressed = true;
-		//	}
-		//	else if (!Application::GetInstance().IsKeyPressed('8') && dakeypressed)
-		//	{
-		//		dakeypressed = false;
-		//	}
-		//}
-
-
-
-
-
-
 		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
 	
 		if (TowerManager::GetInstance()->player->get_health() <= 999)
@@ -409,5 +340,20 @@ void GameScene::Exit()
 	//Do this later when the variables are loaded.
 	//CharacterInfo.Save();
 
+	PhysicsManager::Destroy();
+	CollisionManager::Destroy();
+	GameObjectManager::Destroy();
+	GameLogic::Destroy();
+	//MeshList::Destroy();
+	EnvironmentManager::Destroy();
+	RenderManager::Destroy();
+	MinionManager::Destroy();
+	SeasonManager::Destroy();
+	ObjectPoolManager::Destroy();
+	HUDManager::Destroy();
+	EnemyAiLogic::Destroy();
+	ShowHpManager::Destroy();
+	SpellManager::Destroy();
+	TowerManager::Destroy();
 }
 

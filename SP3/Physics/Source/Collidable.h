@@ -12,7 +12,7 @@ class Collidable : public GameObject
 	Faction faction;
 public:
 	Faction::FACTION_SIDE get_faction_side();
-	void set_faction_side(Faction::FACTION_SIDE side);
+	virtual void set_faction_side(Faction::FACTION_SIDE side);
 	virtual void collision_response(Collidable* obj);
 	virtual void update(double dt);
 

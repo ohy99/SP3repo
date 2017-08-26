@@ -123,6 +123,53 @@ Mesh* MeshBuilder::GenerateQuad(const std::string &meshName, Color color, float 
 	return mesh;
 }
 
+Mesh * MeshBuilder::GenerateOppositeQuad(const std::string & meshName, Color color, float length)
+{
+	Vertex v;
+	std::vector<Vertex> vertex_buffer_data;
+	std::vector<GLuint> index_buffer_data;
+
+	v.pos.Set(-0.5f * length, -0.5f * length, 0);
+	v.color = color;
+	v.normal.Set(0, 0, 1);
+	v.texCoord.Set(1.f, 0);
+	vertex_buffer_data.push_back(v);
+	v.pos.Set(0.5f * length, -0.5f * length, 0);
+	v.color = color;
+	v.normal.Set(0, 0, 1);
+	v.texCoord.Set(0.0f, 0);
+	vertex_buffer_data.push_back(v);
+	v.pos.Set(0.5f * length, 0.5f * length, 0);
+	v.color = color;
+	v.normal.Set(0, 0, 1);
+	v.texCoord.Set(0.0f, 1.0f);
+	vertex_buffer_data.push_back(v);
+	v.pos.Set(-0.5f * length, 0.5f * length, 0);
+	v.color = color;
+	v.normal.Set(0, 0, 1);
+	v.texCoord.Set(1.f, 1.0f);
+	vertex_buffer_data.push_back(v);
+
+	index_buffer_data.push_back(3);
+	index_buffer_data.push_back(0);
+	index_buffer_data.push_back(2);
+	index_buffer_data.push_back(1);
+	index_buffer_data.push_back(2);
+	index_buffer_data.push_back(0);
+
+	Mesh *mesh = new Mesh(meshName);
+
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertex_buffer_data.size() * sizeof(Vertex), &vertex_buffer_data[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
+
+	mesh->indexSize = index_buffer_data.size();
+	mesh->mode = Mesh::DRAW_TRIANGLES;
+
+	return mesh;
+}
+
 /******************************************************************************/
 /*!
 \brief
@@ -559,6 +606,64 @@ SpriteAnimation* MeshBuilder::GenerateSpriteAnimation(const std::string& meshNam
 			v.pos.Set(-0.5f, 0.5f, 0);
 			v.color.Set(1, 1, 1, alpha);
 			v.texCoord.Set(u1, v1 + height);
+			vertex_buffer_data.push_back(v);
+
+			index_buffer_data.push_back(offset + 0);
+			index_buffer_data.push_back(offset + 1);
+			index_buffer_data.push_back(offset + 2);
+			index_buffer_data.push_back(offset + 0);
+			index_buffer_data.push_back(offset + 2);
+			index_buffer_data.push_back(offset + 3);
+			offset += 4;
+		}
+	}
+
+	SpriteAnimation *mesh = new SpriteAnimation(meshName, numRow, numCol);
+
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertex_buffer_data.size() * sizeof(Vertex), &vertex_buffer_data[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
+
+	mesh->indexSize = index_buffer_data.size();
+	mesh->mode = Mesh::DRAW_TRIANGLES;
+
+	return mesh;
+}
+
+SpriteAnimation * MeshBuilder::GenerateOppositeSpriteAnimation(const std::string & meshName, unsigned numRow, unsigned numCol, float alpha)
+{
+	Vertex v;
+	std::vector<Vertex> vertex_buffer_data;
+	std::vector<GLuint> index_buffer_data;
+
+	float width = 1.f / numCol;
+	float height = 1.f / numRow;
+	int offset = 0;
+	for (unsigned i = 0; i < numRow; ++i)
+	{
+		for (unsigned j = 0; j < numCol; ++j)
+		{
+			float u1 = j * width;
+			float v1 = 1.0f - height - i * height;
+			v.pos.Set(-0.5f, -0.5f, 0);
+			v.color.Set(1, 1, 1, alpha);
+			v.texCoord.Set(u1 + width, v1);
+			vertex_buffer_data.push_back(v);
+
+			v.pos.Set(0.5f, -0.5f, 0);
+			v.color.Set(1, 1, 1, alpha);
+			v.texCoord.Set(u1, v1);
+			vertex_buffer_data.push_back(v);
+
+			v.pos.Set(0.5f, 0.5f, 0);
+			v.color.Set(1, 1, 1, alpha);
+			v.texCoord.Set(u1, v1 + height);
+			vertex_buffer_data.push_back(v);
+
+			v.pos.Set(-0.5f, 0.5f, 0);
+			v.color.Set(1, 1, 1, alpha);
+			v.texCoord.Set(u1 + width, v1 + height);
 			vertex_buffer_data.push_back(v);
 
 			index_buffer_data.push_back(offset + 0);

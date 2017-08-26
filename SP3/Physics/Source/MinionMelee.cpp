@@ -44,3 +44,23 @@ void MinionMelee::attack()
 		//this->reset_attack();
 	}
 }
+
+void MinionMelee::set_faction_side(Faction::FACTION_SIDE side)
+{
+	this->Collidable::set_faction_side(side);
+
+	switch (side)
+	{
+	case Faction::FACTION_SIDE::PLAYER:
+		mesh_state[MinionInfo::STATE::DEAD] = nullptr;
+		mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("#OBROWNDRAGON");
+		mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("#OBROWNATTACK");
+		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("#OBROWNDRAGON");
+		break;
+	default:
+		mesh_state[MinionInfo::STATE::DEAD] = nullptr;
+		mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("BROWNDRAGON");
+		mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("BROWNATTACK");
+		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("BROWNDRAGON");
+	}
+}

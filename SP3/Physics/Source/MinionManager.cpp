@@ -141,6 +141,12 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 			temp_minion->pos = TowerManager::GetInstance()->player->pos;
 			temp_minion->pos.y += TowerManager::GetInstance()->player->scale.y * 0.5f;
 		}
+
+		//if (temp_minion->mesh->name.find("#O") == std::string::npos)
+		//{
+		//	//cant find opposite tag in meshname
+		//	temp_minion->mesh = MeshList::GetInstance()->getMesh("#O" + temp_minion->mesh->name);
+		//}
 	}
 	else
 	{
@@ -156,6 +162,12 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 			temp_minion->pos = TowerManager::GetInstance()->enemy->pos;
 			temp_minion->pos.y += TowerManager::GetInstance()->enemy->scale.y * 0.5f;
 		}
+
+		//if (temp_minion->mesh->name.find("#O") != std::string::npos)
+		//{
+		//	//found opposite tag in meshname
+		//	temp_minion->mesh = MeshList::GetInstance()->getMesh(temp_minion->mesh->name.substr(2));
+		//}
 	}
 }
 
