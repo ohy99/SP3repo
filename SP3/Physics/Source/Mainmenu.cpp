@@ -23,6 +23,7 @@
 #include "GameLogic.h"
 #include "EnvironmentManager.h"
 #include "RenderManager.h"
+#include "EnemyAiLogic.h"
 
 Mainmenu::Mainmenu()
 {
@@ -110,6 +111,7 @@ void Mainmenu::Update(double dt)
 		if (playbutt.collision.isCollide(cursor_collider))
 		{
 			SceneManager::GetInstance()->setNextScene("GAME");
+			EnemyAiLogic::GetInstance()->set_level(1);
 		}
 		if (levelselectbutt.collision.isCollide(cursor_collider))
 		{

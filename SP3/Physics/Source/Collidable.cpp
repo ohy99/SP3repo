@@ -34,7 +34,7 @@ void Collidable::update_collider()
 	}
 	else if (this->collider.collisionType == Collision::CollisionType::SPHERE)
 	{
-		this->collider.radius = this->scale.x * 0.5f;
+		this->collider.radius = this->scale.x;
 	}
 }
 bool Collidable::check_collision(Collision & tat)

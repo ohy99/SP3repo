@@ -23,7 +23,7 @@
 #include "GameLogic.h"
 #include "EnvironmentManager.h"
 #include "RenderManager.h"
-
+#include "EnemyAiLogic.h"
 
 Levelselect::Levelselect()
 {
@@ -128,22 +128,22 @@ void Levelselect::Update(double dt)
 		if (Level1.collision.isCollide(cursor_collider))
 		{
 			SceneManager::GetInstance()->setNextScene("GAME");
-
+			EnemyAiLogic::GetInstance()->set_level(1);
 		}
 		if (Level2.collision.isCollide(cursor_collider))
 		{
 			SceneManager::GetInstance()->setNextScene("GAME");
-
+			EnemyAiLogic::GetInstance()->set_level(2);
 		}
 		if (Level3.collision.isCollide(cursor_collider))
 		{
 			SceneManager::GetInstance()->setNextScene("GAME");
-
+			EnemyAiLogic::GetInstance()->set_level(3);
 		}
 		if (Level4.collision.isCollide(cursor_collider))
 		{
 			SceneManager::GetInstance()->setNextScene("GAME");
-
+			EnemyAiLogic::GetInstance()->set_level(4);
 		}
 
 		if (Back.collision.isCollide(cursor_collider))

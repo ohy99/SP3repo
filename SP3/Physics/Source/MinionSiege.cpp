@@ -31,7 +31,7 @@ void MinionSiege::attack()
 	if (temp)
 	{
 		static float x_vel = 5.f;
-		static float proj_mass = 2.5f;
+		static float proj_mass = 2.f;
 		temp->active = true;
 		temp->pos = this->pos;
 		temp->set_dmg(this->get_attack_damage());

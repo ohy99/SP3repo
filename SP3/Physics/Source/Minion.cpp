@@ -71,7 +71,7 @@ void Minion::respond_to_state(double dt)
 		audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 		break;
 	case STATE::WALK:
-		this->pos += this->move_direction * this->get_move_speed() * (float)dt;
+		walk(dt);
 		break;
 	case STATE::ATTACK:
 		//wait 0.5
@@ -107,6 +107,11 @@ void Minion::respond_to_state(double dt)
 		break;
 	}
 	}
+}
+
+void Minion::walk(double dt)
+{
+	this->pos += this->move_direction * this->get_move_speed() * (float)dt;
 }
 
 void Minion::attack()

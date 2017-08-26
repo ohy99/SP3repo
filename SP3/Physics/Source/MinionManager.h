@@ -41,6 +41,7 @@ class MinionManager : public Singleton<MinionManager>
 
 	void init_pool();
 	void init_info(Minion* minion, MinionInfo::MINION_TYPE type);
+
 public:
 	void update(double dt);
 	void spawn_minion(bool is_Player_Side = true, MinionInfo::MINION_TYPE type = MinionInfo::MINION_TYPE::BASIC_MELEE);

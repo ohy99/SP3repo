@@ -265,6 +265,19 @@ void Character::Update(double dt)
 			dakeypressed = false;
 		}
 	}
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('0') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_HEALER);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('0') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
 }
 
 void Character::Init()

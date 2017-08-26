@@ -20,6 +20,7 @@ public:
 	virtual void update(double dt);
 
 	//every minion different attack style
+	virtual void walk(double dt);
 	virtual void attack();
 	virtual void update_state();
 	void respond_to_state(double dt);

@@ -5,6 +5,12 @@
 #include "DamageArea.h"
 #include "MinionManager.h"
 
+#include "Graphics.h"
+#include "RenderHelper.h"
+#include "TowerManager.h"
+#include "Tower.h"
+#include <limits>
+
 MinionHealer::MinionHealer()
 {
 	this->minion_type = MinionInfo::MINION_TYPE::BASIC_HEALER;
@@ -31,11 +37,12 @@ void MinionHealer::attack()
 	{
 		temp->active = true;
 		temp->mesh = nullptr;// MeshList::GetInstance()->getMesh("CANNONBALL");
+		temp->mesh = MeshList::GetInstance()->getMesh("Sphere"); //sphere appear extra large because the default radius is 1.f and not 0.5.
 		temp->pos.Set(this->pos.x + (this->move_direction * this->scale.x * 0.5f).x,
 			this->pos.y, this->pos.z);
 		temp->set_collision_type(Collision::CollisionType::SPHERE);
-		temp->scale.Set(this->attack_range * this->scale.x * 0.5f,
-			this->attack_range * this->scale.x * 0.5f);
+		temp->scale.Set(this->attack_range * (this->scale.x * 0.5f),
+			this->attack_range * (this->scale.x * 0.5f));
 		temp->update_collider();
 		temp->set_damage(-this->get_attack_damage());//negative coz heal
 		if (this->get_faction_side() == Faction::FACTION_SIDE::PLAYER)
@@ -118,4 +125,55 @@ void MinionHealer::set_faction_side(Faction::FACTION_SIDE side)
 		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
 	}
 
+}
+
+void MinionHealer::walk(double dt)
+{
+	//this shall not walk infront of first ally
+
+	//find its home position
+	Vector3 home_pos;
+	if (this->get_faction_side() == Faction::FACTION_SIDE::PLAYER)
+		home_pos = TowerManager::GetInstance()->player->pos;
+	else
+		home_pos = TowerManager::GetInstance()->enemy->pos;
+
+	//initialize furthest guy's pos as float limit
+	Vector3 furthest_pos(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
+	float furthest_pos_distsq = -std::numeric_limits<float>::max();
+	//iterate through all the allies and see which one is furthest from base
+	for each (auto &ally in *ally_target)
+	{
+		Minion* ally_minion = dynamic_cast<Minion*>(ally);
+		if (ally_minion)
+		{
+			if (ally_minion == this)
+				continue;
+
+			float distance = (ally_minion->pos.x - home_pos.x);//no need length coz its linear!
+			if (distance < 0)
+				distance = -distance;
+			if (distance > furthest_pos_distsq)
+			{
+				furthest_pos = ally_minion->pos;
+				furthest_pos_distsq = distance;
+			}
+		}
+	}
+
+	//if no suitable ally found, byebye and use default movement
+	if (furthest_pos_distsq == -std::numeric_limits<float>::max())
+	{
+		this->pos += this->move_direction * this->get_move_speed() * (float)dt;
+		return;
+	}
+
+	float distancesq_from_home = (this->pos.x - home_pos.x);
+	if (distancesq_from_home < 0)
+		distancesq_from_home = -distancesq_from_home;
+	if (distancesq_from_home > furthest_pos_distsq)
+		return;//dont move if went too far.
+	
+
+	this->pos += this->move_direction * this->get_move_speed() * (float)dt;
 }

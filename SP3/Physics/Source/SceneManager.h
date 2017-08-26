@@ -49,6 +49,10 @@ public:
 	bool checkShouldExit() {
 		return shouldExit;
 	}
+
+	Scene* get_scene(std::string name) {
+		return scenes.at(name);
+	}
 };
 
 #endif
