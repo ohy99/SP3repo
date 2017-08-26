@@ -24,29 +24,35 @@ void Consumables::attachCharacter(Character *character)
 	this->character = character;
 }
 
-void Consumables::UseSmallRepairKit()
+bool Consumables::UseSmallRepairKit()
 {
 	if (wallet->getsmallrepair() > 0)
 	{
 		wallet->removei_smallrepair(1);
 		Addhealth(150);
+		return true;
 	}
+	return false;
 }
-void Consumables::UseMedRepairKit()
+bool Consumables::UseMedRepairKit()
 {
 	if (wallet->getmediumrepair() > 0)
 	{
 		wallet->removei_medrepair(1);
 		Addhealth(300);
+		return true;
 	}
+	return false;
 }
-void Consumables::UseBigRepairKit()
+bool Consumables::UseBigRepairKit()
 {
 	if (wallet->getbigrepair() > 0)
 	{
 		wallet->removei_bigrepair(1);
 		Addhealth(500);
+		return true;
 	}
+	return false;
 }
 
 void Consumables::Addhealth(int amt)

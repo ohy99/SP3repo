@@ -29,8 +29,6 @@ void Weapon::Init(void)
 	timeBetweenShots = 0.1;
 	// The elapsed time (between shots)
 	elapsedTime = 0.0;
-	// Boolean flag to indicate if weapon can fire now
-	bFire = true;
 
 	//reloadTime = 5.0;
 

@@ -25,10 +25,10 @@ public:
 	bool isFreezeActive();
 	bool isBlastActive();
 
-	void useLightningSpell();
-	void useFreezeSpell();
-	void useBlastSpell();
-	void useFireSpell();
+	bool useLightningSpell();
+	bool useFreezeSpell();
+	bool useBlastSpell();
+	bool useFireSpell();
 
 	double getLcooldown();
 	double getFcooldown();
@@ -38,7 +38,7 @@ public:
 	bool is_longkang_active;
 	double longkang_elasped;
 	double longkang_chargeup;
-	void use_longkang_spell();
+	bool use_longkang_spell();
 	float get_longkang_charge();
 	void update_charging_longkang(double dt);
 	double longkang_active_elapsed;

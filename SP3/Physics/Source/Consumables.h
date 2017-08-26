@@ -12,9 +12,9 @@ class Consumables
 public:
 	Consumables();
 	~Consumables();
-	void UseSmallRepairKit();
-	void UseMedRepairKit();
-	void UseBigRepairKit();
+	bool UseSmallRepairKit();
+	bool UseMedRepairKit();
+	bool UseBigRepairKit();
 
 	//void addSmallRepair(int amt);
 	//void addMedRepair(int amt);

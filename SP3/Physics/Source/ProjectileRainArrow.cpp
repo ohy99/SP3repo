@@ -35,6 +35,7 @@ void ProjectileRainArrow::update(double dt)
 			proj->velocity = proj->dir * percentage_force_transfered * this->velocity.Length();
 			proj->set_collision_type(Collision::CollisionType::SPHERE);
 			proj->set_dmg(spliteddmg);
+			proj->set_mass(percentage_force_transfered * this->get_mass());
 
 			proj->scale.Set(3, 3);
 			proj->update_collider();

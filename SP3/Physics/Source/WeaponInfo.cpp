@@ -9,7 +9,6 @@ using namespace std;
 WeaponInfo::WeaponInfo()
 	: timeBetweenShots(0.5)
 	, elapsedTime(0.0)
-	, bFire(true)
 	, damage(0)
 	, force(1.f)
 	, projectile_mass(1.f)
@@ -33,12 +32,6 @@ void WeaponInfo::SetFiringRate(const int firingRate)
 	timeBetweenShots = 60.0 / (double)firingRate;	// 60 seconds divided by firing rate
 }
 
-// Set the firing flag
-void WeaponInfo::SetCanFire(const bool bFire)
-{
-	this->bFire = bFire;
-}
-
 // Get the time between shots
 double WeaponInfo::GetTimeBetweenShots(void) const
 {
@@ -51,12 +44,6 @@ int WeaponInfo::GetFiringRate(void) const
 	return (int)(60.0 / timeBetweenShots);	// 60 seconds divided by timeBetweenShots
 }
 
-// Get the firing flag
-bool WeaponInfo::GetCanFire(void) const
-{
-	return bFire;
-}
-
 // Initialise this instance to default values
 void WeaponInfo::Init(void)
 {
@@ -64,26 +51,19 @@ void WeaponInfo::Init(void)
 	timeBetweenShots = 0.5;
 	// The elapsed time (between shots)
 	elapsedTime = 0.0;
-	// Boolean flag to indicate if weapon can fire now
-	bFire = true;
 	force = 20;
 }
 
 // Update the elapsed time
 void WeaponInfo::Update(const double dt)
 {
-	elapsedTime += dt;
-	if (elapsedTime > timeBetweenShots)
-	{
-		bFire = true;
-		elapsedTime = 0.0;
-	}
+	elapsedTime = Math::Min(elapsedTime + dt, timeBetweenShots);
 }
 
 // Discharge this weapon
 void WeaponInfo::Discharge(Vector3 position, Vector3 dir)
 {
-	if (bFire)
+	if (elapsedTime >= timeBetweenShots)
 	{
 		Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::CANNONBALL);
 		if (proj)
@@ -95,7 +75,7 @@ void WeaponInfo::Discharge(Vector3 position, Vector3 dir)
 			proj->set_faction_side(this->faction.side);
 			proj->set_mass(projectile_mass);
 		}
-		bFire = false;
+		elapsedTime = 0.0;
 	}
 }
 

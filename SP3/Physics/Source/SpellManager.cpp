@@ -162,10 +162,10 @@ void SpellManager::update(double dt)
 	//}
 }
 
-void SpellManager::useLightningSpell()
+bool SpellManager::useLightningSpell()
 {
 	if (lightning->active || lightningReuseTime < lightningCooldown)
-		return;
+		return false;
 	float worldWidth, worldHeight;
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	double x, y;
@@ -183,12 +183,14 @@ void SpellManager::useLightningSpell()
 		//lightningQuantity--;
 		lightningReuseTime = 0.0;
 	}
+
+	return true;
 }
 
-void SpellManager::useFreezeSpell()
+bool SpellManager::useFreezeSpell()
 {
 	if (freeze->active || freezeReuseTime < freezeCooldown)
-		return;
+		return false;
 
 		float worldWidth, worldHeight;
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
@@ -209,12 +211,13 @@ void SpellManager::useFreezeSpell()
 		freezeDuration = 2.0;
 	}
 
+	return true;
 }
 
-void SpellManager::useBlastSpell()
+bool SpellManager::useBlastSpell()
 {
 	if (blast->active || blastReuseTime < blastCooldown)
-		return;
+		return false;
 	float worldWidth, worldHeight;
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	double x, y;
@@ -253,12 +256,11 @@ void SpellManager::useBlastSpell()
 		}
 	}
 
-	if (blastReuseTime >= blastCooldown)
-	{
-		blast->active = true;
-		blastReuseTime = 0.0;
-		blastDuration = 1.0;
-	}
+	blast->active = true;
+	blastReuseTime = 0.0;
+	blastDuration = 1.0;
+	
+	return true;
 }
 
 
@@ -277,10 +279,10 @@ double SpellManager::getBcooldown()
 	return blastReuseTime / blastCooldown;
 }
 
-void SpellManager::useFireSpell()
+bool SpellManager::useFireSpell()
 {
 	if (fire->active || fireReuseTime < fireCooldown)
-		return;
+		return false;
 	float worldWidth, worldHeight;
 	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
 	double x, y;
@@ -298,6 +300,8 @@ void SpellManager::useFireSpell()
 		//lightningQuantity--;
 		fireReuseTime = 0.0;
 	}
+
+	return true;
 }
 
 
@@ -318,10 +322,10 @@ bool SpellManager::isBlastActive()
 }
 
 
-void SpellManager::use_longkang_spell()
+bool SpellManager::use_longkang_spell()
 {
 	if (!character->can_use_ulti())
-		return;
+		return false;
 
 	longkang->pos = CollisionManager::GetInstance()->get_ground()->pos;
 	//longkang->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y;
@@ -330,6 +334,8 @@ void SpellManager::use_longkang_spell()
 
 	is_longkang_charging_active = true;
 	longkang_charging_mesh->active = true;
+
+	return true;
 }
 float SpellManager::get_longkang_charge() {
 	return this->character->get_ulti_charge();

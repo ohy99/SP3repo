@@ -13,8 +13,7 @@ protected:
 	// The elapsed time (between shots) in milliseconds
 	double elapsedTime;
 	double timeBetweenShots;
-	// Boolean flag to indicate if weapon can fire now
-	bool bFire;
+
 	int damage;
 	float force;
 	float projectile_mass;
@@ -24,15 +23,11 @@ public:
 	virtual void SetTimeBetweenShots(const double timeBetweenShots);
 	// Set the firing rate in rounds per min
 	virtual void SetFiringRate(const int firingRate);
-	// Set the firing flag
-	virtual void SetCanFire(const bool bFire);
 
 	// Get the time between shots
 	virtual double GetTimeBetweenShots(void) const;
 	// Get the firing rate
 	virtual int GetFiringRate(void) const;
-	// Get the firing flag
-	virtual bool GetCanFire(void) const;
 
 	// Initialise this instance to default values
 	virtual void Init(void);

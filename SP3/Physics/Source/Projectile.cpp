@@ -55,6 +55,7 @@ void Projectile::collision_response(Collidable* obj)
 		Particle* p = ObjectPoolManager::GetInstance()->get_particle(ObjectPoolManager::PARTICLE_CASE::GROUND);
 		p->pos = this->pos;
 		p->scale = this->scale;
+		p->dir = -this->dir;
 
 		this->active = false;
 	}

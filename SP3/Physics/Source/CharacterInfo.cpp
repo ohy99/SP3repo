@@ -75,10 +75,15 @@ void Character::Update(double dt)
 	int h = Application::GetWindowHeight();
 	//static bool keypressed = false;
 	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
+	weap->dir = -weap->pos + cursor_point_in_world_space;
+	try {
+		weap->dir.Normalize();
+	}
+	catch (DivideByZero &e) {
+		weap->dir.Set(0, 1, 0);
+	}
 	if (Application::GetInstance().IsMousePressed(1))
 	{
-		weap->dir = -weap->pos + cursor_point_in_world_space;
-		weap->dir.Normalize();
 		weap->Discharge(weap->pos, weap->dir);
 	}
 
@@ -117,11 +122,9 @@ void Character::Update(double dt)
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('6') && !dakeypressed)
 		{
-			SpellManager::GetInstance()->useLightningSpell();
-			
-			dakeypressed = true;
-			if(dakeypressed == true)
+			if (SpellManager::GetInstance()->useLightningSpell())
 				audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
+			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('6') && dakeypressed)
 		{
@@ -134,10 +137,9 @@ void Character::Update(double dt)
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('7') && !dakeypressed)
 		{
-			SpellManager::GetInstance()->useFreezeSpell();
-			dakeypressed = true;
-			if (dakeypressed == true)
+			if (SpellManager::GetInstance()->useFreezeSpell())
 				audioPlayer.playSoundThreaded(audioPlayer.playlist[2]->fileName_);
+			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('7') && dakeypressed)
 		{
@@ -149,10 +151,9 @@ void Character::Update(double dt)
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('8') && !dakeypressed)
 		{
-			SpellManager::GetInstance()->useBlastSpell();
-			dakeypressed = true;
-			if (dakeypressed == true)
+			if(SpellManager::GetInstance()->useBlastSpell())
 				audioPlayer.playSoundThreaded(audioPlayer.playlist[1]->fileName_);
+			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('8') && dakeypressed)
 		{
@@ -164,7 +165,8 @@ void Character::Update(double dt)
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('9') && !dakeypressed)
 		{
-			SpellManager::GetInstance()->useFireSpell();
+			if (SpellManager::GetInstance()->useFireSpell())
+				;
 			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('9') && dakeypressed)
@@ -178,11 +180,10 @@ void Character::Update(double dt)
 			static bool dakeypressed = false;
 			if (Application::GetInstance().IsKeyPressed('Z') && !dakeypressed)
 			{
-				consumables.UseSmallRepairKit();
+				if (consumables.UseSmallRepairKit())
+					audioPlayer.playSoundThreaded(audioPlayer.playlist[4]->fileName_);
 				dakeypressed = true;
 				keypresscooldown = 0;
-				if (dakeypressed == true)
-					audioPlayer.playSoundThreaded(audioPlayer.playlist[4]->fileName_);
 			}
 			else if (!Application::GetInstance().IsKeyPressed('Z') && dakeypressed)
 			{
@@ -193,11 +194,10 @@ void Character::Update(double dt)
 			static bool dakeypressed = false;
 			if (Application::GetInstance().IsKeyPressed('X') && !dakeypressed)
 			{
-				consumables.UseMedRepairKit();
+				if (consumables.UseMedRepairKit())
+					audioPlayer.playSoundThreaded(audioPlayer.playlist[5]->fileName_);
 				dakeypressed = true;
 				keypresscooldown = 0;
-				if (dakeypressed == true)
-					audioPlayer.playSoundThreaded(audioPlayer.playlist[5]->fileName_);
 			}
 			else if (!Application::GetInstance().IsKeyPressed('X') && dakeypressed)
 			{
@@ -208,11 +208,10 @@ void Character::Update(double dt)
 			static bool dakeypressed = false;
 			if (Application::GetInstance().IsKeyPressed('C') && !dakeypressed)
 			{
-				consumables.UseBigRepairKit();
+				if (consumables.UseBigRepairKit())
+					audioPlayer.playSoundThreaded(audioPlayer.playlist[6]->fileName_);
 				dakeypressed = true;
 				keypresscooldown = 0;
-				if (dakeypressed == true)
-					audioPlayer.playSoundThreaded(audioPlayer.playlist[6]->fileName_);
 			}
 			else if (!Application::GetInstance().IsKeyPressed('C') && dakeypressed)
 			{
@@ -254,11 +253,10 @@ void Character::Update(double dt)
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed(VK_SPACE) && !dakeypressed)
 		{
-			SpellManager::GetInstance()->use_longkang_spell();
-			dakeypressed = true;
-			if (dakeypressed == true)
+			if (SpellManager::GetInstance()->use_longkang_spell()) 
 				audioPlayer.playSoundThreaded(audioPlayer.playlist[7]->fileName_);
 
+			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed(VK_SPACE) && dakeypressed)
 		{
