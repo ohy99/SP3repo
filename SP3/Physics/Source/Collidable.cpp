@@ -1,6 +1,6 @@
 #include "Collidable.h"
 
-Collidable::Collidable()
+Collidable::Collidable() : is_collidable(true)
 {
 	this->collider.mid = &this->pos;
 	this->collider.collisionType = Collision::CollisionType::AABB;
@@ -44,6 +44,14 @@ bool Collidable::check_collision(Collision & tat)
 Collision & Collidable::get_collider()
 {
 	return collider;
+}
+void Collidable::set_isCollidable(bool is_collidable)
+{
+	this->is_collidable = is_collidable;
+}
+bool Collidable::get_isCollidable()
+{
+	return this->is_collidable;
 }
 void Collidable::set_collision_type(Collision::CollisionType type)
 {

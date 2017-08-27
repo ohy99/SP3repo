@@ -15,8 +15,9 @@ ObjectPoolManager::ObjectPoolManager()
 	{
 		Projectile* temp_proj = new Projectile();
 		temp_proj->set_collision_type(Collision::CollisionType::SPHERE);
+		temp_proj->scale.Set(1.5, 1.5);//this line to set sphere collider as radius 1.5.
+		temp_proj->update_collider();//
 		temp_proj->scale.Set(3, 3);
-		temp_proj->update_collider();
 
 		projectile_pool.push_back(temp_proj);
 		PhysicsManager::GetInstance()->add_object(temp_proj);
@@ -26,8 +27,9 @@ ObjectPoolManager::ObjectPoolManager()
 	{
 		Projectile* temp_proj = new ProjectileRainArrow();
 		temp_proj->set_collision_type(Collision::CollisionType::SPHERE);
-		temp_proj->scale.Set(3, 3);
+		temp_proj->scale.Set(1.5, 1.5);
 		temp_proj->update_collider();
+		temp_proj->scale.Set(3, 3);
 
 		projectile_pool.push_back(temp_proj);
 		PhysicsManager::GetInstance()->add_object(temp_proj);
@@ -35,6 +37,7 @@ ObjectPoolManager::ObjectPoolManager()
 	}
 	projectile_mesh[PROJECTILE_TYPE::BULLET] = MeshList::GetInstance()->getMesh("BULLET");
 	projectile_mesh[PROJECTILE_TYPE::CANNONBALL] = MeshList::GetInstance()->getMesh("CANNONBALL");
+	projectile_mesh[PROJECTILE_TYPE::ARROWS] = MeshList::GetInstance()->getMesh("BULLET");
 
 	for (unsigned int i = 0; i < (unsigned)100; ++i)
 	{

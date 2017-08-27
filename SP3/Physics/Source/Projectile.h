@@ -8,11 +8,18 @@ class Projectile : public Collidable
 	int dmg;
 	float mass;
 	//maybe can add variables to activate particles here
+	bool start_timer;
+	double active_remaining_elapsed_timer;
+	double active_remaining_duration;
+
+	void start_countdown(bool sure_start);
 public:
 	Vector3 velocity;
 
 	Projectile();
 	virtual ~Projectile();
+
+	virtual void update(double dt);
 
 	void set_dmg(int dmg);
 	int get_dmg();

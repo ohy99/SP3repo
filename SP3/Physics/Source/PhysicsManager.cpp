@@ -20,6 +20,9 @@ void PhysicsManager::update(double dt) {
 
 		//go->update(dt);
 		Projectile* proj = dynamic_cast<Projectile*>(go);
+		if (!proj->get_isCollidable())
+			continue;
+
 		if (proj)
 		{
 			if (proj->pos.y < 0)

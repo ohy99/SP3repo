@@ -49,4 +49,13 @@ void Tower::get_hit(int dmg)
 		audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
 	}
 	ShowHpManager::GetInstance()->generate_hp_text(this->pos + Vector3(0, this->scale.y * 0.5f, 0), dmg);
+	//check if hp is good or bad
+	if (this->health <= 0.25f * this->maxhealth)
+		this->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER25");
+	else if (this->health <= 0.5f * this->maxhealth)
+		this->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER50");
+	else if (this->health <= 0.75f * this->maxhealth)
+		this->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER75");
+	else
+		this->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
 }

@@ -269,7 +269,7 @@ void GameScene::Update(double dt)
 
 		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
 	
-		if (TowerManager::GetInstance()->player->get_health() <= 999)
+		if (TowerManager::GetInstance()->player->get_health() <= 0)
 			SceneManager::GetInstance()->setNextScene("LOSE");
 }
 

@@ -78,6 +78,15 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("PLAYERTOWER", Color(0, 0, 0), 1);
 		temp->textureID = LoadTGA("Image//tower(player).tga");
 		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("PLAYERTOWER75", Color(0, 0, 0), 1);
+		temp->textureID = LoadTGA("Image//tower75.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("PLAYERTOWER50", Color(0, 0, 0), 1);
+		temp->textureID = LoadTGA("Image//tower50.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("PLAYERTOWER25", Color(0, 0, 0), 1);
+		temp->textureID = LoadTGA("Image//tower25.tga");
+		assignMesh(temp);
 
 		/*temp = MeshBuild cbcer::GenerateQuad("BACKGROUND1", Color(0, 0, 0), 10);
 		temp->textureID = LoadTGA("Image//level1background.tga");
@@ -272,9 +281,6 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("drain", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\drainwater.tga");
 		assignMesh(temp);
-		//temp = MeshBuilder::GenerateQuad("fire", Color(1, 1, 1), 1);
-		//temp->textureID = LoadTGA("Image\\fire.tga");
-		//assignMesh(temp);
 
 		temp = MeshBuilder::GenerateQuad("SPELLHUD", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\spellhud.tga");
@@ -282,6 +288,18 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("ULTIREADY", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\ultiready.tga");
 		assignMesh(temp);
+
+		//weap
+		temp = MeshBuilder::GenerateQuad("NOOBBOW", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\weapon1.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("OKAYBOW", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\weapon2.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("GOODBOW", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\weapon3.tga");
+		assignMesh(temp);
+
 	}
 
 	void assignMesh(Mesh* a) {

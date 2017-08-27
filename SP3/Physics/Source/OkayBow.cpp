@@ -2,6 +2,7 @@
 
 #include "Projectile.h"
 #include "ObjectPoolManager.h"
+#include "MeshList.h"
 
 OkayBow::OkayBow()
 {
@@ -12,6 +13,8 @@ OkayBow::OkayBow()
 
 	this->num_of_shots = 3;
 	this->distance_btw_shots = 2.f;
+
+	this->mesh = MeshList::GetInstance()->getMesh("OKAYBOW");
 }
 
 OkayBow::~OkayBow()

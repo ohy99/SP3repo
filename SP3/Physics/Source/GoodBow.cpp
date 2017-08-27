@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "ObjectPoolManager.h"
 #include "ProjectileRainArrow.h"
+#include "MeshList.h"
 
 GoodBow::GoodBow()
 {
@@ -11,11 +12,13 @@ GoodBow::GoodBow()
 	this->force = 40.f;
 	this->projectile_mass = 1.5f;
 
-	this->num_of_splits = 10.f;
-	this->spliting_time = 1.f;
+	this->num_of_splits = 5.f;
+	this->spliting_time = 0.5f;
 	this->percentage_force_transfered = 0.75f;
-	this->degree_apart = 5.f;
+	this->degree_apart = 10.f;
 	this->percentage_damage_transfered = 2.f;
+
+	this->mesh = MeshList::GetInstance()->getMesh("GOODBOW");
 }
 
 GoodBow::~GoodBow()
