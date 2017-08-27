@@ -71,7 +71,7 @@ SpellManager::SpellManager()
 	fire->set_collision_type(Collision::CollisionType::AABB);
 	fire->scale.Set(20, 20);
 	fire->update_collider();
-	fire->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+	fire->mesh = MeshList::GetInstance()->getMesh("fire");
 
 	fireCooldown = 15.0;
 	fireReuseTime = fireCooldown;
@@ -91,7 +91,7 @@ SpellManager::SpellManager()
 	longkang->set_collision_type(Collision::CollisionType::AABB);
 	longkang->scale.Set(100, 10);
 	longkang->update_collider();
-	longkang->mesh = MeshList::GetInstance()->getMesh("blast");
+	longkang->mesh = MeshList::GetInstance()->getMesh("drain");
 
 	longkang_active_elapsed = 0.0;
 	longkang_active_duration = 3.0;
@@ -100,7 +100,7 @@ SpellManager::SpellManager()
 
 	RenderManager::GetInstance()->attach_renderable(longkang);
 	longkang_charging_mesh = new GameObject();
-	longkang_charging_mesh->mesh = MeshList::GetInstance()->getMesh("PLAYERTOWER");
+	longkang_charging_mesh->mesh = MeshList::GetInstance()->getMesh("drainparticle");
 	longkang_charging_mesh->pos = CollisionManager::GetInstance()->get_ground()->pos;
 	RenderManager::GetInstance()->attach_renderable(longkang_charging_mesh);
 }

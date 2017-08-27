@@ -47,7 +47,7 @@ kill_enemy_extra_charge_percent(0.5f)
 	audioPlayer.playlist.push_back(new Sound("Audio//BigRepair.mp3"));//6
 
 	audioPlayer.playlist.push_back(new Sound("Audio//Drain.mp3"));//7
-
+	audioPlayer.playlist.push_back(new Sound("Audio//Fire.mp3"));//8
 	//set nullptr
 	weapsah[0] = nullptr;
 	weapsah[1] = nullptr;
@@ -166,7 +166,8 @@ void Character::Update(double dt)
 		if (Application::GetInstance().IsKeyPressed('9') && !dakeypressed)
 		{
 			if (SpellManager::GetInstance()->useFireSpell())
-				;
+				if (SpellManager::GetInstance()->useBlastSpell())
+					audioPlayer.playSoundThreaded(audioPlayer.playlist[8]->fileName_);
 			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('9') && dakeypressed)

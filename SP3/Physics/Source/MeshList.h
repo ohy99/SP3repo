@@ -260,6 +260,18 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image\\blast.tga");
 		assignMesh(temp);
 
+		temp = MeshBuilder::GenerateQuad("fire", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\fire.tga");
+		assignMesh(temp);
+
+
+		temp = MeshBuilder::GenerateQuad("drainparticle", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\drainparticle.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("drain", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\drainwater.tga");
+		assignMesh(temp);
 		//temp = MeshBuilder::GenerateQuad("fire", Color(1, 1, 1), 1);
 		//temp->textureID = LoadTGA("Image\\fire.tga");
 		//assignMesh(temp);
