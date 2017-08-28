@@ -77,6 +77,7 @@ int DamageArea::get_damage()
 void DamageArea::set_duration(double duration)
 {
 	this->active_duration = duration;
+	active_elapsed = 0.0;
 }
 
 

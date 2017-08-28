@@ -1,8 +1,5 @@
-//GameScene_H
-
-
-#ifndef GameScene_H
-#define GameScene_H
+#ifndef TRANS_H
+#define TRANS_H
 
 #include "GameObject.h"
 #include <vector>
@@ -14,12 +11,11 @@
 #include "TowerManager.h"
 class Mesh;
 
-#include "Weapon.h"
-class GameScene : public Scene
+class Trans : public Scene
 {
 public:
-	GameScene();
-	~GameScene();
+	Trans();
+	~Trans();
 
 	virtual void Init();
 	virtual void Update(double dt);
@@ -29,20 +25,13 @@ public:
 protected:
 	Camera camera;
 	double fps;
-	AudioPlayer audioPlayer;
+
 	Mesh* axis;
-	Mesh* pausescreen;
-	Mesh* winlvl;
-	Character CharacterInfo;
+	double rj;
+	AudioPlayer audioPlayer;
 	//Mesh* background;
 	float worldHeight;
 	float worldWidth;
-	bool isPause;
-	bool isShop;
-	bool isFreeze;
-	bool istrans;
-	Weapon weap;
-	Shop shop;
 };
 
 #endif

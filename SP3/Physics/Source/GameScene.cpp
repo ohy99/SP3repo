@@ -88,14 +88,29 @@ void GameScene::Init()
 	//background = EntityBase::getInstance()->getEntity("BACKGROUND");
 	pausescreen = MeshList::GetInstance()->getMesh("PAUSE");
 	GameObjectManager::GetInstance()->load_objects("Image\\lvl0objects.txt");
+	winlvl = MeshList::GetInstance()->getMesh("TRANS");
 
 	isPause = false;
 	isShop = false;
+	istrans = false;
 	//Example of Audio playing //
 	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
-	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level2.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level3.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level4.mp3"));
+	
+
+	if(EnemyAiLogic::GetInstance()->get_level() == 1)
 	audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
 	
+	if (EnemyAiLogic::GetInstance()->get_level() == 2)
+		audioPlayer.playLoop(audioPlayer.playlist[1]->fileName_);
+
+	if (EnemyAiLogic::GetInstance()->get_level() == 3)
+		audioPlayer.playLoop(audioPlayer.playlist[2]->fileName_);
+
+	if (EnemyAiLogic::GetInstance()->get_level() == 4)
+		audioPlayer.playLoop(audioPlayer.playlist[3]->fileName_);
 
 	CharacterInfo.Init();
 	//CharacterInfo.Load();
@@ -201,14 +216,14 @@ void GameScene::Init()
 void GameScene::Update(double dt)
 {
 
-	
-	
-	
+
+
+
 	//Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
 
 
 	static bool PButtonState = false;
-	if (Application::IsKeyPressed('P') && !PButtonState&&!isShop)
+	if (Application::IsKeyPressed('P') && !PButtonState && !isShop && !istrans)
 	{
 		if (!isPause)
 			isPause = true;
@@ -223,7 +238,7 @@ void GameScene::Update(double dt)
 	}
 
 	static bool SButtonState = false;
-	if (Application::IsKeyPressed('S') && !SButtonState&&!isPause)
+	if (Application::IsKeyPressed('S') && !SButtonState && !isPause && !istrans)
 	{
 		if (!isShop)
 			isShop = true;
@@ -240,13 +255,13 @@ void GameScene::Update(double dt)
 
 	//	weap.WeaponInfo::Update(dt);
 
-	if (!isPause && !isShop)
+	if (!isPause && !isShop&&!istrans)
 	{
 		CharacterInfo.Update(dt);
 
 		GameLogic::GetInstance()->update(dt);
 		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
-	
+
 		SpellManager::GetInstance()->update(dt);
 		//Update enemies
 		EnemyAiLogic::GetInstance()->update(dt);
@@ -262,15 +277,36 @@ void GameScene::Update(double dt)
 		HUDManager::GetInstance()->update(dt);
 		fps = 1.0 / dt;
 	}
-		if (isShop)
-		{
-			shop.Update(dt);
-		}
+	if (isShop)
+	{
+		shop.Update(dt);
+	}
 
-		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
-	
-		if (TowerManager::GetInstance()->player->get_health() <= 0)
-			SceneManager::GetInstance()->setNextScene("LOSE");
+	//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
+
+	//if (TowerManager::GetInstance()->player->get_health() <= 0)
+	//	SceneManager::GetInstance()->setNextScene("LOSE");
+
+	if (TowerManager::GetInstance()->enemy->get_health() <= 0)
+	{
+		if (EnemyAiLogic::GetInstance()->get_level() != 4)
+		{
+			istrans = true;
+			SceneManager::GetInstance()->setNextScene("TRANS");
+			//EnemyAiLogic::GetInstance()->set_level(EnemyAiLogic::GetInstance()->get_level()+= 1);
+			audioPlayer.pause();
+		}
+		else
+		{
+			audioPlayer.pause();
+			SceneManager::GetInstance()->setNextScene("WIN");
+		}
+	}
+	else if (TowerManager::GetInstance()->player->get_health() <= 0)
+	{
+		SceneManager::GetInstance()->setNextScene("LOSE");
+		audioPlayer.pause();
+	}
 }
 
 
@@ -308,6 +344,7 @@ void GameScene::Render()
 	ShowHpManager::GetInstance()->render_all_hp_text();
 	RenderManager::GetInstance()->post_render();
 	ms.PopMatrix();
+
 
 	//SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
 	//ms.PushMatrix();

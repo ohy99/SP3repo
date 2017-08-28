@@ -17,6 +17,7 @@ private:
 	int i_weaplevel;
 	int i_towerlevel;
 
+	int i_coins;
 
 public:
 	
@@ -28,11 +29,12 @@ public:
 		i_bluedrake(0),
 		i_blackdrake(0),
 		i_weaplevel(0),
-		i_towerlevel(0){
+		i_towerlevel(0),
+		i_coins(0){
 	};
 	~Wallet() {};
 	//Functions
-	void wLoad(int getsmallrepair, int getmediumrepair, int getbigrepair, int getgreendrake, int getbrowndrake, int getbluedrake, int getblackdrake, int getweaplevel, int gettowerlevel)
+	void wLoad(int getsmallrepair, int getmediumrepair, int getbigrepair, int getgreendrake, int getbrowndrake, int getbluedrake, int getblackdrake, int getweaplevel, int gettowerlevel , int getcoins)
 	{
 		this->i_smallrepair = getsmallrepair;
 		this->i_medrepair = getmediumrepair;
@@ -44,8 +46,25 @@ public:
 		this->i_blackdrake = getblackdrake;
 		this->i_weaplevel = getweaplevel;
 		this->i_towerlevel = gettowerlevel;
+		this->i_coins = getcoins;
 	};
-	//Getters
+	//Coins
+	int getcoins()
+	{
+		return i_coins;
+	}
+
+	void add_coins(int value)
+	{
+		this->i_coins += value;
+	}
+
+	void setcurrentcoins(int i_coins)
+		{
+			this->i_coins = i_coins;
+		}
+
+	//Getters---------------------
 	int getsmallrepair()
 	{
 		return i_smallrepair;
@@ -110,6 +129,7 @@ public:
 	//
 	void addi_weaplevel(int i_weaplevel) { this->i_weaplevel += 1; }
 	void addi_towerlevel(int i_weaplevel) { this->i_towerlevel += 1; }
+	
 
 
 

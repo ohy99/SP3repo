@@ -24,7 +24,7 @@ Character::Character() : maxhealth(0),
 health(0),
 damage(0),
 levels(0),
-coins(0),
+//coins(0),
 highscore(0),
 keypresscooldown(3.0),
 weap(nullptr),
@@ -347,11 +347,11 @@ int Character::getcurrenthealth()
 {
 	return health;
 }
-
-int Character::getcurrentcoins()
-{
-	return coins;
-}
+//
+//int Character::getcurrentcoins()
+//{
+//	return coins;
+//}
 
 int Character::getcurrenthighscore()
 {
@@ -377,11 +377,11 @@ void Character::setcurrenthealth(int health)
 {
 	this->health = health;
 }
-
-void Character::setcurrentcoins(int coin)
-{
-	this->coins = coins;
-}
+//
+//void Character::setcurrentcoins(int coin)
+//{
+//	this->coins = coins;
+//}
 
 void Character::setcurrenthighscore(int highscore)
 {
@@ -414,13 +414,13 @@ Wallet & Character::getWallet()
 {
 	return wallet;
 }
-
-void Character::add_coins(int value)
-{
-	this->coins += value;
-
-	//std::cout << coins << std::endl;
-}
+//
+//void Character::add_coins(int value)
+//{
+//	this->coins += value;
+//
+//	//std::cout << coins << std::endl;
+//}
 
 //ULTI
 void Character::set_damage_feedback(int dmg, bool killed_target, int target_max_hp)
@@ -473,7 +473,7 @@ void Character::SetUp(const Vector3 & up)
 // Load this class
 bool Character::Load(const string saveFileName)
 {
-	int temp[9];
+	int temp[10];
 
 	ifstream myfile(saveFileName.c_str(), ios::in);
 	if (myfile.is_open())
@@ -510,10 +510,7 @@ bool Character::Load(const string saveFileName)
 				{
 					levels = Token2Double(aToken);
 				}
-				else if (theTag == "coin")
-				{
-					coins = Token2Double(aToken);
-				}
+				
 				else if (theTag == "highscore")
 				{
 					highscore = Token2Double(aToken);
@@ -562,11 +559,15 @@ bool Character::Load(const string saveFileName)
 				{
 					temp[8] = Token2Double(aToken);
 				}
+				else if (theTag == "i_coins")
+				{
+					temp[9] = Token2Double(aToken);
+				}
 			}
 		}
 
 		//int 1 = Token2Double(aToken);
-		wallet.wLoad(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8]);
+		wallet.wLoad(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8] , temp[9]);
 		myfile.close();
 	}
 	else
@@ -591,7 +592,6 @@ bool Character::Save(const string saveFileName)
 		myfile << "health=" << health << endl;
 		myfile << "damage=" << damage << endl;
 		myfile << "levels=" << levels << endl;
-		myfile << "coin=" << coins << endl;
 		myfile << "highscore=" << highscore << endl;
 		myfile << "currentsound=" << soundtrack << endl;
 		myfile << "muteornot=" << mute << endl;
@@ -604,6 +604,7 @@ bool Character::Save(const string saveFileName)
 		myfile << "i_blackdrake=" << wallet.getblackdrake() << endl;
 		myfile << "i_weaplevel=" << wallet.getweaplevel() << endl;
 		myfile << "i_towerlevel=" << wallet.gettowerlevel() << endl;
+		myfile << "i_coins=" << wallet.getcoins() << endl;
 		myfile.close();
 		return true;
 	}

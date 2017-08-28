@@ -30,6 +30,11 @@ void EnemyAiLogic::set_level(int level)
 	this->level = level;
 }
 
+int EnemyAiLogic::get_level()
+{
+	return level;
+}
+
 void EnemyAiLogic::update(double dt)
 {
 	resource_gain_elapsed_time += dt;

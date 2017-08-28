@@ -3,6 +3,7 @@
 #include "MeshList.h"
 #include "RenderManager.h"
 #include "CharacterInfo.h"
+#include "ShowHpManager.h"
 Shop::Shop()
 {
 }
@@ -13,9 +14,18 @@ Shop::~Shop()
 
 void Shop::init()
 {
-	ShopUI.pos.Set(40, 40, 0);
-	ShopUI.resize_button(80,70);
+	
+	ShopUI.pos.Set(30, 40, 0);
+	ShopUI.resize_button(50,50);
 	ShopUI.mesh = MeshList::GetInstance()->getMesh("Shop");
+
+	ShopHeader.pos.Set(85, 40, 0);
+	ShopHeader.resize_button(30, 80);
+	ShopHeader.mesh = MeshList::GetInstance()->getMesh("header");
+
+	Currentcoins.pos.Set(60, 5, 0);
+	Currentcoins.resize_button(15, 15);
+	Currentcoins.mesh = MeshList::GetInstance()->getMesh("currentcoins");
 	//Buy Items
 	Buy1.pos.Set(80, 65, 0);
 	Buy1.resize_button(5, 5);
@@ -271,6 +281,8 @@ void Shop::Render()
 	//this is here to make the shop image looks legit
 	ms.Scale(worldHeight / defaultheight, worldHeight / defaultheight, 1);
 	ShopUI.render_button();
+	ShopHeader.render_button();
+	Currentcoins.render_button();
 	ms.PopMatrix();
 	//Buy
 	Buy1.render_button();
@@ -291,7 +303,11 @@ void Shop::Render()
 	Sell6.render_button();
 	Sell7.render_button();
 
-
+	ms.PushMatrix();
+	ms.Translate(60, 0, 0);
+	ms.Scale(5, 5, 5);
+	RenderHelper::RenderText(&ShowHpManager::GetInstance()->get_font(), std::to_string(walletshop->getcoins()), Color(1,1,1));
+	ms.PopMatrix();
 }
 
 void Shop::attachWalletInfo(Wallet * walletshop)
