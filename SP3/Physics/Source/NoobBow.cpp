@@ -1,6 +1,8 @@
 #include "NoobBow.h"
 
 #include "MeshList.h"
+#include "Projectile.h"
+#include "ObjectPoolManager.h"
 
 NoobBow::NoobBow()
 {
@@ -14,4 +16,24 @@ NoobBow::NoobBow()
 
 NoobBow::~NoobBow()
 {
+}
+
+void NoobBow::Discharge(Vector3 position, Vector3 dir)
+{
+	if (elapsedTime < timeBetweenShots)
+		return;
+
+	Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::ARROWS);
+	if (proj)
+	{
+		proj->pos = position;
+		proj->dir = dir;
+		proj->velocity = dir * force;
+		proj->set_dmg(this->get_damage());
+		proj->set_faction_side(this->faction.side);
+		proj->set_mass(projectile_mass);
+	}
+
+	elapsedTime = 0.0;
+
 }

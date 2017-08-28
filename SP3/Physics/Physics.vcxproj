@@ -206,6 +206,7 @@
     <ClCompile Include="Source\SpriteAnimation.cpp" />
     <ClCompile Include="Source\Tower.cpp" />
     <ClCompile Include="Source\TowerManager.cpp" />
+    <ClCompile Include="Source\trans.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
     <ClCompile Include="Source\WeaponCannon.cpp" />
@@ -284,6 +285,7 @@
     <ClInclude Include="Source\TextManager.h" />
     <ClInclude Include="Source\Tower.h" />
     <ClInclude Include="Source\TowerManager.h" />
+    <ClInclude Include="Source\trans.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
     <ClInclude Include="Source\Weapon.h" />

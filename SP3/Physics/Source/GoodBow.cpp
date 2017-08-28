@@ -30,7 +30,7 @@ void GoodBow::Discharge(Vector3 position, Vector3 dir)
 	if (elapsedTime < timeBetweenShots)
 		return;
 	
-	Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::CANNONBALL, 1);
+	Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::ARROWS3, 1);
 	if (proj)
 	{
 		proj->pos = position;

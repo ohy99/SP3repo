@@ -14,6 +14,8 @@ public:
 		BULLET,
 		CANNONBALL,
 		ARROWS,
+		ARROWS2,
+		ARROWS3,
 		COUNT
 	};
 	enum PARTICLE_CASE

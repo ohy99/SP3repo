@@ -324,6 +324,19 @@ class MeshList : public Singleton <MeshList>
 		assignMesh(temp);
 
 
+		temp = MeshBuilder::GenerateQuad("fireballsprite", Color(1, 1, 1, 0.2f), 1);
+		temp->textureID = LoadTGA("Image\\fireballsprite.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("proj", Color(1, 1, 1, 0.2f), 1);
+		temp->textureID = LoadTGA("Image\\projectile.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("proj2", Color(1, 1, 1, 0.2f), 1);
+		temp->textureID = LoadTGA("Image\\projectile2.tga");
+		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("proj3", Color(1, 1, 1, 0.2f), 1);
+		temp->textureID = LoadTGA("Image\\projectile3.tga");
+		assignMesh(temp);
+
 	}
 
 	void assignMesh(Mesh* a) {

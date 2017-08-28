@@ -29,7 +29,7 @@ void OkayBow::Discharge(Vector3 position, Vector3 dir)
 	Vector3 furthest_left = -right * distance_btw_shots * (num_of_shots / 2);
 	for (int i = 0; i < num_of_shots; ++i)
 	{
-		Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::CANNONBALL);
+		Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::ARROWS2);
 		if (proj)
 		{
 			proj->pos = position + furthest_left + right * i * distance_btw_shots;

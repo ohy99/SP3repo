@@ -197,6 +197,9 @@
     <ClCompile Include="Source\HUDManager.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\trans.cpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -429,6 +432,9 @@
     </ClInclude>
     <ClInclude Include="Source\HUDManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\trans.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

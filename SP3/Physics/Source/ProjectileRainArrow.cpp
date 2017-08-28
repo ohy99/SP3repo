@@ -25,7 +25,7 @@ void ProjectileRainArrow::update(double dt)
 
 		for (int i = 0; i < num_of_splits; ++i)
 		{
-			Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::PROJECTILE_TYPE::CANNONBALL);
+			Projectile* proj = ObjectPoolManager::GetInstance()->get_projectile(ObjectPoolManager::PROJECTILE_TYPE::ARROWS3);
 			proj->active = true;
 			Mtx44 rotate;
 			rotate.SetToRotation(-total_degree_between * 0.5f + (float)i * degree_apart, 0, 0, 1);
