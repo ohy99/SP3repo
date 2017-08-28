@@ -628,7 +628,11 @@ void Character::spawn_minion()
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('1') && !dakeypressed)
 		{
-			MinionManager::GetInstance()->spawn_minion();
+			if (this->wallet.getbrowndrake())
+			{
+				MinionManager::GetInstance()->spawn_minion();
+				this->wallet.removei_browndrake(1);
+			}
 			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('1') && dakeypressed)
@@ -641,7 +645,11 @@ void Character::spawn_minion()
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('2') && !dakeypressed)
 		{
-			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
+			if (this->wallet.getbluedrake())
+			{
+				MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
+				this->wallet.removei_bluedrake(1);
+			}
 			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('2') && dakeypressed)
@@ -654,7 +662,11 @@ void Character::spawn_minion()
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('3') && !dakeypressed)
 		{
-			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_SIEGE);
+			if (this->wallet.getgreendrake())
+			{
+				MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_SIEGE);
+				this->wallet.removei_greendrake(1);
+			}
 			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('3') && dakeypressed)
@@ -667,7 +679,11 @@ void Character::spawn_minion()
 		static bool dakeypressed = false;
 		if (Application::GetInstance().IsKeyPressed('4') && !dakeypressed)
 		{
-			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_HEALER);
+			if (this->wallet.getblackdrake())
+			{
+				MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_HEALER);
+				this->wallet.removei_blackdrake(1);
+			}
 			dakeypressed = true;
 		}
 		else if (!Application::GetInstance().IsKeyPressed('4') && dakeypressed)
