@@ -37,7 +37,7 @@ void MinionHealer::attack()
 	{
 		temp->active = true;
 		temp->mesh = nullptr;// MeshList::GetInstance()->getMesh("CANNONBALL");
-		temp->mesh = MeshList::GetInstance()->getMesh("Sphere"); //sphere appear extra large because the default radius is 1.f and not 0.5.
+		//temp->mesh = MeshList::GetInstance()->getMesh("Sphere"); //sphere appear extra large because the default radius is 1.f and not 0.5.
 		temp->pos.Set(this->pos.x + (this->move_direction * this->scale.x * 0.5f).x,
 			this->pos.y, this->pos.z);
 		temp->set_collision_type(Collision::CollisionType::SPHERE);

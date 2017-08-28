@@ -11,6 +11,9 @@ ShowHpManager::ShowHpManager() : default_scale(3, 3, 0), default_duration(1.f),
 {
 	chiller_font.text_mesh = MeshList::GetInstance()->getMesh("CHILLER");
 	chiller_font.textWidth = LoadTextData("Image//Chiller Data.csv");
+
+	calibri.text_mesh = MeshList::GetInstance()->getMesh("CALIBRI");
+	calibri.textWidth = LoadTextData("Image//Calibri Data.csv");
 }
 
 ShowHpManager::~ShowHpManager()
@@ -56,6 +59,12 @@ void ShowHpManager::generate_hp_text(Vector3 pos, int value, bool is_crit)
 FontType & ShowHpManager::get_font()
 {
 	return chiller_font;
+}
+
+FontType & ShowHpManager::get_calibri()
+{
+	// TODO: insert return statement here
+	return this->calibri;
 }
 
 

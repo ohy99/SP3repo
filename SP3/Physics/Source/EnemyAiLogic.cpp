@@ -3,6 +3,8 @@
 #include "MinionManager.h"
 #include "CharacterInfo.h"
 #include <string>
+#include "TowerManager.h"
+#include "Tower.h"
 
 EnemyAiLogic::EnemyAiLogic(int level) : logic_level(level),
 	resource(0), resource_gain(0), resource_gain_delay(0.0), resource_gain_elapsed_time(0.0),
@@ -35,7 +37,9 @@ void EnemyAiLogic::update(double dt)
 	random_spawn_cooldown = Math::Max(random_spawn_cooldown - dt, 0.0);
 
 	//std::cout << "gen rand: " << random_spawn_cooldown << "   spawn cd: " << spawn_cooldown << std::endl;
-
+	float enemy_armor = Math::Max(100 * (1 + level) - (int)resource_gain_elapsed_time, 100);
+	float enemy_dmg_reduction = 1.0f - (100.f / (100.f + enemy_armor));
+	TowerManager::GetInstance()->set_enemy_dmg_reduction(enemy_dmg_reduction);
 
 	random_spawn();
 	attempt_to_unqueue_spawn();

@@ -37,8 +37,8 @@ void ProjectileRainArrow::update(double dt)
 			proj->set_dmg(spliteddmg);
 			proj->set_mass(percentage_force_transfered * this->get_mass());
 
-			proj->scale.Set(3, 3);
-			proj->update_collider();
+			//proj->scale.Set(3, 3);
+			//proj->update_collider();
 			proj->set_faction_side(this->get_faction_side());
 		}
 

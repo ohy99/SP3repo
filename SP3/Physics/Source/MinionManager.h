@@ -12,6 +12,7 @@ class Collidable;
 class Character;
 class MinionManager : public Singleton<MinionManager>
 {
+public:
 	struct MINION_INFO
 	{
 		int max_hp;
@@ -22,6 +23,7 @@ class MinionManager : public Singleton<MinionManager>
 		double cast_time;
 		MINION_INFO();
 	};
+private:
 	MINION_INFO default_minion_info[MinionInfo::MINION_TYPE::MINION_TYPE_COUNT];
 	MINION_INFO minion_info[MinionInfo::MINION_TYPE::MINION_TYPE_COUNT];
 	Character* characterinfo;
@@ -64,6 +66,9 @@ public:
 	void reset_minions_hp();
 
 	void attach_character(Character* character);
+
+	MINION_INFO get_info(MinionInfo::MINION_TYPE type);
+	MINION_INFO get_default_info(MinionInfo::MINION_TYPE type);
 protected:
 	MinionManager();
 	~MinionManager();

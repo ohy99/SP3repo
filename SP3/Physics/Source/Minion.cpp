@@ -10,6 +10,10 @@
 #include "Collidable.h"
 #include "ShowHpManager.h"
 #include "CharacterInfo.h"
+#include "Application.h"
+#include "GameLogic.h"
+#include "ShowHpManager.h"
+#include <sstream>
 
 Minion::Minion()
 {
@@ -23,6 +27,12 @@ Minion::Minion()
 
 
 	animation.Set(0, 5, 1, this->move_speed, true);
+
+	heal_elapsed = 0.0;
+	heal_duration = 1.f;
+
+	show_stats_info = false;
+	stats_info_pos.SetZero();
 }
 
 Minion::~Minion()
@@ -59,6 +69,28 @@ void Minion::update(double dt)
 	}
 
 	respond_to_state(dt);
+
+	heal_elapsed = Math::Max(heal_elapsed - dt, 0.0);
+
+	float worldWidth, worldHeight;
+	GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
+	double x, y;
+	Application::GetCursorPos(&x, &y);
+	int w = Application::GetWindowWidth();
+	int h = Application::GetWindowHeight();
+	//static bool keypressed = false;
+	Vector3 cursor_point_in_world_space(x / w * worldWidth, (Application::GetWindowHeight() - y) / h * worldHeight);
+	Collision cursor_collider;
+	cursor_collider.collisionType = Collision::POINT;
+	cursor_collider.mid = &cursor_point_in_world_space;
+	if (this->collider.isCollide(cursor_collider))
+	{
+		//show_stats(cursor_point_in_world_space);
+		show_stats_info = true;
+		stats_info_pos = cursor_point_in_world_space;
+	}
+	else
+		show_stats_info = false;
 }
 
 void Minion::respond_to_state(double dt)
@@ -144,6 +176,9 @@ void Minion::get_hit(int dmg)
 			this->add_coin_to_character(dmg);
 			this->send_damage_feedback_to_character(dmg, (this->health <= 0 ? true : false), this->max_health);
 		}
+		
+	if (dmg < 0)
+		heal_elapsed = heal_duration;
 }
 
 void Minion::collision_response(Collidable * obj)
@@ -193,4 +228,229 @@ void Minion::render()
 	hp->pos.y += this->scale.y;
 	hp->scale.Set(this->scale.x, 1);
 	hp->render((float)this->health / (float)this->max_health);
+
+	if (heal_elapsed > 0.0)
+	{
+		ms.PushMatrix();
+		ms.Translate(this->pos);
+		ms.Scale(this->scale * 0.8f);
+		RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("HEAL"), false);
+		ms.PopMatrix();
+	}
+
+	if (show_stats_info) {
+		show_stats(this->pos);
+		RenderManager::GetInstance()->render_this_last(this);
+	}
+}
+
+void Minion::show_stats(Vector3 pos)
+{
+	static Vector3 statscale(11.f, 8.5f, 1);
+	static FontType& font = ShowHpManager::GetInstance()->get_calibri();
+	static Vector3 fontscale(1.35f, 1.35f, 1);
+	static float addition_row_x = statscale.x * 0.8f;
+	static Color default_color(0.f, 0.f, 0.f);
+	static Color changed_color(0.15f, 0.15f, 0.15f);
+	static Vector3 default_offset(statscale.x * 0.025f, -statscale.y * 0.0f, 0);
+	static Vector3 changed_offset(statscale.x * 0.4f, -statscale.y * 0.0f, 0);
+	static Vector3 addition_offset(statscale.x * 0.76f, -statscale.y * 0.0f, 0);
+	static Color positive_color(0, 1, 0);
+	static Color negative_color(1, 0, 0);
+	float difference = 0;
+	int textrow = 1;
+	MinionManager::MINION_INFO info = MinionManager::GetInstance()->get_info(this->minion_type);
+	MinionManager::MINION_INFO default_info = MinionManager::GetInstance()->get_default_info(this->minion_type);
+
+	MS& ms = Graphics::GetInstance()->modelStack;
+	ms.PushMatrix();
+//	ms.Translate(50,50,0);
+	ms.Translate(pos.x, pos.y, 0);
+
+	ms.PushMatrix();
+	ms.Translate(statscale.x * 0.5f, -statscale.y * 0.5f, 0);
+	ms.PushMatrix();
+	ms.Scale(statscale);
+	RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("STATSCREEN"), false);
+	ms.PopMatrix();
+	//ms.PushMatrix();
+	//ms.Scale(statscale * 1.1f);
+	//RenderHelper::RenderMesh(MeshList::GetInstance()->getMesh("STATBORDER"), false);
+	//ms.PopMatrix();
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	//Offset from border
+	ms.Translate(default_offset);
+
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "Default", default_color);
+	ms.PopMatrix();
+
+	std::stringstream ss;
+	ss << std::fixed;
+	ss.precision(1);
+
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++,0);
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "Hp : " + std::to_string(default_info.max_hp), default_color);
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "Dmg: " + std::to_string(default_info.dmg), default_color);
+	ms.PopMatrix();
+
+	ss.str("");
+	ss << default_info.att_spd;
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "AS : " + ss.str(), default_color);
+	ms.PopMatrix();
+
+	ss.str("");
+	ss << default_info.att_range;
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "AR : " + ss.str(), default_color);
+	ms.PopMatrix();
+
+	ss.str("");
+	ss << default_info.move_spd;
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "MS : " + ss.str(), default_color);
+	ms.PopMatrix();
+
+	ms.PopMatrix();
+	
+	ms.PushMatrix();
+	ms.Translate(changed_offset);
+	//CHANGED VALUES
+	textrow = 1;
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "Season", changed_color);
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.PushMatrix();
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "Hp : " + std::to_string(info.max_hp), changed_color);
+	ms.PopMatrix();
+	difference = default_info.max_hp - info.max_hp;
+	if (difference != 0.f)
+	{
+		ss.str("");
+		ss << difference;
+		ms.PushMatrix();
+		ms.Translate(-changed_offset);
+		ms.Translate(addition_offset);
+		ms.Scale(fontscale);
+		RenderHelper::RenderText(&font, (difference > 0.f ? "+" : "") + ss.str(), (difference > 0.f ? positive_color : negative_color));
+		ms.PopMatrix();
+	}
+
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.PushMatrix();
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "Dmg: " + std::to_string(default_info.dmg), changed_color);
+	ms.PopMatrix();
+	difference = default_info.dmg - info.dmg;
+	if (difference != 0.f)
+	{
+		ss.str("");
+		ss << difference;
+		ms.PushMatrix();
+		ms.Translate(-changed_offset);
+		ms.Translate(addition_offset);
+		ms.Scale(fontscale);
+		RenderHelper::RenderText(&font, (difference > 0.f ? "+" : "") + ss.str(), (difference > 0.f ? positive_color : negative_color));
+		ms.PopMatrix();
+	}
+	ms.PopMatrix();
+
+	ss.str("");
+	ss << default_info.att_spd;
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.PushMatrix();
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "AS : " + ss.str(), changed_color);
+	ms.PopMatrix();
+	difference = default_info.att_spd - info.att_spd;
+	if (difference != 0.f)
+	{
+		ss.str("");
+		ss << difference;
+		ms.PushMatrix();
+		ms.Translate(-changed_offset);
+		ms.Translate(addition_offset);
+		ms.Scale(fontscale);
+		RenderHelper::RenderText(&font, (difference > 0.f ? "+" : "") + ss.str(), (difference > 0.f ? positive_color : negative_color));
+		ms.PopMatrix();
+	}
+	ms.PopMatrix();
+
+	ss.str("");
+	ss << default_info.att_range;
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+	ms.PushMatrix();
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "AR : " + ss.str(), changed_color);
+	ms.PopMatrix();
+	difference = default_info.att_range - info.att_range;
+	if (difference != 0.f)
+	{
+		ss.str("");
+		ss << difference;
+		ms.PushMatrix();
+		ms.Translate(-changed_offset);
+		ms.Translate(addition_offset);
+		ms.Scale(fontscale);
+		RenderHelper::RenderText(&font, (difference > 0.f ? "+" : "") + ss.str(), (difference > 0.f ? positive_color : negative_color));
+		ms.PopMatrix();
+	}
+	ms.PopMatrix();
+
+	ss.str("");
+	ss << default_info.move_spd;
+	ms.PushMatrix();
+	ms.Translate(0, -fontscale.y * textrow++, 0);
+
+	ms.PushMatrix();
+	ms.Scale(fontscale);
+	RenderHelper::RenderText(&font, "MS : " + ss.str(), changed_color);
+	ms.PopMatrix();
+
+	difference = default_info.move_spd - info.move_spd;
+	if (difference != 0.f)
+	{
+		ss.str("");
+		ss << difference;
+		ms.PushMatrix();
+		ms.Translate(-changed_offset);
+		ms.Translate(addition_offset);
+		ms.Scale(fontscale);
+		RenderHelper::RenderText(&font, (difference > 0.f ? "+" : "") + ss.str(), (difference > 0.f ? positive_color : negative_color));
+		ms.PopMatrix();
+	}
+	ms.PopMatrix();
+
+	ms.PopMatrix();
+
+	ms.PopMatrix();
 }

@@ -125,6 +125,7 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 	temp_minion->active = true;
 	temp_minion->reset();
 	init_info(temp_minion, type);
+	temp_minion->heal_elapsed = 0.0;
 
 	if (is_player_side)
 	{
@@ -370,6 +371,16 @@ void MinionManager::attach_character(Character * character)
 {
 	this->characterinfo = character;
 	minions.at(0)->attach_character(this->characterinfo);//static ma
+}
+
+MinionManager::MINION_INFO MinionManager::get_info(MinionInfo::MINION_TYPE type)
+{
+	return minion_info[type];
+}
+
+MinionManager::MINION_INFO MinionManager::get_default_info(MinionInfo::MINION_TYPE type)
+{
+	return default_minion_info[type];
 }
 
 

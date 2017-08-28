@@ -4,7 +4,7 @@
 #include <exception>
 #include "EnvironmentManager.h"
 
-RenderManager::RenderManager()
+RenderManager::RenderManager() : last_to_render(nullptr)
 {
 }
 
@@ -23,6 +23,19 @@ void RenderManager::render_all_active_objects()
 			if (go->active)
 				go->render();
 	}
+}
+
+void RenderManager::post_render()
+{
+	if (last_to_render)
+		if (last_to_render->active)
+			last_to_render->render();
+	last_to_render = nullptr;
+}
+
+void RenderManager::render_this_last(GameObject * obj)
+{
+	last_to_render = obj;
 }
 
 void RenderManager::attach_renderable(GameObject* go, int layer)

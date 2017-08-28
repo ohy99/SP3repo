@@ -51,6 +51,9 @@ AudioPlayer::~AudioPlayer()
 
 	if (currentSound)
 	currentSound->drop();
+
+	for each (auto s in playlist)
+		delete s;
 }
 
 

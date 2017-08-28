@@ -11,6 +11,11 @@ public:
 	//temp
 	Tower* player;
 	Tower* enemy;
+
+	void set_enemy_dmg_reduction(float value);
+	void set_player_dmg_reduction(float value);
+
+	void update(double dt);
 protected:
 	TowerManager();
 	~TowerManager();

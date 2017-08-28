@@ -12,6 +12,13 @@ class Minion : public Collidable, public MinionInfo
 	bool attacked;
 	Animation animation;
 	AudioPlayer audioPlayer;
+
+	double heal_elapsed;
+	double heal_duration;
+
+	bool show_stats_info;
+	Vector3 stats_info_pos;
+	void show_stats(Vector3 pos);
 public:
 	Mesh* mesh_state[MinionInfo::STATE::STATE_COUNT];
 	Minion();

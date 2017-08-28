@@ -306,6 +306,7 @@ void GameScene::Render()
 	SeasonManager::GetInstance()->render_season();
 	HUDManager::GetInstance()->render();
 	ShowHpManager::GetInstance()->render_all_hp_text();
+	RenderManager::GetInstance()->post_render();
 	ms.PopMatrix();
 
 	//SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
