@@ -429,7 +429,7 @@ void Character::set_damage_feedback(int dmg, bool killed_target, int target_max_
 	//if killed target, gain extra 50% charge of its max hp
 	this->ulti_charge += Math::Min( (killed_target ? (float)dmg + (float)target_max_hp * kill_enemy_extra_charge_percent : (float)dmg), 
 		max_ulti_charge - ulti_charge);
-	std::cout << ulti_charge << std::endl;
+	//std::cout << ulti_charge << std::endl;
 }
 
 bool Character::can_use_ulti()
