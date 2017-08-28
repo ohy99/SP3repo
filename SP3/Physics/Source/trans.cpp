@@ -101,9 +101,7 @@ void Trans::Update(double dt)
 	rj += dt;
 	if (rj >= 5.0)
 	{
-		int level = EnemyAiLogic::GetInstance()->get_level() + 1;
 		SceneManager::GetInstance()->setNextScene("GAME");
-		EnemyAiLogic::GetInstance()->set_level(level);
 		rj = 0.0;
 	}
 	

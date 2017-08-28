@@ -216,9 +216,9 @@ void GameScene::Init()
 void GameScene::Update(double dt)
 {
 
+	cout << EnemyAiLogic::GetInstance()->get_level() << endl;
 
-
-
+	
 	//Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
 
 
@@ -289,7 +289,7 @@ void GameScene::Update(double dt)
 
 	if (TowerManager::GetInstance()->enemy->get_health() <= 0)
 	{
-		if (EnemyAiLogic::GetInstance()->get_level() != 4)
+		if (EnemyAiLogic::GetInstance()->get_level() < 4 )
 		{
 			istrans = true;
 			int level = EnemyAiLogic::GetInstance()->get_level();
@@ -300,7 +300,7 @@ void GameScene::Update(double dt)
 		}
 		else
 		{
-			audioPlayer.pause();
+			
 			SceneManager::GetInstance()->setNextScene("WIN");
 		}
 	}

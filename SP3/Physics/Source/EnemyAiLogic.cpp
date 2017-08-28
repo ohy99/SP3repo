@@ -94,7 +94,7 @@ void EnemyAiLogic::queue_spawn_horde(std::string pattern)
 	{
 		spawn_queue.push(pattern.at(i));
 	}
-	std::cout << pattern << std::endl;
+	//std::cout << pattern << std::endl;
 }
 
 void EnemyAiLogic::attempt_to_unqueue_spawn()
