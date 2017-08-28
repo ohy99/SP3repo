@@ -43,6 +43,7 @@ public:
 	void update(double dt);
 	void attachCharacter(Character *character);
 	void set_level(int level);
+	int get_level();
 	EnemyAiLogic(int level = 0);
 	~EnemyAiLogic();
 protected:
