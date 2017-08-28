@@ -337,6 +337,9 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image\\projectile3.tga");
 		assignMesh(temp);
 
+		temp = MeshBuilder::GenerateQuad("repair", Color(1, 1, 1, 0.2f), 1);
+		temp->textureID = LoadTGA("Image\\repair.tga");
+		assignMesh(temp);
 	}
 
 	void assignMesh(Mesh* a) {

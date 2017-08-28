@@ -113,7 +113,8 @@ void Shop::Update(double dt)
 	cursor_collider.collisionType = Collision::POINT;
 	cursor_collider.mid = &cursor_point_in_world_space;
 
-	if (Application::IsMousePressed(0))
+	static bool mousereleased = true;
+	if (Application::IsMousePressed(0) && mousereleased == true)
 	{
 		if (Buy1.collision.isCollide(cursor_collider))
 		{
@@ -193,8 +194,10 @@ void Shop::Update(double dt)
 			walletshop->removei_blackdrake(walletshop->getblackdrake());
 
 		}
-		
+		mousereleased = false;
 	}
+	else if (!Application::IsMousePressed(0) && mousereleased == false)
+		mousereleased = true;
 }
 
 void Shop::Render()

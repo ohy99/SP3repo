@@ -172,6 +172,7 @@ void GameScene::Init()
 	MinionManager::GetInstance()->attach_character(&this->CharacterInfo);
 	EnemyAiLogic::GetInstance()->attachCharacter(&this->CharacterInfo);
 	SpellManager::GetInstance()->character = &this->CharacterInfo;
+	HUDManager::GetInstance()->character = &this->CharacterInfo;
 
 	FontType & wad = ShowHpManager::GetInstance()->get_font();
 	std::cout << &wad << std::endl;
