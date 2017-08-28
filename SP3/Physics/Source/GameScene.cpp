@@ -358,7 +358,7 @@ void GameScene::Render()
 		ms.PushMatrix();
 		ms.Translate(worldWidth / 2, worldHeight / 2, 0);
 		ms.Scale(Vector3(100, 80, 1));
-		RenderHelper::RenderMesh(winlvl, false);
+		RenderHelper::RenderMesh(pausescreen, false);
 		ms.PopMatrix();
 	}
 	if (isShop)
