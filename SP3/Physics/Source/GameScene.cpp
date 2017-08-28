@@ -88,9 +88,11 @@ void GameScene::Init()
 	//background = EntityBase::getInstance()->getEntity("BACKGROUND");
 	pausescreen = MeshList::GetInstance()->getMesh("PAUSE");
 	GameObjectManager::GetInstance()->load_objects("Image\\lvl0objects.txt");
+	winlvl = MeshList::GetInstance()->getMesh("TRANS");
 
 	isPause = false;
 	isShop = false;
+	istrans = false;
 	//Example of Audio playing //
 	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
@@ -208,7 +210,7 @@ void GameScene::Update(double dt)
 
 
 	static bool PButtonState = false;
-	if (Application::IsKeyPressed('P') && !PButtonState && !isShop)
+	if (Application::IsKeyPressed('P') && !PButtonState && !isShop && !istrans)
 	{
 		if (!isPause)
 			isPause = true;
@@ -223,7 +225,7 @@ void GameScene::Update(double dt)
 	}
 
 	static bool SButtonState = false;
-	if (Application::IsKeyPressed('S') && !SButtonState && !isPause)
+	if (Application::IsKeyPressed('S') && !SButtonState && !isPause && !istrans)
 	{
 		if (!isShop)
 			isShop = true;
@@ -240,7 +242,7 @@ void GameScene::Update(double dt)
 
 	//	weap.WeaponInfo::Update(dt);
 
-	if (!isPause && !isShop)
+	if (!isPause && !isShop&&!istrans)
 	{
 		CharacterInfo.Update(dt);
 
@@ -272,24 +274,20 @@ void GameScene::Update(double dt)
 	//if (TowerManager::GetInstance()->player->get_health() <= 0)
 	//	SceneManager::GetInstance()->setNextScene("LOSE");
 
-	if (EnemyAiLogic::GetInstance()->get_level() == 4)
+	if (TowerManager::GetInstance()->enemy->get_health() <= 0)
 	{
-		if (TowerManager::GetInstance()->enemy->get_health() <= 0)
-			SceneManager::GetInstance()->setNextScene("WIN");
-		else if (TowerManager::GetInstance()->player->get_health() <= 0)
-			SceneManager::GetInstance()->setNextScene("LOSE");
-	}
-	else
-	{
-		if (TowerManager::GetInstance()->enemy->get_health() <= 0)
+		if (EnemyAiLogic::GetInstance()->get_level() != 4)
 		{
-			int level = EnemyAiLogic::GetInstance()->get_level() + 1;
-			SceneManager::GetInstance()->setNextScene("GAME");
-			EnemyAiLogic::GetInstance()->set_level(level);
+			istrans = true;
+			SceneManager::GetInstance()->setNextScene("TRANS");
+
 		}
-		else if (TowerManager::GetInstance()->player->get_health() <= 0)
-			SceneManager::GetInstance()->setNextScene("LOSE");
+		else
+			SceneManager::GetInstance()->setNextScene("WIN");
 	}
+	else if(TowerManager::GetInstance()->player->get_health() <= 0)
+		SceneManager::GetInstance()->setNextScene("LOSE");
+
 }
 
 
@@ -327,6 +325,7 @@ void GameScene::Render()
 	ShowHpManager::GetInstance()->render_all_hp_text();
 	ms.PopMatrix();
 
+
 	//SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("Poster"));
 	//ms.PushMatrix();
 	//ms.Translate(50, 50, 0);
@@ -340,7 +339,7 @@ void GameScene::Render()
 		ms.PushMatrix();
 		ms.Translate(worldWidth / 2, worldHeight / 2, 0);
 		ms.Scale(Vector3(100, 80, 1));
-		RenderHelper::RenderMesh(pausescreen, false);
+		RenderHelper::RenderMesh(winlvl, false);
 		ms.PopMatrix();
 	}
 	if (isShop)

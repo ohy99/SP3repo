@@ -127,7 +127,7 @@ void Mainmenu::Update(double dt)
 		}
 	}
 	if (Application::IsKeyPressed('1'))
-		SceneManager::GetInstance()->setNextScene("WIN");
+		SceneManager::GetInstance()->setNextScene("TRANS");
 	if (Application::IsKeyPressed('2'))
 		SceneManager::GetInstance()->setNextScene("LOSE");
 	if (Application::IsKeyPressed('3'))

@@ -299,6 +299,9 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("GOODBOW", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\weapon3.tga");
 		assignMesh(temp);
+		temp = MeshBuilder::GenerateQuad("TRANS", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\winlvl.tga");
+		assignMesh(temp);
 
 	}
 

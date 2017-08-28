@@ -24,6 +24,7 @@
 #include "Lose.h"
 #include "Win.h"
 #include "Options.h"
+#include "trans.h"
 
 
 struct AtExit
@@ -151,6 +152,7 @@ void Application::Run()
 	SM->addScene("WIN", new Win());
 	SM->addScene("OPTIONS", new Options());
 	SM->addScene("LEVELSELECT", new Levelselect());
+	SM->addScene("TRANS", new Trans());
 	SM->setCurrScene("MAIN");
 
 
