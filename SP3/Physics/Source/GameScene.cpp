@@ -201,14 +201,14 @@ void GameScene::Init()
 void GameScene::Update(double dt)
 {
 
-	
-	
-	
+
+
+
 	//Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
 
 
 	static bool PButtonState = false;
-	if (Application::IsKeyPressed('P') && !PButtonState&&!isShop)
+	if (Application::IsKeyPressed('P') && !PButtonState && !isShop)
 	{
 		if (!isPause)
 			isPause = true;
@@ -223,7 +223,7 @@ void GameScene::Update(double dt)
 	}
 
 	static bool SButtonState = false;
-	if (Application::IsKeyPressed('S') && !SButtonState&&!isPause)
+	if (Application::IsKeyPressed('S') && !SButtonState && !isPause)
 	{
 		if (!isShop)
 			isShop = true;
@@ -246,7 +246,7 @@ void GameScene::Update(double dt)
 
 		GameLogic::GetInstance()->update(dt);
 		GameLogic::GetInstance()->get_world_size(worldWidth, worldHeight);
-	
+
 		SpellManager::GetInstance()->update(dt);
 		//Update enemies
 		EnemyAiLogic::GetInstance()->update(dt);
@@ -262,15 +262,34 @@ void GameScene::Update(double dt)
 		HUDManager::GetInstance()->update(dt);
 		fps = 1.0 / dt;
 	}
-		if (isShop)
-		{
-			shop.Update(dt);
-		}
+	if (isShop)
+	{
+		shop.Update(dt);
+	}
 
-		//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
-	
-		if (TowerManager::GetInstance()->player->get_health() <= 0)
+	//TextManager::GetInstance()->add_text(0, "fps: " + std::to_string(fps));
+
+	//if (TowerManager::GetInstance()->player->get_health() <= 0)
+	//	SceneManager::GetInstance()->setNextScene("LOSE");
+
+	if (EnemyAiLogic::GetInstance()->get_level() == 4)
+	{
+		if (TowerManager::GetInstance()->enemy->get_health() <= 0)
+			SceneManager::GetInstance()->setNextScene("WIN");
+		else if (TowerManager::GetInstance()->player->get_health() <= 0)
 			SceneManager::GetInstance()->setNextScene("LOSE");
+	}
+	else
+	{
+		if (TowerManager::GetInstance()->enemy->get_health() <= 0)
+		{
+			int level = EnemyAiLogic::GetInstance()->get_level() + 1;
+			SceneManager::GetInstance()->setNextScene("GAME");
+			EnemyAiLogic::GetInstance()->set_level(level);
+		}
+		else if (TowerManager::GetInstance()->player->get_health() <= 0)
+			SceneManager::GetInstance()->setNextScene("LOSE");
+	}
 }
 
 
