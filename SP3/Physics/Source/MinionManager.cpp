@@ -220,33 +220,33 @@ Minion* MinionManager::get_inactive_minion(MinionInfo::MINION_TYPE type)
 }
 
 
-void MinionManager::init_info()
+void MinionManager::init_info(float level)
 {
 	//att range is the number of half scales. 3.f is 2unit range
-	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].max_hp = 100;
-	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].dmg = 10;
-	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].att_spd = 1.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].max_hp = 100 * ((1.f + level) / 2.f);
+	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].dmg = 10 * ((1.f + level) / 2.f);
+	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].att_spd = 1.f * ((1.f + level) / 2.f);
 	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].att_range = 1.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].move_spd = 5.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_MELEE].cast_time = 2.f;
 
-	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].max_hp = 80;
-	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].dmg = 8;
-	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].att_spd = 1.5f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].max_hp = 80 * ((1.f + level) / 2.f);
+	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].dmg = 8 * ((1.f + level) / 2.f);
+	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].att_spd = 1.5f * ((1.f + level) / 2.f);
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].att_range = 3.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].move_spd = 10.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_RANGE].cast_time = 1.f;
 
-	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].max_hp = 120;
-	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].dmg = 25;
-	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].att_spd = 0.5f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].max_hp = 120 * ((1.f + level) / 2.f);
+	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].dmg = 25 * ((1.f + level) / 2.f);
+	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].att_spd = 0.5f * ((1.f + level) / 2.f);
 	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].att_range = 5.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].move_spd = 3.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_SIEGE].cast_time = 3.f;
 
-	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].max_hp = 60;
-	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].dmg = 25;
-	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_spd = 1.f;
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].max_hp = 60 * ((1.f + level) / 2.f);
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].dmg = 25 * ((1.f + level) / 2.f);
+	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_spd = 1.f * ((1.f + level) / 2.f);
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].att_range = 10.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].move_spd = 7.f;
 	minion_info[MinionInfo::MINION_TYPE::BASIC_HEALER].cast_time = 3.f;
@@ -390,3 +390,7 @@ MinionManager::MINION_INFO::MINION_INFO() : max_hp(0), dmg(0), att_spd(0.f), att
 }
 
 
+void MinionManager::adjust_minion_difficulty(float difficulty)
+{
+	init_info(difficulty);
+}

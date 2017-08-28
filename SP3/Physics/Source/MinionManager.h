@@ -39,7 +39,7 @@ private:
 	Vector3 enemy_movement_direction;
 
 	std::vector<DamageArea*> damage_sprite;
-	void init_info();
+	void init_info(float level = 1.f);
 
 	void init_pool();
 	void init_info(Minion* minion, MinionInfo::MINION_TYPE type);
@@ -64,6 +64,8 @@ public:
 	void reset_minions_att_spd();
 	void adjust_minions_hp(float percentage_of_default);
 	void reset_minions_hp();
+
+	void adjust_minion_difficulty(float difficulty);
 
 	void attach_character(Character* character);
 

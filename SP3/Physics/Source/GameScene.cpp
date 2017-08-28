@@ -144,6 +144,9 @@ void GameScene::Init()
 		break;
 	}
 
+	
+	MinionManager::GetInstance()->adjust_minion_difficulty(EnemyAiLogic::GetInstance()->get_level());
+
 	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
 	if (sa)
 	{
