@@ -91,7 +91,7 @@ SpellManager::SpellManager()
 	longkang->set_collision_type(Collision::CollisionType::AABB);
 	longkang->scale.Set(100, 10);
 	longkang->update_collider();
-	longkang->mesh = MeshList::GetInstance()->getMesh("drain");
+	longkang->mesh = MeshList::GetInstance()->getMesh("drainparticle");
 
 	longkang_active_elapsed = 0.0;
 	longkang_active_duration = 3.0;
@@ -100,7 +100,7 @@ SpellManager::SpellManager()
 
 	RenderManager::GetInstance()->attach_renderable(longkang);
 	longkang_charging_mesh = new GameObject();
-	longkang_charging_mesh->mesh = MeshList::GetInstance()->getMesh("drainparticle");
+	longkang_charging_mesh->mesh = MeshList::GetInstance()->getMesh("drain");
 	longkang_charging_mesh->pos = CollisionManager::GetInstance()->get_ground()->pos;
 	RenderManager::GetInstance()->attach_renderable(longkang_charging_mesh);
 }
@@ -354,18 +354,36 @@ void SpellManager::update_charging_longkang(double dt)
 	if (after_midway == false)
 	{
 		longkang_elasped = Math::Min(longkang_elasped + dt, longkang_chargeup);
-		longkang_charging_mesh->scale.x = CollisionManager::GetInstance()->get_ground()->scale.x * xoffset
-			* (float)(longkang_elasped / longkang_chargeup);
-		longkang_charging_mesh->scale.y = CollisionManager::GetInstance()->get_ground()->scale.y * yoffset
-			* (float)(longkang_elasped / longkang_chargeup);
+		//longkang_charging_mesh->scale.x = CollisionManager::GetInstance()->get_ground()->scale.x * xoffset
+		//	* (float)(longkang_elasped / longkang_chargeup);
+		//longkang_charging_mesh->scale.y = CollisionManager::GetInstance()->get_ground()->scale.y * yoffset
+		//	* (float)(longkang_elasped / longkang_chargeup);
+		longkang_charging_mesh->scale.x = CollisionManager::GetInstance()->get_ground()->scale.x * xoffset;
+		longkang_charging_mesh->scale.y = CollisionManager::GetInstance()->get_ground()->scale.y * yoffset;
+		if (longkang_elasped >= longkang_chargeup * 0.5)
+		{
+			longkang->active = true;
+			longkang->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y - 
+				CollisionManager::GetInstance()->get_ground()->scale.y * yoffset * 0.5f 
+				*( 1.0 - ((longkang_elasped - longkang_chargeup * 0.5 ) / (longkang_chargeup - longkang_chargeup * 0.5)));
+			longkang->scale = longkang_charging_mesh->scale;
+			longkang->update_collider();
+			longkang->set_duration(longkang_active_duration);
+			longkang_active_elapsed = 0.0;
+		}
 	}
 	else
 	{
+		//going back
+		longkang->active = true;
 		longkang_elasped = Math::Max(longkang_elasped - dt, 0.0);
-		longkang_charging_mesh->scale.x = CollisionManager::GetInstance()->get_ground()->scale.x * xoffset
-			* (float)(longkang_elasped / longkang_chargeup);
-		longkang_charging_mesh->scale.y = CollisionManager::GetInstance()->get_ground()->scale.y * yoffset
-			* (float)(longkang_elasped / longkang_chargeup);
+		//longkang_charging_mesh->scale.x = CollisionManager::GetInstance()->get_ground()->scale.x * xoffset
+		//	* (float)(longkang_elasped / longkang_chargeup);
+		//longkang_charging_mesh->scale.y = CollisionManager::GetInstance()->get_ground()->scale.y * yoffset
+		//	* (float)(longkang_elasped / longkang_chargeup);
+		longkang->pos.y = CollisionManager::GetInstance()->get_ground()->pos.y -
+			CollisionManager::GetInstance()->get_ground()->scale.y * yoffset * 0.5f
+			*(1.0 - ((longkang_elasped - longkang_chargeup * 0.5) / (longkang_chargeup - longkang_chargeup * 0.5)));
 	}
 
 	
@@ -378,7 +396,6 @@ void SpellManager::update_charging_longkang(double dt)
 
 		//longkang_elasped = 0.0;
 		is_longkang_charging_active = false;
-
 		longkang_charging_mesh->active = false;
 		//longkang_charging_mesh->scale.SetZero();
 		after_midway = true;
@@ -391,6 +408,7 @@ void SpellManager::update_charging_longkang(double dt)
 		longkang_charging_mesh->active = false;
 		after_midway = false;
 	}
+
 }
 
 void SpellManager::update_active_longkang(double dt)
