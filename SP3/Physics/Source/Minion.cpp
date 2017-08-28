@@ -247,7 +247,7 @@ void Minion::render()
 void Minion::show_stats(Vector3 pos)
 {
 	static Vector3 statscale(11.f, 8.5f, 1);
-	static FontType& font = ShowHpManager::GetInstance()->get_calibri();
+	FontType& font = ShowHpManager::GetInstance()->get_calibri();
 	static Vector3 fontscale(1.35f, 1.35f, 1);
 	static float addition_row_x = statscale.x * 0.8f;
 	static Color default_color(0.f, 0.f, 0.f);
@@ -347,7 +347,7 @@ void Minion::show_stats(Vector3 pos)
 	ms.Scale(fontscale);
 	RenderHelper::RenderText(&font, "Hp : " + std::to_string(info.max_hp), changed_color);
 	ms.PopMatrix();
-	difference = default_info.max_hp - info.max_hp;
+	difference = info.max_hp - default_info.max_hp;
 	if (difference != 0.f)
 	{
 		ss.str("");
@@ -366,9 +366,9 @@ void Minion::show_stats(Vector3 pos)
 	ms.Translate(0, -fontscale.y * textrow++, 0);
 	ms.PushMatrix();
 	ms.Scale(fontscale);
-	RenderHelper::RenderText(&font, "Dmg: " + std::to_string(default_info.dmg), changed_color);
+	RenderHelper::RenderText(&font, "Dmg: " + std::to_string(info.dmg), changed_color);
 	ms.PopMatrix();
-	difference = default_info.dmg - info.dmg;
+	difference = info.dmg - default_info.dmg;
 	if (difference != 0.f)
 	{
 		ss.str("");
@@ -383,14 +383,14 @@ void Minion::show_stats(Vector3 pos)
 	ms.PopMatrix();
 
 	ss.str("");
-	ss << default_info.att_spd;
+	ss << info.att_spd;
 	ms.PushMatrix();
 	ms.Translate(0, -fontscale.y * textrow++, 0);
 	ms.PushMatrix();
 	ms.Scale(fontscale);
 	RenderHelper::RenderText(&font, "AS : " + ss.str(), changed_color);
 	ms.PopMatrix();
-	difference = default_info.att_spd - info.att_spd;
+	difference = info.att_spd - default_info.att_spd;
 	if (difference != 0.f)
 	{
 		ss.str("");
@@ -405,14 +405,14 @@ void Minion::show_stats(Vector3 pos)
 	ms.PopMatrix();
 
 	ss.str("");
-	ss << default_info.att_range;
+	ss << info.att_range;
 	ms.PushMatrix();
 	ms.Translate(0, -fontscale.y * textrow++, 0);
 	ms.PushMatrix();
 	ms.Scale(fontscale);
 	RenderHelper::RenderText(&font, "AR : " + ss.str(), changed_color);
 	ms.PopMatrix();
-	difference = default_info.att_range - info.att_range;
+	difference = info.att_range - default_info.att_range;
 	if (difference != 0.f)
 	{
 		ss.str("");
@@ -427,7 +427,7 @@ void Minion::show_stats(Vector3 pos)
 	ms.PopMatrix();
 
 	ss.str("");
-	ss << default_info.move_spd;
+	ss << info.move_spd;
 	ms.PushMatrix();
 	ms.Translate(0, -fontscale.y * textrow++, 0);
 
@@ -436,7 +436,7 @@ void Minion::show_stats(Vector3 pos)
 	RenderHelper::RenderText(&font, "MS : " + ss.str(), changed_color);
 	ms.PopMatrix();
 
-	difference = default_info.move_spd - info.move_spd;
+	difference = info.move_spd - default_info.move_spd;
 	if (difference != 0.f)
 	{
 		ss.str("");

@@ -14,6 +14,8 @@ public:
 	void attach_background(GenericDecoration* background);
 	void render_environment();
 	void add_decorations(GenericDecoration* deco);
+
+	GenericDecoration* get_background();
 protected:
 	EnvironmentManager();
 	~EnvironmentManager();

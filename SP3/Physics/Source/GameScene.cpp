@@ -23,6 +23,7 @@
 #include "ShowHpManager.h"
 #include "EnemyAiLogic.h"
 #include "TowerManager.h"
+#include "GenericDecoration.h"
 
 #include "CharacterInfo.h"
 #include "SpriteAnimation.h"
@@ -99,22 +100,33 @@ void GameScene::Init()
 	audioPlayer.playlist.push_back(new Sound("Audio//Level3.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//Level4.mp3"));
 	
-
-	if(EnemyAiLogic::GetInstance()->get_level() == 1)
-	audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
-	
-	if (EnemyAiLogic::GetInstance()->get_level() == 2)
+	switch (EnemyAiLogic::GetInstance()->get_level())
+	{
+	case 1:
+		audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
+		CollisionManager::GetInstance()->get_ground()->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND");
+		break;
+	case 2:
 		audioPlayer.playLoop(audioPlayer.playlist[1]->fileName_);
-
-	if (EnemyAiLogic::GetInstance()->get_level() == 3)
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND2");
+		break;
+	case 3:
 		audioPlayer.playLoop(audioPlayer.playlist[2]->fileName_);
-
-	if (EnemyAiLogic::GetInstance()->get_level() == 4)
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND3");
+		break;
+	case 4:
 		audioPlayer.playLoop(audioPlayer.playlist[3]->fileName_);
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND4");
+		break;
+	}
+
 
 	CharacterInfo.Init();
 	//CharacterInfo.Load();
 	shop.init();
+	//MinionManager::GetInstance()->adjust_minion_difficulty(EnemyAiLogic::GetInstance()->get_level());
+
 	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0,3));
 	switch (SeasonManager::GetInstance()->get_season())
 	{
@@ -144,60 +156,7 @@ void GameScene::Init()
 		break;
 	}
 
-	
-	MinionManager::GetInstance()->adjust_minion_difficulty(EnemyAiLogic::GetInstance()->get_level());
 
-	SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENDRAGON"));
-	if (sa)
-	{
-		sa->m_anim = new Animation();
-		sa->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-	SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("GREENATTACK"));
-	if (sa2)
-	{
-		sa2->m_anim = new Animation();
-		sa2->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-
-	SpriteAnimation* sa3 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLUEDRAGON"));
-	if (sa3)
-	{
-		sa3->m_anim = new Animation();
-		sa3->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-	SpriteAnimation* sa4 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLUEATTACK"));
-	if (sa4)
-	{
-		sa4->m_anim = new Animation();
-		sa4->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-
-	SpriteAnimation* sa5 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BROWNDRAGON"));
-	if (sa5)
-	{
-		sa5->m_anim = new Animation();
-		sa5->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-	SpriteAnimation* sa6 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BROWNATTACK"));
-	if (sa6)
-	{
-		sa6->m_anim = new Animation();
-		sa6->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-
-	SpriteAnimation* sa7 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLACKDRAGON"));
-	if (sa7)
-	{
-		sa7->m_anim = new Animation();
-		sa7->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
-	SpriteAnimation* sa8 = dynamic_cast<SpriteAnimation*>(MeshList::GetInstance()->getMesh("BLACKATTACK"));
-	if (sa8)
-	{
-		sa8->m_anim = new Animation();
-		sa8->m_anim->Set(0, 5, 1, 10.0f, true);
-	}
 	/*weap.Init();
 	weap.set_faction_side(Faction::FACTION_SIDE::PLAYER);
 	weap.mesh = MeshList::GetInstance()->getMesh("CANNON");
@@ -213,15 +172,14 @@ void GameScene::Init()
 	MinionManager::GetInstance()->attach_character(&this->CharacterInfo);
 	EnemyAiLogic::GetInstance()->attachCharacter(&this->CharacterInfo);
 	SpellManager::GetInstance()->character = &this->CharacterInfo;
+
+	FontType & wad = ShowHpManager::GetInstance()->get_font();
+	std::cout << &wad << std::endl;
 }
 
 
 void GameScene::Update(double dt)
 {
-
-	cout << EnemyAiLogic::GetInstance()->get_level() << endl;
-
-	
 	//Test out for variable in characterinfo save	cout << CharacterInfo.getcurrentcoins() << endl;
 
 

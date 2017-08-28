@@ -20,6 +20,11 @@ void EnvironmentManager::add_decorations(GenericDecoration* deco)
 	this->decorations.push_back(deco);
 }
 
+GenericDecoration * EnvironmentManager::get_background()
+{
+	return this->background;
+}
+
 void EnvironmentManager::render_environment()
 {
 	//always render background first

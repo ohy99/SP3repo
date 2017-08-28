@@ -50,6 +50,8 @@ private:
 	float ulti_charge;//dmg / 10
 	float kill_enemy_extra_charge_percent;//0 - 1.f
 	float max_ulti_charge;
+
+	void spawn_minion();
 public:
 
 	AudioPlayer audioPlayer;

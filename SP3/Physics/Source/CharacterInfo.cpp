@@ -90,32 +90,7 @@ void Character::Update(double dt)
 	weap->WeaponInfo::Update(dt);
 	keypresscooldown += dt;
 	//------------Minon Section Update-------------------------------//
-
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('1') && !dakeypressed)
-		{
-			MinionManager::GetInstance()->spawn_minion();
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('1') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
-
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('2') && !dakeypressed)
-		{
-			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('2') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
+	spawn_minion();
 
 	//------------------------Spell Section Update--------------------------//
 	{
@@ -278,6 +253,8 @@ void Character::Update(double dt)
 	}
 
 }
+
+
 
 void Character::Init()
 {
@@ -642,5 +619,62 @@ double Character::Token2Double(const string token)
 bool Character::Token2Bool(const string token)
 {
 	return token.at(0) == '1';
+}
+
+
+void Character::spawn_minion()
+{
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('1') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion();
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('1') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('2') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('2') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('3') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_SIEGE);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('3') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
+	{
+		static bool dakeypressed = false;
+		if (Application::GetInstance().IsKeyPressed('4') && !dakeypressed)
+		{
+			MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_HEALER);
+			dakeypressed = true;
+		}
+		else if (!Application::GetInstance().IsKeyPressed('4') && dakeypressed)
+		{
+			dakeypressed = false;
+		}
+	}
+
 }
 #endif // ! CHARACTERINFO_H

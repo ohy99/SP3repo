@@ -117,7 +117,7 @@ float Tower::get_dmg_reduction()
 void Tower::show_stats(Vector3 pos, bool render_right)
 {
 	static Vector3 statscale(8.5f, 8.5f, 1);
-	static FontType& font = ShowHpManager::GetInstance()->get_calibri();
+	FontType& font = ShowHpManager::GetInstance()->get_calibri();
 	static Vector3 fontscale(1.35f, 1.35f, 1);
 	//static float addition_row_x = statscale.x * 0.8f;
 	static Color default_color(0.f, 0.f, 0.f);
