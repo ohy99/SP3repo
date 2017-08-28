@@ -74,8 +74,21 @@ void Trans::Init()
 
 	audioPlayer.playlist.push_back(new Sound("Audio//MAINMENU.mp3"));
 	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level2.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level3.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level4.mp3"));
 
-	audioPlayer.playSoundThreaded(audioPlayer.playlist[0]->fileName_);
+	if (EnemyAiLogic::GetInstance()->get_level() == 1)
+		audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
+
+	if (EnemyAiLogic::GetInstance()->get_level() == 2)
+		audioPlayer.playLoop(audioPlayer.playlist[1]->fileName_);
+
+	if (EnemyAiLogic::GetInstance()->get_level() == 3)
+		audioPlayer.playLoop(audioPlayer.playlist[2]->fileName_);
+
+	if (EnemyAiLogic::GetInstance()->get_level() == 4)
+		audioPlayer.playLoop(audioPlayer.playlist[3]->fileName_);
 }
 
 

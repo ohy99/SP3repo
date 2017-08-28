@@ -95,9 +95,22 @@ void GameScene::Init()
 	istrans = false;
 	//Example of Audio playing //
 	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
-	audioPlayer.playlist.push_back(new Sound("Audio//explosion.wav"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level2.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level3.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level4.mp3"));
+	
+
+	if(EnemyAiLogic::GetInstance()->get_level() == 1)
 	audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
 	
+	if (EnemyAiLogic::GetInstance()->get_level() == 2)
+		audioPlayer.playLoop(audioPlayer.playlist[1]->fileName_);
+
+	if (EnemyAiLogic::GetInstance()->get_level() == 3)
+		audioPlayer.playLoop(audioPlayer.playlist[2]->fileName_);
+
+	if (EnemyAiLogic::GetInstance()->get_level() == 4)
+		audioPlayer.playLoop(audioPlayer.playlist[3]->fileName_);
 
 	CharacterInfo.Init();
 	//CharacterInfo.Load();
@@ -280,14 +293,20 @@ void GameScene::Update(double dt)
 		{
 			istrans = true;
 			SceneManager::GetInstance()->setNextScene("TRANS");
-
+			//EnemyAiLogic::GetInstance()->set_level(EnemyAiLogic::GetInstance()->get_level()+= 1);
+			audioPlayer.pause();
 		}
 		else
+		{
+			audioPlayer.pause();
 			SceneManager::GetInstance()->setNextScene("WIN");
+		}
 	}
-	else if(TowerManager::GetInstance()->player->get_health() <= 0)
+	else if (TowerManager::GetInstance()->player->get_health() <= 0)
+	{
 		SceneManager::GetInstance()->setNextScene("LOSE");
-
+		audioPlayer.pause();
+	}
 }
 
 

@@ -243,6 +243,8 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateQuad("MENUBACKGROUND", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image//background.tga");
 		assignMesh(temp);
+
+
 		//Shop Button
 		temp = MeshBuilder::GenerateQuad("Buy", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\buy.tga");
@@ -256,6 +258,13 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image\\Shop.tga");
 		assignMesh(temp);
 
+		temp = MeshBuilder::GenerateQuad("currentcoins", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\currentcoins.tga");
+		assignMesh(temp);
+
+		temp = MeshBuilder::GenerateQuad("header", Color(1, 1, 1), 1);
+		temp->textureID = LoadTGA("Image\\header.tga");
+		assignMesh(temp);
 		//Spells
 		temp = MeshBuilder::GenerateQuad("lightning", Color(1, 1, 1), 1);
 		temp->textureID = LoadTGA("Image\\lightning.tga");

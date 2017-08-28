@@ -55,6 +55,9 @@ protected:
 	Button Sell9;
 
 	Button ShopUI;
+
+	Button ShopHeader;
+	Button Currentcoins;
 	float worldWidth;
 	float worldHeight;
 };
