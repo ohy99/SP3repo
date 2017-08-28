@@ -292,8 +292,10 @@ void GameScene::Update(double dt)
 		if (EnemyAiLogic::GetInstance()->get_level() != 4)
 		{
 			istrans = true;
+			int level = EnemyAiLogic::GetInstance()->get_level();
 			SceneManager::GetInstance()->setNextScene("TRANS");
-			//EnemyAiLogic::GetInstance()->set_level(EnemyAiLogic::GetInstance()->get_level()+= 1);
+
+			EnemyAiLogic::GetInstance()->set_level(level += 1);
 			audioPlayer.pause();
 		}
 		else
