@@ -60,6 +60,7 @@ protected:
 	Button Currentcoins;
 	float worldWidth;
 	float worldHeight;
+	float clickcooldown;
 };
 
 #endif

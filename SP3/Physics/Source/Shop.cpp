@@ -14,17 +14,17 @@ Shop::~Shop()
 
 void Shop::init()
 {
-	
-	ShopUI.pos.Set(30, 40, 0);
-	ShopUI.resize_button(50,50);
+	clickcooldown =3.0f;
+	ShopUI.pos.Set(40, 35, 0);
+	ShopUI.resize_button(60,60);
 	ShopUI.mesh = MeshList::GetInstance()->getMesh("Shop");
 
 	ShopHeader.pos.Set(85, 40, 0);
 	ShopHeader.resize_button(30, 80);
 	ShopHeader.mesh = MeshList::GetInstance()->getMesh("header");
 
-	Currentcoins.pos.Set(60, 5, 0);
-	Currentcoins.resize_button(15, 15);
+	Currentcoins.pos.Set(65, 5, 0);
+	Currentcoins.resize_button(20, 15);
 	Currentcoins.mesh = MeshList::GetInstance()->getMesh("currentcoins");
 	//Buy Items
 	Buy1.pos.Set(80, 65, 0);
@@ -96,6 +96,7 @@ void Shop::init()
 
 void Shop::Update(double dt)
 {
+	clickcooldown += dt;
 	//cout << "test" << endl;
 	//cout << walletshop->getsmallrepair() << endl;
 	//worldHeight = 100;
@@ -113,87 +114,106 @@ void Shop::Update(double dt)
 	cursor_collider.collisionType = Collision::POINT;
 	cursor_collider.mid = &cursor_point_in_world_space;
 
-	if (Application::IsMousePressed(0))
+	if (clickcooldown >= 3.0f)
 	{
-		if (Buy1.collision.isCollide(cursor_collider))
+		if (Application::IsMousePressed(0))
 		{
-			walletshop->addi_smallrepair(walletshop->getsmallrepair());
-			
-		}
-		if (Buy2.collision.isCollide(cursor_collider))
-		{
-			walletshop->addi_medrepair(walletshop->getmediumrepair());
+			if (Buy1.collision.isCollide(cursor_collider) && walletshop->getcoins() >= 75)
+			{
+				walletshop->addi_smallrepair(walletshop->getsmallrepair());
+				walletshop->setcurrentcoins(walletshop->getcoins() - 75);
+				clickcooldown = 0;
+			}
+			if (Buy2.collision.isCollide(cursor_collider) && walletshop->getcoins() >= 200)
+			{
+				walletshop->addi_medrepair(walletshop->getmediumrepair());
+				walletshop->setcurrentcoins(walletshop->getcoins() - 200);
+				clickcooldown = 0;
+			}
+			if (Buy3.collision.isCollide(cursor_collider) && walletshop->getcoins() >= 400)
+			{
+				walletshop->addi_bigrepair(walletshop->getbigrepair());
+				walletshop->setcurrentcoins(walletshop->getcoins() - 400);
+				clickcooldown = 0;
+			}
+			//Drakes
+			if (Buy4.collision.isCollide(cursor_collider) && walletshop->getcoins() >= 150)
+			{
+				walletshop->addi_greendrake(walletshop->getgreendrake());
+				walletshop->setcurrentcoins(walletshop->getcoins() - 150);
+				clickcooldown = 0;
+			}
+			if (Buy5.collision.isCollide(cursor_collider) && walletshop->getcoins() >= 300)
+			{
+				walletshop->addi_bluedrake(walletshop->getbluedrake());
+				walletshop->setcurrentcoins(walletshop->getcoins() - 300);
+				clickcooldown = 0;
+			}
+			if (Buy6.collision.isCollide(cursor_collider) && walletshop->getcoins() >= 500)
+			{
+				walletshop->addi_browndrake(walletshop->getbrowndrake());
+				walletshop->setcurrentcoins(walletshop->getcoins() - 500);
+				clickcooldown = 0;
+			}
+			if (Buy7.collision.isCollide(cursor_collider) && walletshop->getcoins() >= 700)
+			{
+				walletshop->addi_blackdrake(walletshop->getblackdrake());
+				walletshop->setcurrentcoins(walletshop->getcoins() - 700);
+				clickcooldown = 0;
+			}
+			//Weapon level
+			if (Buy8.collision.isCollide(cursor_collider) && walletshop->getcoins() >= 800)
+			{
+				walletshop->addi_weaplevel(walletshop->getweaplevel());
+				walletshop->setcurrentcoins(walletshop->getcoins() - 800);
+				clickcooldown = 0;
+			}
+
+			//----------------------------------------------Sell------------------------------//
+			if (Sell1.collision.isCollide(cursor_collider) && walletshop->getsmallrepair() >= 1)
+			{
+				walletshop->removei_smallrepair(walletshop->getsmallrepair());
+				walletshop->setcurrentcoins(walletshop->getcoins() + 75);
+				clickcooldown = 0;
+			}
+			if (Sell2.collision.isCollide(cursor_collider) && walletshop->getmediumrepair() >= 1)
+			{
+				walletshop->removei_medrepair(walletshop->getmediumrepair());
+				walletshop->setcurrentcoins(walletshop->getcoins() + 150);
+				clickcooldown = 0;
+			}
+			if (Sell3.collision.isCollide(cursor_collider) && walletshop->getbigrepair() >= 1)
+			{
+				walletshop->removei_bigrepair(walletshop->getbigrepair());
+				walletshop->setcurrentcoins(walletshop->getcoins() + 200);
+				clickcooldown = 0;
+			}
+			if (Sell4.collision.isCollide(cursor_collider) && walletshop->getgreendrake() >= 1)
+			{
+				walletshop->removei_greendrake(walletshop->getgreendrake());
+				walletshop->setcurrentcoins(walletshop->getcoins() + 100);
+				clickcooldown = 0;
+			}
+			if (Sell5.collision.isCollide(cursor_collider) && walletshop->getbluedrake() >= 1)
+			{
+				walletshop->removei_bluedrake(walletshop->getbluedrake());
+				walletshop->setcurrentcoins(walletshop->getcoins() + 180);
+				clickcooldown = 0;
+			}
+			if (Sell6.collision.isCollide(cursor_collider) && walletshop->getbrowndrake() >= 1)
+			{
+				walletshop->removei_browndrake(walletshop->getbrowndrake());
+				walletshop->setcurrentcoins(walletshop->getcoins() + 250);
+				clickcooldown = 0;
+			}
+			if (Sell7.collision.isCollide(cursor_collider) && walletshop->getblackdrake() >= 1)
+			{
+				walletshop->removei_blackdrake(walletshop->getblackdrake());
+				walletshop->setcurrentcoins(walletshop->getcoins() + 500);
+				clickcooldown = 0;
+			}
 
 		}
-		if (Buy3.collision.isCollide(cursor_collider))
-		{
-			walletshop->addi_bigrepair(walletshop->getbigrepair());
-
-		}
-		//Drakes
-		if (Buy4.collision.isCollide(cursor_collider))
-		{
-			walletshop->addi_greendrake(walletshop->getgreendrake());
-
-		}
-		if (Buy5.collision.isCollide(cursor_collider))
-		{
-			walletshop->addi_bluedrake(walletshop->getbluedrake());
-
-		}
-		if (Buy6.collision.isCollide(cursor_collider))
-		{
-			walletshop->addi_browndrake(walletshop->getbrowndrake());
-
-		}
-		if (Buy7.collision.isCollide(cursor_collider))
-		{
-			walletshop->addi_blackdrake(walletshop->getblackdrake());
-
-		}
-		//Weapon level
-		if (Buy8.collision.isCollide(cursor_collider))
-		{
-			walletshop->addi_weaplevel(walletshop->getweaplevel());
-
-		}
-		
-		//----------------------------------------------Sell------------------------------//
-		if (Sell1.collision.isCollide(cursor_collider))
-		{
-			walletshop->removei_smallrepair(walletshop->getsmallrepair());
-		}
-		if (Sell2.collision.isCollide(cursor_collider))
-		{
-			walletshop->removei_medrepair(walletshop->getmediumrepair());
-
-		}
-		if (Sell3.collision.isCollide(cursor_collider))
-		{
-			walletshop->removei_bigrepair(walletshop->getbigrepair());
-
-		}
-		if (Sell4.collision.isCollide(cursor_collider))
-		{
-			walletshop->removei_greendrake(walletshop->getgreendrake());
-
-		}
-		if (Sell5.collision.isCollide(cursor_collider))
-		{
-			walletshop->removei_bluedrake(walletshop->getbluedrake());
-
-		}
-		if (Sell6.collision.isCollide(cursor_collider))
-		{
-			walletshop->removei_browndrake(walletshop->getbrowndrake());
-
-		}
-		if (Sell7.collision.isCollide(cursor_collider))
-		{
-			walletshop->removei_blackdrake(walletshop->getblackdrake());
-
-		}
-		
 	}
 }
 
@@ -239,8 +259,8 @@ void Shop::Render()
 	Buy7.pos.y = 5 * worldHeight / defaultheight;
 
 	Buy8.resize_button(5.f * worldHeight / defaultheight, 5.f * worldHeight / defaultheight);
-	Buy8.pos.x = 80 * worldHeight / defaultheight;
-	Buy8.pos.y = -5 * worldHeight / defaultheight;
+	Buy8.pos.x = 40 * worldHeight / defaultheight;
+	Buy8.pos.y = 10 * worldHeight / defaultheight;
 
 	//Sell-------------------------------------------------
 	Sell1.resize_button(5.f * worldHeight / defaultheight, 5.f * worldHeight / defaultheight);
@@ -306,7 +326,7 @@ void Shop::Render()
 	ms.PushMatrix();
 	ms.Translate(60, 0, 0);
 	ms.Scale(5, 5, 5);
-	RenderHelper::RenderText(&ShowHpManager::GetInstance()->get_font(), std::to_string(walletshop->getcoins()), Color(1,1,1));
+	RenderHelper::RenderText(&ShowHpManager::GetInstance()->get_font(), std::to_string(walletshop->getcoins()), Color(0,0,0));
 	ms.PopMatrix();
 }
 

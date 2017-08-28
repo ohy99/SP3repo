@@ -1,7 +1,6 @@
 //Characterinfo.cpp
 
-#ifndef  CHARACTERINFO_H
-#define CHARACTERINFO_H
+
 
 
 #include "CharacterInfo.h"
@@ -693,4 +692,3 @@ void Character::spawn_minion()
 	}
 
 }
-#endif // ! CHARACTERINFO_H

@@ -1,4 +1,6 @@
 //Char info.h
+#ifndef CHARACTERINFO_H
+#define CHARACTERINFO_H
 #pragma once
 #include "Vector3.h"
 #include <string>
@@ -118,3 +120,4 @@ protected:
 
 	double keypresscooldown;
 };
+#endif
