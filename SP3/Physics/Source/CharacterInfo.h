@@ -31,7 +31,7 @@ private:
 	int levels;
 
 	//Ecnomoy & highscore//
-	int coins;
+	//int coins;
 	int highscore;
 	//Irrklang stuff
 	int soundtrack;
@@ -61,7 +61,7 @@ public:
 	int getlevel();
 	int getmaxhealth();
 	int getcurrenthealth();
-	int getcurrentcoins();
+	/*int getcurrentcoins();*/
 	int getcurrenthighscore();
 	int getcurrentst();
 	Vector3 GetPos(void) const;
@@ -71,7 +71,7 @@ public:
 	Vector3 GetUp(void) const;
 
 	Wallet & getWallet();
-	void add_coins(int value);
+	//void add_coins(int value);
 
 	//ULTI
 	void set_damage_feedback(int dmg, bool killed_target = false, int target_max_hp = 0);
@@ -90,7 +90,7 @@ public:
 	void setlevel(int);
 	void setmaxhealth(int);
 	void setcurrenthealth(int);
-	void setcurrentcoins(int);
+	//void setcurrentcoins(int);
 	void setcurrenthighscore(int);
 
 	void setcurrentst(int);

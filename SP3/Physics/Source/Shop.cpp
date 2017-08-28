@@ -3,6 +3,7 @@
 #include "MeshList.h"
 #include "RenderManager.h"
 #include "CharacterInfo.h"
+#include "ShowHpManager.h"
 Shop::Shop()
 {
 }
@@ -13,8 +14,9 @@ Shop::~Shop()
 
 void Shop::init()
 {
+	
 	ShopUI.pos.Set(40, 40, 0);
-	ShopUI.resize_button(80,70);
+	ShopUI.resize_button(60,60);
 	ShopUI.mesh = MeshList::GetInstance()->getMesh("Shop");
 	//Buy Items
 	Buy1.pos.Set(80, 65, 0);
@@ -291,7 +293,11 @@ void Shop::Render()
 	Sell6.render_button();
 	Sell7.render_button();
 
-
+	ms.PushMatrix();
+	ms.Translate(60, 10, 0);
+	ms.Scale(5, 5, 5);
+	RenderHelper::RenderText(&ShowHpManager::GetInstance()->get_font(), std::to_string(walletshop->getcoins()), Color(1,1,1));
+	ms.PopMatrix();
 }
 
 void Shop::attachWalletInfo(Wallet * walletshop)

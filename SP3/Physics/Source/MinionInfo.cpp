@@ -2,9 +2,8 @@
 #include "MyMath.h"
 #include "Minion.h"
 #include "CharacterInfo.h"
-
+#include "Wallet.h"
 Character* MinionInfo::character = nullptr;
-
 MinionInfo::MinionInfo() : health(0), max_health(100), attack_damage(0),
 attack_speed(0), attack_range(0), move_speed(0), attack_delay(0.0), move_direction(0, 0, 0), is_CCed(false), 
 knockback_direction(0, 0, 0), knockback_duration(0.0), knockback_force(0.0), knockback_elapsed(0.0),
@@ -134,9 +133,11 @@ void MinionInfo::attach_character(Character * character)
 	this->character = character;
 }
 
+
+
 void MinionInfo::add_coin_to_character(int value)
 {
-	this->character->add_coins(value);
+	this->character->getWallet().add_coins(value);
 }
 
 void MinionInfo::send_damage_feedback_to_character(int dmg, bool killed_target, int target_hp)

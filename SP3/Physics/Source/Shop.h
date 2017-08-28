@@ -12,6 +12,7 @@ using std::string;
 
 class Wallet;
 class Mesh;
+class Character;
 class Shop {
 
 
@@ -25,9 +26,10 @@ public:
 	void init();
 	void Update(double dt);
 	void attachWalletInfo(Wallet* walletshop);
+	
 protected:
 	Wallet *walletshop;
-
+	
 	//Title
 	Button Title;
 	//Buy Buttons

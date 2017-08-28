@@ -53,6 +53,7 @@ public:
 	void set_knockback(Vector3 direction, float knockback_duration, float knockback_force);
 
 	void attach_character(Character* character);
+	//void attach_wallet(Wallet* wallet);
 	void add_coin_to_character(int value);
 	void send_damage_feedback_to_character(int dmg, bool killed_target = false, int target_hp = 0);
 protected:
