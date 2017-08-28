@@ -37,7 +37,7 @@ ObjectPoolManager::ObjectPoolManager()
 	}
 	projectile_mesh[PROJECTILE_TYPE::BULLET] = MeshList::GetInstance()->getMesh("BULLET");
 	projectile_mesh[PROJECTILE_TYPE::CANNONBALL] = MeshList::GetInstance()->getMesh("CANNONBALL");
-	projectile_mesh[PROJECTILE_TYPE::ARROWS] = MeshList::GetInstance()->getMesh("proj");
+	projectile_mesh[PROJECTILE_TYPE::ARROWS] = MeshList::GetInstance()->getMesh("CANNONBALL");
 	projectile_mesh[PROJECTILE_TYPE::ARROWS2] = MeshList::GetInstance()->getMesh("proj2");
 	projectile_mesh[PROJECTILE_TYPE::ARROWS3] = MeshList::GetInstance()->getMesh("proj3");
 
