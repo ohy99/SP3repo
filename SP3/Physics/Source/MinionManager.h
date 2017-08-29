@@ -46,7 +46,7 @@ private:
 
 public:
 	void update(double dt);
-	void spawn_minion(bool is_Player_Side = true, MinionInfo::MINION_TYPE type = MinionInfo::MINION_TYPE::BASIC_MELEE);
+	bool spawn_minion(bool is_Player_Side = true, MinionInfo::MINION_TYPE type = MinionInfo::MINION_TYPE::BASIC_MELEE);
 
 	DamageArea* request_inactive_collidable(MinionInfo::MINION_TYPE type = MinionInfo::MINION_TYPE::BASIC_MELEE);
 

@@ -93,7 +93,7 @@ void MinionManager::update(double dt)
 	}
 }
 
-void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE type)
+bool MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE type)
 {
 	Minion* temp_minion = get_inactive_minion(type);
 	if (is_player_side)
@@ -106,7 +106,7 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 			Minion* temp_check = dynamic_cast<Minion*>(pm);
 			if (temp_check)
 				if (temp_minion->collider.isCollide(dynamic_cast<Minion*>(pm)->collider))
-					return;
+					return false;
 		}
 	}
 	else
@@ -118,7 +118,7 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 			Minion* temp_check = dynamic_cast<Minion*>(em);
 			if (temp_check)
 				if (temp_minion->collider.isCollide(temp_check->collider))
-					return;
+					return false;
 		}
 	}
 	//temp_minion->minion_type = type;
@@ -142,12 +142,6 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 			temp_minion->pos = TowerManager::GetInstance()->player->pos;
 			temp_minion->pos.y += TowerManager::GetInstance()->player->scale.y * 0.5f;
 		}
-
-		//if (temp_minion->mesh->name.find("#O") == std::string::npos)
-		//{
-		//	//cant find opposite tag in meshname
-		//	temp_minion->mesh = MeshList::GetInstance()->getMesh("#O" + temp_minion->mesh->name);
-		//}
 	}
 	else
 	{
@@ -163,13 +157,9 @@ void MinionManager::spawn_minion(bool is_player_side, MinionInfo::MINION_TYPE ty
 			temp_minion->pos = TowerManager::GetInstance()->enemy->pos;
 			temp_minion->pos.y += TowerManager::GetInstance()->enemy->scale.y * 0.5f;
 		}
-
-		//if (temp_minion->mesh->name.find("#O") != std::string::npos)
-		//{
-		//	//found opposite tag in meshname
-		//	temp_minion->mesh = MeshList::GetInstance()->getMesh(temp_minion->mesh->name.substr(2));
-		//}
 	}
+
+	return true;
 }
 
 DamageArea * MinionManager::request_inactive_collidable(MinionInfo::MINION_TYPE type)
