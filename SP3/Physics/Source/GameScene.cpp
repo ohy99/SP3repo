@@ -125,7 +125,7 @@ void GameScene::Init()
 	CharacterInfo.Init();
 	//CharacterInfo.Load();
 	shop.init();
-	//MinionManager::GetInstance()->adjust_minion_difficulty(EnemyAiLogic::GetInstance()->get_level());
+	MinionManager::GetInstance()->adjust_minion_difficulty(EnemyAiLogic::GetInstance()->get_level());
 
 	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0,3));
 	switch (SeasonManager::GetInstance()->get_season())

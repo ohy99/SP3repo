@@ -127,26 +127,26 @@ void Levelselect::Update(double dt)
 	{
 		if (Level1.collision.isCollide(cursor_collider))
 		{
-			SceneManager::GetInstance()->setNextScene("GAME");
 			EnemyAiLogic::GetInstance()->set_level(1);
+			SceneManager::GetInstance()->setNextScene("GAME");
 			audioPlayer.pause();
 		}
 		if (Level2.collision.isCollide(cursor_collider))
 		{
-			SceneManager::GetInstance()->setNextScene("GAME");
 			EnemyAiLogic::GetInstance()->set_level(2);
+			SceneManager::GetInstance()->setNextScene("GAME");
 			audioPlayer.pause();
 		}
 		if (Level3.collision.isCollide(cursor_collider))
 		{
-			SceneManager::GetInstance()->setNextScene("GAME");
 			EnemyAiLogic::GetInstance()->set_level(3);
+			SceneManager::GetInstance()->setNextScene("GAME");
 			audioPlayer.pause();
 		}
 		if (Level4.collision.isCollide(cursor_collider))
 		{
-			SceneManager::GetInstance()->setNextScene("GAME");
 			EnemyAiLogic::GetInstance()->set_level(4);
+			SceneManager::GetInstance()->setNextScene("GAME");
 			audioPlayer.pause();
 		}
 
