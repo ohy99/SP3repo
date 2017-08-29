@@ -5,19 +5,33 @@
 #include <string>
 #include "TowerManager.h"
 #include "Tower.h"
+#include "NoobBow.h"
+#include "OkayBow.h"
+#include "GoodBow.h"
+#include "WeaponCannon.h"
+#include "MinionManager.h"
 
 EnemyAiLogic::EnemyAiLogic(int level) : logic_level(level),
 	resource(0), resource_gain(0), resource_gain_delay(0.0), resource_gain_elapsed_time(0.0),
 	player_threat_level(0), 
 	random_spawn_cooldown(0.0), random_spawn_min_time(10.0), random_spawn_max_time(15.0),
 	spawn_cooldown(0.0), spawn_min_time(3.0), spawn_max_time(5.0),
-	level(1)
+	level(1), weap(nullptr)
 {
 	set_spawn_pattern();
+
+	weap = new NoobBow();
+	weap->pos.Set(92.5, 25);
+	weap->scale.Set(5, 5, 5);
+	weap->set_faction_side(Faction::FACTION_SIDE::ENEMY);
+	weap->active = true;
+	RenderManager::GetInstance()->attach_renderable(weap, 2);
 }
 
 EnemyAiLogic::~EnemyAiLogic()
 {
+	if (weap)
+		delete weap;
 }
 
 void EnemyAiLogic::attachCharacter(Character *character)
@@ -28,6 +42,42 @@ void EnemyAiLogic::attachCharacter(Character *character)
 void EnemyAiLogic::set_level(int level)
 {
 	this->level = level;
+
+	if (weap)
+	{
+		RenderManager::GetInstance()->remove_renderable(weap);
+		delete weap;
+	}
+	switch (level)
+	{
+	case 1:
+		weap = new Cannon();
+		weap->set_damage(30);
+		weap->set_attackspeed(0.8f);
+		break;
+	case 2:
+		weap = new NoobBow();
+		weap->set_damage(40);
+		weap->set_attackspeed(1.f);
+		break;
+	case 3:
+		weap = new NoobBow();
+		weap->set_damage(50);
+		weap->set_attackspeed(2.f);
+		break;
+	case 4:
+		weap = new OkayBow();
+		weap->set_damage(3);
+		weap->set_attackspeed(5.f);
+		break;
+	default:
+		break;
+	}
+	weap->pos.Set(92.5, 25);
+	weap->scale.Set(5, 5, 5);
+	weap->set_faction_side(Faction::FACTION_SIDE::ENEMY);
+	weap->active = true;
+	RenderManager::GetInstance()->attach_renderable(weap, 3);
 }
 
 int EnemyAiLogic::get_level()
@@ -45,6 +95,9 @@ void EnemyAiLogic::update(double dt)
 	float enemy_armor = Math::Max(100 * (1 + level) - (int)resource_gain_elapsed_time, 100);
 	float enemy_dmg_reduction = 1.0f - (100.f / (100.f + enemy_armor));
 	TowerManager::GetInstance()->set_enemy_dmg_reduction(enemy_dmg_reduction);
+
+	//ignore for now
+	update_weapon(dt);
 
 	random_spawn();
 	attempt_to_unqueue_spawn();
@@ -139,6 +192,15 @@ void EnemyAiLogic::attempt_to_unqueue_spawn()
 	
 	//adjust depends on what type is spawned
 	spawn_cooldown = (double)Math::RandFloatMinMax(spawn_min_time, spawn_max_time);
+}
+
+void EnemyAiLogic::update_weapon(double dt)
+{
+	if (!weap)
+		return;
+	weap->WeaponInfo::Update(dt);
+
+	//find target
 }
 
 void EnemyAiLogic::set_spawn_pattern()

@@ -16,9 +16,9 @@ HUDManager::HUDManager()
 	Spell2 = MeshList::GetInstance()->getMesh("freeze");
 	Spell3 = MeshList::GetInstance()->getMesh("blast");
 	//Spell4 = MeshList::GetInstance()->getMesh("blast");
-	Ulti_Bar = MeshList::GetInstance()->getMesh("REDHPBAR");
-	Ulti_Charge = MeshList::GetInstance()->getMesh("GREENHPBAR");
-	cooldown = MeshList::GetInstance()->getMesh("GREENHPBAR");
+	Ulti_Bar = MeshList::GetInstance()->getMesh("chargeborder");
+	Ulti_Charge = MeshList::GetInstance()->getMesh("charge");
+	cooldown = MeshList::GetInstance()->getMesh("cooldown");
 	ulti_ready_mesh = MeshList::GetInstance()->getMesh("ULTIREADY");
 
 	ultbarpos = TowerManager::GetInstance()->player->pos;

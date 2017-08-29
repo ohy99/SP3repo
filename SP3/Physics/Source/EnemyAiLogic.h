@@ -9,6 +9,7 @@
 #include <queue>
 
 class Character;
+class Weapon;
 class EnemyAiLogic : public Singleton<EnemyAiLogic>
 {
 	friend Singleton;
@@ -39,6 +40,9 @@ class EnemyAiLogic : public Singleton<EnemyAiLogic>
 
 	Character *character;
 	int level;
+
+	Weapon* weap;
+	void update_weapon(double dt);
 public:
 	void update(double dt);
 	void attachCharacter(Character *character);

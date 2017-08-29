@@ -38,6 +38,20 @@ void RenderManager::render_this_last(GameObject * obj)
 	last_to_render = obj;
 }
 
+GameObject * RenderManager::remove_renderable(GameObject * obj)
+{
+	for each (auto &gopair in objects)
+	{
+		for (std::vector<GameObject*>::iterator it = objects.at(gopair.first).begin();
+			it != objects.at(gopair.first).end(); ++it)
+			if ((*it) == obj)
+			{
+				it = objects.at(gopair.first).erase(it);
+				return (*it);
+			}
+	}
+}
+
 void RenderManager::attach_renderable(GameObject* go, int layer)
 {
 	if (go == nullptr)

@@ -17,6 +17,7 @@ public:
 	void render_all_active_objects();
 	void post_render();
 	void render_this_last(GameObject* obj);
+	GameObject * remove_renderable(GameObject* obj);
 protected:
 	RenderManager();
 	~RenderManager();
