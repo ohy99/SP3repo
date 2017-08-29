@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "Projectile.h"
+#include "ProjectileRainArrow.h"
 
 PhysicsManager::PhysicsManager() : gravity(0, -10, 0)
 {
@@ -20,17 +21,17 @@ void PhysicsManager::update(double dt) {
 
 		//go->update(dt);
 		Projectile* proj = dynamic_cast<Projectile*>(go);
-		if (!proj->get_isCollidable())
-			continue;
-
 		if (proj)
 		{
+			if (!proj->get_isCollidable())
+				continue;
 			if (proj->pos.y < 0)
 				proj->active = false;
 
 			proj->velocity += proj->get_mass() * gravity * (float)dt;
 			proj->dir = proj->velocity.Normalized();
 			proj->pos += proj->velocity * (float)dt;
+
 		}
 	}
 }

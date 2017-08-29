@@ -39,6 +39,7 @@ void GoodBow::Discharge(Vector3 position, Vector3 dir)
 		proj->set_dmg(this->get_damage());
 		proj->set_faction_side(this->faction.side);
 		proj->set_mass(projectile_mass);
+		proj->set_isCollidable(true);
 
 		ProjectileRainArrow* pra = dynamic_cast<ProjectileRainArrow*>(proj);
 		pra->set_degree_apart(degree_apart);
