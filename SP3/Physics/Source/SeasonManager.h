@@ -9,6 +9,7 @@
 #include "ParticleManager.h"
 #include "MeshList.h"
 #include "SpriteAnimation.h"
+#include "MinionManager.h"
 class Mesh;
 class SeasonManager : public Singleton<SeasonManager>
 {
@@ -24,6 +25,36 @@ public:
 	Animation season_animation[SEASON_TYPE::COUNT];
 	void set_season(SEASON_TYPE a) { season = a; };
 	SEASON_TYPE get_season() { return season; };
+	void apply_season()
+	{
+		switch (season)
+		{
+		case SeasonManager::WINTER:
+			MinionManager::GetInstance()->adjust_minions_move_speed(80);
+			MinionManager::GetInstance()->adjust_minions_dmg(90);
+			MinionManager::GetInstance()->adjust_minions_hp(110);
+			MinionManager::GetInstance()->adjust_minions_att_spd(80);
+			break;
+		case SeasonManager::SUMMER:
+			MinionManager::GetInstance()->adjust_minions_move_speed(110);
+			MinionManager::GetInstance()->adjust_minions_dmg(120);
+			MinionManager::GetInstance()->adjust_minions_att_spd(110);
+			MinionManager::GetInstance()->adjust_minions_hp(90);
+			break;
+		case SeasonManager::SPRING:
+			MinionManager::GetInstance()->reset_minions_att_spd();
+			MinionManager::GetInstance()->reset_minions_dmg();
+			MinionManager::GetInstance()->reset_minions_hp();
+			MinionManager::GetInstance()->reset_minions_move_speed();
+			break;
+		case SeasonManager::AUTUMN:
+			MinionManager::GetInstance()->adjust_minions_hp(80);
+			MinionManager::GetInstance()->adjust_minions_dmg(80);
+			MinionManager::GetInstance()->adjust_minions_move_speed(120);
+			MinionManager::GetInstance()->adjust_minions_att_spd(80);
+			break;
+		}
+	}
 	void update(double dt) 
 	{
 		SpriteAnimation* sa = dynamic_cast<SpriteAnimation*>(season_mesh[season]);

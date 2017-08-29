@@ -10,9 +10,9 @@ MinionAir::MinionAir()
 	this->minion_type = MinionInfo::MINION_TYPE::BASIC_AIR;
 
 	mesh_state[MinionInfo::STATE::DEAD] = nullptr;
-	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
-	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("BLACKATTACK");
-	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
+	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("PURPLEDRAGON");
+	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("PURPLEATTACK");
+	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("PURPLEDRAGON");
 
 	this->is_air_unit = true;
 }
@@ -56,17 +56,17 @@ void MinionAir::set_faction_side(Faction::FACTION_SIDE side)
 
 	switch (side)
 	{
-	case Faction::FACTION_SIDE::PLAYER:
-		mesh_state[MinionInfo::STATE::DEAD] = nullptr;
-		mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("#BLACKDRAGON");
-		mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("#BLACKATTACK");
-		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("#BLACKDRAGON");
-		break;
+	//case Faction::FACTION_SIDE::PLAYER:
+	//	mesh_state[MinionInfo::STATE::DEAD] = nullptr;
+	//	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("#PURPLEDRAGON");
+	//	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("#PURPLEATTACK");
+	//	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("#PURPLEDRAGON");
+	//	break;
 	default:
 		mesh_state[MinionInfo::STATE::DEAD] = nullptr;
-		mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
-		mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("BLACKATTACK");
-		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
+		mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("PURPLEDRAGON");
+		mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("PURPLEATTACK");
+		mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("PURPLEDRAGON");
 	}
 }
 

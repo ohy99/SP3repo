@@ -13,6 +13,8 @@
 #include "EnvironmentManager.h"
 #include "MeshList.h"
 #include "GenericDecoration.h"
+#include "MyMath.h"
+#include "SeasonManager.h"
 
 EnemyAiLogic::EnemyAiLogic(int level) : logic_level(level),
 	resource(0), resource_gain(0), resource_gain_delay(0.0), resource_gain_elapsed_time(0.0),
@@ -111,6 +113,8 @@ void EnemyAiLogic::set_level(int level)
 	
 
 	MinionManager::GetInstance()->adjust_minion_difficulty(EnemyAiLogic::GetInstance()->get_level());
+	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0, 3));
+	SeasonManager::GetInstance()->apply_season();
 }
 
 int EnemyAiLogic::get_level()
