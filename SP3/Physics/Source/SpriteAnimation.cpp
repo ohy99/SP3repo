@@ -78,12 +78,19 @@ void SpriteAnimation::Render()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
 	indexSize = 6;
-	if (mode == DRAW_LINES)
-		glDrawElements(GL_LINES, indexSize, GL_UNSIGNED_INT, (void*)(m_anim->m_currentFrame * 6 * sizeof(GLuint)));
-	else if (mode == DRAW_TRIANGLE_STRIP)
-		glDrawElements(GL_TRIANGLE_STRIP, indexSize, GL_UNSIGNED_INT, (void*)(m_anim->m_currentFrame * 6 * sizeof(GLuint)));
+	if (m_anim)
+	{
+		if (mode == DRAW_LINES)
+			glDrawElements(GL_LINES, indexSize, GL_UNSIGNED_INT, (void*)(m_anim->m_currentFrame * 6 * sizeof(GLuint)));
+		else if (mode == DRAW_TRIANGLE_STRIP)
+			glDrawElements(GL_TRIANGLE_STRIP, indexSize, GL_UNSIGNED_INT, (void*)(m_anim->m_currentFrame * 6 * sizeof(GLuint)));
+		else
+			glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, (void*)(m_anim->m_currentFrame * 6 * sizeof(GLuint)));
+	}
 	else
-		glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, (void*)(m_anim->m_currentFrame * 6 * sizeof(GLuint)));
+	{
+		glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, (void*)(0 * 6 * sizeof(GLuint)));
+	}
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

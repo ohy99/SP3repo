@@ -44,9 +44,11 @@ private:
 	void init_pool();
 	void init_info(Minion* minion, MinionInfo::MINION_TYPE type);
 
+	Vector3 ground_spawn_point_relative_to_tower;
+	Vector3 air_spawn_point_relative_to_tower;
 public:
 	void update(double dt);
-	void spawn_minion(bool is_Player_Side = true, MinionInfo::MINION_TYPE type = MinionInfo::MINION_TYPE::BASIC_MELEE);
+	bool spawn_minion(bool is_Player_Side = true, MinionInfo::MINION_TYPE type = MinionInfo::MINION_TYPE::BASIC_MELEE);
 
 	DamageArea* request_inactive_collidable(MinionInfo::MINION_TYPE type = MinionInfo::MINION_TYPE::BASIC_MELEE);
 

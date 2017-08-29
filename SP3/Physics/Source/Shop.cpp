@@ -14,7 +14,7 @@ Shop::~Shop()
 
 void Shop::init()
 {
-	clickcooldown =3.0f;
+	clickcooldown = 3.0f;
 	ShopUI.pos.Set(40, 35, 0);
 	ShopUI.resize_button(60,60);
 	ShopUI.mesh = MeshList::GetInstance()->getMesh("Shop");
@@ -96,7 +96,7 @@ void Shop::init()
 
 void Shop::Update(double dt)
 {
-	clickcooldown += dt;
+	//clickcooldown += dt;
 	//cout << "test" << endl;
 	//cout << walletshop->getsmallrepair() << endl;
 	//worldHeight = 100;
@@ -114,7 +114,10 @@ void Shop::Update(double dt)
 	cursor_collider.collisionType = Collision::POINT;
 	cursor_collider.mid = &cursor_point_in_world_space;
 
-	if (clickcooldown >= 3.0f)
+
+	static bool mousereleased = true;
+	if (Application::IsMousePressed(0) && mousereleased == true)
+	//if (clickcooldown >= 3.0f)
 	{
 		if (Application::IsMousePressed(0))
 		{
@@ -214,7 +217,10 @@ void Shop::Update(double dt)
 			}
 
 		}
+		mousereleased = false;
 	}
+	else if (!Application::IsMousePressed(0) && mousereleased == false)
+		mousereleased = true;
 }
 
 void Shop::Render()

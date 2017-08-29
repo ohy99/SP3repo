@@ -5,6 +5,7 @@
 #include "Vector3.h"
 #include "Vertex.h"
 class Mesh;
+class Character;
 class HUDManager : public Singleton<HUDManager>
 {
 	friend Singleton;
@@ -30,10 +31,18 @@ class HUDManager : public Singleton<HUDManager>
 	Vector3 ulti_ready_dir;
 	Color ulti_ready_color;
 	void render_ulti_bar();
+
+	Mesh* brownd;
+	Mesh* blued;
+	Mesh* greend;
+	Mesh* blackd;
+
+	Mesh* repair;
 public:
 	void update(double dt);
 	void render();
 
+	Character* character;
 protected:
 	HUDManager();
 	~HUDManager();

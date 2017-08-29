@@ -94,38 +94,12 @@ void GameScene::Init()
 	isPause = false;
 	isShop = false;
 	istrans = false;
-	//Example of Audio playing //
-	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
-	audioPlayer.playlist.push_back(new Sound("Audio//Level2.mp3"));
-	audioPlayer.playlist.push_back(new Sound("Audio//Level3.mp3"));
-	audioPlayer.playlist.push_back(new Sound("Audio//Level4.mp3"));
 	
-	switch (EnemyAiLogic::GetInstance()->get_level())
-	{
-	case 1:
-		audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
-		CollisionManager::GetInstance()->get_ground()->mesh = MeshList::GetInstance()->getMesh("Tile1");
-		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND");
-		break;
-	case 2:
-		audioPlayer.playLoop(audioPlayer.playlist[1]->fileName_);
-		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND2");
-		break;
-	case 3:
-		audioPlayer.playLoop(audioPlayer.playlist[2]->fileName_);
-		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND3");
-		break;
-	case 4:
-		audioPlayer.playLoop(audioPlayer.playlist[3]->fileName_);
-		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND4");
-		break;
-	}
-
 
 	CharacterInfo.Init();
 	//CharacterInfo.Load();
 	shop.init();
-	//MinionManager::GetInstance()->adjust_minion_difficulty(EnemyAiLogic::GetInstance()->get_level());
+	
 
 	SeasonManager::GetInstance()->set_season((SeasonManager::SEASON_TYPE)Math::RandIntMinMax(0,3));
 	switch (SeasonManager::GetInstance()->get_season())
@@ -172,6 +146,7 @@ void GameScene::Init()
 	MinionManager::GetInstance()->attach_character(&this->CharacterInfo);
 	EnemyAiLogic::GetInstance()->attachCharacter(&this->CharacterInfo);
 	SpellManager::GetInstance()->character = &this->CharacterInfo;
+	HUDManager::GetInstance()->character = &this->CharacterInfo;
 
 	FontType & wad = ShowHpManager::GetInstance()->get_font();
 	std::cout << &wad << std::endl;

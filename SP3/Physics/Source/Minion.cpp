@@ -48,13 +48,7 @@ void Minion::update(double dt)
 		sa->m_anim = &this->animation;
 		sa->Update(dt);
 	}
-	//SpriteAnimation* sa2 = dynamic_cast<SpriteAnimation*>(mesh_state[current_state]);
-	//if (sa2)
-	//{
-	//	sa2->Update(dt);
-	//	sa2->m_anim->animActive = true;
-	//	sa->m_anim->animTime = anim_time;
-	//}
+	
 	MinionInfo::STATE prev_state = current_state;
 	this->prev_pos = this->pos;
 	this->update_info(dt);

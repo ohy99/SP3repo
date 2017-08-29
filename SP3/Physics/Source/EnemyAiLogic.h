@@ -3,12 +3,13 @@
 
 #include "SingletonTemplate.h"
 #include "MinionInfo.h"
-
+#include "AudioPlayer.h"
 #include <utility>
 #include <vector>
 #include <queue>
 
 class Character;
+class Weapon;
 class EnemyAiLogic : public Singleton<EnemyAiLogic>
 {
 	friend Singleton;
@@ -38,7 +39,11 @@ class EnemyAiLogic : public Singleton<EnemyAiLogic>
 	//const double default_spawn_min_time, default_spawn_max_time;
 
 	Character *character;
+	AudioPlayer audioPlayer;
 	int level;
+
+	Weapon* weap;
+	void update_weapon(double dt);
 public:
 	void update(double dt);
 	void attachCharacter(Character *character);

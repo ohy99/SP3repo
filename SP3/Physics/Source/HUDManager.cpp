@@ -7,6 +7,7 @@
 #include "TowerManager.h"
 #include "Tower.h"
 #include "ShowHpManager.h"
+#include "CharacterInfo.h"
 
 HUDManager::HUDManager()
 {
@@ -15,9 +16,9 @@ HUDManager::HUDManager()
 	Spell2 = MeshList::GetInstance()->getMesh("freeze");
 	Spell3 = MeshList::GetInstance()->getMesh("blast");
 	//Spell4 = MeshList::GetInstance()->getMesh("blast");
-	Ulti_Bar = MeshList::GetInstance()->getMesh("REDHPBAR");
-	Ulti_Charge = MeshList::GetInstance()->getMesh("GREENHPBAR");
-	cooldown = MeshList::GetInstance()->getMesh("GREENHPBAR");
+	Ulti_Bar = MeshList::GetInstance()->getMesh("chargeborder");
+	Ulti_Charge = MeshList::GetInstance()->getMesh("charge");
+	cooldown = MeshList::GetInstance()->getMesh("cooldown");
 	ulti_ready_mesh = MeshList::GetInstance()->getMesh("ULTIREADY");
 
 	ultbarpos = TowerManager::GetInstance()->player->pos;
@@ -34,6 +35,15 @@ HUDManager::HUDManager()
 	ulti_ready_rotate = 0.f;
 	ulti_ready_rotate_speed = 90.f;
 	ulti_ready_rotate_limit = 10.f;
+
+	brownd = MeshList::GetInstance()->getMesh("BROWNDRAGON");
+	blued = MeshList::GetInstance()->getMesh("BLUEDRAGON");
+	greend = MeshList::GetInstance()->getMesh("GREENDRAGON");
+	blackd = MeshList::GetInstance()->getMesh("BLACKDRAGON");
+
+	repair = MeshList::GetInstance()->getMesh("repair");
+
+	character = nullptr;
 }
 
 HUDManager::~HUDManager()
@@ -124,42 +134,95 @@ void HUDManager::render()
 
 	render_ulti_bar();
 
-	////FREEZE
-	//ms.PushMatrix();
-	//ms.Translate(40, 6, 10);
-	//ms.Scale(5, 5, 5);
-	//RenderHelper::RenderMesh(Spell2, false);
+	int column = 0;
+	Vector3 spacing(5, 0, 0);
+	Vector3 offset(5, 50, 0);
+	Vector3 scale(5, 5, 1);
+	Color color(1, 1, 1);
+	FontType& font = ShowHpManager::GetInstance()->get_calibri();
+	ms.PushMatrix();
+	ms.Translate(offset);
 
-	//if (SpellManager::GetInstance()->getFcooldown() < 1.0)
-	//{
-	//	ms.PushMatrix();
-	//	ms.Translate(0, -(1.0 - SpellManager::GetInstance()->getFcooldown()) * 0.5f, 0);
-	//	ms.Scale(1, SpellManager::GetInstance()->getFcooldown(), 1);//.y 0-1
-	//	RenderHelper::RenderMesh(cooldown, false);
-	//	ms.PopMatrix();
-	//}
+	ms.PushMatrix();
+	ms.Translate(spacing.x * column++, spacing.y, 0);
+	ms.PushMatrix();
+	ms.Scale(scale * 0.5f);
+	RenderHelper::RenderMesh(repair, false);
+	ms.PopMatrix();
+	ms.Translate(-scale.x * 0.25f, -scale.y * 0.5f, 0);
+	ms.Scale(scale);
+	RenderHelper::RenderText(&font, std::to_string(character->getWallet().getsmallrepair()), color);
+	ms.PopMatrix();
 
-	//ms.PopMatrix();
+	ms.PushMatrix();
+	ms.Translate(spacing.x * column++, spacing.y, 0);
+	ms.PushMatrix();
+	ms.Scale(scale * 0.75f);
+	RenderHelper::RenderMesh(repair, false);
+	ms.PopMatrix();
+	ms.Translate(-scale.x * 0.25f, -scale.y * 0.5f, 0);
+	ms.Scale(scale);
+	RenderHelper::RenderText(&font, std::to_string(character->getWallet().getmediumrepair()), color);
+	ms.PopMatrix();
 
-	////FIRE
-	//ms.PushMatrix();
-	//ms.Translate(50, 6, 10);
-	//ms.Scale(5, 5, 5);
-	//RenderHelper::RenderMesh(Spell3, false);
+	ms.PushMatrix();
+	ms.Translate(spacing.x * column++, spacing.y, 0);
+	ms.PushMatrix();
+	ms.Scale(scale);
+	RenderHelper::RenderMesh(repair, false);
+	ms.PopMatrix();
+	ms.Translate(-scale.x * 0.25f, -scale.y * 0.5f, 0);
+	ms.Scale(scale);
+	RenderHelper::RenderText(&font, std::to_string(character->getWallet().getbigrepair()), color);
+	ms.PopMatrix();
 
-	//if (SpellManager::GetInstance()->getBcooldown() < 1.0)
-	//{
-	//	ms.PushMatrix();
-	//	ms.Translate(0, -(1.0 - SpellManager::GetInstance()->getBcooldown()) * 0.5f, 0);
-	//	ms.Scale(1, SpellManager::GetInstance()->getBcooldown(), 1);//.y 0-1
-	//	RenderHelper::RenderMesh(cooldown, false);
-	//	ms.PopMatrix();
-	//}
+	//MINIONS
+	ms.PushMatrix();
+	ms.Translate(spacing.x * column++, spacing.y, 0);
+	ms.PushMatrix();
+	ms.Scale(scale);
+	RenderHelper::RenderMesh(brownd, false);
+	ms.PopMatrix();
+	ms.Translate(-scale.x * 0.25f, -scale.y * 0.5f, 0);
+	ms.Scale(scale);
+	RenderHelper::RenderText(&font, std::to_string(character->getWallet().getbrowndrake()), color);
+	ms.PopMatrix();
 
-	//ms.PopMatrix();
+	ms.PushMatrix();
+	ms.Translate(spacing.x * column++, spacing.y, 0);
+	ms.PushMatrix();
+	ms.Scale(scale);
+	RenderHelper::RenderMesh(blued, false);
+	ms.PopMatrix();
+	ms.Translate(-scale.x * 0.25f, -scale.y * 0.5f, 0);
+	ms.Scale(scale);
+	RenderHelper::RenderText(&font, std::to_string(character->getWallet().getbluedrake()), color);
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	ms.Translate(spacing.x * column++, spacing.y, 0);
+	ms.PushMatrix();
+	ms.Scale(scale);
+	RenderHelper::RenderMesh(greend, false);
+	ms.PopMatrix();
+	ms.Translate(-scale.x * 0.25f, -scale.y * 0.5f, 0);
+	ms.Scale(scale);
+	RenderHelper::RenderText(&font, std::to_string(character->getWallet().getgreendrake()), color);
+	ms.PopMatrix();
+
+	ms.PushMatrix();
+	ms.Translate(spacing.x * column++, spacing.y, 0);
+	ms.PushMatrix();
+	ms.Scale(scale);
+	RenderHelper::RenderMesh(blackd, false);
+	ms.PopMatrix();
+	ms.Translate(-scale.x * 0.25f, -scale.y * 0.5f, 0);
+	ms.Scale(scale);
+	RenderHelper::RenderText(&font, std::to_string(character->getWallet().getblackdrake()), color);
+	ms.PopMatrix();
 
 
-
+	ms.PopMatrix();//End offset
 }
 
 void HUDManager::render_ulti_bar()

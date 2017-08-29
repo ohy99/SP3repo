@@ -182,6 +182,7 @@
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\Minion.cpp" />
+    <ClCompile Include="Source\MinionAir.cpp" />
     <ClCompile Include="Source\MinionHealer.cpp" />
     <ClCompile Include="Source\MinionInfo.cpp" />
     <ClCompile Include="Source\MinionManager.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="Source\GoodBow.h" />
     <ClInclude Include="Source\HpBar.h" />
     <ClInclude Include="Source\HUDManager.h" />
+    <ClInclude Include="Source\MinionAir.h" />
     <ClInclude Include="Source\MinionHealer.h" />
     <ClInclude Include="Source\MinionManager.h" />
     <ClInclude Include="Source\EnemyMinion.h" />

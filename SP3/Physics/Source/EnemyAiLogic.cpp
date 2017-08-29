@@ -5,19 +5,36 @@
 #include <string>
 #include "TowerManager.h"
 #include "Tower.h"
+#include "NoobBow.h"
+#include "OkayBow.h"
+#include "GoodBow.h"
+#include "WeaponCannon.h"
+#include "MinionManager.h"
+#include "EnvironmentManager.h"
+#include "MeshList.h"
+#include "GenericDecoration.h"
 
 EnemyAiLogic::EnemyAiLogic(int level) : logic_level(level),
 	resource(0), resource_gain(0), resource_gain_delay(0.0), resource_gain_elapsed_time(0.0),
 	player_threat_level(0), 
-	random_spawn_cooldown(0.0), random_spawn_min_time(10.0), random_spawn_max_time(15.0),
+	random_spawn_cooldown(3.0), random_spawn_min_time(10.0), random_spawn_max_time(15.0),
 	spawn_cooldown(0.0), spawn_min_time(3.0), spawn_max_time(5.0),
-	level(1)
+	level(1), weap(nullptr)
 {
 	set_spawn_pattern();
+
+	weap = new NoobBow();
+	weap->pos.Set(92.5, 25);
+	weap->scale.Set(5, 5, 5);
+	weap->set_faction_side(Faction::FACTION_SIDE::ENEMY);
+	weap->active = true;
+	RenderManager::GetInstance()->attach_renderable(weap, 2);
 }
 
 EnemyAiLogic::~EnemyAiLogic()
 {
+	if (weap)
+		delete weap;
 }
 
 void EnemyAiLogic::attachCharacter(Character *character)
@@ -28,6 +45,72 @@ void EnemyAiLogic::attachCharacter(Character *character)
 void EnemyAiLogic::set_level(int level)
 {
 	this->level = level;
+
+	if (weap)
+	{
+		RenderManager::GetInstance()->remove_renderable(weap);
+		delete weap;
+	}
+	switch (level)
+	{
+	case 1:
+		weap = new Cannon();
+		weap->set_damage(30);
+		weap->set_attackspeed(0.8f);
+		break;
+	case 2:
+		weap = new NoobBow();
+		weap->set_damage(40);
+		weap->set_attackspeed(1.f);
+		break;
+	case 3:
+		weap = new NoobBow();
+		weap->set_damage(50);
+		weap->set_attackspeed(2.f);
+		break;
+	case 4:
+		weap = new OkayBow();
+		weap->set_damage(3);
+		weap->set_attackspeed(5.f);
+		break;
+	default:
+		break;
+	}
+	weap->pos.Set(92.5, 25);
+	weap->scale.Set(5, 5, 5);
+	weap->set_faction_side(Faction::FACTION_SIDE::ENEMY);
+	weap->active = true;
+	RenderManager::GetInstance()->attach_renderable(weap, 3);
+
+	//Example of Audio playing //
+	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level2.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level3.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level4.mp3"));
+
+	switch (EnemyAiLogic::GetInstance()->get_level())
+	{
+	case 1:
+		audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
+		CollisionManager::GetInstance()->get_ground()->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND");
+		break;
+	case 2:
+		audioPlayer.playLoop(audioPlayer.playlist[1]->fileName_);
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND2");
+		break;
+	case 3:
+		audioPlayer.playLoop(audioPlayer.playlist[2]->fileName_);
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND3");
+		break;
+	case 4:
+		audioPlayer.playLoop(audioPlayer.playlist[3]->fileName_);
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND4");
+		break;
+	}
+	
+
+	MinionManager::GetInstance()->adjust_minion_difficulty(EnemyAiLogic::GetInstance()->get_level());
 }
 
 int EnemyAiLogic::get_level()
@@ -45,6 +128,9 @@ void EnemyAiLogic::update(double dt)
 	float enemy_armor = Math::Max(100 * (1 + level) - (int)resource_gain_elapsed_time, 100);
 	float enemy_dmg_reduction = 1.0f - (100.f / (100.f + enemy_armor));
 	TowerManager::GetInstance()->set_enemy_dmg_reduction(enemy_dmg_reduction);
+
+	//ignore for now
+	update_weapon(dt);
 
 	random_spawn();
 	attempt_to_unqueue_spawn();
@@ -113,25 +199,31 @@ void EnemyAiLogic::attempt_to_unqueue_spawn()
 	{
 	case 'R':
 		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_RANGE);
-		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
 			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_RANGE);
 		spawn_max_time = spawn_min_time * 1.5f;
 		break;
 	case 'S':
 		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_SIEGE);
-		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
 			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_SIEGE);
 		spawn_max_time = spawn_min_time * 1.5f;
 		break;
 	case 'H':
 		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_HEALER);
-		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
 			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_HEALER);
+		spawn_max_time = spawn_min_time * 1.5f;
+		break;
+	case 'A':
+		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_AIR);
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
+			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_AIR);
 		spawn_max_time = spawn_min_time * 1.5f;
 		break;
 	default:
 		MinionManager::GetInstance()->spawn_minion(false);
-		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
 			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_MELEE);
 		spawn_max_time = spawn_min_time * 1.5f;
 		break;
@@ -139,6 +231,15 @@ void EnemyAiLogic::attempt_to_unqueue_spawn()
 	
 	//adjust depends on what type is spawned
 	spawn_cooldown = (double)Math::RandFloatMinMax(spawn_min_time, spawn_max_time);
+}
+
+void EnemyAiLogic::update_weapon(double dt)
+{
+	if (!weap)
+		return;
+	weap->WeaponInfo::Update(dt);
+
+	//find target
 }
 
 void EnemyAiLogic::set_spawn_pattern()
@@ -174,21 +275,35 @@ void EnemyAiLogic::set_spawn_pattern()
 
 	//lvl 4
 	temp.first = 4;
-	temp.second = "MH";
+	temp.second = "MHS";
 	spawn_pattern.push_back(temp);
 	temp.second = "MRH";
-	spawn_pattern.push_back(temp);
-	temp.second = "MHS";
 	spawn_pattern.push_back(temp);
 	temp.second = "MRSH";
 	spawn_pattern.push_back(temp);
 
-	//bonus weird stuffs
-	temp.second = "HRSH";
+	temp.second = "A";
 	spawn_pattern.push_back(temp);
-	temp.second = "HHS";
+	temp.second = "AA";
+	spawn_pattern.push_back(temp);
+	temp.second = "AHA";
+	spawn_pattern.push_back(temp);
+	temp.second = "HAA";
+	spawn_pattern.push_back(temp);
+
+	temp.second = "MRSHAA";
+	spawn_pattern.push_back(temp);
+	temp.second = "MRSSHAA";
+	spawn_pattern.push_back(temp);
+
+	//bonus weird stuffs
+	temp.second = "HRSAH";
+	spawn_pattern.push_back(temp);
+	temp.second = "SHSAHA";
 	spawn_pattern.push_back(temp);
 	temp.second = "MRSHS";
 	spawn_pattern.push_back(temp);
+
+
 }
 

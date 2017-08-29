@@ -140,7 +140,6 @@ void Character::Update(double dt)
 		if (Application::GetInstance().IsKeyPressed('9') && !dakeypressed)
 		{
 			if (SpellManager::GetInstance()->useFireSpell())
-				if (SpellManager::GetInstance()->useBlastSpell())
 					audioPlayer.playSoundThreaded(audioPlayer.playlist[8]->fileName_);
 			dakeypressed = true;
 		}
@@ -238,18 +237,7 @@ void Character::Update(double dt)
 			dakeypressed = false;
 		}
 	}
-	{
-		static bool dakeypressed = false;
-		if (Application::GetInstance().IsKeyPressed('0') && !dakeypressed)
-		{
-			MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_HEALER);
-			dakeypressed = true;
-		}
-		else if (!Application::GetInstance().IsKeyPressed('0') && dakeypressed)
-		{
-			dakeypressed = false;
-		}
-	}
+
 
 }
 
@@ -629,8 +617,8 @@ void Character::spawn_minion()
 		{
 			if (this->wallet.getbrowndrake())
 			{
-				MinionManager::GetInstance()->spawn_minion();
-				this->wallet.removei_browndrake(1);
+				if (MinionManager::GetInstance()->spawn_minion())
+					this->wallet.removei_browndrake(1);
 			}
 			dakeypressed = true;
 		}
@@ -646,8 +634,8 @@ void Character::spawn_minion()
 		{
 			if (this->wallet.getbluedrake())
 			{
-				MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE);
-				this->wallet.removei_bluedrake(1);
+				if (MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_RANGE))
+					this->wallet.removei_bluedrake(1);
 			}
 			dakeypressed = true;
 		}
@@ -663,8 +651,8 @@ void Character::spawn_minion()
 		{
 			if (this->wallet.getgreendrake())
 			{
-				MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_SIEGE);
-				this->wallet.removei_greendrake(1);
+				if (MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_SIEGE))
+					this->wallet.removei_greendrake(1);
 			}
 			dakeypressed = true;
 		}
@@ -680,8 +668,8 @@ void Character::spawn_minion()
 		{
 			if (this->wallet.getblackdrake())
 			{
-				MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_HEALER);
-				this->wallet.removei_blackdrake(1);
+				if (MinionManager::GetInstance()->spawn_minion(true, MinionInfo::MINION_TYPE::BASIC_HEALER))
+					this->wallet.removei_blackdrake(1);
 			}
 			dakeypressed = true;
 		}
