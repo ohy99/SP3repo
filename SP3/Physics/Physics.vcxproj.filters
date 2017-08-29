@@ -200,6 +200,9 @@
     <ClCompile Include="Source\trans.cpp">
       <Filter>Header Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MinionAir.cpp">
+      <Filter>Header Files\GameObject\Minion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -435,6 +438,9 @@
     </ClInclude>
     <ClInclude Include="Source\trans.h">
       <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MinionAir.h">
+      <Filter>Header Files\GameObject\Minion</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

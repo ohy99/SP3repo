@@ -14,7 +14,7 @@
 EnemyAiLogic::EnemyAiLogic(int level) : logic_level(level),
 	resource(0), resource_gain(0), resource_gain_delay(0.0), resource_gain_elapsed_time(0.0),
 	player_threat_level(0), 
-	random_spawn_cooldown(0.0), random_spawn_min_time(10.0), random_spawn_max_time(15.0),
+	random_spawn_cooldown(3.0), random_spawn_min_time(10.0), random_spawn_max_time(15.0),
 	spawn_cooldown(0.0), spawn_min_time(3.0), spawn_max_time(5.0),
 	level(1), weap(nullptr)
 {
@@ -166,25 +166,31 @@ void EnemyAiLogic::attempt_to_unqueue_spawn()
 	{
 	case 'R':
 		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_RANGE);
-		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
 			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_RANGE);
 		spawn_max_time = spawn_min_time * 1.5f;
 		break;
 	case 'S':
 		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_SIEGE);
-		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
 			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_SIEGE);
 		spawn_max_time = spawn_min_time * 1.5f;
 		break;
 	case 'H':
 		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_HEALER);
-		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
 			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_HEALER);
+		spawn_max_time = spawn_min_time * 1.5f;
+		break;
+	case 'A':
+		MinionManager::GetInstance()->spawn_minion(false, MinionInfo::MINION_TYPE::BASIC_AIR);
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
+			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_AIR);
 		spawn_max_time = spawn_min_time * 1.5f;
 		break;
 	default:
 		MinionManager::GetInstance()->spawn_minion(false);
-		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.5f /
+		spawn_min_time = MinionManager::GetInstance()->get_minion_scale()* 1.25f /
 			MinionManager::GetInstance()->get_move_spd_of_type(MinionInfo::MINION_TYPE::BASIC_MELEE);
 		spawn_max_time = spawn_min_time * 1.5f;
 		break;
@@ -236,21 +242,35 @@ void EnemyAiLogic::set_spawn_pattern()
 
 	//lvl 4
 	temp.first = 4;
-	temp.second = "MH";
+	temp.second = "MHS";
 	spawn_pattern.push_back(temp);
 	temp.second = "MRH";
-	spawn_pattern.push_back(temp);
-	temp.second = "MHS";
 	spawn_pattern.push_back(temp);
 	temp.second = "MRSH";
 	spawn_pattern.push_back(temp);
 
-	//bonus weird stuffs
-	temp.second = "HRSH";
+	temp.second = "A";
 	spawn_pattern.push_back(temp);
-	temp.second = "HHS";
+	temp.second = "AA";
+	spawn_pattern.push_back(temp);
+	temp.second = "AHA";
+	spawn_pattern.push_back(temp);
+	temp.second = "HAA";
+	spawn_pattern.push_back(temp);
+
+	temp.second = "MRSHAA";
+	spawn_pattern.push_back(temp);
+	temp.second = "MRSSHAA";
+	spawn_pattern.push_back(temp);
+
+	//bonus weird stuffs
+	temp.second = "HRSAH";
+	spawn_pattern.push_back(temp);
+	temp.second = "SHSAHA";
 	spawn_pattern.push_back(temp);
 	temp.second = "MRSHS";
 	spawn_pattern.push_back(temp);
+
+
 }
 
