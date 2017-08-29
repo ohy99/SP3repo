@@ -57,7 +57,7 @@ SpellManager::SpellManager()
 	blast->update_collider();
 	blast->mesh = MeshList::GetInstance()->getMesh("blast");
 
-	blastCooldown = 10.0;
+	blastCooldown = 5.0;
 	blastReuseTime = blastCooldown;
 	blastDuration = 0.0;
 

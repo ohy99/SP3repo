@@ -140,7 +140,6 @@ void Character::Update(double dt)
 		if (Application::GetInstance().IsKeyPressed('9') && !dakeypressed)
 		{
 			if (SpellManager::GetInstance()->useFireSpell())
-				if (SpellManager::GetInstance()->useBlastSpell())
 					audioPlayer.playSoundThreaded(audioPlayer.playlist[8]->fileName_);
 			dakeypressed = true;
 		}

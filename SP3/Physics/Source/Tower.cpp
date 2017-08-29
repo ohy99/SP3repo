@@ -191,7 +191,7 @@ void Tower::show_stats(Vector3 pos, bool render_right)
 	RenderHelper::RenderText(&font, ss.str(), default_color);
 	ms.PopMatrix();
 	ss.str("");
-	ss << "Reduction: " << this->dmg_reduction << "%";
+	ss << "Reduction: " << this->dmg_reduction * 100.f << "%";
 	ms.PushMatrix();
 	ms.Translate(0, -fontscale.y * textrow++, 0);
 	ms.Scale(fontscale);
