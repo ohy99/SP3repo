@@ -238,6 +238,7 @@ void GameScene::Update(double dt)
 		{
 			
 			SceneManager::GetInstance()->setNextScene("WIN");
+			audioPlayer.pause();
 		}
 	}
 	else if (TowerManager::GetInstance()->player->get_health() <= 0)

@@ -120,7 +120,14 @@ class MeshList : public Singleton <MeshList>
 		temp->textureID = LoadTGA("Image//blackattack.tga");
 		assignMesh(temp);
 
+	
+		temp = MeshBuilder::GenerateSpriteAnimation("PURPLEDRAGON", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//purpledragon.tga");
+		assignMesh(temp);
 
+		temp = MeshBuilder::GenerateSpriteAnimation("PURPLEATTACK", 1, 6, 1.f);
+		temp->textureID = LoadTGA("Image//purpleattack.tga");
+		assignMesh(temp);
 		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OGREENDRAGON", 1, 6, 1.f);
 		temp->textureID = LoadTGA("Image//greendragon.tga");
 		assignMesh(temp);
@@ -145,6 +152,8 @@ class MeshList : public Singleton <MeshList>
 		temp = MeshBuilder::GenerateOppositeSpriteAnimation("#OBLACKATTACK", 1, 6, 1.f);
 		temp->textureID = LoadTGA("Image//blackattack.tga");
 		assignMesh(temp);
+
+
 		//Level 2
 
 		temp = MeshBuilder::GenerateQuad("BACKGROUND2", Color(1, 1, 1), 1);
