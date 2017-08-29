@@ -28,6 +28,7 @@ public:
 		BASIC_RANGE,
 		BASIC_SIEGE,
 		BASIC_HEALER,
+		BASIC_AIR,
 
 		MINION_TYPE_COUNT
 	} minion_type;
@@ -79,6 +80,8 @@ protected:
 
 	std::list<Collidable*> *enemy_target;
 	std::list<Collidable*> *ally_target;
+
+	bool is_air_unit;
 };
 
 #endif // !MINIONINFO_H

@@ -7,7 +7,7 @@ Character* MinionInfo::character = nullptr;
 MinionInfo::MinionInfo() : health(0), max_health(100), attack_damage(0),
 attack_speed(0), attack_range(0), move_speed(0), attack_delay(0.0), move_direction(0, 0, 0), is_CCed(false), 
 knockback_direction(0, 0, 0), knockback_duration(0.0), knockback_force(0.0), knockback_elapsed(0.0),
-nearest_target(nullptr), cast_time(0.0), cast_elapsed(0.0)
+nearest_target(nullptr), cast_time(0.0), cast_elapsed(0.0), is_air_unit(false)
 {
 }
 
@@ -71,6 +71,7 @@ void MinionInfo::find_nearest_target(Vector3 &pos, Vector3 &scale)
 		return;
 	}
 	//come in only when can attack and when should attack
+	nearest_target = nullptr;//reset
 
 	//finding nearest target
 	Collision temp;
@@ -85,14 +86,17 @@ void MinionInfo::find_nearest_target(Vector3 &pos, Vector3 &scale)
 			//now set as attack the first one if first one is inside
 			this->current_state = ATTACK;
 			nearest_target = &target->pos;
-			if (dynamic_cast<Minion*>(target))
+			if (dynamic_cast<Minion*>(target))//priortize minion
 				break;//if the target is minion, break
 		}
 		else
 		{
 			//nothing in range
-			this->current_state = WALK;
-			nearest_target = nullptr;
+			if (nearest_target == nullptr)
+			{
+				this->current_state = WALK;
+				//nearest_target = nullptr;
+			}
 		}
 	}
 }

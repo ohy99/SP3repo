@@ -19,6 +19,8 @@ MinionHealer::MinionHealer()
 	mesh_state[MinionInfo::STATE::WALK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
 	mesh_state[MinionInfo::STATE::ATTACK] = MeshList::GetInstance()->getMesh("BLACKATTACK");
 	mesh_state[MinionInfo::STATE::KNOCKBACK] = MeshList::GetInstance()->getMesh("BLACKDRAGON");
+
+	this->is_air_unit = true;
 }
 
 MinionHealer::~MinionHealer()
