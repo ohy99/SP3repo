@@ -10,6 +10,9 @@
 #include "GoodBow.h"
 #include "WeaponCannon.h"
 #include "MinionManager.h"
+#include "EnvironmentManager.h"
+#include "MeshList.h"
+#include "GenericDecoration.h"
 
 EnemyAiLogic::EnemyAiLogic(int level) : logic_level(level),
 	resource(0), resource_gain(0), resource_gain_delay(0.0), resource_gain_elapsed_time(0.0),
@@ -78,6 +81,36 @@ void EnemyAiLogic::set_level(int level)
 	weap->set_faction_side(Faction::FACTION_SIDE::ENEMY);
 	weap->active = true;
 	RenderManager::GetInstance()->attach_renderable(weap, 3);
+
+	//Example of Audio playing //
+	audioPlayer.playlist.push_back(new Sound("Audio//YARUTA.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level2.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level3.mp3"));
+	audioPlayer.playlist.push_back(new Sound("Audio//Level4.mp3"));
+
+	switch (EnemyAiLogic::GetInstance()->get_level())
+	{
+	case 1:
+		audioPlayer.playLoop(audioPlayer.playlist[0]->fileName_);
+		CollisionManager::GetInstance()->get_ground()->mesh = MeshList::GetInstance()->getMesh("Tile1");
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND");
+		break;
+	case 2:
+		audioPlayer.playLoop(audioPlayer.playlist[1]->fileName_);
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND2");
+		break;
+	case 3:
+		audioPlayer.playLoop(audioPlayer.playlist[2]->fileName_);
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND3");
+		break;
+	case 4:
+		audioPlayer.playLoop(audioPlayer.playlist[3]->fileName_);
+		EnvironmentManager::GetInstance()->get_background()->mesh = MeshList::GetInstance()->getMesh("BACKGROUND4");
+		break;
+	}
+	
+
+	MinionManager::GetInstance()->adjust_minion_difficulty(EnemyAiLogic::GetInstance()->get_level());
 }
 
 int EnemyAiLogic::get_level()

@@ -3,7 +3,7 @@
 
 #include "SingletonTemplate.h"
 #include "MinionInfo.h"
-
+#include "AudioPlayer.h"
 #include <utility>
 #include <vector>
 #include <queue>
@@ -39,6 +39,7 @@ class EnemyAiLogic : public Singleton<EnemyAiLogic>
 	//const double default_spawn_min_time, default_spawn_max_time;
 
 	Character *character;
+	AudioPlayer audioPlayer;
 	int level;
 
 	Weapon* weap;
